@@ -145,6 +145,7 @@
 .campo {
   height: 2.4rem;
   width: 2.4rem;
+  overflow: hidden;
 }
 
 .campo > svg > path{
