@@ -3,10 +3,10 @@ document.addEventListener('DOMContentLoaded', () => {
   const $ = element => document.querySelector(element)
   const $$ = elements => document.querySelectorAll(elements)
 
+  const form = $('#form')
   const inputs = $$('#form .input-camp')
   const textArea = $('#group__message textarea')
   const submit = $('#submit')
-  const send = $('#send')
   const modal = $('#modal')
   const alerta = $('#modal span')
 
@@ -20,13 +20,6 @@ document.addEventListener('DOMContentLoaded', () => {
     lastName: false,
     email: false,
     message: false
-  }
-
-  const data = {
-    firstName: '',
-    lastName: '',
-    email: '',
-    message: '',
   }
 
   const validarFormulario = (e) => {
@@ -89,55 +82,62 @@ document.addEventListener('DOMContentLoaded', () => {
     camps.message = false
   }
 
-  const cleanData = () => {
-    data.firstName = ''
-    data.lastName = ''
-    data.email = ''
-    data.message = ''
-  }
-
   // modal
   const openModal = () => {
     modal.showModal()
   }
 
-  const closeModal = () => {
-    modal.close()
-  }
-
+  // close modal
   modal.addEventListener('click', () => {
     modal.close()
   })
 
-  submit.addEventListener('click', e => {
+  const handleSubmit = async e => {
+
+    const data = new FormData(form)
+    const url = 'https://formspree.io/f/mqkjavlv'
 
     e.preventDefault()
 
     if (camps.firstName && camps.lastName && camps.email && camps.message) {
 
-      form.reset()
+      const response = await fetch(url, {
+        method: 'POST',
+        body: data,
+        headers: {
+          'Accept': 'application/json'
+        }
+      })
 
+      if (response.ok) {
 
-      modal.classList.remove('invalid-modal')
-      alerta.textContent = 'Message is being processed.'
-      openModal()
+        modal.classList.remove('invalid-modal')
+        alerta.textContent = 'Email sent successfully.'
+        openModal()
+        form.reset()
+        cleanState()
+        setTimeout(() => {
+          window.location = '/'
+        }, 4500)
 
-      send.setAttribute('href', `mailto:cristhixnn@hotmail.com?subject=${data.firstName} ${data.lastName} desde rxtsel.ml&body=Nombre: ${data.firstName} ${data.lastName}. Email: ${data.email}. Mensaje: ${data.message}`)
-      send.click()
+      } else {
 
-      cleanState()
-      cleanData()
+        modal.classList.add('invalid-modal')
+        alerta.textContent = 'Oops! There was a problem submitting your form.'
+        openModal()
 
-      setTimeout(() => {
-        window.location = '/'
-      }, 3000);
+      }
 
     } else {
 
       modal.classList.add('invalid-modal')
       alerta.textContent = 'Please check the fields.'
       openModal()
+
     }
-  })
+
+  }
+
+  submit.addEventListener('click', handleSubmit)
 
 })
