@@ -96,9 +96,11 @@
     width: 4rem!important;
     height: 4rem!important;
     overflow: hidden;
+    right: 2.5rem;
     color: transparent;
     border: 1px solid transparent!important;
     transform: translateY(15rem);
+    background: #1d1d1d;
   }
 
   .tertiary::after {
