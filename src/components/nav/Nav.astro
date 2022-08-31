@@ -6,7 +6,7 @@ const {url} = Astro.props
 
 <nav class={style.nav}>
 
-  <a href="/" class={style.logo} tabindex="0">
+  <a href="/" class={style.logo}>
     <img class={style.logo__img} src="logo.svg" alt="puede ser un logo del rostro de un gato negro con ojos blancos y una letra c blanca en la frente">
   </a>
   
@@ -14,7 +14,6 @@ const {url} = Astro.props
 
     <a href={url === 'pageNotFound' ? '/#home' : '#home'}
       class={`home ${style.nav__url}`}
-      tabindex="1"
     >
       <Icon icon="home" />
       Home
@@ -22,7 +21,6 @@ const {url} = Astro.props
 
     <a href={url === 'pageNotFound' ? '/#about' : '#about'}
       class={`about ${style.nav__url}`}
-      tabindex="2"
     >
       <Icon icon="about" />
       About
@@ -30,7 +28,6 @@ const {url} = Astro.props
 
     <a href={url === 'pageNotFound' ? '/#portfolio' : '#portfolio'} 
       class={`portfolio ${style.nav__url}`} 
-      tabindex="3"
     >
       <Icon icon="portfolio" />
       Portfolio
@@ -38,7 +35,6 @@ const {url} = Astro.props
 
     <a href={url === 'pageNotFound' ? '/#connect' : '#connect'} 
       class={`connect ${style.nav__url}`} 
-      tabindex="4"
     >
       <Icon icon="connect" />
       Connect
@@ -52,15 +48,15 @@ const {url} = Astro.props
   </div>
 
   <div class={style.social}>
-    <a class={style.campo} href="https://twitter.com/rxtsel" target="_blank" tabindex="5">
+    <a class={style.campo} href="https://twitter.com/rxtsel" target="_blank">
       <Icon icon="twitter-alt" />
       go to twitter
     </a>
-    <a class={style.campo} href="https://instagram.com/rxtsel" target="_blank" tabindex="6">
+    <a class={style.campo} href="https://instagram.com/rxtsel" target="_blank">
       <Icon icon="instagram" />
       go to instagram
     </a>
-    <a class={style.campo} href="https://github.com/rxtsel" target="_blank" tabindex="7">
+    <a class={style.campo} href="https://github.com/rxtsel" target="_blank">
       <Icon icon="github" />
       go to github
     </a>
