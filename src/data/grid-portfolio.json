@@ -1,0 +1,92 @@
+[
+  {
+    "id": "0",
+    "img": "grid-portfolio-1.webp",
+    "alt": "puede ser una imagen que contiene una captura de pantalla del sitio web programas.ml",
+    "title": "Programas Premium",
+    "description": "Website where I share programs to test on windows and encourage to buy the original software.",
+    "technology": ["Astro"],
+    "url": "https://programas.ml",
+    "repo": "https://github.com/rxtsel/free-premium-programs"
+  },
+  {
+    "id": "1",
+    "img": "grid-portfolio-2.webp",
+    "alt": "puede ser una imagen que contiene una captura de pantalla del sitio web biolink.ga",
+    "title": "Biolink",
+    "description": "Landing page to display links in social network bios.",
+    "technology": ["Html", "Css", "Js"],
+    "url": "https://www.biolink.ga/",
+    "repo": "https://github.com/rxtsel/biolink"
+  },
+  {
+    "id": "2",
+    "img": "grid-portfolio-3.webp",
+    "alt": "puede ser una imagen que contiene una captura de pantalla de una aplicacion de escritorio hecho en java que dice lector de calidad de agua",
+    "title": "LCA",
+    "description": "Water quality measurement software. Project mintic 2022.",
+    "technology": ["Java", "SQLite"],
+    "url": "https://github.com/rxtsel/LCA/releases/tag/v.0.0.1",
+    "repo": "https://github.com/rxtsel/LCA/tree/reto-4"
+  },
+  {
+    "id": "3",
+    "img": "grid-portfolio-4.webp",
+    "alt": "puede ser una imagen que contiene una captura de pantalla de un sitio web que dice get information with a simple click",
+    "title": "IP-Info",
+    "description": "Web page that has the functionality to provide information about an IP",
+    "technology": ["Html", "Css", "Js"],
+    "url": "https://github.com/rxtsel/LCA/releases/tag/v.0.0.1",
+    "repo": "https://github.com/rxtsel/LCA/tree/reto-4"
+  },
+  {
+    "id": "4",
+    "img": "grid-portfolio-5.webp",
+    "alt": "puede ser una imagen que contiene una captura de pantalla de un sitio web que dice get information with a simple click",
+    "title": "Guitar-LA",
+    "description": "Course react from @CodigoConJuan where I added more things like the option to see the number of items in the cart.",
+    "technology": ["Next", "Strapi", "Mongo"],
+    "url": "https://guitar-la-black.vercel.app/",
+    "repo": "https://github.com/rxtsel/Guitar-LA"
+  },
+  {
+    "id": "5",
+    "img": "grid-portfolio-6.webp",
+    "alt": "puede ser una imagen que contiene una captura de pantalla de un sitio web que dice control de gastos",
+    "title": "Expense Manager",
+    "description": "Web App to manage and keep track of our money, has CRUD functions",
+    "technology": ["React", "Css"],
+    "url": "https://cryptocurrency-exchange-react.netlify.app/",
+    "repo": "https://github.com/rxtsel/Cryptocurrency-Exchange"
+  },
+  {
+    "id": "6",
+    "img": "grid-portfolio-7.webp",
+    "alt": "A web application to view the exchange rate of a local currency to a cryptocurrency",
+    "title": "Cryptocurrency Exchange",
+    "description": "Web App to manage and keep track of our money",
+    "technology": ["React", "Css"],
+    "url": "https://cryptocurrency-exchange-react.netlify.app/",
+    "repo": "https://github.com/rxtsel/Cryptocurrency-Exchange"
+  },
+  {
+    "id": "7",
+    "img": "grid-portfolio-8.webp",
+    "alt": "puede ser una imagen que contiene una captura de pantalla del sitio web que dice administrador de pacientes de veterinaria",
+    "title": "Veterinary patient manager",
+    "description": "Web App to manage patients in a veterinary practice, has CRUD functions",
+    "technology": ["React", "Css"],
+    "url": "https://veterinary-patient-manager-react.netlify.app/",
+    "repo": "https://github.com/rxtsel/Veterinary-patient-manager-react"
+  },
+  {
+    "id": "8",
+    "img": "grid-portfolio-9.webp",
+    "alt": "puede ser una imagen que contiene una captura de pantalla del sitio web xpplestore.co",
+    "title": "XppleStore",
+    "description": "This is my first web pg developed before taking web development courses.",
+    "technology": ["Html", "Css", "Js"],
+    "url": "https://xpplestore.co/",
+    "repo": "https://github.com/rxtsel/XppleStore"
+  }
+]

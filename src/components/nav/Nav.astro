@@ -1,0 +1,53 @@
+---
+import style from './nav.module.css'
+import Icon from '../icons/Icon.astro'
+---
+
+<nav class={style.nav}>
+
+  <a href="/" class={style.logo} tabindex="1">
+    <img class={style.logo__img} src="logo.webp" alt="puede ser un logo del rostro de un gato negro con ojos blancos y una letra c blanca en la frente">
+  </a>
+  
+  <div id="nav__links" class={style.nav__links}>
+
+    <a href="#home" class={`home ${style.nav__url}`} tabindex="3">
+      <Icon icon="home" />
+      Home
+    </a>  
+
+    <a href="#about" class={`about ${style.nav__url}`} tabindex="4">
+      <Icon icon="about" />
+      About
+    </a>
+
+    <a href="#portfolio" class={`portfolio ${style.nav__url}`} tabindex="5">
+      <Icon icon="portfolio" />
+      Portfolio
+    </a>
+
+    <a href="#connect" class={`connect ${style.nav__url}`} tabindex="6">
+      <Icon icon="connect" />
+      Connect
+    </a>
+
+  </div>
+
+  <div id="burger" class={style.burger} tabindex="2" >
+    <Icon icon="burger" /> 
+    <Icon icon="hidden" /> 
+  </div>
+
+  <div class={style.social}>
+    <a class={style.campo} href="https://twitter.com/rxtsel" target="_blank" tabindex="7">
+      <Icon icon="twitter-alt" />
+    </a>
+    <a class={style.campo} href="https://instagram.com/rxtsel" target="_blank" tabindex="8">
+      <Icon icon="instagram" />
+    </a>
+    <a class={style.campo} href="https://github.com/rxtsel" target="_blank" tabindex="9">
+      <Icon icon="github" />
+    </a>
+  </div>
+
+</nav>

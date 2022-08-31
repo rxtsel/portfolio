@@ -1,0 +1,23 @@
+---
+import style from './about.module.css'
+import Button from '../../components/button/Button.astro';
+---
+
+<section id="about" class={style.section}>
+  <div class="campo">
+      <h3 class={`title ${style.title}`}>I love to create something a simple and clean</h3>
+  </div>
+
+  <div class="campo">
+    <h4 class={style.aboutme}>About me</h4>
+    <p class={style.paragraph}>Currently living in Colombia with good food and amazing landscapes.  I like to explore minimalist designs with good functionality.
+
+I can spend hours every day exploring designs.
+
+I'm also active on Twitter and if you have any questions feel free to mention me, I'm sure it will be an interesting chat.
+     
+    </p>
+    <Button tipo="secundary" text="Download CV"/>
+  </div>
+
+</section>

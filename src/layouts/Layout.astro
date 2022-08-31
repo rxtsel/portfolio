@@ -1,0 +1,53 @@
+---
+import '../styles/global.css'
+export interface Props {
+	title: string;
+}
+
+const { title } = Astro.props as Props;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		<link rel="icon" type="image/svg+xml" href="16x16.svg" sizes="16x16"/>
+    <link rel="icon" type="image/svg+xml" href="32x32.svg" sizes="32x32"/>
+    <link rel="icon" type="image/svg+xml" href="96x96.svg" sizes="96x96"/>
+    <link rel="apple-touch-icon" type="image/svg+xml" href="180x180.svg" sizes="180x180" >
+		<title>{title}</title>
+		<meta name="keywords" content="Cristhian Melo, rxtsel, rxtsel.ml"/>
+		<meta name="author" content="Cristhian Melo" />
+		<meta name="copyright" content="Cristhian Melo" />
+		<!-- Primary Meta Tags -->
+		<meta name="title" content="Cristhian Melo - Software Developer">
+		<meta name="description"
+			content="Website where you will find information about me and some of the projects I have worked on.">
+
+		<!-- Open Graph / Facebook -->
+		<meta property="og:type" content="website">
+		<meta property="og:url" content="https://rxtsel.ml/">
+		<meta property="og:title" content="Cristhian Melo - Software Developer">
+		<meta property="og:description"
+			content="Website where you will find information about me and some of the projects I have worked on.">
+		<meta property="og:image"
+			content="meta_tags_large_icon.png">
+
+		<!-- Twitter -->
+		<meta property="twitter:card" content="summary_large_image">
+		<meta property="twitter:url" content="https://rxtsel.ml/">
+		<meta property="twitter:title" content="Cristhian Melo - Software Developer">
+		<meta property="twitter:description"
+			content="Website where you will find information about me and some of the projects I have worked on.">
+		<meta property="twitter:image"
+			content="meta_tags_large_icon.png">
+	</head>
+	<body>
+		<span id="cursor"></span>
+		<slot />
+		<script type="module" src="helpers/index.js"></script>
+		<script type="module" src="helpers/mail.js"></script>
+	</body>
+</html>

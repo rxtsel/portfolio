@@ -1,0 +1,35 @@
+---
+import style from './connect.module.css'
+import Icon from '../icons/Icon.astro';
+import Form from '../form/Form.astro'
+---
+
+<section id="connect" class={style.section}>
+
+  <div class="campo">
+    <h2 class={style.h2}>Connect</h2>
+    <h3 class={style.h3}>Let's connect</h3>
+    <p class={style.paragraph}>If it's a new project, it would be great if you could touch on scope, timeline and budget</p>
+    <h4 class={style.h4}>Social media</h4>
+
+    <div class={style.contentIcons}>
+
+      <a class={`linkedin ${style.campo}`} href="https://linkedin.com/in/rxtsel" target="_blank" tabindex="14">
+        <Icon icon="linkedin" />
+      </a>
+
+      <a class={`twitter ${style.campo}`} href="https://twitter.com/rxtsel" target="_blank" tabindex="15">
+        <Icon icon="twitter" />
+      </a>
+
+      <a class={`instagram ${style.campo}`} href="https://instagram.com/rxtsel" target="_blank" tabindex="16">
+        <Icon icon="instagram" />
+      </a>
+
+    </div>
+
+  </div>
+
+  <Form />
+
+</section>

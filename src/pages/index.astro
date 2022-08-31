@@ -1,0 +1,30 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/header/Header.astro'
+import Hero from '../components/hero/Hero.astro'
+import About from '../components/about/About.astro'
+import Portfolio from '../components/portfolio/Portfolio.astro'
+import Connect from '../components/connect/Connect.astro'
+import Footer from '../components/footer/Footer.astro'
+import Button from '../components/button/Button.astro';
+---
+
+<Layout title="Cristhian Melo - Software Developer">
+
+	<Header/>
+
+	<div class="container">
+
+		<main>
+			<Hero />
+		</main>
+
+		<About />
+		<Portfolio/>
+		<Connect />
+		<Footer />
+		<Button tipo="tertiary" text="Back to top" />
+
+	</div>
+
+</Layout>

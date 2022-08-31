@@ -1,0 +1,28 @@
+---
+import style from './button.module.css'
+const {tipo, text} = Astro.props
+---
+
+{
+  tipo === 'primary' && (
+    <a class={`button ${style.primary}`} href='#connect' tabindex="10">
+      {text}
+    </a>
+  )
+}
+
+{
+  tipo === 'secundary' && (
+    <a class={`button ${style.secundary}`} href='/pdf/CristhianMelo_CV.pdf' download="" target="_blank" tabindex="11">
+      {text}
+    </a>
+  )
+}
+
+{
+  tipo === 'tertiary' && (
+    <a id="back-top" class={`button ${style.tertiary}`} href='#home' tabindex="12">
+      {text}
+    </a>
+  )
+}

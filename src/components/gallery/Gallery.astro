@@ -1,0 +1,9 @@
+---
+import style from './gallery.module.css'
+import GridCard from '../gridcard/GridCard.astro';
+import images from '../../data/grid-cards.json'
+---
+
+<section class={style.grid}>
+  <GridCard data={images} />
+</section>
