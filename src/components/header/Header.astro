@@ -1,8 +1,9 @@
 ---
 import style from './header.module.css'
 import Nav from '../nav/Nav.astro'
+const {url} = Astro.props
 ---
 
 <header class={style.header}>
-  <Nav/>
+  <Nav url={url}/>
 </header>
