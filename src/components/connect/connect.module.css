@@ -82,6 +82,9 @@
   justify-content: center;
   align-items: center;
   box-shadow: var(--shadow-sm);
+  text-decoration: none;
+  overflow: hidden;
+  font-size: 0;
 }
 
 :global(.linkedin:hover) {
