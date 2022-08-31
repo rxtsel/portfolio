@@ -49,12 +49,12 @@ document.addEventListener('DOMContentLoaded', () => {
   const validarCampo = (expresion, input, camp) => {
     if (expresion.test(input.value)) {
       $(`#group__${camp} #input__error`)
-      .classList.remove('input__error-active')
+        .classList.remove('input__error-active')
       camps[camp] = true
       data[camp] = input.value
     } else {
       $(`#group__${camp} #input__error`)
-      .classList.add('input__error-active')
+        .classList.add('input__error-active')
       camps[camp] = false
       data[camp] = ''
     }
@@ -63,12 +63,12 @@ document.addEventListener('DOMContentLoaded', () => {
   const validarTextArea = () => {
     if (textArea.value.length >= 3) {
       $(`#group__message #input__error`)
-      .classList.remove('input__error-active')
+        .classList.remove('input__error-active')
       camps.message = true
       data.message = textArea.value
     } else {
       $(`#group__message #input__error`)
-      .classList.add('input__error-active')
+        .classList.add('input__error-active')
       camps.message = false
       data.message = ''
     }
@@ -93,7 +93,7 @@ document.addEventListener('DOMContentLoaded', () => {
     data.firstName = ''
     data.lastName = ''
     data.email = ''
-    data.message = '' 
+    data.message = ''
   }
 
   // modal
@@ -125,10 +125,12 @@ document.addEventListener('DOMContentLoaded', () => {
       send.setAttribute('href', `mailto:cristhixnn@hotmail.com?subject=${data.firstName} ${data.lastName} desde rxtsel.ml&body=Nombre: ${data.firstName} ${data.lastName}. Email: ${data.email}. Mensaje: ${data.message}`)
       send.click()
 
-      window.location = '/'
-
       cleanState()
       cleanData()
+
+      setTimeout(() => {
+        window.location = '/'
+      }, 3000);
 
     } else {
 
