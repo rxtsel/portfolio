@@ -1,0 +1,20 @@
+.content {
+  min-height: calc(100vh - 8.61rem);
+  display: grid;
+  place-content: center;
+}
+
+.title {
+  font-size: var(--font-title);
+  color: var(--white);
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .section {
+    min-height: 100vh;
+  }
+  .title {
+    font-size: 3rem;
+  }
+}
