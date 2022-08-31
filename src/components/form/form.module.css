@@ -4,9 +4,10 @@
 }
 
 .dialog {
-  background: var(--gray);
+  background: #1d1d1d;
   border: none;
   font-size: 1.6rem;
+  font-weight: 600;
   border-radius: .2rem;
   border: 1px solid rgb(112, 188, 112);
   color:rgb(112, 188, 112);
