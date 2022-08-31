@@ -5,7 +5,7 @@ const {tipo, text} = Astro.props
 
 {
   tipo === 'primary' && (
-    <a class={`button ${style.primary}`} href='#connect' tabindex="9">
+    <a class={`button ${style.primary}`} href='#connect' tabindex="8">
       {text}
     </a>
   )
@@ -13,7 +13,7 @@ const {tipo, text} = Astro.props
 
 {
   tipo === 'secundary' && (
-    <a class={`button ${style.secundary}`} href='/pdf/CristhianMelo_CV.pdf' download="" target="_blank" tabindex="10">
+    <a class={`button ${style.secundary}`} href='/pdf/CristhianMelo_CV.pdf' download="" target="_blank" tabindex="9">
       {text}
     </a>
   )
@@ -21,7 +21,7 @@ const {tipo, text} = Astro.props
 
 {
   tipo === 'tertiary' && (
-    <a id="back-top" class={`button ${style.tertiary}`} href='#home' tabindex="11">
+    <a id="back-top" class={`button ${style.tertiary}`} href='#home'>
       {text}
     </a>
   )

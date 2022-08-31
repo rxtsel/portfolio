@@ -11,12 +11,12 @@ import style from './form.module.css'
   <div id="campo" class={style.campo}>
     <h3 id="title" class={style.h3}>My name is</h3>
     <div id="group__firstName" class={style.input_group}>
-      <input id="firstName" required type="text" name="firstName" autocomplete="off"  class={`input-camp ${style.input}`} tabindex="16">
+      <input id="firstName" required type="text" name="firstName" autocomplete="off"  class={`input-camp ${style.input}`} tabindex="14">
       <label for="firstName" class={style.user_label}>First Name</label>
       <p id="input__error" class={style.input__error}>Your name must not contain spaces or numbers.</p>
     </div>
     <div id="group__lastName" class={style.input_group}>
-      <input id="lastName" required type="text" name="lastName" autocomplete="off"  class={`input-camp ${style.input}`} tabindex="17">
+      <input id="lastName" required type="text" name="lastName" autocomplete="off"  class={`input-camp ${style.input}`} tabindex="15">
       <label for="lastName" class={style.user_label}>Last Name</label>
       <p id="input__error" class={style.input__error}>Your name must not contain spaces or numbers.</p>
     </div>
@@ -25,7 +25,7 @@ import style from './form.module.css'
   <div class={style.campo}>
     <h3 class={style.h3}>My email is</h3>
     <div id="group__email" class={style.input_group}>
-      <input id="email" required type="email" name="email" autocomplete="off"  class={`input-camp ${style.input}`} tabindex="18">
+      <input id="email" required type="email" name="email" autocomplete="off"  class={`input-camp ${style.input}`} tabindex="16">
       <label for="email" class={style.user_label}>Email</label>
       <p id="input__error" class={style.input__error}>You must enter a valid email address.</p>
     </div>
@@ -35,7 +35,7 @@ import style from './form.module.css'
     <h3 class={style.h3}>My message is</h3>
     
     <div id="group__message" class={style.input_group}>
-      <textarea id="message" required name="message"  class={`input-camp ${style.input}`} tabindex="19" />
+      <textarea id="message" required name="message"  class={`input-camp ${style.input}`} tabindex="17" />
       <label for="message" class={style.user_label}>Message</label>
       <p id="input__error" class={style.input__error}>The message must not be empty.</p>
     </div>
@@ -43,7 +43,7 @@ import style from './form.module.css'
 
   <div class={style.campo}>
     <div class={style.input_group}>
-      <button id="submit" type="submit" class={style.input} tabindex="20">Submit</button>
+      <button id="submit" type="submit" class={style.input} tabindex="18">Submit</button>
     </div>
   </div>
 
