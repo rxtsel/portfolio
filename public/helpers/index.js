@@ -80,4 +80,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
   })
 
+  // change language
+  const lang = $('#lang')
+
+  lang.addEventListener('click', () => {
+    const currentLink = window.location.href
+    let gato = currentLink.split('#')
+    const nameSection = gato[1]
+
+    if (currentLink.includes('es')) {
+      window.location = `/#${nameSection}`
+    } else {
+      window.location = `/es/#${nameSection}`
+    }
+
+  })
+
 })

@@ -1,43 +1,52 @@
 ---
 import style from './nav.module.css'
 import Icon from '../icons/Icon.astro'
-const {url} = Astro.props
+const {url, lang} = Astro.props
+console.log(lang)
 ---
 
 <nav class={style.nav}>
 
-  <a href="/" class={style.logo}>
-    <img class={style.logo__img} src="logo.svg" alt="puede ser un logo del rostro de un gato negro con ojos blancos y una letra c blanca en la frente">
+  <a href={lang === 'es' ? '/es' : '/'} class={style.logo}>
+    <img class={style.logo__img} src={lang === 'en' ? 'logo.svg' : '/logo.svg' } alt="puede ser un logo del rostro de un gato negro con ojos blancos y una letra c blanca en la frente">
   </a>
   
   <div id="nav__links" class={style.nav__links}>
 
-    <a href={url === 'pageNotFound' ? '/#home' : '#home'}
+    <a href={lang === 'es' ? '/es/#home' : url === 'pageNotFound' ? '/#home' : '/#home'}
       class={`home ${style.nav__url}`}
     >
       <Icon icon="home" />
-      Home
+      {
+        lang === 'es' ? ('Inicio') : ('Home') 
+      } 
     </a>  
 
-    <a href={url === 'pageNotFound' ? '/#about' : '#about'}
+    <a href={lang === 'es' ? '/es/#about' : url === 'pageNotFound' ? '/#about' : '/#about'}
       class={`about ${style.nav__url}`}
     >
       <Icon icon="about" />
-      About
+      {
+        lang === 'es' ? ('Sobre') : ('About') 
+      }
     </a>
 
-    <a href={url === 'pageNotFound' ? '/#portfolio' : '#portfolio'} 
+    <a href={lang === 'es' ? '/es/#portfolio' : url === 'pageNotFound' ? '/#portfolio' : '/#portfolio'}
       class={`portfolio ${style.nav__url}`} 
     >
       <Icon icon="portfolio" />
-      Portfolio
+      {
+        lang === 'es' ? ('Portafolio') : ('Portfolio') 
+      }
     </a>
 
-    <a href={url === 'pageNotFound' ? '/#connect' : '#connect'} 
+    <a href={lang === 'es' ? '/es/#connect' : url === 'pageNotFound' ? '/#connect' : '/#connect'}
       class={`connect ${style.nav__url}`} 
     >
       <Icon icon="connect" />
-      Connect
+      {
+        lang === 'es' ? ('Conectar') : ('Connect') 
+      }
     </a>
 
   </div>
@@ -45,6 +54,11 @@ const {url} = Astro.props
   <div id="burger" class={style.burger}>
     <Icon icon="burger" /> 
     <Icon icon="hidden" /> 
+  </div>
+
+  <div id="lang" class={style.lang_content} title={lang === 'es' ? 'Lenguaje' : 'Language'}>
+    {lang === 'es' ? 'EN' : 'ES'}
+    <Icon icon="language" />
   </div>
 
   <div class={style.social}>

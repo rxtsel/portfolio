@@ -1,19 +1,19 @@
 ---
 import style from './gridCard.module.css'
-const {data} = Astro.props
+const {data, lang} = Astro.props
 ---
 
 {
-  data.map(({ src, alt, type, id } ) => 
+  data.map(({ src, alt, type, id, srces } ) => 
    type === 'img' ?
     (
       <div id={id} class={style.grid__campo}>
-        <img loading="lazy" src={src} alt={alt}>
+        <img loading="lazy" src={lang === 'es' ? srces : src} alt={alt}>
       </div> 
     ) :
     (
       <div id={id} class={style.grid__campo}>
-        <video src={src} autoplay loop muted/>
+        <video src={lang === 'es' ? srces : src} autoplay loop muted/>
       </div>
     ) 
   )

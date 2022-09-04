@@ -94,6 +94,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const handleSubmit = async e => {
 
+    const currentUrl = window.location.pathname
     const data = new FormData(form)
     const url = 'https://formspree.io/f/mqkjavlv'
 
@@ -112,7 +113,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (response.ok) {
 
         modal.classList.remove('invalid-modal')
-        alerta.textContent = 'Email sent successfully.'
+        alerta.textContent = currentUrl.includes('es') ? 'Email enviado correctamente' : 'Email sent successfully.'
         openModal()
         form.reset()
         cleanState()
@@ -123,7 +124,7 @@ document.addEventListener('DOMContentLoaded', () => {
       } else {
 
         modal.classList.add('invalid-modal')
-        alerta.textContent = 'Oops! There was a problem submitting your form.'
+        alerta.textContent = currentUrl.includes('es') ? '¡Oops! Hubo un problema al enviar su formulario.' : 'Oops! There was a problem submitting your form.'
         openModal()
 
       }
@@ -131,7 +132,7 @@ document.addEventListener('DOMContentLoaded', () => {
     } else {
 
       modal.classList.add('invalid-modal')
-      alerta.textContent = 'Please check the fields.'
+      alerta.textContent = currentUrl.includes('es') ? 'Por favor, compruebe los campos.' : 'Please check the fields.'
       openModal()
 
     }

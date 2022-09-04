@@ -1,9 +1,10 @@
 ---
 import Footer from '../footer/Footer.astro';
 import style from './notFound.module.css'
+const { lang } = Astro.props
 ---
 
 <main class={`container ${style.content}`}>
-  <h1 class={style.title}>Page not Found. ☹️</h1>
+  <h1 class={style.title}>{lang === 'es' ? 'Página no encontrada. ☹️' : 'Page not Found. ☹️'}</h1>
 </main>
-<Footer />
+<Footer lang={lang} />

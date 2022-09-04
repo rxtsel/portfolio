@@ -1,0 +1,23 @@
+---
+import style from './hero.module.css'
+import Button from '../../components/button/Button.astro'
+import Gallery from '../../components/gallery/Gallery.astro'
+---
+
+<section id="home" class={style.section}>
+
+  <div class={style.content__info}>
+    <figure class={style.figure}>
+      <img class={style.img} src="/profile.webp" alt="puede ser una foto de una persona con gorra gris y mirando hacia la izquierda">
+      <figcaption class={style.figcaption}>@rxtsel</figcaption>
+    </figure>
+    <h1 class={style.name}>Hola, Soy Cristhian</h1>
+    <h2 class={style.rol}>Desarrollador de Software</h2>
+    <h3 class={`title ${style.slogan}`}>Apasionado por crear productos digitales <span class={style.span}>increíbles.</span></h3>
+    <p class={style.description}>+1 año de experiencia como desarrollador web. Amante del diseño y la innovación. Además de diseño web, actualmente estoy aprendiendo lenguajes de programación como python y java.</p>
+    <Button tipo="primary" text="Conéctate conmigo"/>
+  </div>
+
+  <Gallery lang="es"/>
+
+</section>

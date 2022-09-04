@@ -2,13 +2,15 @@
 import Layout from "../layouts/Layout.astro";
 import Header from "../components/header/Header.astro";
 import NotFound from "../components/notFound/NotFound.astro";
+const link = new URL(Astro.request.url)
+const isSpanish = link.pathname.includes('es')
 ---
 
-<Layout title="Page not found">
+<Layout title={ isSpanish ? 'Página no encontrada' : 'Page not found' } lang={ isSpanish ? 'es' : 'en' }>
 
-  <Header url="pageNotFound" />
+  <Header url="pageNotFound" lang={ isSpanish ? 'es' : 'en'} />
 
-  <NotFound/>
+  <NotFound lang={ isSpanish ? 'es' : 'en' }/>
 
 
 </Layout>

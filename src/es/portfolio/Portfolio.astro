@@ -1,0 +1,12 @@
+---
+import style from './portfolio.module.css'
+import GridPortfolio from '../gridPortfolio/GridPortfolio.astro';
+import portfolio from '../../data/grid-portfolio.json'
+---
+
+<section id="portfolio" class={style.section}>
+  <h2 class={style.title}>Portafolio</h2>
+  <ul class={style.content_grid_portfolio}>
+    <GridPortfolio data={portfolio} lang="es" />
+  </ul>
+</section>
