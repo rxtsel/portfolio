@@ -71,14 +71,17 @@ document.addEventListener('DOMContentLoaded', () => {
   // cursor
   const cursor = $('#cursor')
 
-  document.addEventListener('mousemove', e => {
+  if (cursor) {
 
-    const mouseX = e.pageX - 30
-    const mouseY = e.pageY - 30
+    document.addEventListener('mousemove', e => {
 
-    cursor.style = `transform: translate3d(${mouseX}px, ${mouseY}px, 0);`
+      const mouseX = e.pageX - 30
+      const mouseY = e.pageY - 30
 
-  })
+      cursor.style = `transform: translate3d(${mouseX}px, ${mouseY}px, 0);`
+
+    })
+  }
 
   // change language
   const lang = $('#lang')
