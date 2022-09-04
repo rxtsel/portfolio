@@ -89,9 +89,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const nameSection = gato[1]
 
     if (currentLink.includes('es')) {
-      window.location = `/#${nameSection}`
+      window.location = `/#${nameSection === undefined ? 'home' : nameSection}`
     } else {
-      window.location = `/es/#${nameSection}`
+      window.location = `/es/#${nameSection === undefined ? 'home' : nameSection}`
     }
 
   })
