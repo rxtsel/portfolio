@@ -79,6 +79,16 @@ const { title, lang } = Astro.props as Props;
 				<meta property="twitter:image" content="meta_tags_large_icon.png">
 			)
 		}
+		<!-- Manifest -->
+		{
+			lang === 'es' ?
+			(
+				<link rel="manifest" href="/manifest.json">
+			) :
+			(
+				<link rel="manifest" href="manifest.json">
+			)
+		}
 	</head>
 	<body>
 		<span id="cursor"></span>
