@@ -68,8 +68,8 @@
     "description": "Web App to manage and keep track of our money, has CRUD functions",
     "descriptiones": "Una aplicación web para gestionar y llevar el control de nuestro dinero, tiene funciones CRUD",
     "technology": ["React", "Css"],
-    "url": "https://cryptocurrency-exchange-react.netlify.app/",
-    "repo": "https://github.com/rxtsel/Cryptocurrency-Exchange"
+    "url": "https://expense-manager-react.netlify.app/",
+    "repo": "https://github.com/rxtsel/Expense-control-react"
   },
   {
     "id": "2",
