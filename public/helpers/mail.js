@@ -44,12 +44,10 @@ document.addEventListener('DOMContentLoaded', () => {
       $(`#group__${camp} #input__error`)
         .classList.remove('input__error-active')
       camps[camp] = true
-      data[camp] = input.value
     } else {
       $(`#group__${camp} #input__error`)
         .classList.add('input__error-active')
       camps[camp] = false
-      data[camp] = ''
     }
   }
 
@@ -58,12 +56,10 @@ document.addEventListener('DOMContentLoaded', () => {
       $(`#group__message #input__error`)
         .classList.remove('input__error-active')
       camps.message = true
-      data.message = textArea.value
     } else {
       $(`#group__message #input__error`)
         .classList.add('input__error-active')
       camps.message = false
-      data.message = ''
     }
   }
 
