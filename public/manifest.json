@@ -37,5 +37,10 @@
     "src": "logo.svg",
     "sizes": "40x40",
     "type": "image/svg+xml"
+  }, {
+    "src": "PWA.png",
+    "sizes": "196x196",
+    "type": "image/png",
+    "purpose": "any maskable"
   }]
 }
