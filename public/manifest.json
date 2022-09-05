@@ -1,8 +1,9 @@
 {
   "name": "rxtsel.ml",
   "short_name": "rxtsel",
-  "start_url": ".",
+  "start_url": "/?utm_source=web_app_manifest",
   "display": "standalone",
+  "theme_color":	"#1A1A1A",
   "background_color": "#1A1A1A",
   "description": "Website where you will find information about me and some of the projects I have worked on.",
   "icons": [{
