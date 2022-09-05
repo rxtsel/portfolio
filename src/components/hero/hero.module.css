@@ -38,6 +38,7 @@
   border-radius: 100%;
   box-shadow : var(--shadow);
   margin: 0 auto;
+  border: 1px solid var(--gray)
 }
 
 .figcaption {
