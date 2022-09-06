@@ -33,9 +33,6 @@
     grid-column: 4 / 5;
     grid-row: 1 / 2;
   }
-  :global(#grid-gallery-4) img {
-    object-fit: contain;
-  }
 
   :global(#grid-gallery-3) {
     grid-column: 4 / 5;
@@ -49,21 +46,14 @@
 
 }
 
-@media (min-width: 1024px) {
-  :global(#grid-gallery-4) img {
-    object-fit: cover;
-  }
-}
-
 @media (max-width: 768px) {
   :global(#grid-gallery-1) img {
-    /* object-position: left; */
     object-position: bottom 0px right -115px;
   }
-}
 
-.grid__campo img:first-child(1) {
-  background-color: #9f6868;
+  :global(#grid-gallery-4) img {
+    object-fit: contain;
+  }
 }
 
 .grid__campo video {
