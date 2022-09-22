@@ -4,6 +4,14 @@
   overflow-x: hidden;
 }
 
+@media (max-width: 768px) {
+  .section {
+    display: grid;
+    place-content: center;
+    padding: 4rem;
+  }
+}
+
 .section:focus-visible {
   outline: none;
 }

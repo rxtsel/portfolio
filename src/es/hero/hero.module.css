@@ -4,6 +4,8 @@
 
 .content__info {
   min-height: 100vh;
+  display: grid;
+  place-content: center;
 }
 
 @media (min-width: 768px) {
