@@ -82,3 +82,8 @@
   word-wrap: break-word;
   white-space: pre-wrap;
 }
+
+.social_link {
+  text-decoration: none;
+  color: var(--active);
+}
