@@ -41,8 +41,8 @@
     "imges": "/grid-portfolio-4.webp",
     "alt": "puede ser una imagen que contiene una captura de pantalla de un sitio web que dice get information with a simple click",
     "title": "IP-Info",
-    "description": "Web page that has the functionality to provide information about an IP.",
-    "descriptiones": "Página web que tiene la funcionalidad de proporcionar información sobre una IP.",
+    "description": "Practicing consuming APIS with the tutorial of @midudev, a person I admire a lot.",
+    "descriptiones": "Practicando consumir APIS con el tutorial de @midudev persona que admiro mucho.",
     "technology": ["Html", "Css", "Js"],
     "url": "https://github.com/rxtsel/LCA/releases/tag/v.0.0.1",
     "repo": "https://github.com/rxtsel/LCA/tree/reto-4"
