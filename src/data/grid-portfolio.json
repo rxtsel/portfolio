@@ -3,13 +3,13 @@
     "id": "8",
     "img": "grid-portfolio-1.webp",
     "imges": "/grid-portfolio-1.webp",
-    "alt": "puede ser una imagen que contiene una captura de pantalla del sitio web rxtsel.ml",
-    "title": "Portfolio",
-    "description": "Designed in figma and developed with astro technology. Applying the new knowledge obtained.",
-    "descriptiones": "Diseñado en figma y desarrollado con tecnología astro. Aplicando los nuevos conocimientos obtenidos.",
+    "alt": "puede ser una imagen que tiene un texto con letra blanca que dice los mejores programas completamente gratis y libre de virus",
+    "title": "Free Premium Programs",
+    "description": "Non-profit website for educational purposes. Windows OS programs are shared.",
+    "descriptiones": "Sitio web sin fines de lucro con fines educativos. Se comparten programas para SO windows.",
     "technology": ["Figma" ,"Astro", "Css", "Js"],
-    "url": "https://rxtsel.ml",
-    "repo": "https://github.com/rxtsel/portfolio"
+    "url": "https://programas.ml",
+    "repo": "https://github.com/rxtsel/free-premium-programs"
   },
   {
     "id": "7",
@@ -44,8 +44,8 @@
     "description": "Practicing consuming APIS with the tutorial of @midudev, a person I admire a lot.",
     "descriptiones": "Practicando consumir APIS con el tutorial de @midudev persona que admiro mucho.",
     "technology": ["Html", "Css", "Js"],
-    "url": "https://github.com/rxtsel/LCA/releases/tag/v.0.0.1",
-    "repo": "https://github.com/rxtsel/LCA/tree/reto-4"
+    "url": "https://rxtsel.github.io/ip-info/",
+    "repo": "https://github.com/rxtsel/ip-info"
   },
   {
     "id": "4",
