@@ -465,15 +465,13 @@ body {
 
 body::before {
   content: '';
-  width: 40rem;
-  height: 40rem;
-  background: linear-gradient(145deg, #464646 0%, #1b1b1b 50%, #1a1a1a 100%);
+  width: 80rem;
+  height: 80rem;
+  background: linear-gradient(145deg, #464646 -129%, #1a1a1a 76%);
   position: absolute;
-  top: 0;
-  left: 0;
+  top: -36rem;
+  left: -36rem;
   border-radius: 50%;
-  filter: blur(300px);
-  -webkit-filter: blur(300px);
   z-index: -1;
 }
 
