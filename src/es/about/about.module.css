@@ -8,7 +8,6 @@
   .section {
     display: grid;
     place-content: center;
-    padding: 4rem;
   }
 }
 
