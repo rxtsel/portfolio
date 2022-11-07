@@ -10,7 +10,7 @@
 
 @media (min-width: 768px) {
   .section {
-    padding-top: calc(var(--separation) + 3rem);
+    padding-top: var(--separation);
   }
 }
 
