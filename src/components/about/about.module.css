@@ -17,7 +17,6 @@
   height: 70rem;
   background: linear-gradient(145deg, #2a2a2a 0%, #1a1a1a 100%);
   opacity: .15;
-  filter: blur(5px);
 }
 
 @media (max-width: 768px) {
