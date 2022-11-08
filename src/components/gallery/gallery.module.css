@@ -4,6 +4,7 @@
   grid-template-rows: repeat(3, 1fr);
   place-content: center;
   margin: var(--separation) auto;
+  max-width: 120rem;
 }
 
 .grid:focus-visible {
