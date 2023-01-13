@@ -7,7 +7,7 @@
     "title": "Free Premium Programs",
     "description": "Non-profit website for educational purposes. Windows OS programs are shared.",
     "descriptiones": "Sitio web sin fines de lucro con fines educativos. Se comparten programas para SO windows.",
-    "technology": ["Figma" ,"Astro", "Css", "Js"],
+    "technology": ["Figma", "Astro", "Css", "Js"],
     "url": "https://programas.ml",
     "repo": "https://github.com/rxtsel/free-premium-programs"
   },
@@ -104,7 +104,7 @@
     "description": "This is my first web pg developed before taking web development courses.",
     "descriptiones": "Esta es mi primera web pg desarrollada antes de tomar cursos de desarrollo web.",
     "technology": ["Html", "Css", "Js"],
-    "url": "https://rxtsel.github.io/XppleStore/",
+    "url": "https://xpplestore.netlify.app/",
     "repo": "https://github.com/rxtsel/XppleStore"
   }
 ]
