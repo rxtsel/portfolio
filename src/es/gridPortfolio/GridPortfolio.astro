@@ -27,9 +27,19 @@ import Icon from '../../components/icons/Icon.astro'
             }
           </div>
 
-          <a href={repo} class={style.githubUrl} target="_blank">
-            <Icon icon="github" name="Source"/>
-          </a>
+          {
+            repo !== 'none' ?
+            (
+              <a href={repo} class={style.githubUrl} target="_blank">
+                <Icon icon="github" name="Source"/>
+              </a>
+            ) : (
+              <a href={url} class={style.githubUrl} target="_blank">
+                <Icon icon="private" name="Private"/>
+              </a>
+            )
+          }
+
         </div>
 
       </div>  
