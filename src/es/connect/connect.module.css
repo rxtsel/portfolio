@@ -18,21 +18,20 @@
 
   .section::before {
     position: absolute;
-    content: '';
+    content: "";
     background: linear-gradient(245deg, #2a2a2a 0%, #1a1a1a 100%);
-    opacity: .2;
+    opacity: 0.2;
     right: -20rem;
     bottom: 8rem;
     width: 60rem;
     height: 60rem;
     overflow-x: hidden;
   }
-
 }
 
 @media (max-width: 768px) {
   .section {
-    padding-top: .5rem;
+    padding-top: 0.5rem;
   }
 }
 
@@ -86,14 +85,20 @@
   font-size: 0;
 }
 
+:global(.linkedin),
+:global(.twitter),
+:global(.github) {
+  transition: background 0.5s ease;
+}
+
 :global(.linkedin:hover) {
   background: linear-gradient(180deg, #3a66d4, #3a66d4);
 }
 
 :global(.twitter:hover) {
-  background: linear-gradient(180deg, #4cafe6, #4cafe6)
+  background: linear-gradient(180deg, #4cafe6, #4cafe6);
 }
 
-:global(.instagram:hover) {
-  background: linear-gradient(207deg, #b42dc0, #ff2c77 34%, #ff4917 69%, #ff5219)
+:global(.github:hover) {
+  background: linear-gradient(180deg, #020202, #000);
 }
