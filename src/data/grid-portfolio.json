@@ -16,11 +16,11 @@
     "img": "grid-portfolio-2.webp",
     "imges": "/grid-portfolio-2.webp",
     "alt": "puede ser una imagen que contiene una captura de pantalla del sitio web biolink.ga",
-    "title": "Biolink",
+    "title": "Biolinks",
     "description": "Landing page to display links in social network bios.",
     "descriptiones": "Página de aterrizaje para mostrar enlaces en las biografías de las redes sociales.",
     "technology": ["Html", "Css", "Js"],
-    "url": "https://www.biolink.ga/",
+    "url": "https://links.rxtsel.dev",
     "repo": "https://github.com/rxtsel/biolink"
   },
   {
