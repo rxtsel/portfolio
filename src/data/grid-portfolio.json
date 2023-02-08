@@ -44,17 +44,6 @@
     "repo": "https://github.com/rxtsel/ip-info"
   },
   {
-    "img": "grid-portfolio-5.webp",
-    "imges": "/grid-portfolio-5.webp",
-    "alt": "puede ser una imagen que contiene una captura de pantalla de un sitio web que dice get information with a simple click",
-    "title": "Guitar-LA",
-    "description": "Course react from @CodigoConJuan where I added more things like the option to see the number of items in the cart.",
-    "descriptiones": "Curso react de @CodigoConJuan donde he añadido más cosas como la opción de ver el número de artículos en el carrito.",
-    "technology": ["Next", "Strapi", "Mongo"],
-    "url": "https://guitar-la-black.vercel.app/",
-    "repo": "https://github.com/rxtsel/Guitar-LA"
-  },
-  {
     "img": "grid-portfolio-6.webp",
     "imges": "/grid-portfolio-6.webp",
     "alt": "puede ser una imagen que contiene una captura de pantalla de un sitio web que dice control de gastos",
