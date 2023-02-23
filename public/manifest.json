@@ -1,11 +1,13 @@
 {
-  "name": "rxtsel.ml",
+  "version": "1.0.0",
+  "manifest_version": 2,
+  "name": "rxtsel.dev",
   "short_name": "rxtsel",
   "start_url": "/?utm_source=web_app_manifest",
   "display": "standalone",
   "theme_color":	"#1A1A1A",
   "background_color": "#1A1A1A",
-  "description": "Website where you will find information about me and some of the projects I have worked on.",
+  "description": "Discover my portfolio specialized in Performance, SEO, Accessibility, and Best Programming Practices. Get to know my experience and skills in developing high-quality and high-performing websites.",
   "icons": [{
     "src": "16x16.svg",
     "sizes": "16x16",
