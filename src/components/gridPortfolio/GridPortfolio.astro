@@ -1,22 +1,36 @@
 ---
-const {data} = Astro.props;
+export interface Props {
+  data: Array<{
+    img: string,
+    alt: string,
+    title: string,
+    description: string,
+    url: string,
+    technology: Array<string>,
+    repo: string
+  }>,
+  lang: string
+}
+const { data, lang } = Astro.props;
 import style from './gridPortfolio.module.css'
 import Icon from '../icons/Icon.astro'
+
+const path = lang === 'es' ? '/' : ''
 ---
 
 {
-	data.map(({img, alt, title, description, url, technology, repo}) => 
+	data.map(({img, alt, title, description, descriptiones, url, technology, repo}) => 
 
   <li class={style.li} >
     <a class={style.url_content} href={url} target="_blank">
 
       <div class={style.img}>
-        <img src={img} alt={alt} loading="lazy">  
+        <img src={`${path}${img}`} alt={alt} loading="lazy">  
       </div>
 
       <div class={style.info}>
         <h2 class={style.title}>{title} <span class={style.span}>&rarr;</span></h2>  
-        <p class={style.description}>{description}</p>
+        <p class={style.description}>{lang === 'es' ? descriptiones : description}</p>
 
         <div class={style.contentTechAndGithub}>
           <div class={style.technologys}>

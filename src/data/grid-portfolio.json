@@ -1,7 +1,6 @@
 [
   {
     "img": "grid-portfolio-5.webp",
-    "imges": "/grid-portfolio-5.webp",
     "alt": "puede ser una imagen de la portada de un gym que tiene un texto con letra blanca que dice comenzemos una nueva vida hoy",
     "title": "Gold's Gym",
     "description": "Design and development of a landing page for a gym.",
@@ -12,7 +11,6 @@
   },
   {
     "img": "grid-portfolio-10.webp",
-    "imges": "/grid-portfolio-10.webp",
     "alt": "puede ser una imagen que dice qué paquete necesito para mi sitio web y cuánto cuesta",
     "title": "Services Quotation",
     "description": "A service quotation tool designed to simplify and streamline the process of obtaining quotes for your services.",
@@ -23,7 +21,6 @@
   },
   {
     "img": "grid-portfolio-1.webp",
-    "imges": "/grid-portfolio-1.webp",
     "alt": "puede ser una imagen que tiene un texto con letra blanca que dice design",
     "title": "Vehement Agency",
     "description": "Web site design and development for an agency.",
@@ -34,7 +31,6 @@
   },
   {
     "img": "grid-portfolio-2.webp",
-    "imges": "/grid-portfolio-2.webp",
     "alt": "puede ser una imagen que contiene una captura de pantalla del sitio web biolink.ga",
     "title": "Biolinks",
     "description": "Landing page to display links in social network bios.",
@@ -45,7 +41,6 @@
   },
   {
     "img": "grid-portfolio-3.webp",
-    "imges": "/grid-portfolio-3.webp",
     "alt": "puede ser una imagen que contiene una captura de pantalla de una aplicacion de escritorio hecho en java que dice lector de calidad de agua",
     "title": "LCA",
     "description": "Water quality measurement software. Project mintic 2022.",
@@ -56,7 +51,6 @@
   },
   {
     "img": "grid-portfolio-4.webp",
-    "imges": "/grid-portfolio-4.webp",
     "alt": "puede ser una imagen que contiene una captura de pantalla de un sitio web que dice get information with a simple click",
     "title": "IP-Info",
     "description": "Practicing consuming APIS with the tutorial of @midudev, a person I admire a lot.",
@@ -67,7 +61,6 @@
   },
   {
     "img": "grid-portfolio-6.webp",
-    "imges": "/grid-portfolio-6.webp",
     "alt": "puede ser una imagen que contiene una captura de pantalla de un sitio web que dice control de gastos",
     "title": "Expense Manager",
     "description": "Web App to manage and keep track of our money, has CRUD functions",
@@ -78,7 +71,6 @@
   },
   {
     "img": "grid-portfolio-7.webp",
-    "imges": "/grid-portfolio-7.webp",
     "alt": "puede ser una imagen que contiene una captura de pantalla de un sition web que dice cotiza criptomonedas al instante",
     "title": "Cryptocurrency Exchange",
     "description": "An web application to view the exchange rate of a local currency to a cryptocurrency.",
@@ -89,7 +81,6 @@
   },
   {
     "img": "grid-portfolio-8.webp",
-    "imges": "/grid-portfolio-8.webp",
     "alt": "puede ser una imagen que contiene una captura de pantalla del sitio web que dice administrador de pacientes de veterinaria",
     "title": "Veterinary patient manager",
     "description": "Web App to manage patients in a veterinary practice, has CRUD functions",
@@ -100,7 +91,6 @@
   },
   {
     "img": "grid-portfolio-9.webp",
-    "imges": "/grid-portfolio-9.webp",
     "alt": "puede ser una imagen que contiene una captura de pantalla del sitio web xpplestore.co",
     "title": "XppleStore",
     "description": "This is my first web pg developed before taking web development courses.",
