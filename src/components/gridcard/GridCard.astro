@@ -13,7 +13,7 @@ const {data, lang} = Astro.props
     ) :
     (
       <div id={id} class={style.grid__campo}>
-        <video src={lang === 'es' ? srces : src} autoplay loop muted/>
+        <video src={lang === 'es' ? srces : src} autoplay="autoplay" loop="loop" muted="muted" playsinline/>
       </div>
     ) 
   )
