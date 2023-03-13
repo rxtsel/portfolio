@@ -1,41 +1,32 @@
 [
   {
     "id": "grid-gallery-1",
-    "type": "img",
-    "src": "grid-gallery-1.webp",
-    "srces": "/grid-gallery-1.webp",
+    "src": "grid-gallery-1",
     "alt": "puede ser una imagen con una grilla de lista de programas"
   },
   {
     "id": "grid-gallery-2",
-    "type": "video",
-    "src": "grid-gallery-2.mp4",
-    "srces": "/grid-gallery-2.mp4"
+    "src": "grid-gallery-2",
+    "video": true
   },
   {
     "id": "grid-gallery-3",
-    "type": "video",
-    "src": "grid-gallery-3.mp4",
-    "srces": "/grid-gallery-3.mp4"
+    "src": "grid-gallery-3",
+    "video": true
   },
   {
     "id": "grid-gallery-4",
-    "type": "img",
-    "src": "grid-gallery-4.webp",
-    "srces": "/grid-gallery-4.webp",
+    "src": "grid-gallery-4",
     "alt": "puede ser una imagen a blanco y negro con letras que dicen web design y de fondo una persona con gorra mirando hacia la izquierda"
   },
   {
     "id": "grid-gallery-5",
-    "type": "img",
-    "src": "grid-gallery-5.webp",
-    "srces": "/grid-gallery-5.webp",
-    "alt": "puede ser una imagen d[onde se muestra una aplicación web con un texto que dice control de gastos"
+    "src": "grid-gallery-5",
+    "alt": "puede ser una imagen dónde se muestra una aplicación web con un texto que dice control de gastos"
   },
   {
     "id": "grid-gallery-6",
-    "type": "video",
-    "src": "grid-gallery-6.mp4",
-    "srces": "/grid-gallery-6.mp4"
+    "video": true,
+    "src": "grid-gallery-6"
   }
 ]
