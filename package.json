@@ -11,5 +11,8 @@
   },
   "devDependencies": {
     "astro": "1.0.9"
+  },
+  "dependencies": {
+    "@nanostores/react": "0.4.1"
   }
 }
