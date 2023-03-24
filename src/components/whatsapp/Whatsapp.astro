@@ -1,0 +1,38 @@
+<a href="https://api.whatsapp.com/send?phone=573142216604&text=¡Hola, Cristhian! ¿Cómo estás?">
+  <img src="whatsapp.svg"  alt="puede ser una imagen con el logo de whatsapp"/>
+</a>
+
+<style>
+  a {
+    position: fixed;
+    width: 4rem;
+    height: 4rem;
+    right: 2.5rem;
+    bottom: 10rem;
+    transition: all 0.3s ease;
+  }
+
+  a img {
+    width: 100%;
+    height: 100%;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+  }
+
+  :global(:has(.button.show-scroll)) a {
+    bottom: 15rem;
+  }
+
+  @media (min-width: 768px) {
+    a {
+      width: 5.4rem;
+      height: 5.4rem;
+      right: 2rem;
+      bottom: 2rem;
+    }
+
+    :global(:has(.button.show-scroll)) a {
+      bottom: 8.5rem;
+    }
+  }
+</style>
