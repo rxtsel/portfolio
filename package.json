@@ -1,5 +1,5 @@
 {
-  "name": "@example/basics",
+  "name": "portfolio",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -10,22 +10,10 @@
     "astro": "astro"
   },
   "devDependencies": {
-    "@astrojs/react": "2.1.0",
-    "@types/react": "18.0.29",
-    "@types/react-dom": "18.0.11",
-    "@typescript-eslint/eslint-plugin": "5.56.0",
-    "astro": "1.0.9",
-    "eslint": "8.36.0",
-    "eslint-config-standard-with-typescript": "34.0.1",
-    "eslint-plugin-import": "2.27.5",
-    "eslint-plugin-n": "15.6.1",
-    "eslint-plugin-promise": "6.1.1",
-    "eslint-plugin-react": "7.32.2",
-    "react": "18.2.0",
-    "react-dom": "18.2.0",
-    "typescript": "5.0.2"
+    "astro": "1.0.9"
   },
   "dependencies": {
-    "@nanostores/react": "0.4.1"
+    "@nanostores/react": "0.4.1",
+    "nanostores": "0.7.4"
   }
 }
