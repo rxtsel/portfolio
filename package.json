@@ -19,6 +19,7 @@
   },
   "dependencies": {
     "@nanostores/react": "0.4.1",
-    "nanostores": "0.7.4"
+    "nanostores": "0.7.4",
+    "react-icons": "4.8.0"
   }
 }
