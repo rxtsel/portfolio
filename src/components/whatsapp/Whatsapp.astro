@@ -1,5 +1,10 @@
+---
+const url = Astro.request.url.includes('es')
+const path = url ? '/' : ''
+---
+
 <a href="https://api.whatsapp.com/send?phone=573142216604&text=¡Hola, Cristhian! ¿Cómo estás?">
-  <img src="whatsapp.svg"  alt="puede ser una imagen con el logo de whatsapp"/>
+  <img src={`${path}whatsapp.svg`}  alt="puede ser una imagen con el logo de whatsapp"/>
 </a>
 
 <style>
