@@ -31,7 +31,7 @@
   .logo {
     height: 4rem;
     width: 4rem;
-    transition: transform .3s ease-in-out;
+    transition: transform 0.3s ease-in-out;
   }
 
   .logo:hover {
@@ -65,7 +65,8 @@
   margin: 0 auto;
   opacity: 0;
   transform: translateY(165%);
-  transition: transform .2s ease-in-out, opacity .2s ease-in-out; z-index: 1;
+  transition: transform 0.2s ease-in-out, opacity 0.2s ease-in-out;
+  z-index: 1;
 }
 
 @media (min-width: 768px) {
@@ -73,7 +74,8 @@
     opacity: 1;
     align-items: center;
     position: absolute;
-    width: max-content;
+    width: 100%;
+    max-width: max-content;
     display: flex;
     column-gap: 1.5rem;
     bottom: 5rem;
@@ -100,14 +102,13 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  transition: color .5s ease;
-  width: 100%;
+  transition: color 0.5s ease;
+  width: max-content;
   height: 100%;
   z-index: 9;
 }
 
 @media (min-width: 768px) {
-
   .nav__url {
     font-size: var(--normal-font);
     font-weight: 400;
@@ -147,7 +148,7 @@
 
 :global(.active-color) {
   color: var(--active);
-  fill: var(--active)!important;
+  fill: var(--active) !important;
 }
 
 .social {
@@ -160,17 +161,17 @@
   overflow: hidden;
 }
 
-.campo > svg > path{
-  transition: fill .3s ease-in-out;
+.campo > svg > path {
+  transition: fill 0.3s ease-in-out;
 }
 
 .campo:hover > svg > path {
-  fill: var(--active)!important;
+  fill: var(--active) !important;
 }
 
 /* gitihub */
 .campo:hover > div > svg > path {
-  fill: var(--active)!important;
+  fill: var(--active) !important;
 }
 
 @media (min-width: 768px) {
@@ -183,7 +184,7 @@
 .lang_content {
   color: var(--white);
   font-size: 2rem;
-  transition: color .3s ease-in-out;
+  transition: color 0.3s ease-in-out;
 }
 
 .lang_content:hover {
@@ -205,14 +206,19 @@
     font-size: 0;
   }
 
-  .lang_content > svg > path {
-    fill: var(--white);
-    transition: fill .3s ease-in-out;
+  .lang_content > svg {
+    width: 2.4rem;
+    height: 2.4rem;
   }
 
-    .lang_content:hover > svg > path {
-      fill: var(--active);
-    }
+  .lang_content > svg > path {
+    fill: var(--white);
+    transition: fill 0.3s ease-in-out;
+  }
+
+  .lang_content:hover > svg > path {
+    fill: var(--active);
+  }
 }
 
 @media (min-width: 768px) {
