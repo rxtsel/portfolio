@@ -1,8 +1,6 @@
 ---
 import style from './gridCard.module.css'
-const {data, lang} = Astro.props
-
-const path = lang === 'es' ? '/' : ''
+const { data } = Astro.props
 ---
 
 {
@@ -10,14 +8,14 @@ const path = lang === 'es' ? '/' : ''
    !video ?
     (
       <div id={id} class={style.grid__campo}>
-        <img loading="lazy" src={`${path}${src}.webp`} alt={alt}>
+        <img loading="lazy" src={`${src}.webp`} alt={alt}>
       </div> 
     ) :
     (
       <div id={id} class={style.grid__campo}>
         <video autoplay="autoplay" loop="loop" muted="muted" playsinline poster={`${src}.webp`}>
-          <source src={`${path}${src}.mp4`} type="video/mp4" />
-          <source src={`${path}${src}.webm`} type="video/webm" />
+          <source src={`${src}.mp4`} type="video/mp4" />
+          <source src={`${src}.webm`} type="video/webm" />
         </video>
       </div>
     ) 

@@ -1,38 +1,32 @@
 ---
-import style from './connect.module.css'
+import style from './contact.module.css'
 import Icon from '../icons/Icon.astro';
 import Form from '../form/Form.astro'
+import { t } from "i18next";
 ---
 
-<section id="connect" class={style.section}>
-
+<section id="contact" class={style.section}>
   <div class="campo">
-    <h2 class={style.h2}>Connect</h2>
-    <h3 class={style.h3}>Let's connect</h3>
-    <p class={style.paragraph}>If it's a new project, it would be great if you could touch on scope, timeline and budget</p>
-    <h4 class={style.h4}>Social media</h4>
-
+    <h2 class={style.h2}>{t("contact.campo.h2")}</h2>
+    <h3 class={style.h3}>{t("contact.campo.h3")}</h3>
+    <p class={style.paragraph}>{t("contact.campo.p")}</p>
+    <h4 class={style.h4}>{t("contact.campo.h4")}</h4>
     <div class={style.contentIcons}>
-
       <a class={`linkedin ${style.campo}`} href="https://linkedin.com/in/rxtsel" target="_blank" >
         <Icon icon="linkedin" />
-        go to linkedin
+        {t("contact.social.linkedin")}
       </a>
 
       <a class={`twitter ${style.campo}`} href="https://twitter.com/rxtsel" target="_blank" >
         <Icon icon="twitter" />
-        go to twitter
+        {t("contact.social.twitter")}
       </a>
 
       <a class={`github ${style.campo}`} href="https://github.com/rxtsel" target="_blank" >
         <Icon icon="github-alt" />
-        go to github
+        {t("contact.social.github")}
       </a>
-
     </div>
-
   </div>
-
   <Form />
-
 </section>

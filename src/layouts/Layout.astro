@@ -1,41 +1,30 @@
 ---
 import '../styles/global.css'
-export interface Props {
-	title: string,
-	lang: string
-}
-
 import Metatags from '../components/metatags/Metatags.astro'
-import Whatsapp from '../components/whatsapp/Whatsapp.astro'
 import Analitycs from '../components/analitycs/Analitycs.astro'
-
-const { title, lang } = Astro.props as Props;
-
-const url = Astro.request.url.includes('es')
-const path = url ? '/' : ''
+import i18next, { t } from "i18next";
+import { HeadHrefLangs } from "astro-i18next/components";
 ---
 
 <!DOCTYPE html>
-<html lang={lang}>
+<html lang={i18next.language}>
 	<head>
     <Analitycs />
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
-    <link rel="icon" type="image/svg+xml" href={`${path}16x16.svg`} sizes="16x16"/>
-    <link rel="icon" type="image/svg+xml" href={`${path}32x32.svg`} sizes="32x32"/>
-    <link rel="icon" type="image/svg+xml" href={`${path}96x96.svg`} sizes="96x96"/>
-    <link rel="apple-touch-icon" type="image/svg+xml" href={`${path}180x180.svg`} sizes="180x180" />
-    <title>{title}</title>
-    <Metatags path={path} lang={lang}/>
-    <link rel="manifest" href={`${path}manifest.json`}>
+    <link rel="icon" type="image/svg+xml" href='16x16.svg' sizes="16x16"/>
+    <link rel="icon" type="image/svg+xml" href='32x32.svg' sizes="32x32"/>
+    <link rel="icon" type="image/svg+xml" href='96x96.svg' sizes="96x96"/>
+    <link rel="apple-touch-icon" type="image/svg+xml" href='180x180.svg' sizes="180x180" />
+    <title>{t("site.title")}</title>
+    <Metatags />
+    <link rel="manifest" href='manifest.json'>
+    <link rel="sitemap" href="sitemap-index.xml">
     <meta name="theme-color" content="#1A1A1A"/>
+    <HeadHrefLangs />
 	</head>
 	<body>
-		<span id="cursor"></span>
 		<slot />
-    <Whatsapp />
-    <script type="module" src={`${path}helpers/index.js`}></script>
-    <script type="module" src={`${path}helpers/mail.js`}></script>
 	</body>
 </html>

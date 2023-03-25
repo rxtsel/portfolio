@@ -9,19 +9,19 @@
 }
 
 .section::before {
-  content: '';
+  content: "";
   position: absolute;
   right: -20%;
   bottom: 0;
   width: 60rem;
   height: 70rem;
   background: linear-gradient(145deg, #2a2a2a 0%, #1a1a1a 100%);
-  opacity: .15;
+  opacity: 0.15;
 }
 
 @media (max-width: 768px) {
   .section {
-    padding-top: .5rem;
+    padding-top: 0.5rem;
     overflow-x: hidden;
   }
   .section::before {
@@ -44,9 +44,8 @@
     margin-top: 0;
     padding-top: var(--separation);
     max-width: 42.5rem;
-    font-size: 8rem!important;
+    font-size: 8rem !important;
   }
-
 }
 
 .aboutme {
@@ -64,6 +63,10 @@
   }
 }
 
+.campo {
+  z-index: 1;
+}
+
 .paragraph {
   margin-top: 0;
   color: var(--font-off);
@@ -72,6 +75,7 @@
   line-height: 1.2;
   word-wrap: break-word;
   white-space: pre-wrap;
+  margin-bottom: 5.5rem;
 }
 
 .social_link {

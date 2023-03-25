@@ -2,22 +2,21 @@
 import style from './hero.module.css'
 import Button from '../button/Button.astro'
 import Gallery from '../../components/gallery/Gallery.astro'
+import { t } from "i18next"
 ---
 
 <section id="home" class={style.section}>
-
   <div class={style.content__info}>
     <figure class={style.figure}>
-      <img class={style.img} src="profile.webp" alt="puede ser una foto de una persona con gorra gris y mirando hacia la izquierda">
+      <img class={style.img} src="profile.webp" alt={t("hero.alt")}>
       <figcaption class={style.figcaption}>@rxtsel</figcaption>
     </figure>
-    <h1 class={style.name}>Hi, i'm Cristhian</h1>
-    <h2 class={style.rol}>Frontend Developer</h2>
-    <h3 class={`title ${style.slogan}`}>Passionate to craft amazing digital <span class={style.span}>product.</span></h3>
-    <p class={style.description}>+1 year of experience as a web developer. A design and innovation enthusiast.</p>
-    <Button tipo="primary" text="Connect with me"/>
+    <h1 class={style.name}>{t("hero.name")}</h1>
+    <h2 class={style.rol}>{t("hero.rol")}</h2>
+    <h3 class={`title ${style.slogan}`}>{t("hero.slogan")}</h3>
+    <p class={style.description}>{t("hero.description")}</p>
+    <Button tipo="primary" text={t("hero.button")}/>
   </div>
 
-  <Gallery lang="en"/>
-
+  <Gallery />
 </section>

@@ -182,6 +182,11 @@
 }
 
 .lang_content {
+  background: none;
+  border: none;
+  outline: none;
+  margin: 0;
+  padding: 0;
   color: var(--white);
   font-size: 2rem;
   transition: color 0.3s ease-in-out;

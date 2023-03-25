@@ -1,4 +1,5 @@
 ---
+import { t } from "i18next";
 import style from './form.module.css'
 ---
 
@@ -9,42 +10,173 @@ import style from './form.module.css'
 <form id="form" class={style.form}>
 
   <div id="campo" class={style.campo}>
-    <h3 id="title" class={style.h3}>My name is</h3>
+    <h3 id="title" class={style.h3}>{t("form.titles.name")}</h3>
     <div id="group__firstName" class={style.input_group}>
       <input id="firstName" required type="text" name="firstName" autocomplete="off"  class={`input-camp ${style.input}`} />
-      <label for="firstName" class={style.user_label}>First Name</label>
-      <p id="input__error" class={style.input__error}>Your name must not contain spaces or numbers.</p>
+      <label for="firstName" class={style.user_label}>{t("form.labels.firstName")}</label>
+      <p id="input__error" class={style.input__error}>{t("form.errors.name")}</p>
     </div>
     <div id="group__lastName" class={style.input_group}>
       <input id="lastName" required type="text" name="lastName" autocomplete="off"  class={`input-camp ${style.input}`} />
-      <label for="lastName" class={style.user_label}>Last Name</label>
-      <p id="input__error" class={style.input__error}>Your name must not contain spaces or numbers.</p>
+      <label for="lastName" class={style.user_label}>{t("form.labels.lastName")}</label>
+      <p id="input__error" class={style.input__error}>{t("form.errors.name")}</p>
     </div>
   </div>
 
   <div class={style.campo}>
-    <h3 class={style.h3}>My email is</h3>
+    <h3 class={style.h3}>{t("form.titles.email")}</h3>
     <div id="group__email" class={style.input_group}>
       <input id="email" required type="email" name="email" autocomplete="off"  class={`input-camp ${style.input}`} />
-      <label for="email" class={style.user_label}>Email</label>
-      <p id="input__error" class={style.input__error}>You must enter a valid email address.</p>
+      <label for="email" class={style.user_label}>{t("form.labels.email")}</label>
+      <p id="input__error" class={style.input__error}>{t("form.errors.email")}</p>
     </div>
   </div>
 
   <div class={style.campo}>
-    <h3 class={style.h3}>My message is</h3>
+    <h3 class={style.h3}>{t("form.titles.message")}</h3>
     
     <div id="group__message" class={style.input_group}>
       <textarea id="message" required name="message"  class={`input-camp ${style.input}`} />
-      <label for="message" class={style.user_label}>Message</label>
-      <p id="input__error" class={style.input__error}>The message must not be empty.</p>
+      <label for="message" class={style.user_label}>{t("form.labels.message")}</label>
+      <p id="input__error" class={style.input__error}>{t("form.errors.message")}</p>
     </div>
   </div>
 
   <div class={style.campo}>
     <div class={style.input_group}>
-      <button id="submit" type="submit" class={style.input}>Submit</button>
+      <button id="submit" type="submit" class={style.input}>{t("form.button")}</button>
     </div>
   </div>
 
 </form>
+
+<script is:inline>
+  document.addEventListener('DOMContentLoaded', () => {
+    const $ = element => document.querySelector(element)
+    const $$ = elements => document.querySelectorAll(elements)
+
+    const form = $('#form')
+    const inputs = $$('#form .input-camp')
+    const textArea = $('#group__message textarea')
+    const submit = $('#submit')
+    const modal = $('#modal')
+    const alerta = $('#modal span')
+
+    const regex = {
+      text: /^[a-zA-ZÀ-ÿ]{1,40}$/,
+      email: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
+    }
+
+    const camps = {
+      firstName: false,
+      lastName: false,
+      email: false,
+      message: false
+    }
+
+    const validarFormulario = (e) => {
+      switch (e.target.name) {
+        case 'firstName':
+          validarCampo(regex.text, e.target, 'firstName')
+          break
+        case 'lastName':
+          validarCampo(regex.text, e.target, 'lastName')
+          break
+        case 'email':
+          validarCampo(regex.email, e.target, 'email')
+          break
+        case 'message':
+          validarTextArea()
+          break
+      }
+    }
+
+    const validarCampo = (expresion, input, camp) => {
+      if (expresion.test(input.value)) {
+        $(`#group__${camp} #input__error`)
+          .classList.remove('input__error-active')
+        camps[camp] = true
+      } else {
+        $(`#group__${camp} #input__error`)
+          .classList.add('input__error-active')
+        camps[camp] = false
+      }
+    }
+
+    const validarTextArea = () => {
+      if (textArea.value.length >= 3) {
+        $(`#group__message #input__error`)
+          .classList.remove('input__error-active')
+        camps.message = true
+      } else {
+        $(`#group__message #input__error`)
+          .classList.add('input__error-active')
+        camps.message = false
+      }
+    }
+
+    inputs.forEach(input => {
+      input.addEventListener('keyup', validarFormulario)
+      input.addEventListener('blur', validarFormulario)
+    })
+
+    textArea.addEventListener('keyup', validarTextArea)
+    textArea.addEventListener('blur', validarTextArea)
+
+    const cleanState = () => {
+      camps.firstName = false
+      camps.lastName = false
+      camps.email = false
+      camps.message = false
+    }
+
+    // modal
+    const openModal = () => {
+      modal.showModal()
+    }
+
+    // close modal
+    modal.addEventListener('click', () => {
+      modal.close()
+    })
+
+    const handleSubmit = async e => {
+      const currentUrl = window.location.pathname
+      const data = new FormData(form)
+      const url = 'https://formspree.io/f/mqkjavlv'
+
+      e.preventDefault()
+
+      if (camps.firstName && camps.lastName && camps.email && camps.message) {
+        const response = await fetch(url, {
+          method: 'POST',
+          body: data,
+          headers: {
+            'Accept': 'application/json'
+          }
+        })
+
+        if (response.ok) {
+          modal.classList.remove('invalid-modal')
+          alerta.textContent = currentUrl.includes('en') ?  'Email sent successfully.' : 'Email enviado correctamente'
+          openModal()
+          form.reset()
+          cleanState()
+          setTimeout(() => {
+            window.location = '/'
+          }, 4500)
+        } else {
+          modal.classList.add('invalid-modal')
+          alerta.textContent = currentUrl.includes('en') ? 'Oops! There was a problem submitting your form.' : '¡Oops! Hubo un problema al enviar su formulario.'
+          openModal()
+        }
+      } else {
+        modal.classList.add('invalid-modal')
+        alerta.textContent = currentUrl.includes('en') ? 'Please check the fields.' : 'Por favor, compruebe los campos.'
+        openModal()
+      }
+    }
+
+    submit.addEventListener('click', handleSubmit)
+  })
+</script>

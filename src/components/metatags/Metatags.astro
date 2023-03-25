@@ -1,40 +1,22 @@
 ---
-export interface Props {
-  path: string
-  lang: string
-}
-
-const { path, lang } = Astro.props
-
-const TRANSLATOR = {
-  es: {
-    title: 'Cristhian Melo - Desarrollador de Software',
-    description: 'Descubre mi portafolio especializado en Performance, SEO, Accesibilidad y Buenas Prácticas de Programación. Conozca mi experiencia y habilidades en el desarrollo de sitios web de alta calidad y rendimiento.',
-    keywords: 'desarrollador web, diseñador web, colombia, html, css, javascript, diseño responsivo, frameworks, adobe creative suite, experiencia de usuario (ux), optimización de motores de búsqueda (seo), wordpress, ecommerce, desarrollo de aplicaciones web, desarrollo móvil, tecnologías web emergentes, cristhian melo, rxtsel, rxtsel.dev, programador, frontend, frontend developer, web dev'
-  },
-  en: {
-    title: 'Cristhian Melo - Software Developer',
-    description: 'Discover my portfolio specialized in Performance, SEO, Accessibility, and Best Programming Practices. Get to know my experience and skills in developing high-quality and high-performing websites.',
-    keywords: 'web developer, web designer, colombia, html, css, javascript, responsive design, frameworks, adobe creative suite, user experience (ux), search engine optimization (seo), wordpress, ecommerce, web application development, mobile development, emerging web technologies, cristhian melo, rxtsel, rxtsel.dev, developer, programador, frontend, frontend developer, web dev'
-  }
-}
+import { t } from "i18next";
 ---
 
-<meta name="keywords" content={lang === 'es' ? TRANSLATOR.es.keywords : TRANSLATOR.en.keywords}/>
-<meta name="author" content="Cristhian Melo" />
-<meta name="copyright" content="Cristhian Melo" />
-<!-- Primary Meta Tags -->
-<meta name="title" content={lang === 'es' ? TRANSLATOR.es.title : TRANSLATOR.en.title}>
-<meta name="description" content={lang === 'es' ? TRANSLATOR.es.description : TRANSLATOR.en.description}>
-<!-- Open Graph / Facebook -->
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://www.rxtsel.dev">
-<meta property="og:title" content={lang === 'es' ? TRANSLATOR.es.title : TRANSLATOR.en.title}>
-<meta property="og:description" content={lang === 'es' ? TRANSLATOR.es.description : TRANSLATOR.en.description}>
-<meta property="og:image" content={`${path}meta_tags_large_icon.png`}>
-<!-- Twitter -->
-<meta property="twitter:card" content="summary_large_image">
-<meta property="twitter:url" content="https://www.rxtsel.dev">
-<meta property="twitter:title" content={lang === 'es' ? TRANSLATOR.es.title : TRANSLATOR.en.title}>
-<meta property="twitter:description" content={lang === 'es' ? TRANSLATOR.es.description : TRANSLATOR.en.description}>
-<meta property="twitter:image" content={`${path}meta_tags_large_icon.png`}>
+  <meta name="keywords" content={t("site.keywords")}/>
+  <meta name="author" content="Cristhian Melo" />
+  <meta name="copyright" content="Cristhian Melo" />
+  <!-- Primary Meta Tags -->
+  <meta name="title" content={t("site.title")}>
+  <meta name="description" content={t("site.description")}>
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.rxtsel.dev">
+  <meta property="og:title" content={t("site.title")}>
+  <meta property="og:description" content={t("site.description")}>
+  <meta property="og:image" content='meta_tags_large_icon.png'>
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://www.rxtsel.dev">
+  <meta property="twitter:title" content={t("site.title")}>
+  <meta property="twitter:description" content={t("site.description")}>
+  <meta property="twitter:image" content='meta_tags_large_icon.png'>

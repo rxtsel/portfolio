@@ -1,28 +1,37 @@
 ---
 import style from './button.module.css'
-const {tipo, text} = Astro.props
+const { tipo, text } = Astro.props
 ---
 
-{
-  tipo === 'primary' && (
-    <a class={`button ${style.primary}`} href='#connect' >
-      {text}
-    </a>
-  )
-}
+{tipo === 'primary' && (
+  <a class={`button ${style.primary}`} href='#contact' >
+    {text}
+  </a>
+)}
 
-{
-  tipo === 'secundary' && (
-    <a class={`button ${style.secundary}`} href='/pdf/CristhianMelo_CV.pdf' target="_blank" >
-      {text}
-    </a>
-  )
-}
+{tipo === 'secundary' && (
+  <a class={`button ${style.secundary}`} href='/pdf/CristhianMelo_CV.pdf' target="_blank" >
+    {text}
+  </a>
+)}
 
-{
-  tipo === 'tertiary' && (
-    <a id="back-top" class={`button ${style.tertiary}`} href='#home'>
-      {text}
-    </a>
-  )
-}
+{tipo === 'tertiary' && (
+  <a id="back-top" class={`button ${style.tertiary}`} href='#home'>
+    {text}
+  </a>
+)}
+
+<script is:inline>
+  document.addEventListener('DOMContentLoaded', () => {
+    const $ = element => document.querySelector(element)
+
+    // back to top
+    function backToTop() {
+      const scrollUp = $('#back-top')
+      if (this.scrollY >= 560) scrollUp.classList.add('show-scroll')
+      else scrollUp.classList.remove('show-scroll')
+    }
+
+    window.addEventListener('scroll', backToTop)
+  })
+</script>

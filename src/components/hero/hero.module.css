@@ -38,9 +38,9 @@
   height: 100%;
   object-fit: cover;
   border-radius: 100%;
-  box-shadow : var(--shadow);
+  box-shadow: var(--shadow);
   margin: 0 auto;
-  border: 1px solid var(--gray)
+  border: 1px solid var(--gray);
 }
 
 .figcaption {
@@ -87,22 +87,22 @@
 
 @media (min-width: 758px) {
   .slogan {
-    font-size: calc(var(--separation) + 1rem)!important;
+    font-size: calc(var(--separation) + 1rem) !important;
     max-width: 61rem;
   }
 }
 
-.span {
+.slogan {
   position: relative;
 }
 
-.span::after {
+.slogan::after {
   position: absolute;
-  content: url('/subline.webp');
+  content: url("/subline.webp");
   height: 1rem;
   width: 100%;
-  left: 1.5rem;
-  top: 3.7rem;
+  left: 8rem;
+  bottom: 1.6rem;
 }
 
 @media (min-width: 768px) {
