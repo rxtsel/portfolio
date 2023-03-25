@@ -51,7 +51,7 @@ const lang = i18next.language;
   </div>
 
   <button id="lang" class={style.lang_content} title={lang === 'es' ? 'Lenguaje' : 'Language'}>
-    {lang === 'es' ? 'EN' : 'ES'}
+    {lang === 'es' ? 'US' : 'ES'}
     <Icon icon="language" />
   </button>
 
@@ -81,7 +81,7 @@ const lang = i18next.language;
     const lang = $('#lang');
     lang.addEventListener('click', () => {
       const langText = lang.innerText.trim();
-      langText === 'EN' ?
+      langText === 'US' ?
         window.location.pathname = '/en' :
         window.location.pathname = '';
     })
