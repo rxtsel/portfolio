@@ -10,19 +10,11 @@
     "astro": "astro"
   },
   "devDependencies": {
-    "@astrojs/react": "2.1.0",
     "@astrojs/sitemap": "1.2.1",
-    "@types/react": "18.0.29",
-    "@types/react-dom": "18.0.11",
-    "astro": "1.0.9",
-    "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "astro": "1.0.9"
   },
   "dependencies": {
-    "@nanostores/react": "0.4.1",
     "astro-i18next": "1.0.0-beta.21",
-    "install": "0.13.0",
-    "nanostores": "0.7.4",
-    "react-icons": "4.8.0"
+    "install": "0.13.0"
   }
 }
