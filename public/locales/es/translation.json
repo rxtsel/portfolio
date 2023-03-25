@@ -1,0 +1,13 @@
+{
+  "site": {
+    "title": "Cristhian Melo - Desarrollador de Software",
+    "description": "Descubre mi portafolio especializado en Performance, SEO, Accesibilidad y Buenas Prácticas de Programación. Conozca mi experiencia y habilidades en el desarrollo de sitios web de alta calidad y rendimiento.",
+    "keywords": "desarrollador web, diseñador web, colombia, html, css, javascript, diseño responsivo, frameworks, adobe creative suite, experiencia de usuario (ux), optimización de motores de búsqueda (seo), wordpress, ecommerce, desarrollo de aplicaciones web, desarrollo móvil, tecnologías web emergentes, cristhian melo, rxtsel, rxtsel.dev, programador, frontend, frontend developer, web dev"
+  },
+  "nav": {
+    "home": "Inicio",
+    "about": "Sobre mí",
+    "portfolio": "Portafolio",
+    "contact": "Contacto"
+  }
+}
