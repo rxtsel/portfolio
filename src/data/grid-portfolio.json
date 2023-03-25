@@ -16,7 +16,7 @@
     "description": "A service quotation tool designed to simplify and streamline the process of obtaining quotes for your services.",
     "descriptiones": "Un cotizador de servicios diseñado para simplificar y agilizar el proceso de obtener cotizaciones para sus servicios.",
     "technology": ["Next", "Ts", "Tailwind", "Strapi"],
-    "url": "https://quoter-app.vehement.co",
+    "url": "https://quoter.vehement.co",
     "repo": "none"
   },
   {
