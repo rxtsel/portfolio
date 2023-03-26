@@ -3,11 +3,11 @@ import style from "./nav.module.css";
 import Icon from "../icons/Icon.astro";
 import i18next, { t } from "i18next";
 const lang = i18next.language;
-const path = lang !== "es" ? "/" : "";
+const path = lang === "en" ? "/" : "";
 ---
 
 <nav class={style.nav}>
-  <a href="/" class={style.logo}>
+  <a href={lang === "en" ? "/en" : "/"} class={style.logo}>
     <img
       class={style.logo__img}
       src={`${path}logo.svg`}
