@@ -5,7 +5,7 @@ import Analitycs from "../components/analitycs/Analitycs.astro";
 import i18next, { t } from "i18next";
 import { HeadHrefLangs } from "astro-i18next/components";
 const lang = i18next.language;
-const path = lang !== "en" ? "/" : "";
+const path = lang === "en" ? "/" : "";
 ---
 
 <!DOCTYPE html>
