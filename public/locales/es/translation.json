@@ -1,7 +1,7 @@
 {
   "site": {
     "title": "Cristhian Melo - Desarrollador de Software",
-    "description": "Descubre mi portafolio especializado en Performance, SEO, Accesibilidad y Buenas Prácticas de Programación. Conozca mi experiencia y habilidades en el desarrollo de sitios web de alta calidad y rendimiento.",
+    "description": "Especializado en Performance, SEO y Accesibilidad. Firme creyente en la importancia del diseño UX/UI y en cómo puede afectar la experiencia del usuario en un sitio web.",
     "keywords": "desarrollador web, diseñador web, colombia, html, css, javascript, diseño responsivo, frameworks, adobe creative suite, experiencia de usuario (ux), optimización de motores de búsqueda (seo), wordpress, ecommerce, desarrollo de aplicaciones web, desarrollo móvil, tecnologías web emergentes, cristhian melo, rxtsel, rxtsel.dev, programador, frontend, frontend developer, web dev"
   },
   "nav": {
@@ -21,14 +21,14 @@
   "about": {
     "title": "Me encanta crear algo simple y limpio",
     "aboutme": "Sobre mí",
-    "paragraph": "<0>Actualmente vivo en Colombia con buena comida y paisajes increíbles. Me gusta explorar diseños minimalistas con buena funcionalidad.\n\nPuedo pasar horas todos los días explorando diseños.\n\nTambién estoy activo en <1>twitter</1> y si tienes alguna pregunta no dudes en mencionarme, estoy seguro de que será una charla interesante.</0>",
+    "paragraph": "<0>Actualmente vivo en Colombia, donde disfruto de buena comida y paisajes increíbles. Me gusta explorar diseños minimalistas que prioricen la funcionalidad.\n\nPuedo pasar horas todos los días explorando diseños.\n\nTambién estoy activo en <1>twitter</1> y si tienes alguna pregunta no dudes en mencionarme, estoy seguro de que será una charla interesante.</0>",
     "button": "Descargar CV"
   },
   "contact": {
     "campo": {
       "h2": "Conectar",
       "h3": "vamos a conectar",
-      "p": "Si se trata de un proyecto nuevo, sería genial si pudiera mencionar el alcance, el cronograma y el presupuesto.",
+      "p": "Si tiene en mente un nuevo proyecto, sería estupendo que me facilitara información sobre su alcance, calendario y presupuesto.",
       "h4": "Redes sociales"
     },
     "social": {
@@ -39,8 +39,8 @@
   },
   "form": {
     "titles": {
-      "name": "Mi nombre es",
-      "email": "Mi correo es",
+      "name": "Nombre",
+      "email": "Correo",
       "message": "Mi mensaje es"
     },
     "labels": {

@@ -1,7 +1,7 @@
 {
   "site": {
     "title": "Cristhian Melo - Software Developer",
-    "description": "Discover my portfolio specialized in Performance, SEO, Accessibility, and Best Programming Practices. Get to know my experience and skills in developing high-quality and high-performing websites.",
+    "description": "Specialized in Performance, SEO, and Accessibility. A firm believer in the importance of UX/UI design and how it can affect the user experience on a website.",
     "keywords": "web developer, web designer, colombia, html, css, javascript, responsive design, frameworks, adobe creative suite, user experience (ux), search engine optimization (seo), wordpress, ecommerce, web application development, mobile development, emerging web technologies, cristhian melo, rxtsel, rxtsel.dev, developer, programador, frontend, frontend developer, web dev"
   },
   "nav": {
@@ -14,21 +14,21 @@
     "alt": "may be a photo of Cristhian Melo",
     "name": "Hi, i'm Cristhian",
     "rol": "Frontend Developer",
-    "slogan": "Passionate to craft amazing digital product.",
+    "slogan": "Passionate about crafting amazing digital products.",
     "description": "+1 year of experience as a web developer. A design and innovation enthusiast.",
     "button": "Connect with me"
   },
   "about": {
     "title": "I love to create something simple and clean",
     "aboutme": "About me",
-    "paragraph": "<0>Currently living in Colombia with good food and amazing landscapes. I like to explore minimalist designs with good functionality.\n\nI can spend hours every day exploring designs.\n\nI'm also active on <1>twitter</1> and if you have any questions feel free to mention me, I'm sure it will be an interesting chat.</0>",
+    "paragraph": "<0>I'm currently living in Colombia, where I enjoy good food and amazing landscapes. I enjoy exploring minimalist designs that prioritize functionality.\n\nI can spend hours every day exploring designs.\n\nI'm also active on <1>twitter</1> and if you have any questions feel free to mention me, I'm sure it will be an interesting chat.</0>",
     "button": "Download CV"
   },
   "contact": {
     "campo": {
       "h2": "Connect",
       "h3": "Let's connect",
-      "p": "If it's a new project, it would be great if you could touch on scope, timeline and budget",
+      "p": "If you have a new project in mind, it would be great if you could provide some information on its scope, timeline, and budget",
       "h4": "Social media"
     },
     "social": {
@@ -39,8 +39,8 @@
   },
   "form": {
     "titles": {
-      "name": "My name is",
-      "email": "My email is",
+      "name": "Name",
+      "email": "Email",
       "message": "My message is"
     },
     "labels": {
