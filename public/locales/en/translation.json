@@ -1,0 +1,59 @@
+{
+  "site": {
+    "title": "Cristhian Melo - Software Developer",
+    "description": "Discover my portfolio specialized in Performance, SEO, Accessibility, and Best Programming Practices. Get to know my experience and skills in developing high-quality and high-performing websites.",
+    "keywords": "web developer, web designer, colombia, html, css, javascript, responsive design, frameworks, adobe creative suite, user experience (ux), search engine optimization (seo), wordpress, ecommerce, web application development, mobile development, emerging web technologies, cristhian melo, rxtsel, rxtsel.dev, developer, programador, frontend, frontend developer, web dev"
+  },
+  "nav": {
+    "home": "Home",
+    "about": "About me",
+    "portfolio": "Portfolio",
+    "contact": "Contact"
+  },
+  "hero": {
+    "alt": "may be a photo of Cristhian Melo",
+    "name": "Hi, i'm Cristhian",
+    "rol": "Frontend Developer",
+    "slogan": "Passionate to craft amazing digital product.",
+    "description": "+1 year of experience as a web developer. A design and innovation enthusiast.",
+    "button": "Connect with me"
+  },
+  "about": {
+    "title": "I love to create something simple and clean",
+    "aboutme": "About me",
+    "paragraph": "<0>Currently living in Colombia with good food and amazing landscapes. I like to explore minimalist designs with good functionality.\n\nI can spend hours every day exploring designs.\n\nI'm also active on <1>twitter</1> and if you have any questions feel free to mention me, I'm sure it will be an interesting chat.</0>",
+    "button": "Download CV"
+  },
+  "contact": {
+    "campo": {
+      "h2": "Connect",
+      "h3": "Let's connect",
+      "p": "If it's a new project, it would be great if you could touch on scope, timeline and budget",
+      "h4": "Social media"
+    },
+    "social": {
+      "linkedin": "go to linkedin",
+      "twitter": "go to twitter",
+      "github": "go to github"
+    }
+  },
+  "form": {
+    "titles": {
+      "name": "My name is",
+      "email": "My email is",
+      "message": "My message is"
+    },
+    "labels": {
+      "firstName": "John",
+      "lastName": "Doe",
+      "email": "john-doe@email.com",
+      "message": "Hi Cristhian, I would like to talk about..."
+    },
+    "errors": {
+      "name": "Your name must not contain spaces or numbers.",
+      "email": "You must enter a valid email address.",
+      "message": "The message must not be empty."
+    },
+    "button": "Send message"
+  }
+}

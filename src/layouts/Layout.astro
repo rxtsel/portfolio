@@ -1,124 +1,30 @@
 ---
-import Whatsapp from '../components/whatsapp/Whatsapp.astro';
 import '../styles/global.css'
-export interface Props {
-	title: string,
-	lang: string
-}
-
-const { title, lang } = Astro.props as Props;
+import Metatags from '../components/metatags/Metatags.astro'
+import Analitycs from '../components/analitycs/Analitycs.astro'
+import i18next, { t } from "i18next";
+import { HeadHrefLangs } from "astro-i18next/components";
 ---
 
 <!DOCTYPE html>
-<html lang={lang}>
+<html lang={i18next.language}>
 	<head>
-		<!-- Google tag (gtag.js) -->
-		<script async src="https://www.googletagmanager.com/gtag/js?id=G-DCPSPRJWRR"></script>
-		<script>
-			window.dataLayer = window.dataLayer || [];
-			function gtag(){dataLayer.push(arguments);}
-			gtag('js', new Date());
-
-			gtag('config', 'G-DCPSPRJWRR');
-		</script>
-		<!-- Google tag (gtag.js) -->
+    <Analitycs />
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
-		{
-			lang === 'es' ?
-			(
-					<link rel="icon" type="image/svg+xml" href="/16x16.svg" sizes="16x16"/>
-					<link rel="icon" type="image/svg+xml" href="/32x32.svg" sizes="32x32"/>
-					<link rel="icon" type="image/svg+xml" href="/96x96.svg" sizes="96x96"/>
-					<link rel="apple-touch-icon" type="image/svg+xml" href="/180x180.svg" sizes="180x180" >
-			) :
-			(
-					<link rel="icon" type="image/svg+xml" href="/16x16.svg" sizes="16x16"/>
-					<link rel="icon" type="image/svg+xml" href="/32x32.svg" sizes="32x32"/>
-					<link rel="icon" type="image/svg+xml" href="/96x96.svg" sizes="96x96"/>
-					<link rel="apple-touch-icon" type="image/svg+xml" href="/180x180.svg" sizes="180x180" >
-			)
-		}
-		<title>{title}</title>
-		<meta name="keywords" content="Cristhian Melo, rxtsel, rxtsel.dev, developer, desarollador, programador"/>
-		<meta name="author" content="Cristhian Melo" />
-		<meta name="copyright" content="Cristhian Melo" />
-		<!-- Primary Meta Tags -->
-		{
-			lang === 'es' ?
-			(
-				<meta name="title" content="Cristhian Melo - Desarrollador de Software">
-				<meta name="description" content="Descubre mi portafolio especializado en Performance, SEO, Accesibilidad y Buenas Prácticas de Programación. Conozca mi experiencia y habilidades en el desarrollo de sitios web de alta calidad y rendimiento.">
-			) :
-			(
-				<meta name="title" content="Cristhian Melo - Software Developer">
-				<meta name="description" content="Discover my portfolio specialized in Performance, SEO, Accessibility, and Best Programming Practices. Get to know my experience and skills in developing high-quality and high-performing websites.">
-			)
-		}
-
-		<!-- Open Graph / Facebook -->
-		<meta property="og:type" content="website">
-		<meta property="og:url" content="https://rxtsel.dev">
-		{
-			lang === 'es' ?
-			(
-				<meta property="og:title" content="Cristhian Melo - Desarrollador de Software">
-				<meta property="og:description" content="Descubre mi portafolio especializado en Performance, SEO, Accesibilidad y Buenas Prácticas de Programación. Conozca mi experiencia y habilidades en el desarrollo de sitios web de alta calidad y rendimiento.">
-				<meta property="og:image" content="/meta_tags_large_icon.png">
-			) :
-			(
-				<meta property="og:title" content="Cristhian Melo - Software Developer">
-				<meta property="og:description" content="Discover my portfolio specialized in Performance, SEO, Accessibility, and Best Programming Practices. Get to know my experience and skills in developing high-quality and high-performing websites.">
-				<meta property="og:image" content="meta_tags_large_icon.png">
-			)
-		}
-
-		<!-- Twitter -->
-		<meta property="twitter:card" content="summary_large_image">
-		<meta property="twitter:url" content="https://rxtsel.dev">
-		{
-			lang === 'es' ?
-			(
-				<meta property="twitter:title" content="Cristhian Melo - Desarrollador de Software">
-				<meta property="twitter:description" content="Descubre mi portafolio especializado en Performance, SEO, Accesibilidad y Buenas Prácticas de Programación. Conozca mi experiencia y habilidades en el desarrollo de sitios web de alta calidad y rendimiento.">
-				<meta property="twitter:image" content="/meta_tags_large_icon.png">
-			) :
-			(
-				<meta property="twitter:title" content="Cristhian Melo - Software Developer">
-				<meta property="twitter:description" content="Discover my portfolio specialized in Performance, SEO, Accessibility, and Best Programming Practices. Get to know my experience and skills in developing high-quality and high-performing websites.">
-				<meta property="twitter:image" content="meta_tags_large_icon.png">
-			)
-		}
-		<!-- Manifest -->
-		{
-			lang === 'es' ?
-			(
-				<link rel="manifest" href="/manifest.json">
-			) :
-			(
-				<link rel="manifest" href="manifest.json">
-			)
-		}
-		  <meta name="theme-color" content="#1A1A1A"/>
+    <link rel="icon" type="image/svg+xml" href='16x16.svg' sizes="16x16"/>
+    <link rel="icon" type="image/svg+xml" href='32x32.svg' sizes="32x32"/>
+    <link rel="icon" type="image/svg+xml" href='96x96.svg' sizes="96x96"/>
+    <link rel="apple-touch-icon" type="image/svg+xml" href='180x180.svg' sizes="180x180" />
+    <title>{t("site.title")}</title>
+    <Metatags />
+    <link rel="manifest" href='manifest.json'>
+    <link rel="sitemap" href="sitemap-index.xml">
+    <meta name="theme-color" content="#1A1A1A"/>
+    <HeadHrefLangs />
 	</head>
 	<body>
-		<span id="cursor"></span>
 		<slot />
-
-		{
-			lang === 'es' ?
-			(
-				<script type="module" src="/helpers/index.js"></script>
-				<script type="module" src="/helpers/mail.js"></script>
-			) :
-			(
-				<script type="module" src="helpers/index.js"></script>
-				<script type="module" src="helpers/mail.js"></script>
-			)
-		}
-
-    <Whatsapp />
-
 	</body>
 </html>

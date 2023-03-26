@@ -1,23 +1,26 @@
 ---
 import style from './about.module.css'
 import Button from '../../components/button/Button.astro';
+import { t } from "i18next";
+import { Trans } from "astro-i18next/components";
 ---
 
-<section id="about" class={style.section}>
+<section id="about-me" class={style.section}>
   <div class="campo">
-      <h3 class={`title ${style.title}`}>I love to create something simple and clean</h3>
+      <h3 class={`title ${style.title}`}>{t("about.title")}</h3>
   </div>
 
-  <div class="campo">
-    <h4 class={style.aboutme}>About me</h4>
-    <p class={style.paragraph}>Currently living in Colombia with good food and amazing landscapes.  I like to explore minimalist designs with good functionality.
+  <div class={style.campo}>
+    <h4 class={style.aboutme}>{t("about.aboutme")}</h4>
+    <Trans i18nKey="about.paragraph">
+      <p class={style.paragraph}>Currently living in Colombia with good food and amazing landscapes.  I like to explore minimalist designs with good functionality.
 
-I can spend hours every day exploring designs.
+        I can spend hours every day exploring designs.
 
-I'm also active on <a class={style.social_link} href="https://twitter.com/rxtsel" target="_blank">twitter</a> and if you have any questions feel free to mention me, I'm sure it will be an interesting chat.
-     
-    </p>
-    <Button tipo="secundary" text="Download CV"/>
+        I'm also active on <a class={style.social_link} href="https://twitter.com/rxtsel" target="_blank">twitter</a> and if you have any questions feel free to mention me, I'm sure it will be an interesting chat.
+      </p>
+    </Trans>
+    <Button tipo="secundary" text={t("about.button")}/>
   </div>
 
 </section>

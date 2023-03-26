@@ -1,0 +1,13 @@
+---
+import { changeLanguage } from "i18next";
+import Layout from "../../layouts/Layout.astro";
+import Header from "../../components/header/Header.astro";
+import NotFound from "../../components/notFound/NotFound.astro";
+
+changeLanguage("en");
+---
+
+<Layout>
+  <Header />
+  <NotFound />
+</Layout>

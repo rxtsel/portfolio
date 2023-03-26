@@ -1,30 +1,32 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Header from '../components/header/Header.astro'
-import Hero from '../components/hero/Hero.astro'
-import About from '../components/about/About.astro'
-import Portfolio from '../components/portfolio/Portfolio.astro'
-import Connect from '../components/connect/Connect.astro'
-import Footer from '../components/footer/Footer.astro'
-import Button from '../components/button/Button.astro';
+import i18next, { changeLanguage } from "i18next";
+import Layout from "../layouts/Layout.astro";
+import Header from "../components/header/Header.astro";
+import Hero from "../components/hero/Hero.astro";
+import About from "../components/about/About.astro";
+import Portfolio from "../components/portfolio/Portfolio.astro";
+import Contact from "../components/contact/Contact.astro";
+import Footer from "../components/footer/Footer.astro";
+import Button from "../components/button/Button.astro";
+import Whatsapp from "../components/whatsapp/Whatsapp.astro";
+
+changeLanguage("es");
+
+const lang = i18next.language;
+const textButton = lang === "es" ? "Volver arriba" : "Back to top";
 ---
 
-<Layout title="Cristhian Melo - Software Developer" lang="en">
-
-	<Header lang="en"/>
-
+<Layout>
+	<Header />
 	<div class="container">
-
 		<main>
 			<Hero />
 		</main>
-
 		<About />
 		<Portfolio />
-		<Connect />
+		<Contact />
+    <Button tipo="tertiary" text={textButton} />
+    <Whatsapp />
 		<Footer />
-		<Button tipo="tertiary" text="Back to top" />
-
 	</div>
-
 </Layout>

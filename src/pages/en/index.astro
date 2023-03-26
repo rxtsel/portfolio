@@ -1,0 +1,32 @@
+---
+import i18next, { changeLanguage } from "i18next";
+import Layout from "../../layouts/Layout.astro";
+import Header from "../../components/header/Header.astro";
+import Hero from "../../components/hero/Hero.astro";
+import About from "../../components/about/About.astro";
+import Portfolio from "../../components/portfolio/Portfolio.astro";
+import Contact from "../../components/contact/Contact.astro";
+import Footer from "../../components/footer/Footer.astro";
+import Button from "../../components/button/Button.astro";
+import Whatsapp from "../../components/whatsapp/Whatsapp.astro";
+
+changeLanguage("en");
+
+const lang = i18next.language;
+const textButton = lang === "es" ? "Volver arriba" : "Back to top";
+---
+
+<Layout>
+	<Header />
+	<div class="container">
+		<main>
+			<Hero />
+		</main>
+		<About />
+		<Portfolio />
+		<Contact />
+    <Button tipo="tertiary" text={textButton} />
+    <Whatsapp />
+		<Footer />
+	</div>
+</Layout>
