@@ -1,7 +1,5 @@
 ---
-import i18next, { t } from "i18next";
-const lang = i18next.language;
-const path = lang === "en" ? "/" : "";
+import { t } from "i18next";
 ---
 
 <meta name="keywords" content={t("site.keywords")} />
@@ -15,10 +13,16 @@ const path = lang === "en" ? "/" : "";
 <meta property="og:url" content="https://www.rxtsel.dev" />
 <meta property="og:title" content={t("site.title")} />
 <meta property="og:description" content={t("site.description")} />
-<meta property="og:image" content={`${path}meta_tags_large_icon.png`} />
+<meta
+  property="og:image"
+  content="https://www.rxtsel.dev/meta_tags_large_icon.png"
+/>
 <!-- Twitter -->
 <meta property="twitter:card" content="summary_large_image" />
 <meta property="twitter:url" content="https://www.rxtsel.dev" />
 <meta property="twitter:title" content={t("site.title")} />
 <meta property="twitter:description" content={t("site.description")} />
-<meta property="twitter:image" content={`${path}meta_tags_large_icon.png`} />
+<meta
+  property="twitter:image"
+  content="https://www.rxtsel.dev/meta_tags_large_icon.png"
+/>
