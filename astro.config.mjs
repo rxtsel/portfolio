@@ -6,5 +6,6 @@ import astroI18next from "astro-i18next";
 export default defineConfig({
   base: "/",
   site: "https://rxtsel.dev",
-  integrations: [sitemap(), astroI18next()]
+  integrations: [sitemap(), astroI18next()],
+  trailingSlash: "never",
 });
