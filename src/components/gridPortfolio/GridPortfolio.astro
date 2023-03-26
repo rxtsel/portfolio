@@ -1,45 +1,56 @@
 ---
 const { data } = Astro.props;
-import style from './gridPortfolio.module.css'
-import Icon from '../icons/Icon.astro'
+import style from "./gridPortfolio.module.css";
+import Icon from "../icons/Icon.astro";
 import i18next from "i18next";
-const lang = i18next.language
+const lang = i18next.language;
+const path = lang !== "es" ? "/" : "";
 ---
 
 {
-	data.map(({img, alt, title, description, descriptiones, url, technology, repo}) => 
-    <li class={style.li} >
-      <a class={style.url_content} href={url} target="_blank">
-        <div class={style.img}>
-          <img src={`${img}`} alt={alt} loading="lazy">  
-        </div>
-        <div class={style.info}>
-          <h2 class={style.title}>{title} <span class={style.span}>&rarr;</span></h2>  
-          <p class={style.description}>{lang !== 'en' ? descriptiones : description}</p>
-          <div class={style.contentTechAndGithub}>
-            <div class={style.technologys}>
-              {
-                  technology.map((item: any) => (
-                    <Icon icon={item} name={item}/>
-                  ))
-              }
-            </div>
+  data.map(
+    ({
+      img,
+      alt,
+      title,
+      description,
+      descriptiones,
+      url,
+      technology,
+      repo,
+    }) => (
+      <li class={style.li}>
+        <a class={style.url_content} href={url} target="_blank">
+          <div class={style.img}>
+            <img src={`${path}${img}`} alt={alt} loading="lazy" />
+          </div>
+          <div class={style.info}>
+            <h2 class={style.title}>
+              {title} <span class={style.span}>&rarr;</span>
+            </h2>
+            <p class={style.description}>
+              {lang !== "en" ? descriptiones : description}
+            </p>
+            <div class={style.contentTechAndGithub}>
+              <div class={style.technologys}>
+                {technology.map((item: any) => (
+                  <Icon icon={item} name={item} />
+                ))}
+              </div>
 
-            {
-              repo !== 'none' ?
-              (
+              {repo !== "none" ? (
                 <a href={repo} class={style.githubUrl} target="_blank">
-                  <Icon icon="github" name="Source"/>
+                  <Icon icon="github" name="Source" />
                 </a>
               ) : (
                 <a href={url} class={style.githubUrl} target="_blank">
-                  <Icon icon="private" name="Private"/>
+                  <Icon icon="private" name="Private" />
                 </a>
-              )
-            }
+              )}
+            </div>
           </div>
-        </div>  
-      </a>  
-    </li>
-	)
+        </a>
+      </li>
+    )
+  )
 }

@@ -1,10 +1,16 @@
 ---
-const url = Astro.request.url.includes('es')
-const path = url ? '/' : ''
+import i18next from "i18next";
+const lang = i18next.language;
+const path = lang !== "es" ? "/" : "";
 ---
 
-<a href="https://api.whatsapp.com/send?phone=573142216604&text=¡Hola, Cristhian! ¿Cómo estás?">
-  <img src={`${path}whatsapp.svg`}  alt="puede ser una imagen con el logo de whatsapp"/>
+<a
+  href="https://api.whatsapp.com/send?phone=573142216604&text=¡Hola, Cristhian! ¿Cómo estás?"
+>
+  <img
+    src={`${path}whatsapp.svg`}
+    alt="puede ser una imagen con el logo de whatsapp"
+  />
 </a>
 
 <style>
@@ -14,7 +20,7 @@ const path = url ? '/' : ''
     height: 4rem;
     right: 2.5rem;
     bottom: 10rem;
-    transition: all .5s ease;
+    transition: all 0.5s ease;
   }
 
   a img {
