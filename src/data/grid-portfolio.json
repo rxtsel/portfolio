@@ -25,7 +25,7 @@
     "title": "Vehement Agency",
     "description": "Web site design and development for an agency.",
     "descriptiones": "Diseño y desarrollo de sitio web para agencia.",
-    "technology": ["Figma", "Html", "Css", "Js"],
+    "technology": ["Figma", "Astro", "React", "Css"],
     "url": "https://vehement.co",
     "repo": "none"
   },
