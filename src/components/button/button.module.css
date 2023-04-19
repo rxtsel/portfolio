@@ -30,7 +30,11 @@
   opacity: 1;
 }
 
-.secundary {
+.secundary,
+.view {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background-color: transparent;
   display: flex;
   color: var(--white);
@@ -41,12 +45,15 @@
 }
 
 @media (min-width: 768px) {
-  .secundary {
+  .secundary,
+  .view {
     margin: unset;
+    transition: all .3s ease-in-out;
   }
 }
 
-.secundary:hover {
+.secundary:hover,
+.view:hover {
   border: 1px solid #4895ef;
   color: transparent;
 }
@@ -63,6 +70,15 @@
   margin-left: -12px;
   -webkit-animation: bounce-down 1.6s linear infinite;
   animation: bounce-down 1.6s linear infinite;
+}
+
+.view::after {
+  content: '';
+  visibility: hidden;
+}
+
+:has(.view:hover) :global(._icon_m8z1g_5) {
+  fill: #4895ef;
 }
 
 .secundary:hover::after {
@@ -175,4 +191,11 @@
   75% {
     transform: translateY(.2rem);
   }
+}
+
+/* view */
+
+:global(.view svg path) {
+  padding: 0;
+  margin: 0;
 }

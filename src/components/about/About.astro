@@ -1,8 +1,9 @@
 ---
 import style from './about.module.css'
 import Button from '../../components/button/Button.astro';
-import { t } from "i18next";
+import i18next, { t } from "i18next";
 import { Trans } from "astro-i18next/components";
+const lang = i18next.language
 ---
 
 <section id="about-me" class={style.section}>
@@ -20,7 +21,35 @@ import { Trans } from "astro-i18next/components";
         I'm also active on <a class={style.social_link} href="https://twitter.com/rxtsel" target="_blank">twitter</a> and if you have any questions feel free to mention me, I'm sure it will be an interesting chat.
       </p>
     </Trans>
-    <Button tipo="secundary" text={t("about.button")}/>
+    <div class="buttons">
+      <Button tipo="secundary" text={t("about.button")}/>
+      <Button tipo="view" text={lang === 'es' ? 'Ver CV' : 'View CV'}/>
+    </div>
   </div>
 
 </section>
+
+<style>
+.buttons {
+  display: flex;
+  width: max-content;
+  margin: 0 auto;
+  column-gap: .5rem;
+}
+
+:global(.buttons > a > svg) {
+  width: 1.8rem;
+  height: 1.8rem;
+}
+
+@media (min-width: 768px) {
+  .buttons {
+    width: 100%;
+  }
+
+  :global(.buttons > a > svg) {
+    width: 2.4rem;
+    height: 2.4rem;
+  }
+}
+</style>

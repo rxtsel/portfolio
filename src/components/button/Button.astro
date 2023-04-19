@@ -1,4 +1,5 @@
 ---
+import Icon from '../icons/Icon.astro'
 import style from './button.module.css'
 const { tipo, text } = Astro.props
 ---
@@ -10,7 +11,7 @@ const { tipo, text } = Astro.props
 )}
 
 {tipo === 'secundary' && (
-  <a class={`button ${style.secundary}`} href='/pdf/CristhianMelo_CV.pdf' target="_blank" >
+  <a class={`button ${style.secundary}`} href='/pdf/CristhianMelo_CV.pdf' download target="_blank" title={text}>
     {text}
   </a>
 )}
@@ -20,6 +21,13 @@ const { tipo, text } = Astro.props
     {text}
   </a>
 )}
+
+{tipo === 'view' && (
+  <a class={`button ${style.secundary} ${style.view}`} href='/pdf/CristhianMelo_CV.pdf' target="_blank" title={text}>
+    <Icon icon="view" />
+  </a> 
+)
+}
 
 <script is:inline>
   document.addEventListener('DOMContentLoaded', () => {
