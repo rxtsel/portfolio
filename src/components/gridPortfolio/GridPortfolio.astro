@@ -13,6 +13,7 @@ const path = lang === "en" ? "/" : "";
       img,
       alt,
       title,
+      titleEs,
       description,
       descriptiones,
       url,
@@ -26,7 +27,7 @@ const path = lang === "en" ? "/" : "";
           </div>
           <div class={style.info}>
             <h2 class={style.title}>
-              {title} <span class={style.span}>&rarr;</span>
+              {titleEs && lang === 'es' ? titleEs : title} <span class={style.span}>&rarr;</span>
             </h2>
             <p class={style.description}>
               {lang !== "en" ? descriptiones : description}
