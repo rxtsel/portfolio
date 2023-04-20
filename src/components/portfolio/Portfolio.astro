@@ -2,10 +2,11 @@
 import style from './portfolio.module.css'
 import GridPortfolio from '../gridPortfolio/GridPortfolio.astro';
 import portfolio from '../../data/grid-portfolio.json'
+import { t } from 'i18next'
 ---
 
 <section id="portfolio" class={style.section}>
-  <h2 class={style.title}>Portfolio</h2>
+  <h2 class={style.title}>{t("portfolio")}</h2>
   <ul class={style.content_grid_portfolio}>
     <GridPortfolio data={portfolio} lang="en" />
   </ul>
