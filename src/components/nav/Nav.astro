@@ -47,7 +47,7 @@ const path = lang === "en" ? "/" : "";
     class={style.lang_content}
     title={lang === "es" ? "Lenguaje" : "Language"}
   >
-    {lang === "es" ? "US" : "ES"}
+    {lang === "es" ? "EN" : "ES"}
     <Icon icon="language" />
   </button>
 
@@ -80,7 +80,7 @@ const path = lang === "en" ? "/" : "";
     const lang = $("#lang");
     lang.addEventListener("click", () => {
       const langText = lang.innerText.trim();
-      langText === "US"
+      langText === "EN"
         ? (window.location.pathname = "/en")
         : (window.location.pathname = "");
     });
