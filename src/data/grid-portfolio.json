@@ -16,7 +16,7 @@
     "titleEs": "Cotizador de servicios",
     "description": "A service quotation tool designed to simplify and streamline the process of obtaining quotes for your services.",
     "descriptiones": "Un cotizador de servicios diseñado para simplificar y agilizar el proceso de obtener cotizaciones para sus servicios.",
-    "technology": ["Next", "Ts", "Tailwind", "Strapi"],
+    "technology": ["Next.js", "TypeScript", "Tailwind", "Strapi"],
     "url": "https://quoter.vehement.co",
     "repo": "none"
   },
@@ -37,7 +37,7 @@
     "title": "Gold's Gym",
     "description": "Design and development of a landing page for a gym.",
     "descriptiones": "Diseño y desarrollo de landing page para gymnasio.",
-    "technology": ["Figma", "Astro", "Css", "Ts"],
+    "technology": ["Figma", "Astro", "Css", "TypeScript"],
     "url": "https://rxtsel.github.io/gold-s-gym/",
     "repo": "https://github.com/rxtsel/gold-s-gym"
   },
@@ -47,7 +47,7 @@
     "title": "Biolinks",
     "description": "Landing page to display links in social network bios.",
     "descriptiones": "Página de aterrizaje para mostrar enlaces en las biografías de las redes sociales.",
-    "technology": ["Html", "Css", "Js"],
+    "technology": ["Html", "Css", "JavaScript"],
     "url": "https://links.rxtsel.dev",
     "repo": "https://github.com/rxtsel/biolink"
   },

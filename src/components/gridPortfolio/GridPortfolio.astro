@@ -1,57 +1,223 @@
 ---
 const { data } = Astro.props;
-import style from "./gridPortfolio.module.css";
 import Icon from "../icons/Icon.astro";
 import i18next from "i18next";
 const lang = i18next.language;
 const path = lang === "en" ? "/" : "";
+const nameSource = lang === "en" ? "Source" : "Fuente";
+const namePrivate = lang === "en" ? "Private" : "Privado";
 ---
 
-{
-  data.map(
-    ({
-      img,
-      alt,
-      title,
-      titleEs,
-      description,
-      descriptiones,
-      url,
-      technology,
-      repo,
-    }) => (
-      <li class={style.li}>
-        <a class={style.url_content} href={url} target="_blank">
-          <div class={style.img}>
-            <img src={`${path}${img}`} alt={alt} loading="lazy" />
-          </div>
-          <div class={style.info}>
-            <h2 class={style.title}>
-              {titleEs && lang === 'es' ? titleEs : title} <span class={style.span}>&rarr;</span>
-            </h2>
-            <p class={style.description}>
-              {lang !== "en" ? descriptiones : description}
-            </p>
-            <div class={style.contentTechAndGithub}>
-              <div class={style.technologys}>
-                {technology.map((item: any) => (
-                  <Icon icon={item} name={item} />
-                ))}
-              </div>
+<ul class="portfolio">
+  {
+    data.map(
+      ({
+        img,
+        alt,
+        title,
+        titleEs,
+        description,
+        descriptiones,
+        url,
+        technology,
+        repo,
+      }) => (
+        <li class="portfolio__item">
 
-              {repo !== "none" ? (
-                <a href={repo} class={style.githubUrl} target="_blank">
-                  <Icon icon="github" name="Source" />
-                </a>
-              ) : (
-                <a href={url} class={style.githubUrl} target="_blank">
-                  <Icon icon="private" name="Private" />
-                </a>
-              )}
+          <a class="url_content" href={url} target="_blank">
+            <div class="img">
+              <img src={`${path}${img}`} alt={alt} loading="lazy" />
             </div>
+            <div class="info">
+              <h2 class="title">
+                {titleEs && lang === 'es' ? titleEs : title} <span class="span">&rarr;</span>
+              </h2>
+              <p class="description">
+                {lang !== "en" ? descriptiones : description}
+              </p>
+            </div>
+          </a>
+
+          <div class="contentTechAndGithub">
+            <ul class="icons-tech">
+              {technology.map((item: any) => (
+                <li class="icons-tech__item" title={item}>
+                  <Icon icon={item} name={item} />
+                </li>
+              ))}
+            </ul>
+
+            {repo !== "none" ? (
+              <a href={repo} class="githubUrl icons-tech__item" target="_blank" title={nameSource}>
+                <Icon icon="github" name="Source" />
+              </a>
+            ) : (
+              <div class="githubUrl icons-tech__item" title={namePrivate} >
+                <Icon icon="private" name="Private" />
+              </div>
+            )}
           </div>
-        </a>
-      </li>
-    )
-  )
+
+        </li>
+      ))}
+</ul>
+
+<style>
+.portfolio {
+  padding: 0;
+  display: grid;
+  margin: 0 auto;
+  place-content: center;
+  grid-template-columns: repeat(1, 1fr);
+  width: 100%;
+  gap: 4rem;
 }
+
+@media (min-width: 768px) {
+  .portfolio {
+    max-width: 120rem;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  }
+}
+
+.portfolio__item {
+  list-style: none;
+  border-radius: 2rem;
+  margin: 0 auto;
+  max-width: 48rem;
+  width: 35rem;
+  background-color: var(--bg-nav);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  box-shadow: var(--shadow-sm);
+}
+
+.url_content {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  text-decoration: none;
+}
+
+.url_content:is(:hover, :focus-within) {
+  background-position: 0;
+}
+
+.url_content:is(:hover, :focus-within) .title {
+  color: var(--active);
+}
+
+.url_content:is(:hover, :focus-within) .title .span {
+  will-change: transform;
+  transform: translateX(2px);
+}
+
+.info {
+  padding: .2rem 1.5rem 1rem 1.5rem;
+  position: relative;
+}
+
+.title {
+  display: flex;
+  align-items: center;
+  margin: 0;
+  padding: 0 0 1.5rem 0;
+  color: var(--white);
+  font-size: 2rem;
+  transition: color 0.3s ease-in-out;
+}
+
+@media (min-width: 768px) {
+  .title {
+    margin-top: 0.5rem;
+    line-height: 0;
+  }
+}
+
+.description {
+  padding: 0;
+  margin: 1rem auto .5rem;
+  color: var(--font-off);
+  font-size: 1.6rem;
+  min-height: 5.5rem;
+}
+
+.contentTechAndGithub {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1.5rem 1.5rem;
+}
+
+.icons-tech {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.icons-tech__item {
+  width: 3rem;
+  height: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: .5rem;
+  border-radius: .6rem;
+  transition: background .3s ease;
+}
+
+.icons-tech__item:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.githubUrl {
+  text-decoration: none;
+  color: var(--font-off);
+  padding: 0;
+  margin: 0;
+}
+
+.githubUrl > svg > path {
+  transition: fill 0.3s ease-in-out;
+}
+
+.githubUrl:hover > div > svg > path {
+  fill: var(--active);
+}
+
+.technologys {
+  display: flex;
+  height: 4rem;
+  width: 4rem;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid red;
+}
+
+.technologys > div > * + * {
+  margin: 0 1rem;
+}
+
+.img {
+  width: 100%;
+  max-width: 100%;
+  height: 185px;
+  min-height: 100%;
+}
+
+.img > img {
+  width: 100%;
+  height: 100%;
+  border-radius: 2rem 2rem 0 0;
+  object-fit: cover;
+}
+
+.span {
+  padding-left: 1rem;
+  font-size: 3rem;
+  display: inline-block;
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+</style>
