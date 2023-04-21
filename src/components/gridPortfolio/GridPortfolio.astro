@@ -52,7 +52,7 @@ const namePrivate = lang === "en" ? "Private" : "Privado";
                 <Icon icon="github" name="Source" />
               </a>
             ) : (
-              <div class="githubUrl icons-tech__item" title={namePrivate} >
+              <div class="icons-tech__item" title={namePrivate} >
                 <Icon icon="private" name="Private" />
               </div>
             )}
@@ -73,13 +73,6 @@ const namePrivate = lang === "en" ? "Private" : "Privado";
   gap: 4rem;
 }
 
-@media (min-width: 768px) {
-  .portfolio {
-    max-width: 120rem;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-  }
-}
-
 .portfolio__item {
   list-style: none;
   border-radius: 2rem;
@@ -95,7 +88,7 @@ const namePrivate = lang === "en" ? "Private" : "Privado";
 .url_content {
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 1rem;
   text-decoration: none;
 }
 
@@ -110,93 +103,6 @@ const namePrivate = lang === "en" ? "Private" : "Privado";
 .url_content:is(:hover, :focus-within) .title .span {
   will-change: transform;
   transform: translateX(2px);
-}
-
-.info {
-  padding: .2rem 1.5rem 1rem 1.5rem;
-  position: relative;
-}
-
-.title {
-  display: flex;
-  align-items: center;
-  margin: 0;
-  padding: 0 0 1.5rem 0;
-  color: var(--white);
-  font-size: 2rem;
-  transition: color 0.3s ease-in-out;
-}
-
-@media (min-width: 768px) {
-  .title {
-    margin-top: 0.5rem;
-    line-height: 0;
-  }
-}
-
-.description {
-  padding: 0;
-  margin: 1rem auto .5rem;
-  color: var(--font-off);
-  font-size: 1.6rem;
-  min-height: 5.5rem;
-}
-
-.contentTechAndGithub {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 1.5rem 1.5rem;
-}
-
-.icons-tech {
-  display: flex;
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.icons-tech__item {
-  width: 3rem;
-  height: 3rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: .5rem;
-  border-radius: .6rem;
-  transition: background .3s ease;
-}
-
-.icons-tech__item:hover {
-  background: rgba(255, 255, 255, 0.05);
-}
-
-.githubUrl {
-  text-decoration: none;
-  color: var(--font-off);
-  padding: 0;
-  margin: 0;
-}
-
-.githubUrl > svg > path {
-  transition: fill 0.3s ease-in-out;
-}
-
-.githubUrl:hover > div > svg > path {
-  fill: var(--active);
-}
-
-.technologys {
-  display: flex;
-  height: 4rem;
-  width: 4rem;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid red;
-}
-
-.technologys > div > * + * {
-  margin: 0 1rem;
 }
 
 .img {
@@ -218,6 +124,87 @@ const namePrivate = lang === "en" ? "Private" : "Privado";
   font-size: 3rem;
   display: inline-block;
   transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.info {
+  padding: .2rem 1.5rem 1rem 1.5rem;
+  position: relative;
+}
+
+.title {
+  display: flex;
+  align-items: center;
+  margin: 0;
+  padding: 0 0 1rem 0;
+  color: var(--white);
+  font-size: 2rem;
+  transition: color 0.3s ease-in-out;
+}
+
+.description {
+  padding: 0;
+  margin: 0 auto .5rem;
+  color: var(--font-off);
+  font-size: 1.6rem;
+  min-height: 5.5rem;
+}
+
+.contentTechAndGithub {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1.5rem 1.5rem;
+}
+
+.icons-tech {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.icons-tech__item {
+  width: 4rem;
+  height: 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: .5rem;
+  border-radius: .6rem;
+  transition: background .3s ease;
+}
+
+.icons-tech__item:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+:global(.githubUrl svg) {
+  transition: fill 0.3s ease-in-out;
+}
+
+:global(.githubUrl:hover svg) {
+  fill: var(--active);
+}
+
+@media (min-width: 768px) {
+  .portfolio {
+    max-width: 120rem;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  }
+
+  .url_content {
+    gap: 2rem;
+  }
+
+  .title {
+    margin-top: 0.5rem;
+    padding: 0 0 1.5rem 0;
+    line-height: 0;
+  }
+
+  .description {
+    margin: 1rem auto .5rem;
+  }
 }
 
 </style>
