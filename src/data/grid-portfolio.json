@@ -5,7 +5,7 @@
     "title": "Qantto.io",
     "description": "Designed to offer an online service quotation product. It provides a pleasant and smooth user experience.",
     "descriptiones": "Diseñado para ofrecer un producto de cotización de servicios en línea. Ofrece una experiencia de usuario agradable y fluida.",
-    "technology": ["Astro", "React"],
+    "technology": ["Astro", "React", "Tailwind"],
     "url": "https://qantto.io",
     "repo": "none"
   },
