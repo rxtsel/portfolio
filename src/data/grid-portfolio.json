@@ -1,5 +1,15 @@
 [
- {
+  {
+    "img": "portfolio-qantto.webp",
+    "alt": "puede ser una imagen de la portada de un sitio web que dice qantto.io",
+    "title": "Qantto.io",
+    "description": "Designed to offer an online service quotation product. It provides a pleasant and smooth user experience.",
+    "descriptiones": "Diseñado para ofrecer un producto de cotización de servicios en línea. Ofrece una experiencia de usuario agradable y fluida.",
+    "technology": ["Astro", "React"],
+    "url": "https://qantto.io",
+    "repo": "none"
+  },
+  {
     "img": "grid-portfolio-4.webp",
     "alt": "puede ser una imagen que contiene una captura de pantalla de un sitio web que dice get information with a simple click",
     "title": "María Alicia Cabrera",
@@ -8,7 +18,7 @@
     "technology": ["Astro", "Strapi"],
     "url": "https://mariaaliciacabrera.com",
     "repo": "none"
-  }, 
+  },
   {
     "img": "grid-portfolio-10.webp",
     "alt": "puede ser una imagen que dice qué paquete necesito para mi sitio web y cuánto cuesta",
@@ -31,7 +41,7 @@
     "url": "https://vehement.co",
     "repo": "none"
   },
-   {
+  {
     "img": "grid-portfolio-5.webp",
     "alt": "puede ser una imagen de la portada de un gym que tiene un texto con letra blanca que dice comenzemos una nueva vida hoy",
     "title": "Gold's Gym",
