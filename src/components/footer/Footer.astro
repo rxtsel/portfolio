@@ -1,12 +1,27 @@
 ---
-import style from './footer.module.css'
+import style from "./footer.module.css";
 import i18next from "i18next";
 const lang = i18next.language;
 ---
 
 <footer class={style.footer}>
-  {lang === 'es' ?
-    <p>&copy; {new Date().getFullYear()} Todos los derechos reservados | Hecho con &hearts; por <a href="https://twitter.com/rxtsel" target="_blank">@rxtsel</a></p> :
-    <p>&copy; {new Date().getFullYear()} All right reserved | Made with &hearts; by <a href="https://twitter.com/rxtsel" target="_blank">@rxtsel</a></p>
+  {
+    lang === "es" ? (
+      <p>
+        &copy; 2022 - {new Date().getFullYear()}. Todos los derechos reservados.
+        Hecho con &hearts; por{" "}
+        <a href="https://twitter.com/rxtsel" target="_blank">
+          @rxtsel
+        </a>
+      </p>
+    ) : (
+      <p>
+        &copy; 2022 - {new Date().getFullYear()}. All right reserved. Made with
+        &hearts; by{" "}
+        <a href="https://twitter.com/rxtsel" target="_blank">
+          @rxtsel
+        </a>
+      </p>
+    )
   }
 </footer>
