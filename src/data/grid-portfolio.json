@@ -1,5 +1,16 @@
 [
   {
+    "img": "portfolio-isaarte.webp",
+    "alt": "puede ser una imagen de la portada del sitio web isabelrenfijo.art",
+    "title": "Isart Portfolio",
+    "titleEs": "Isart Portafolio",
+    "description": "Discover the trajectory, works, exhibitions, and awards of a Colombian artist.",
+    "descriptiones": "Descubre la trayectoria, obras, exposiciones y premios de una artista colombiana.",
+    "technology": ["Astro", "Css"],
+    "url": "https://isabelrengifo.art",
+    "repo": "none"
+  },
+  {
     "img": "portfolio-qantto.webp",
     "alt": "puede ser una imagen de la portada de un sitio web que dice qantto.io",
     "title": "Qantto.io",
