@@ -1,5 +1,16 @@
 [
   {
+    "img": "qantto-app.webp",
+    "alt": "puede ser una imagen de la portada del dashboard de app.qantto.io",
+    "title": "Qantto Dashboard",
+    "titleEs": "Qantto Dashboard",
+    "description": "A dashboard designed to manage the services offered by Qantto.io",
+    "descriptiones": "Un panel de control diseñado para gestionar los servicios ofrecidos por Qantto.io",
+    "technology": ["Next.js", "Material UI"],
+    "url": "https://app.qantto.io",
+    "repo": "none"
+  },
+  {
     "img": "portfolio-isaarte.webp",
     "alt": "puede ser una imagen de la portada del sitio web isabelrenfijo.art",
     "title": "Isart Portfolio",
