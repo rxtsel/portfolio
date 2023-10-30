@@ -1,5 +1,16 @@
 [
   {
+    "img": "spell-check-ai.webp",
+    "alt": "puede ser una imagen de la portada de la app de correccion de ortografia",
+    "title": "Spell Check AI",
+    "titleEs": "Corrector Ortográfico IA",
+    "description": "A web application that allows you to correct spelling errors in a text using artificial intelligence.",
+    "descriptiones": "Una aplicación web que permite corregir errores ortográficos en un texto usando inteligencia artificial.",
+    "technology": ["Astro", "Open AI", "Tailwind"],
+    "url": "https://spell-check-ai.vercel.app/",
+    "repo": "https://github.com/rxtsel/spell-check-ai"
+  },
+  {
     "img": "qantto-app.webp",
     "alt": "puede ser una imagen de la portada del dashboard de app.qantto.io",
     "title": "Qantto Dashboard",
