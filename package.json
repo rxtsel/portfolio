@@ -11,7 +11,7 @@
   },
   "devDependencies": {
     "@astrojs/sitemap": "1.2.1",
-    "astro": "2.1.7"
+    "astro": "4.0.8"
   },
   "dependencies": {
     "astro-i18next": "1.0.0-beta.21",
