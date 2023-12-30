@@ -3,20 +3,20 @@ import Metatags from '@/components/Metatags.astro'
 import Analitycs from '@/components/Analitycs.astro'
 ---
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang='es'>
-	<head>
-		<meta charset='UTF-8' />
-		<meta name='viewport' content='width=device-width' />
-		<title>('site.title')</title>
-		<Metatags />
-		<meta name='generator' content={Astro.generator} />
-		<link rel='manifest' href={'/manifest.json'} />
-		<link rel='sitemap' href={'/sitemap-index.xml'} />
-		<meta name='theme-color' content='#1A1A1A' />
-		<Analitycs />
-	</head>
-	<body>
-		<slot />
-	</body>
+  <head>
+    <meta charset='UTF-8' />
+    <meta name='viewport' content='width=device-width' />
+    <title>('site.title')</title>
+    <Metatags />
+    <meta name='generator' content={Astro.generator} />
+    <link rel='manifest' href={'/manifest.json'} />
+    <link rel='sitemap' href={'/sitemap-index.xml'} />
+    <meta name='theme-color' content='#1A1A1A' />
+    <Analitycs />
+  </head>
+  <body>
+    <slot />
+  </body>
 </html>
