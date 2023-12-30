@@ -1,6 +1,7 @@
 ---
 import Metatags from '@/components/Metatags.astro'
 import Analitycs from '@/components/Analitycs.astro'
+import '@fontsource-variable/onest';
 ---
 
 <!doctype html>
@@ -21,7 +22,7 @@ import Analitycs from '@/components/Analitycs.astro'
   </body>
 </html>
 
-<style>
+<style is:global>
   body {
     font-family: 'Onest Variable', sans-serif;
   }
