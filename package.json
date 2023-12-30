@@ -10,11 +10,7 @@
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "4.0.8",
-    "astro-i18next": "1.0.0-beta.21",
-    "i18next": "22.4.14",
-    "i18next-fs-backend": "2.1.1",
-    "install": "0.13.0"
+    "astro": "4.0.8"
   },
   "devDependencies": {
     "@astrojs/sitemap": "1.2.1",

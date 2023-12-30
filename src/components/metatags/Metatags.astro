@@ -1,18 +1,14 @@
----
-import { t } from "i18next";
----
-
-<meta name="keywords" content={t("site.keywords")} />
+<meta name="keywords" content={("site.keywords")} />
 <meta name="author" content="Cristhian Melo" />
 <meta name="copyright" content="Cristhian Melo" />
 <!-- Primary Meta Tags -->
-<meta name="title" content={t("site.title")} />
-<meta name="description" content={t("site.description")} />
+<meta name="title" content={("site.title")} />
+<meta name="description" content={("site.description")} />
 <!-- Open Graph / Facebook -->
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://www.rxtsel.dev" />
-<meta property="og:title" content={t("site.title")} />
-<meta property="og:description" content={t("site.description")} />
+<meta property="og:title" content={("site.title")} />
+<meta property="og:description" content={("site.description")} />
 <meta
   property="og:image"
   content="https://www.rxtsel.dev/meta_tags_large_icon.png"
@@ -20,9 +16,35 @@ import { t } from "i18next";
 <!-- Twitter -->
 <meta property="twitter:card" content="summary_large_image" />
 <meta property="twitter:url" content="https://www.rxtsel.dev" />
-<meta property="twitter:title" content={t("site.title")} />
-<meta property="twitter:description" content={t("site.description")} />
+<meta property="twitter:title" content={("site.title")} />
+<meta property="twitter:description" content={("site.description")} />
 <meta
   property="twitter:image"
   content="https://www.rxtsel.dev/meta_tags_large_icon.png"
+/>
+
+<!-- WPA	 -->
+<link
+  rel='icon'
+  type='image/svg+xml'
+  href="/16x16.svg"
+  sizes='16x16'
+/>
+<link
+  rel='icon'
+  type='image/svg+xml'
+  href={`/32x32.svg`}
+  sizes='32x32'
+/>
+<link
+  rel='icon'
+  type='image/svg+xml'
+  href={`/96x96.svg`}
+  sizes='96x96'
+/>
+<link
+  rel='apple-touch-icon'
+  type='image/svg+xml'
+  href='180x180.svg'
+  sizes='180x180'
 />
