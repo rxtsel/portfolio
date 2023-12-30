@@ -1,0 +1,188 @@
+---
+import { ROUTES, LANGUAGES } from '@/constants/routes'
+import Logo from '@/icons/Logo.astro'
+import HomeIcon from '@/icons/Home.astro'
+import UserIcon from '@/icons/User.astro'
+import PortfolioIcon from '@/icons/Portfolio.astro'
+import MailIcon from '@/icons/Mail.astro'
+import TranslateIcon from '@/icons/Translate.astro'
+import FlagUS from '@/icons/FlagUS.astro'
+import FlagES from '@/icons/FlagES.astro'
+---
+
+<nav class='flex w-full max-w-6xl mx-auto items-center justify-between'>
+  <a href={ROUTES.home.path} class='h-10 w-10 flex-grow max-w-16 order-2'>
+    <Logo />
+  </a>
+
+  <ul
+    id='nav-mobile'
+    class='text-cWhite grid grid-cols-2 place-content-center place-items-center justify-center gap-5 uppercase absolute transform -translate-y-28 left-0 right-0 mx-auto w-full p-5 rounded-2xl text-xs bg-cPaper shadow-md z-10'
+  >
+    <li class='size-full z-10'>
+      <a
+        class='text-cWhite hover:text-cBlue transition-colors duration-300 ease-in h-full w-full flex flex-col place-items-center gap-2'
+        href={ROUTES.home.path}
+      >
+        <div class='size-6'>
+          <HomeIcon />
+        </div>
+
+        {ROUTES.home.name}
+      </a>
+    </li>
+    <li class='size-full'>
+      <a
+        class='text-cWhite hover:text-cBlue transition-colors duration-300 ease-in h-full w-full flex flex-col place-items-center gap-2'
+        href={ROUTES.aboutMe.path}
+      >
+        <div class='size-6'>
+          <UserIcon />
+        </div>
+        {ROUTES.aboutMe.name}
+      </a>
+    </li>
+    <li class='size-full'>
+      <a
+        class='text-cWhite hover:text-cBlue transition-colors duration-300 ease-in h-full w-full flex flex-col place-items-center gap-2'
+        href={ROUTES.portfolio.path}
+      >
+        <div class='size-6'>
+          <PortfolioIcon />
+        </div>
+        {ROUTES.portfolio.name}
+      </a>
+    </li>
+    <li class='size-full'>
+      <a
+        class='text-cWhite hover:text-cBlue transition-colors duration-300 ease-in h-full w-full flex flex-col place-items-center gap-2'
+        href={ROUTES.contact.path}
+      >
+        <div class='size-6'>
+          <MailIcon />
+        </div>
+        {ROUTES.contact.name}
+      </a>
+    </li>
+  </ul>
+
+  <label class='hamburger order-3'>
+    <input type='checkbox' class='check-hamburger' />
+    <svg viewBox='0 0 32 32'>
+      <path
+        class='line line-top-bottom'
+        d='M27 10 13 10C10.8 10 9 8.2 9 6 9 3.5 10.8 2 13 2 15.2 2 17 3.8 17 6L17 26C17 28.2 18.8 30 21 30 23.2 30 25 28.2 25 26 25 23.8 23.2 22 21 22L7 22'
+      ></path>
+      <path class='line' d='M7 16 27 16'></path>
+    </svg>
+  </label>
+
+  <ul
+    id='lang-options'
+    class='text-cWhite grid grid-cols-2 place-content-center place-items-center justify-center gap-5 uppercase absolute transform -translate-y-20 left-0 right-0 mx-auto w-full p-5 rounded-2xl text-xs bg-cPaper shadow-md z-10'
+  >
+    <li class='size-full z-10'>
+      <a
+        class='text-cWhite hover:text-cBlue transition-colors duration-300 ease-in h-full w-full flex flex-col place-items-center gap-2'
+        href={LANGUAGES.ES.path}
+      >
+        <div class='size-6'>
+          <img src={LANGUAGES.ES.flag} alt={LANGUAGES.ES.name} loading='lazy' />
+        </div>
+
+        {LANGUAGES.ES.name}
+      </a>
+    </li>
+    <li class='size-full'>
+      <a
+        class='text-cWhite hover:text-cBlue transition-colors duration-300 ease-in h-full w-full flex flex-col place-items-center gap-2'
+        href={LANGUAGES.EN.path}
+      >
+        <div class='size-6'>
+          <img src={LANGUAGES.EN.flag} alt={LANGUAGES.ES.name} loading='lazy' />
+        </div>
+        {LANGUAGES.EN.name}
+      </a>
+    </li>
+  </ul>
+
+  <label
+    class='lang order-1 text-cWhite transition-colors duration-300 ease-in size-6 cursor-pointer'
+  >
+    <input type='checkbox' class='check-lang' />
+    <TranslateIcon />
+  </label>
+</nav>
+
+<style>
+  .hamburger {
+    cursor: pointer;
+  }
+
+  .check-hamburger,
+  .check-lang {
+    display: none;
+  }
+
+  .hamburger svg {
+    height: 32px;
+    transition: transform 600ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .line {
+    fill: none;
+    stroke: white;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 2.5;
+    transition:
+      stroke-dasharray 600ms cubic-bezier(0.4, 0, 0.2, 1),
+      stroke-dashoffset 600ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .line-top-bottom {
+    stroke-dasharray: 12 63;
+  }
+
+  .check-hamburger:checked + svg {
+    transform: rotate(-45deg);
+  }
+
+  .check-hamburger:checked + svg .line-top-bottom {
+    stroke-dasharray: 20 300;
+    stroke-dashoffset: -32.42;
+  }
+
+  #nav-mobile,
+  #lang-options {
+    opacity: 0;
+    visibility: hidden;
+    transition: all 600ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  :has(.check-hamburger:checked) #nav-mobile {
+    animation: slide linear both;
+    visibility: visible;
+    @apply -translate-y-32 opacity-100;
+  }
+
+  :has(.check-hamburger:checked) .line {
+    animation: colorActive 600ms both;
+  }
+
+  :has(.check-lang:checked) #lang-options {
+    animation: slide linear both;
+    visibility: visible;
+    @apply -translate-y-24 opacity-100;
+  }
+
+  :has(.check-lang:checked) .lang {
+    @apply text-cBlue;
+  }
+
+  @keyframes colorActive {
+    to {
+      @apply stroke-cBlue;
+    }
+  }
+</style>

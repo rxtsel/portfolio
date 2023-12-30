@@ -1,0 +1,74 @@
+---
+import { ROUTES, SOCIALS } from '@/constants/routes'
+import Logo from '@/icons/Logo.astro'
+import TranslateIcon from '@/icons/Translate.astro'
+import LinkedinIcon from '@/icons/Linkedin.astro'
+import TwitterIcon from '@/icons/Twitter.astro'
+import GithubIcon from '@/icons/Github.astro'
+---
+
+<nav class='flex w-full max-w-6xl mx-auto items-center justify-between'>
+  <a href={ROUTES.home.path} class='h-16 w-16 flex-grow max-w-16'>
+    <Logo />
+  </a>
+
+  <ul class='text-cWhite flex space-x-4 uppercase'>
+    <li>
+      <a
+        class='text-cWhite hover:text-cBlue transition-colors duration-300 ease-in'
+        href={ROUTES.home.path}>{ROUTES.home.name}</a
+      >
+    </li>
+    <li>
+      <a
+        class='text-cWhite hover:text-cBlue transition-colors duration-300 ease-in'
+        href={ROUTES.aboutMe.path}>{ROUTES.aboutMe.name}</a
+      >
+    </li>
+    <li>
+      <a
+        class='text-cWhite hover:text-cBlue transition-colors duration-300 ease-in'
+        href={ROUTES.portfolio.path}>{ROUTES.portfolio.name}</a
+      >
+    </li>
+    <li>
+      <a
+        class='text-cWhite hover:text-cBlue transition-colors duration-300 ease-in'
+        href={ROUTES.contact.path}>{ROUTES.contact.name}</a
+      >
+    </li>
+  </ul>
+
+  <ul class='text-cWhite flex space-x-4 flex-shrink-0'>
+    <li class='w-6 h-6'>
+      <a
+        class='text-cWhite hover:text-cBlue transition-colors duration-300 ease-in'
+        ><TranslateIcon /></a
+      >
+    </li>
+    <li class='w-6 h-6'>
+      <a
+        href={SOCIALS.linkedin}
+        target='_blank'
+        class='text-cWhite hover:text-cBlue transition-colors duration-300 ease-in'
+        ><LinkedinIcon /></a
+      >
+    </li>
+    <li class='w-6 h-6'>
+      <a
+        href={SOCIALS.twitter}
+        target='_blank'
+        class='text-cWhite hover:text-cBlue transition-colors duration-300 ease-in'
+        ><TwitterIcon /></a
+      >
+    </li>
+    <li class='w-6 h-6'>
+      <a
+        href={SOCIALS.github}
+        target='_blank'
+        class='text-cWhite hover:text-cBlue transition-colors duration-300 ease-in'
+        ><GithubIcon /></a
+      >
+    </li>
+  </ul>
+</nav>

@@ -16,7 +16,13 @@ import Analitycs from '@/components/Analitycs.astro'
     <meta name='theme-color' content='#1A1A1A' />
     <Analitycs />
   </head>
-  <body>
+  <body class="antialiased">
     <slot />
   </body>
 </html>
+
+<style>
+  body {
+    font-family: 'Onest Variable', sans-serif;
+  }
+</style>
