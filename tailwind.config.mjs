@@ -5,6 +5,7 @@ export default {
     extend: {
       colors: {
         cBlack: '#1A1A1A',
+        cPaper: '#1d1d1d',
         cWhite: '#F5F5F5',
         cAccent: '#838383',
         cBlue: '#4895EF',
