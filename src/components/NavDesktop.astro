@@ -8,7 +8,11 @@ import GithubIcon from '@/icons/Github.astro'
 ---
 
 <nav class='flex w-full max-w-6xl mx-auto items-center justify-between'>
-  <a href={ROUTES.home.path} class='h-16 w-16 flex-grow max-w-16'>
+  <a
+    href={ROUTES.home.path}
+    class='h-16 w-16 flex-grow max-w-36'
+    aria-label='logo of the website rxtel.dev'
+  >
     <Logo />
   </a>
 
@@ -16,24 +20,28 @@ import GithubIcon from '@/icons/Github.astro'
     <li>
       <a
         class='text-cWhite hover:text-cBlue transition-colors duration-300 ease-in'
+        aria-label={ROUTES.home.name}
         href={ROUTES.home.path}>{ROUTES.home.name}</a
       >
     </li>
     <li>
       <a
         class='text-cWhite hover:text-cBlue transition-colors duration-300 ease-in'
+        aria-label={ROUTES.aboutMe.name}
         href={ROUTES.aboutMe.path}>{ROUTES.aboutMe.name}</a
       >
     </li>
     <li>
       <a
         class='text-cWhite hover:text-cBlue transition-colors duration-300 ease-in'
+        aria-label={ROUTES.portfolio.name}
         href={ROUTES.portfolio.path}>{ROUTES.portfolio.name}</a
       >
     </li>
     <li>
       <a
         class='text-cWhite hover:text-cBlue transition-colors duration-300 ease-in'
+        aria-label={ROUTES.contact.name}
         href={ROUTES.contact.path}>{ROUTES.contact.name}</a
       >
     </li>
@@ -43,7 +51,16 @@ import GithubIcon from '@/icons/Github.astro'
     <li class='w-6 h-6'>
       <a
         class='text-cWhite hover:text-cBlue transition-colors duration-300 ease-in'
-        ><TranslateIcon /></a
+        aria-label='Change language'><TranslateIcon /></a
+      >
+    </li>
+    <li class='w-6 h-6'>
+      <a
+        href={SOCIALS.twitter}
+        target='_blank'
+        aria-label='Twitter'
+        class='text-cWhite hover:text-cBlue transition-colors duration-300 ease-in'
+        ><TwitterIcon /></a
       >
     </li>
     <li class='w-6 h-6'>
@@ -51,21 +68,14 @@ import GithubIcon from '@/icons/Github.astro'
         href={SOCIALS.linkedin}
         target='_blank'
         class='text-cWhite hover:text-cBlue transition-colors duration-300 ease-in'
-        ><LinkedinIcon /></a
-      >
-    </li>
-    <li class='w-6 h-6'>
-      <a
-        href={SOCIALS.twitter}
-        target='_blank'
-        class='text-cWhite hover:text-cBlue transition-colors duration-300 ease-in'
-        ><TwitterIcon /></a
+        aria-label='Linkedin'><LinkedinIcon /></a
       >
     </li>
     <li class='w-6 h-6'>
       <a
         href={SOCIALS.github}
         target='_blank'
+        aria-label='Github'
         class='text-cWhite hover:text-cBlue transition-colors duration-300 ease-in'
         ><GithubIcon /></a
       >

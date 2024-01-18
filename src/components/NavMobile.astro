@@ -6,23 +6,26 @@ import UserIcon from '@/icons/User.astro'
 import PortfolioIcon from '@/icons/Portfolio.astro'
 import MailIcon from '@/icons/Mail.astro'
 import TranslateIcon from '@/icons/Translate.astro'
-import FlagUS from '@/icons/FlagUS.astro'
-import FlagES from '@/icons/FlagES.astro'
 ---
 
 <nav class='flex w-full max-w-6xl mx-auto items-center justify-between'>
-  <a href={ROUTES.home.path} class='h-10 w-10 flex-grow max-w-16 order-2'>
+  <a
+    href={ROUTES.home.path}
+    class='h-10 w-10 flex-grow max-w-16 order-2'
+    aria-label='logo of the website rxtel.dev'
+  >
     <Logo />
   </a>
 
   <ul
     id='nav-mobile'
-    class='text-cWhite grid grid-cols-2 place-content-center place-items-center justify-center gap-5 uppercase absolute transform -translate-y-28 left-0 right-0 mx-auto w-full p-5 rounded-2xl text-xs bg-cPaper shadow-md z-10'
+    class='text-cWhite grid grid-cols-2 place-content-center place-items-center justify-center gap-5 uppercase absolute transform -translate-y-28 left-0 right-0 mx-auto w-full p-5 rounded-2xl text-xxs bg-cPaper shadow-md z-10'
   >
     <li class='size-full z-10'>
       <a
         class='text-cWhite hover:text-cBlue transition-colors duration-300 ease-in h-full w-full flex flex-col place-items-center gap-2'
         href={ROUTES.home.path}
+        aria-label={ROUTES.home.name}
       >
         <div class='size-6'>
           <HomeIcon />
@@ -34,6 +37,7 @@ import FlagES from '@/icons/FlagES.astro'
     <li class='size-full'>
       <a
         class='text-cWhite hover:text-cBlue transition-colors duration-300 ease-in h-full w-full flex flex-col place-items-center gap-2'
+        aria-label={ROUTES.aboutMe.name}
         href={ROUTES.aboutMe.path}
       >
         <div class='size-6'>
@@ -45,6 +49,7 @@ import FlagES from '@/icons/FlagES.astro'
     <li class='size-full'>
       <a
         class='text-cWhite hover:text-cBlue transition-colors duration-300 ease-in h-full w-full flex flex-col place-items-center gap-2'
+        aria-label={ROUTES.portfolio.name}
         href={ROUTES.portfolio.path}
       >
         <div class='size-6'>
@@ -56,6 +61,7 @@ import FlagES from '@/icons/FlagES.astro'
     <li class='size-full'>
       <a
         class='text-cWhite hover:text-cBlue transition-colors duration-300 ease-in h-full w-full flex flex-col place-items-center gap-2'
+        aria-label={ROUTES.contact.name}
         href={ROUTES.contact.path}
       >
         <div class='size-6'>
@@ -79,15 +85,22 @@ import FlagES from '@/icons/FlagES.astro'
 
   <ul
     id='lang-options'
-    class='text-cWhite grid grid-cols-2 place-content-center place-items-center justify-center gap-5 uppercase absolute transform -translate-y-20 left-0 right-0 mx-auto w-full p-5 rounded-2xl text-xs bg-cPaper shadow-md z-10'
+    class='text-cWhite grid grid-cols-2 place-content-center place-items-center justify-center gap-5 uppercase absolute transform -translate-y-20 left-0 right-0 mx-auto w-full p-5 rounded-2xl text-xxs bg-cPaper shadow-md z-10'
   >
     <li class='size-full z-10'>
       <a
         class='text-cWhite hover:text-cBlue transition-colors duration-300 ease-in h-full w-full flex flex-col place-items-center gap-2'
         href={LANGUAGES.ES.path}
+        aria-label='Change language'
       >
-        <div class='size-6'>
-          <img src={LANGUAGES.ES.flag} alt={LANGUAGES.ES.name} loading='lazy' />
+        <div class='size-6 flex items-end'>
+          <img
+            src={LANGUAGES.ES.flag}
+            alt={LANGUAGES.ES.name}
+            loading='lazy'
+            width='24'
+            height='24'
+          />
         </div>
 
         {LANGUAGES.ES.name}
@@ -98,8 +111,14 @@ import FlagES from '@/icons/FlagES.astro'
         class='text-cWhite hover:text-cBlue transition-colors duration-300 ease-in h-full w-full flex flex-col place-items-center gap-2'
         href={LANGUAGES.EN.path}
       >
-        <div class='size-6'>
-          <img src={LANGUAGES.EN.flag} alt={LANGUAGES.ES.name} loading='lazy' />
+        <div class='size-6 flex items-end'>
+          <img
+            src={LANGUAGES.EN.flag}
+            alt={LANGUAGES.ES.name}
+            loading='lazy'
+            width='24'
+            height='24'
+          />
         </div>
         {LANGUAGES.EN.name}
       </a>
@@ -134,7 +153,7 @@ import FlagES from '@/icons/FlagES.astro'
     stroke: white;
     stroke-linecap: round;
     stroke-linejoin: round;
-    stroke-width: 2.5;
+    stroke-width: 1.5;
     transition:
       stroke-dasharray 600ms cubic-bezier(0.4, 0, 0.2, 1),
       stroke-dashoffset 600ms cubic-bezier(0.4, 0, 0.2, 1);
@@ -163,7 +182,7 @@ import FlagES from '@/icons/FlagES.astro'
   :has(.check-hamburger:checked) #nav-mobile {
     animation: slide linear both;
     visibility: visible;
-    @apply -translate-y-32 opacity-100;
+    @apply -translate-y-[117px] opacity-100;
   }
 
   :has(.check-hamburger:checked) .line {
@@ -173,11 +192,17 @@ import FlagES from '@/icons/FlagES.astro'
   :has(.check-lang:checked) #lang-options {
     animation: slide linear both;
     visibility: visible;
-    @apply -translate-y-24 opacity-100;
+    @apply -translate-y-[84px] opacity-100;
   }
 
   :has(.check-lang:checked) .lang {
     @apply text-cBlue;
+  }
+
+  /* remove scroll when nav is open */
+  :global(:has(.check-hamburger:checked) body),
+  :global(:has(.check-lang:checked) body) {
+    @apply overflow-hidden;
   }
 
   @keyframes colorActive {
@@ -186,3 +211,30 @@ import FlagES from '@/icons/FlagES.astro'
     }
   }
 </style>
+
+<script>
+  const $hamburgerBtn = document.querySelector(
+    '.check-hamburger'
+  ) as HTMLInputElement
+  const $hamburgerCheckbox = document.querySelector(
+    '.check-hamburger'
+  ) as HTMLInputElement
+  const $toggleLangBtn = document.querySelector('.lang') as HTMLInputElement
+  const $langCheckbok = document.querySelector(
+    '.check-lang'
+  ) as HTMLInputElement
+
+  $hamburgerBtn.addEventListener('click', () => {
+    if ($langCheckbok.checked) {
+      $langCheckbok.checked = false
+      return
+    }
+  })
+
+  $toggleLangBtn.addEventListener('click', () => {
+    if ($hamburgerCheckbox.checked) {
+      $hamburgerCheckbox.checked = false
+      return
+    }
+  })
+</script>
