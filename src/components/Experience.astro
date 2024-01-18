@@ -1,0 +1,31 @@
+---
+import ExperienceItem from './ExperienceItem.astro'
+const works = [
+  {
+    company: 'Visual Dealers',
+    role: 'Front-end Developer',
+    startDate: '2023-04-01',
+    description:
+      'Desarrollador de E-commerce, plantillas de email marketing, SEO y landing pages. Mejora del 70% en Core Web Vitals. Apasionado por la creación de experiencias web excepcionales y orientadas al rendimiento. '
+  },
+  {
+    company: 'Vehement S.A.S',
+    role: 'Front-end Developer',
+    startDate: '2022-09-01',
+    description:
+      'Responsable de la plataforma, componentes y utilidades para la creación y desarrollo de aplicaciones web. Mejora de un 90% en la entrega de software. Implantación de medidas de integración continua y despliegue.'
+  }
+]
+---
+
+<section class='section w-full mx-auto lg:w-full max-w-3xl pb-24'>
+  <h2 class='text-2xl font-semibold text-cWhite mb-6 flex gap-x-3 items-center'>
+    Experiencia laboral
+  </h2>
+  <ol class='relative border-s border-cAccent ml-2 md:ml-3'>
+    {works
+      .sort((a, b) => new Date(b.startDate) - new Date(a.startDate))
+      .map((work) => <ExperienceItem data={work} />
+      )}
+  </ol>
+</section>
