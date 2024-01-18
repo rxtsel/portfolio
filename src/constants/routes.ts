@@ -31,12 +31,12 @@ export const LANGUAGES = {
     name: 'Español',
     path: '/',
     code: 'es',
-    flag: 'https://flagcdn.com/w20/es.webp'
+    flag: '/flag-es.webp'
   },
   EN: {
     name: 'English',
     path: '/en',
     code: 'en',
-    flag: 'https://flagcdn.com/w20/us.webp'
+    flag: '/flag-us.webp'
   }
 }
