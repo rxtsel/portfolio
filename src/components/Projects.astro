@@ -1,0 +1,11 @@
+---
+import Section from '@/components/Section.astro'
+import ProjectCard from '@/components/ProjectCard.astro'
+import { projects } from '@/data/projects'
+---
+
+<Section title='Featured Projects'>
+  <div class='grid grid-cols-1 gap-4 sm:grid-cols-2'>
+    {projects.map((project) => <ProjectCard props={project} />)}
+  </div>
+</Section>
