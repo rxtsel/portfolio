@@ -1,7 +1,7 @@
 ---
 import Metatags from '@/components/Metatags.astro'
 import Analitycs from '@/components/Analitycs.astro'
-import '@fontsource-variable/onest';
+import '@fontsource-variable/onest'
 ---
 
 <!doctype html>
@@ -17,7 +17,7 @@ import '@fontsource-variable/onest';
     <meta name='theme-color' content='#1A1A1A' />
     <Analitycs />
   </head>
-  <body class="antialiased relative bg-cBlack">
+  <body class='antialiased relative bg-cBlack'>
     <div
       class='absolute w-full h-full bottom-0 left-0 right-0 top-0 bg-[linear-gradient(to_right,#4f4f4f2e_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f2e_1px,transparent_1px)] bg-[size:40px_40px] md:bg-[size:50px_50px] lg:bg-[size:70px_70px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] -z-10'
     >
@@ -27,7 +27,15 @@ import '@fontsource-variable/onest';
 </html>
 
 <style is:global>
-  body {
-    font-family: 'Onest Variable', sans-serif;
+  @font-face {
+    font-family: 'Satoshi';
+    src: url('/fonts/Satoshi.woff2') format('woff2');
+    font-style: normal;
+    font-weight: 300 900;
+    font-display: swap;
+  }
+
+  html {
+    font-family: Satoshi,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans,sans-serif,"Apple Color Emoji","Segoe UI Emoji",Segoe UI Symbol,"Noto Color Emoji"
   }
 </style>
