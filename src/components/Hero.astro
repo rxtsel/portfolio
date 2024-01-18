@@ -18,16 +18,34 @@
       class='text-[clamp(30px,6vw,80px)] font-bold flex flex-col leading-none'
     >
       Hey, soy Cristhian
-      <strong class='font-normal text-[clamp(18px,6vw,28px)] text-cWhite my-6'>
+      <strong class='font-normal text-[clamp(18px,6vw,28px)] text-cWhite mt-2 mb-6'>
         Desarrollador Web Front-end</strong
       >
     </h1>
 
     <h2 class='text-[clamp(34px,6vw,80px)] font-medium leading-none text-pretty'>
-      Apasionado por crear productos digitales increíbles.
+      Apasionado por crear productos digitales <span class="line relative">increíbles.</span>
     </h2>
 
     <p class="mt-6 max-w-2xl mx-auto text-cAccent text-base font-normal text-pretty">Estudiante de ingeniería de software con +1 año de experiencia como desarrollador web. Amante del diseño y la innovación.</p>
 
   </article>
 </section>
+
+<style>
+.line::after {
+  position: absolute;
+  content: url("/subline.webp");
+  height: 10px;
+  width: 100%;
+  top: 30px;
+  left: 0px;
+}
+
+@media (width >= 1024px) {
+  .line::after {
+    top: 46px;
+    left: 90px;
+  }
+}
+</style>
