@@ -12,3 +12,4 @@ export type Tecnologies =
   | 'Java'
   | 'SQLite'
   | 'HTML'
+  | 'JavaScript'
