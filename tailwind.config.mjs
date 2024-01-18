@@ -10,6 +10,9 @@ export default {
         cAccent: '#838383',
         cBlue: '#4895EF',
         cRed: '#D14343'
+      },
+      fontSize: {
+        xxs: '10px'
       }
     }
   },
