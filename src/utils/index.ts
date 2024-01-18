@@ -1,1 +1,2 @@
-export * from './calculateDurationWork'
+export * from './calculateDuration'
+export * from './formatDuration'
