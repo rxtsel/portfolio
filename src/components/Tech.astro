@@ -55,7 +55,7 @@ const techs: iTechnology[] = [
 <Section title='Technologies'>
   <div class='grid grid-cols-2 gap-4 md:grid-cols-6'>
     {
-      techs.sort().map(({ name, Icon }: iTechnology) => (
+      techs.sort((a, b) => a.name.localeCompare(b.name)).map(({ name, Icon }: iTechnology) => (
         <TechCard name={name}>
           <Icon />
         </TechCard>
