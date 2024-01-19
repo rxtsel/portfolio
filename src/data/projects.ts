@@ -55,6 +55,6 @@ export const projects: iProject[] = [
     descriptionEn: 'Web app to manage and keep track of our money.',
     url: 'https://expense-manager-react.netlify.app/',
     gh: 'https://github.com/rxtsel/Expense-control-react',
-    tags: ['Java', 'SQLite']
+    tags: ['React', 'CSS']
   }
 ]
