@@ -5,6 +5,13 @@ import TranslateIcon from '@/icons/Translate.astro'
 import LinkedinIcon from '@/icons/Linkedin.astro'
 import TwitterIcon from '@/icons/Twitter.astro'
 import GithubIcon from '@/icons/Github.astro'
+
+const { currentLocale } = Astro
+
+const colorWhenLangIsEn =
+  currentLocale === 'en' ? 'text-cBlue bg-cBlack' : 'text-cWhite'
+const colorWhenLangIsEs =
+  currentLocale === 'es' ? 'text-cBlue bg-cBlack' : 'text-cWhite'
 ---
 
 <nav class='flex w-full max-w-6xl mx-auto items-center justify-between'>
@@ -22,10 +29,10 @@ import GithubIcon from '@/icons/Github.astro'
         <li>
           <a
             class='text-cWhite hover:text-cBlue transition-colors duration-300 ease-in'
-            aria-label={route.name}
+            aria-label={currentLocale === 'en' ? route.nameEn : route.name}
             href={route.path}
           >
-            {route.name}
+            {currentLocale === 'en' ? route.nameEn : route.name}
           </a>
         </li>
       ))
@@ -47,19 +54,19 @@ import GithubIcon from '@/icons/Github.astro'
       >
         <li class='size-full z-10'>
           <a
-            class='text-cWhite hover:text-cBlue hover:bg-cBlack px-10 py-2 rounded transition-colors duration-300 ease-in h-full w-full flex place-items-center gap-2'
+            class={`${colorWhenLangIsEs} hover:text-cBlue hover:bg-cBlack px-10 py-2 rounded transition-colors duration-300 ease-in h-full w-full flex place-items-center gap-2`}
             href={LANGUAGES.ES.path}
             aria-label='Change language'
           >
-            {LANGUAGES.ES.name}
+            {currentLocale === 'en' ? LANGUAGES.ES.nameEn : LANGUAGES.ES.name}
           </a>
         </li>
         <li class='size-full'>
           <a
-            class='text-cWhite hover:text-cBlue hover:bg-cBlack px-10 py-2 rounded transition-colors duration-300 ease-in h-full w-full flex place-items-center gap-2'
+            class={`${colorWhenLangIsEn} hover:text-cBlue hover:bg-cBlack px-10 py-2 rounded transition-colors duration-300 ease-in h-full w-full flex place-items-center gap-2`}
             href={LANGUAGES.EN.path}
           >
-            {LANGUAGES.EN.name}
+            {currentLocale === 'en' ? LANGUAGES.EN.nameEn : LANGUAGES.EN.name}
           </a>
         </li>
       </ul>

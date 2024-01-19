@@ -2,9 +2,13 @@
 import Section from '@/components/Section.astro'
 import ProjectCard from '@/components/ProjectCard.astro'
 import { works } from '@/data'
+import { getI18N } from '@/i18n'
+
+const { currentLocale } = Astro
+const i18n = getI18N({ currentLocale })
 ---
 
-<Section title='Latest Works' id='portfolio'>
+<Section title={i18n.works.title} id='portfolio'>
   <div class='grid grid-cols-1 gap-4 sm:grid-cols-2'>
     {works.sort().map((work) => <ProjectCard props={work} />)}
   </div>

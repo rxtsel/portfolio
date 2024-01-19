@@ -15,6 +15,7 @@ interface Data {
 
 const { data } = Astro.props
 const { company, role, startDate, endDate, description } = data
+const { currentLocale } = Astro
 ---
 
 <li class='mb-10 ms-4'>
@@ -22,12 +23,12 @@ const { company, role, startDate, endDate, description } = data
     class='absolute block w-3 h-3 rounded-full mt-1.5 -start-1.5 border border-cBlue bg-cBlue'
   ></span>
 
-  <time class='mb-1 text-sm font-normal leading-none text-cAccent'>
+  <time class='mb-1 text-sm font-normal leading-none text-cAccent capitalize'>
     {
       endDate
-        ? formatDuration({ startDate, endDate })
-        : formatDuration({ startDate })
-    } · {calculateDuration(startDate)}.
+        ? formatDuration({ startDate, endDate, locale: currentLocale })
+        : formatDuration({ startDate, locale: currentLocale })
+    } · {calculateDuration({ startDate, locale: currentLocale })}.
   </time>
 
   <h3 class='text-lg font-semibold text-white mt-2 capitalize'>

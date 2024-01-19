@@ -7,6 +7,12 @@ export default defineConfig({
   base: '/',
   site: 'https://rxtsel.dev',
   integrations: [sitemap(), tailwind()],
+  i18n: {
+    defaultLocale: 'es',
+    locales: ['es', 'en'],
+    routing: {
+      prefixDefaultLocale: false
+    }
+  },
   trailingSlash: 'never'
 })
-

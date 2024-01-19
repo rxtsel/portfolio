@@ -6,6 +6,11 @@ import UserIcon from '@/icons/User.astro'
 import PortfolioIcon from '@/icons/Portfolio.astro'
 import Message from '@/icons/Message.astro'
 import TranslateIcon from '@/icons/Translate.astro'
+
+const { currentLocale } = Astro
+
+const colorWhenLangIsEn = currentLocale === 'en' ? 'text-cBlue' : 'text-cWhite'
+const colorWhenLangIsEs = currentLocale === 'es' ? 'text-cBlue' : 'text-cWhite'
 ---
 
 <nav class='flex w-full max-w-6xl mx-auto items-center justify-between'>
@@ -25,49 +30,61 @@ import TranslateIcon from '@/icons/Translate.astro'
       <a
         class='text-cWhite hover:text-cBlue transition-colors duration-300 ease-in h-full w-full flex flex-col place-items-center gap-2'
         href={ROUTES.home.path}
-        aria-label={ROUTES.home.name}
+        aria-label={currentLocale === 'en'
+          ? ROUTES.home.nameEn
+          : ROUTES.home.name}
       >
         <div class='size-6'>
           <HomeIcon />
         </div>
 
-        {ROUTES.home.name}
+        {currentLocale === 'en' ? ROUTES.home.nameEn : ROUTES.home.name}
       </a>
     </li>
     <li class='size-full'>
       <a
         class='text-cWhite hover:text-cBlue transition-colors duration-300 ease-in h-full w-full flex flex-col place-items-center gap-2'
-        aria-label={ROUTES.portfolio.name}
+        aria-label={currentLocale === 'en'
+          ? ROUTES.portfolio.nameEn
+          : ROUTES.portfolio.name}
         href={ROUTES.portfolio.path}
       >
         <div class='size-6'>
           <PortfolioIcon />
         </div>
-        {ROUTES.portfolio.name}
+        {
+          currentLocale === 'en'
+            ? ROUTES.portfolio.nameEn
+            : ROUTES.portfolio.name
+        }
       </a>
     </li>
     <li class='size-full'>
       <a
         class='text-cWhite hover:text-cBlue transition-colors duration-300 ease-in h-full w-full flex flex-col place-items-center gap-2'
-        aria-label={ROUTES.aboutMe.name}
+        aria-label={currentLocale === 'en'
+          ? ROUTES.aboutMe.nameEn
+          : ROUTES.aboutMe.name}
         href={ROUTES.aboutMe.path}
       >
         <div class='size-6'>
           <UserIcon />
         </div>
-        {ROUTES.aboutMe.name}
+        {currentLocale === 'en' ? ROUTES.aboutMe.nameEn : ROUTES.aboutMe.name}
       </a>
     </li>
     <li class='size-full'>
       <a
         class='text-cWhite hover:text-cBlue transition-colors duration-300 ease-in h-full w-full flex flex-col place-items-center gap-2'
-        aria-label={ROUTES.contact.name}
+        aria-label={currentLocale === 'en'
+          ? ROUTES.contact.nameEn
+          : ROUTES.contact.name}
         href={ROUTES.contact.path}
       >
         <div class='size-6'>
           <Message />
         </div>
-        {ROUTES.contact.name}
+        {currentLocale === 'en' ? ROUTES.contact.nameEn : ROUTES.contact.name}
       </a>
     </li>
   </ul>
@@ -89,7 +106,7 @@ import TranslateIcon from '@/icons/Translate.astro'
   >
     <li class='size-full z-10'>
       <a
-        class='text-cWhite hover:text-cBlue transition-colors duration-300 ease-in h-full w-full flex flex-col place-items-center gap-2'
+        class={`${colorWhenLangIsEs} hover:text-cBlue transition-colors duration-300 ease-in h-full w-full flex flex-col place-items-center gap-2`}
         href={LANGUAGES.ES.path}
         aria-label='Change language'
       >
@@ -103,24 +120,24 @@ import TranslateIcon from '@/icons/Translate.astro'
           />
         </div>
 
-        {LANGUAGES.ES.name}
+        {currentLocale === 'en' ? LANGUAGES.ES.nameEn : LANGUAGES.ES.name}
       </a>
     </li>
     <li class='size-full'>
       <a
-        class='text-cWhite hover:text-cBlue transition-colors duration-300 ease-in h-full w-full flex flex-col place-items-center gap-2'
+        class={`${colorWhenLangIsEn} hover:text-cBlue transition-colors duration-300 ease-in h-full w-full flex flex-col place-items-center gap-2`}
         href={LANGUAGES.EN.path}
       >
         <div class='size-6 flex items-end'>
           <img
             src={LANGUAGES.EN.flag}
-            alt={LANGUAGES.ES.name}
+            alt={LANGUAGES.EN.name}
             loading='lazy'
             width='24'
             height='24'
           />
         </div>
-        {LANGUAGES.EN.name}
+        {currentLocale === 'en' ? LANGUAGES.EN.nameEn : LANGUAGES.EN.name}
       </a>
     </li>
   </ul>

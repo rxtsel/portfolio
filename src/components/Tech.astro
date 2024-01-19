@@ -10,6 +10,10 @@ import React from '@/icons/color/React.astro'
 import Git from '@/icons/color/Git.astro'
 import JavaScript from '@/icons/color/JavaScript.astro'
 import Lua from '@/icons/color/Lua.astro'
+import { getI18N } from '@/i18n'
+
+const { currentLocale } = Astro
+const i18n = getI18N({ currentLocale })
 
 interface iTechnology {
   name: Tecnologies
@@ -52,14 +56,16 @@ const techs: iTechnology[] = [
 ]
 ---
 
-<Section title='Technologies'>
+<Section title={i18n.tech.title}>
   <div class='grid grid-cols-2 gap-4 md:grid-cols-6'>
     {
-      techs.sort((a, b) => a.name.localeCompare(b.name)).map(({ name, Icon }: iTechnology) => (
-        <TechCard name={name}>
-          <Icon />
-        </TechCard>
-      ))
+      techs
+        .sort((a, b) => a.name.localeCompare(b.name))
+        .map(({ name, Icon }: iTechnology) => (
+          <TechCard name={name}>
+            <Icon />
+          </TechCard>
+        ))
     }
   </div>
 </Section>

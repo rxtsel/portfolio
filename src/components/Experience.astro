@@ -1,25 +1,28 @@
 ---
 import Section from '@/components/Section.astro'
 import ExperienceItem from './ExperienceItem.astro'
+import { getI18N } from '@/i18n'
+
+const { currentLocale } = Astro
+const i18n = getI18N({ currentLocale })
+
 const works = [
   {
     company: 'Visual Dealers',
     role: 'Front-end Developer',
     startDate: '2023-04-01',
-    description:
-      'Desarrollador de E-commerce, plantillas de email marketing, SEO y landing pages. Mejora del 70% en Core Web Vitals. Apasionado por la creación de experiencias web excepcionales y orientadas al rendimiento. '
+    description: i18n.experience.visualdealers.desc
   },
   {
     company: 'Vehement S.A.S',
     role: 'Front-end Developer',
     startDate: '2022-09-01',
-    description:
-      'Responsable de la plataforma, componentes y utilidades para la creación y desarrollo de aplicaciones web. Mejora de un 90% en la entrega de software. Implantación de medidas de integración continua y despliegue.'
+    description: i18n.experience.vehement.desc
   }
 ]
 ---
 
-<Section title='Experience'>
+<Section title={i18n.experience.title}>
   <article class='section w-full lg:w-full max-w-3xl'>
     <ol
       class='relative border-s border-neutral-800 md:border-cAccent ml-2 md:ml-3'

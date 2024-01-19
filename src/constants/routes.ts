@@ -1,19 +1,23 @@
 export const ROUTES = {
   home: {
-    path: '/#top',
-    name: 'Inicio'
+    path: '#top',
+    name: 'Inicio',
+    nameEn: 'Home'
   },
   portfolio: {
-    path: '/#portfolio',
-    name: 'Portafolio'
+    path: '#portfolio',
+    name: 'Portafolio',
+    nameEn: 'Portfolio'
   },
   aboutMe: {
-    path: '/#about-me',
-    name: 'Sobre mí'
+    path: '#about-me',
+    name: 'Sobre mí',
+    nameEn: 'About me'
   },
   contact: {
-    path: '/#contact',
-    name: 'Contacto'
+    path: '#contact',
+    name: 'Contacto',
+    nameEn: 'Contact'
   }
 }
 
@@ -30,12 +34,14 @@ export const SOCIALS = {
 export const LANGUAGES = {
   ES: {
     name: 'Español',
+    nameEn: 'Spanish',
     path: '/',
     code: 'es',
     flag: '/flag-es.webp'
   },
   EN: {
-    name: 'English',
+    name: 'Inglés',
+    nameEn: 'English',
     path: '/en',
     code: 'en',
     flag: '/flag-us.webp'
