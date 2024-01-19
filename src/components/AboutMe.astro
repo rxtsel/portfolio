@@ -1,0 +1,27 @@
+---
+import { SOCIALS } from '@/constants/routes'
+import Section from './Section.astro'
+---
+
+<Section title='Sobre mí' container id='about-me'>
+  <article class='text-cAccent max-w-3xl'>
+    <h3 class='text-xl font-medium text-cWhite leading-none mb-4'>
+      Me encanta crear algo simple y limpio
+    </h3>
+    <p class='text-pretty'>
+      Desde niño me ha gustado el mundo de la tecnología. Actualmente desempeño
+      el rol de Desarrollador Web Front-end. He trabajado cómo profesional
+      independiente para empresas en Europa y Estados Unidos.
+    </p>
+    <p class='text-pretty my-3'>
+      Vivo en Colombia, donde disfruto de buena comida y paisajes increíbles. Me
+      gusta explorar diseños minimalistas que prioricen la funcionalidad.
+    </p>
+    <p class='text-pretty'>
+      También estoy activo en <a href={SOCIALS.twitter} class='text-cBlue'
+        >twitter</a
+      > y si tienes alguna pregunta no dudes en mencionarme, estoy seguro de que
+      será una charla interesante.
+    </p>
+  </article>
+</Section>
