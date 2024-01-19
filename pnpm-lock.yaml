@@ -19,9 +19,6 @@ devDependencies:
   '@astrojs/sitemap':
     specifier: 1.2.1
     version: 1.2.1
-  '@fontsource-variable/onest':
-    specifier: 5.0.2
-    version: 5.0.2
   prettier:
     specifier: ^3.1.1
     version: 3.1.1
@@ -562,10 +559,6 @@ packages:
     requiresBuild: true
     dev: false
     optional: true
-
-  /@fontsource-variable/onest@5.0.2:
-    resolution: {integrity: sha512-XsH6q+/OyO0Oba4OB/NkiQu3ON93U2Kx+1YxKpNZMuS+a+WvxipwhO8Und2CC0mLI33xOZzTWUk4wtnsUJzjCQ==}
-    dev: true
 
   /@img/sharp-darwin-arm64@0.33.1:
     resolution: {integrity: sha512-esr2BZ1x0bo+wl7Gx2hjssYhjrhUsD88VQulI0FrG8/otRQUOxLWHMBd1Y1qo2Gfg2KUvXNpT0ASnV9BzJCexw==}
