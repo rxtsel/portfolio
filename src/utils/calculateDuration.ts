@@ -1,13 +1,12 @@
+import { differenceInCalendarMonths } from 'date-fns'
+
 export const calculateDuration = ({
   startDate,
-  locale = undefined
+  locale
 }: {
-  startDate: Date | string
+  startDate: Date
   locale: 'en' | 'es' | undefined
 }): string => {
-  const toDate = (date: Date | string): Date => {
-    return typeof date === 'string' ? new Date(date) : date
-  }
   if (locale === undefined) locale = 'es'
 
   const translateMonth = locale === 'es' ? 'mes' : 'month'
@@ -15,18 +14,23 @@ export const calculateDuration = ({
   const translateMonths = locale === 'es' ? 'meses' : 'months'
   const translateYears = locale === 'es' ? 'años' : 'years'
 
-  const startDateObject = toDate(startDate)
   const currentDate = new Date()
-  const monthDifference =
-    (currentDate.getFullYear() - startDateObject.getFullYear()) * 12 +
-    (currentDate.getMonth() - startDateObject.getMonth())
+  const monthDifference = differenceInCalendarMonths(currentDate, startDate)
 
   if (monthDifference >= 12) {
     const years = Math.floor(monthDifference / 12)
     const months = monthDifference % 12
-    return `${years} ${
-      years === 1 ? translateYear : translateYears
-    } ${months} ${months === 1 ? translateMonth : translateMonths}`
+
+    const yearText =
+      years > 0
+        ? `${years} ${years === 1 ? translateYear : translateYears}`
+        : ''
+    const monthText =
+      months > 0
+        ? `${months} ${months === 1 ? translateMonth : translateMonths}`
+        : ''
+
+    return `${yearText} ${monthText}`
   } else {
     return `${monthDifference} ${
       monthDifference === 1 ? translateMonth : translateMonths
