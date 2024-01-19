@@ -1,24 +1,14 @@
-/**
- * Calculate the duration between the start date and the current date.
- * @function
- * @param {Date | string} startDate - The start date of the duration.
- * @returns {string} - The formatted duration string.
- */
 export const calculateDuration = ({
   startDate,
-  locale = 'es'
+  locale = undefined
 }: {
   startDate: Date | string
-  locale: 'en' | 'es'
+  locale: 'en' | 'es' | undefined
 }): string => {
-  /**
-   * Convert a string or Date to a Date object.
-   * @param {Date | string} date - The date to be converted.
-   * @returns {Date} - The converted Date object.
-   */
   const toDate = (date: Date | string): Date => {
     return typeof date === 'string' ? new Date(date) : date
   }
+  if (locale === undefined) locale = 'es'
 
   const translateMonth = locale === 'es' ? 'mes' : 'month'
   const translateYear = locale === 'es' ? 'año' : 'year'
