@@ -1,4 +1,4 @@
-import { format, differenceInCalendarMonths, add } from 'date-fns'
+import { format, differenceInCalendarMonths } from 'date-fns'
 import { enUS, es } from 'date-fns/locale'
 
 interface DurationOptions {
@@ -34,14 +34,13 @@ export const formatDuration = ({
         return monthText
       }
     } else {
-      const adjustedStartDate = add(startDate, { months: 1 })
       const endMonth = format(endDate, 'MMM', { locale: localeObject })
       const endYear = format(endDate, 'yyyy', { locale: localeObject })
 
-      const startMonth = format(adjustedStartDate, 'MMM', {
+      const startMonth = format(startDate, 'MMM', {
         locale: localeObject
       })
-      const startYear = format(adjustedStartDate, 'yyyy', {
+      const startYear = format(startDate, 'yyyy', {
         locale: localeObject
       })
 
@@ -52,8 +51,7 @@ export const formatDuration = ({
       }
     }
   } else {
-    const adjustedStartDate = add(startDate, { months: 1 })
-    const startMonth = format(adjustedStartDate, 'MMM', {
+    const startMonth = format(startDate, 'MMM', {
       locale: localeObject
     })
     const startYear = format(startDate, 'yyyy', { locale: localeObject })

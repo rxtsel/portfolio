@@ -1,4 +1,4 @@
-import { differenceInCalendarMonths } from 'date-fns'
+import { differenceInCalendarMonths, add } from 'date-fns'
 
 export const calculateDuration = ({
   startDate,
@@ -15,7 +15,11 @@ export const calculateDuration = ({
   const translateYears = locale === 'es' ? 'años' : 'years'
 
   const currentDate = new Date()
-  const monthDifference = differenceInCalendarMonths(currentDate, startDate)
+  const adjustedStartDate = add(startDate, { months: 1 })
+  const monthDifference = differenceInCalendarMonths(
+    currentDate,
+    adjustedStartDate
+  )
 
   if (monthDifference >= 12) {
     const years = Math.floor(monthDifference / 12)
