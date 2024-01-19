@@ -1,0 +1,42 @@
+---
+import { getI18N } from '@/i18n'
+
+const { currentLocale } = Astro
+const i18n = getI18N({ currentLocale })
+---
+
+<meta name='keywords' content={i18n.site.keywords} />
+<meta name='author' content='Cristhian Melo' />
+<meta name='copyright' content='Cristhian Melo' />
+<!-- Primary Meta Tags -->
+<meta name='title' content={i18n.site.title} />
+<meta name='description' content={i18n.site.description} />
+<!-- Open Graph / Facebook -->
+<meta property='og:type' content='website' />
+<meta property='og:url' content='https://www.rxtsel.dev' />
+<meta property='og:title' content={i18n.site.title} />
+<meta property='og:description' content={i18n.site.description} />
+<meta
+  property='og:image'
+  content='https://www.rxtsel.dev/meta_tags_large_icon.png'
+/>
+<!-- Twitter -->
+<meta property='twitter:card' content='summary_large_image' />
+<meta property='twitter:url' content='https://www.rxtsel.dev' />
+<meta property='twitter:title' content={i18n.site.title} />
+<meta property='twitter:description' content={i18n.site.description} />
+<meta
+  property='twitter:image'
+  content='https://www.rxtsel.dev/meta_tags_large_icon.png'
+/>
+
+<!-- WPA	 -->
+<link rel='icon' type='image/svg+xml' href='/16x16.svg' sizes='16x16' />
+<link rel='icon' type='image/svg+xml' href='/32x32.svg' sizes='32x32' />
+<link rel='icon' type='image/svg+xml' href='/96x96.svg' sizes='96x96' />
+<link
+  rel='apple-touch-icon'
+  type='image/svg+xml'
+  href='/180x180.svg'
+  sizes='180x180'
+/>

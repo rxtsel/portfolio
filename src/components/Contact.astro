@@ -1,0 +1,50 @@
+---
+import { SOCIALS } from '@/constants/routes'
+import Section from './Section.astro'
+import Linkedin from '@/icons/Linkedin.astro'
+import Mail from '@/icons/Mail.astro'
+import Twitter from '@/icons/Twitter.astro'
+import { getI18N } from '@/i18n'
+
+const { currentLocale } = Astro
+const i18n = getI18N({ currentLocale })
+---
+
+<Section title={i18n.contact.title} id='contact' container>
+  <nav class='grid grid-cols-2 gap-4 md:grid-cols-6'>
+    <a
+      class='flex max-w-xs flex-col items-center space-y-2 rounded-lg border border-neutral-800 p-4'
+      href={SOCIALS.email}
+      aria-label='Email'
+    >
+      <div class='size-14 text-[#e94134]'>
+        <Mail />
+      </div>
+      <h2 class='text-cWhite'>Email</h2>
+    </a>
+
+    <a
+      class='flex max-w-xs flex-col items-center space-y-2 rounded-lg border border-neutral-800 p-4'
+      href={SOCIALS.linkedin}
+      aria-label='Linkedin'
+      target='_blank'
+    >
+      <div class='size-14 text-[#0077B5]'>
+        <Linkedin />
+      </div>
+      <h2 class='text-cWhite'>Linkedin</h2>
+    </a>
+
+    <a
+      class='flex max-w-xs flex-col items-center space-y-2 rounded-lg border border-neutral-800 p-4'
+      href={SOCIALS.twitter}
+      aria-label='Twitter'
+      target='_blank'
+    >
+      <div class='size-14 text-cWhite'>
+        <Twitter />
+      </div>
+      <h2 class='text-cWhite'>Twitter</h2>
+    </a>
+  </nav>
+</Section>

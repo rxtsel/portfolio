@@ -1,0 +1,57 @@
+{
+  "site": {
+    "title": "Cristhian Melo - Software Developer",
+    "description": "Specialized in Performance, SEO, and Accessibility. Firm believer in the importance of UX/UI design and how it can impact the user experience on a website.",
+    "keywords": "web developer, web designer, colombia, html, css, javascript, responsive design, frameworks, adobe creative suite, user experience (ux), search engine optimization (seo), wordpress, ecommerce, web application development, mobile development, emerging web technologies, cristhian melo, rxtsel, rxtsel.dev, programmer, frontend, frontend developer, web dev"
+  },
+  "messages": {
+    "private": "Private",
+    "repository": "Repository"
+  },
+  "nav": {
+    "home": "Home",
+    "about": "About Me",
+    "portfolio": "Portfolio",
+    "contact": "Contact"
+  },
+  "hero": {
+    "name": "Hello, I'm Cristhian",
+    "rol": "Front-end Web Developer",
+    "slogan": "Passionate about creating digital products",
+    "slogan2": "amazing.",
+    "description": "Software engineering student with +1 year of experience as a web developer. Lover of design and innovation."
+  },
+  "experience": {
+    "title": "Experience",
+    "visualdealers": {
+      "desc": "E-commerce developer, email marketing templates, SEO, and landing pages. 70% improvement in Core Web Vitals. Passionate about creating exceptional web experiences focused on performance."
+    },
+    "vehement": {
+      "desc": "Responsible for the platform, components, and utilities for creating and developing web applications. 90% improvement in software delivery. Implementation of continuous integration and deployment measures."
+    }
+  },
+  "works": {
+    "title": "Latest Works"
+  },
+  "projects": {
+    "title": "Featured Projects"
+  },
+  "tech": {
+    "title": "Technologies"
+  },
+  "aboutme": {
+    "title": "About Me",
+    "desc": "I love creating something simple and clean",
+    "p1": "Since childhood, I've been fascinated by the world of technology. Currently, I work as a Front-end Web Developer. I have worked as a freelancer for companies in Europe and the United States.",
+    "p2": "I live in Colombia, where I enjoy good food and incredible landscapes. I like exploring minimalist designs that prioritize functionality.",
+    "p3": "I'm also active on",
+    "p4": "and if you have any questions, feel free to mention me. I'm sure it will be an interesting chat."
+  },
+  "contact": {
+    "title": "Contact Me"
+  },
+  "footer": {
+    "p1": "Made with",
+    "p2": "by"
+  }
+}

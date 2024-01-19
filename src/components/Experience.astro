@@ -1,0 +1,33 @@
+---
+import Section from '@/components/Section.astro'
+import ExperienceItem from './ExperienceItem.astro'
+import { getI18N } from '@/i18n'
+
+const { currentLocale } = Astro
+const i18n = getI18N({ currentLocale })
+
+const works = [
+  {
+    company: 'Visual Dealers',
+    role: 'Front-end Developer',
+    startDate: '2023-04-01',
+    description: i18n.experience.visualdealers.desc
+  },
+  {
+    company: 'Vehement S.A.S',
+    role: 'Front-end Developer',
+    startDate: '2022-09-01',
+    description: i18n.experience.vehement.desc
+  }
+]
+---
+
+<Section title={i18n.experience.title}>
+  <article class='section w-full lg:w-full max-w-3xl'>
+    <ol
+      class='relative border-s border-neutral-800 md:border-cAccent ml-2 md:ml-3'
+    >
+      {works.map((work) => <ExperienceItem data={work} />)}
+    </ol>
+  </article>
+</Section>

@@ -1,0 +1,27 @@
+---
+import { SOCIALS } from '@/constants/routes'
+import Section from './Section.astro'
+import { getI18N } from '@/i18n'
+
+const { currentLocale } = Astro
+const i18n = getI18N({ currentLocale })
+---
+
+<Section title={i18n.aboutme.title} container id='about-me'>
+  <article class='text-cAccent max-w-3xl'>
+    <h3 class='text-xl font-medium text-cWhite leading-none mb-4'>
+      {i18n.aboutme.desc}
+    </h3>
+    <p class='text-pretty'>
+      {i18n.aboutme.p1}
+    </p>
+    <p class='text-pretty my-3'>
+      {i18n.aboutme.p2}
+    </p>
+    <p class='text-pretty'>
+      {i18n.aboutme.p3}
+      <a href={SOCIALS.twitter} class='text-cBlue'>twitter</a>
+      {i18n.aboutme.p4}
+    </p>
+  </article>
+</Section>

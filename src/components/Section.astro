@@ -1,0 +1,19 @@
+---
+export interface Props {
+  title: string
+  id?: string
+  container?: boolean
+}
+
+const { title, id, container } = Astro.props
+---
+
+<section
+  class={`mb-6 pt-8 max-w-6xl mx-auto lg:pt-20 ${container ? 'px-2' : ''}`}
+  id={id ? id : null}
+>
+  <header class='mb-3 flex items-center space-x-4'>
+    <h2 class='text-2xl font-semibold text-cWhite'>{title}</h2>
+  </header>
+  <slot />
+</section>

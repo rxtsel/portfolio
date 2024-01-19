@@ -1,0 +1,71 @@
+---
+import type { Tecnologies } from '@/types'
+import Section from './Section.astro'
+import TechCard from './TechCard.astro'
+import NextJs from '@/icons/color/NextJs.astro'
+import TypeScript from '@/icons/color/TypeScript.astro'
+import Tailwind from '@/icons/color/Tailwind.astro'
+import AstroIcon from '@/icons/color/AstroIcon.astro'
+import React from '@/icons/color/React.astro'
+import Git from '@/icons/color/Git.astro'
+import JavaScript from '@/icons/color/JavaScript.astro'
+import Lua from '@/icons/color/Lua.astro'
+import { getI18N } from '@/i18n'
+
+const { currentLocale } = Astro
+const i18n = getI18N({ currentLocale })
+
+interface iTechnology {
+  name: Tecnologies
+  Icon: HTMLElement | any
+}
+
+const techs: iTechnology[] = [
+  {
+    name: 'Next.js',
+    Icon: NextJs
+  },
+  {
+    name: 'TypeScript',
+    Icon: TypeScript
+  },
+  {
+    name: 'JavaScript',
+    Icon: JavaScript
+  },
+  {
+    name: 'Tailwind CSS',
+    Icon: Tailwind
+  },
+  {
+    name: 'Astro',
+    Icon: AstroIcon
+  },
+  {
+    name: 'React',
+    Icon: React
+  },
+  {
+    name: 'Git',
+    Icon: Git
+  },
+  {
+    name: 'Lua',
+    Icon: Lua
+  }
+]
+---
+
+<Section title={i18n.tech.title}>
+  <div class='grid grid-cols-2 gap-4 md:grid-cols-6'>
+    {
+      techs
+        .sort((a, b) => a.name.localeCompare(b.name))
+        .map(({ name, Icon }: iTechnology) => (
+          <TechCard name={name}>
+            <Icon />
+          </TechCard>
+        ))
+    }
+  </div>
+</Section>
