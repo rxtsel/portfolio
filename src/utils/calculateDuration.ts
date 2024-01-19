@@ -36,28 +36,25 @@ export const calculateDuration = ({
   const localeFormat = locale === 'es' ? es : enUS
 
   // Formatear las fechas
-  const startDateActualWithOneMonthMore = add(startDate, { months: 1 })
-  const startDateFormatted = format(
-    startDateActualWithOneMonthMore,
-    'MMM. yyyy',
-    { locale: localeFormat }
-  )
+  const startDateFormatted = format(startDate, 'MMM. yyyy', {
+    locale: localeFormat
+  })
   const endDateFormatted = endDate
     ? format(endDate, 'MMM. yyyy')
     : localeCurrently
 
   // Crear y devolver la cadena de resultado
-  let resultado = `${startDateFormatted} - ${endDateFormatted} · `
+  let result = `${startDateFormatted} - ${endDateFormatted} · `
 
   // Agregar años a la salida si es más de 1 año
   if (anos > 0) {
-    resultado += `${anos} ${anos === 1 ? localeYear : localeYears} `
+    result += `${anos} ${anos === 1 ? localeYear : localeYears} `
   }
 
   // Agregar meses a la salida si es más de 0 meses
   if (mesesRestantes > 0) {
-    resultado += `${mesesRestantes} ${mesesRestantes === 1 ? localeMonth : localeMonths}`
+    result += `${mesesRestantes} ${mesesRestantes === 1 ? localeMonth : localeMonths}`
   }
 
-  return resultado
+  return result
 }
