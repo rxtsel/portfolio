@@ -224,17 +224,27 @@ import TranslateIcon from '@/icons/Translate.astro'
     '.check-lang'
   ) as HTMLInputElement
 
-  $hamburgerBtn.addEventListener('click', () => {
-    if ($langCheckbok.checked) {
-      $langCheckbok.checked = false
-      return
-    }
-  })
+  const $itemsLang = document.querySelectorAll('#lang-options li')
+  const $itemsNav = document.querySelectorAll('#nav-mobile li')
 
-  $toggleLangBtn.addEventListener('click', () => {
-    if ($hamburgerCheckbox.checked) {
-      $hamburgerCheckbox.checked = false
-      return
-    }
-  })
+  // close nav if other nav item is open
+  const onClickNav = (elem, checkbox) =>
+    elem.addEventListener('click', () => {
+      if (checkbox.checked) {
+        checkbox.checked = false
+        return
+      }
+    })
+  onClickNav($toggleLangBtn, $hamburgerCheckbox)
+  onClickNav($hamburgerBtn, $langCheckbok)
+
+  // close nav when click on nav item
+  const onClickNavItem = (btn, checkbok) =>
+    btn.forEach((item) => {
+      item.addEventListener('click', () => {
+        checkbok.checked = false
+      })
+    })
+  onClickNavItem($itemsLang, $langCheckbok)
+  onClickNavItem($itemsNav, $hamburgerCheckbox)
 </script>
