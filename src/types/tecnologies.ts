@@ -13,3 +13,6 @@ export type Tecnologies =
   | 'SQLite'
   | 'HTML'
   | 'JavaScript'
+  | 'Git'
+  | 'mySQL'
+  | 'Lua'
