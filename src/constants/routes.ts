@@ -3,13 +3,13 @@ export const ROUTES = {
     path: '/#top',
     name: 'Inicio'
   },
-  aboutMe: {
-    path: '/#about-me',
-    name: 'Sobre mí'
-  },
   portfolio: {
     path: '/#portfolio',
     name: 'Portafolio'
+  },
+  aboutMe: {
+    path: '/#about-me',
+    name: 'Sobre mí'
   },
   contact: {
     path: '/#contact',

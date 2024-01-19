@@ -37,18 +37,6 @@ import TranslateIcon from '@/icons/Translate.astro'
     <li class='size-full'>
       <a
         class='text-cWhite hover:text-cBlue transition-colors duration-300 ease-in h-full w-full flex flex-col place-items-center gap-2'
-        aria-label={ROUTES.aboutMe.name}
-        href={ROUTES.aboutMe.path}
-      >
-        <div class='size-6'>
-          <UserIcon />
-        </div>
-        {ROUTES.aboutMe.name}
-      </a>
-    </li>
-    <li class='size-full'>
-      <a
-        class='text-cWhite hover:text-cBlue transition-colors duration-300 ease-in h-full w-full flex flex-col place-items-center gap-2'
         aria-label={ROUTES.portfolio.name}
         href={ROUTES.portfolio.path}
       >
@@ -56,6 +44,18 @@ import TranslateIcon from '@/icons/Translate.astro'
           <PortfolioIcon />
         </div>
         {ROUTES.portfolio.name}
+      </a>
+    </li>
+    <li class='size-full'>
+      <a
+        class='text-cWhite hover:text-cBlue transition-colors duration-300 ease-in h-full w-full flex flex-col place-items-center gap-2'
+        aria-label={ROUTES.aboutMe.name}
+        href={ROUTES.aboutMe.path}
+      >
+        <div class='size-6'>
+          <UserIcon />
+        </div>
+        {ROUTES.aboutMe.name}
       </a>
     </li>
     <li class='size-full'>
