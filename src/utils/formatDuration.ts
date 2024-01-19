@@ -1,6 +1,7 @@
 interface DurationOptions {
   startDate: Date | string
   endDate?: Date | string
+  locale: 'es' | 'en'
 }
 
 /**
@@ -16,7 +17,11 @@ interface DurationOptions {
  * @param {DurationOptions} options - The options for formatting the duration.
  * @returns {string} - The formatted duration string.
  */
-export const formatDuration = (options: DurationOptions): string => {
+export const formatDuration = ({
+  startDate,
+  endDate,
+  locale = 'es'
+}: DurationOptions): string => {
   /**
    * Convert a string or Date to a Date object.
    * @param {Date | string} date - The date to be converted.
@@ -26,26 +31,29 @@ export const formatDuration = (options: DurationOptions): string => {
     return typeof date === 'string' ? new Date(date) : date
   }
 
-  const startDate = toDate(options.startDate)
-  const endDate = options.endDate ? toDate(options.endDate) : undefined
+  const startDateP = toDate(startDate)
+  const endDateP = endDate ? toDate(endDate) : undefined
 
-  const startMonth = new Intl.DateTimeFormat('en-US', {
+  const startMonth = new Intl.DateTimeFormat(`${locale}-US`, {
     month: 'short'
-  }).format(startDate)
-  const startYear = startDate.getFullYear()
+  }).format(startDateP)
 
-  if (endDate) {
-    const endMonth = new Intl.DateTimeFormat('en-US', {
+  const startYear = startDateP.getFullYear()
+
+  const translateCurrently = locale === 'es' ? 'Actualmente' : 'Currently'
+
+  if (endDateP) {
+    const endMonth = new Intl.DateTimeFormat(`${locale}-US`, {
       month: 'short'
-    }).format(endDate)
-    const endYear = endDate.getFullYear()
+    }).format(startDateP)
+    const endYear = startDateP.getFullYear()
 
     if (startMonth === endMonth && startYear === endYear) {
-      return `${startMonth}. ${startYear} - Present`
+      return `${startMonth}. ${startYear} - ${translateCurrently}`
     } else {
       return `${startMonth}. ${startYear} - ${endMonth}. ${endYear}`
     }
   } else {
-    return `${startMonth}. ${startYear} - Present`
+    return `${startMonth}. ${startYear} - ${translateCurrently}`
   }
 }

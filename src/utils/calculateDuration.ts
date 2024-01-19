@@ -4,7 +4,13 @@
  * @param {Date | string} startDate - The start date of the duration.
  * @returns {string} - The formatted duration string.
  */
-export const calculateDuration = (startDate: Date | string): string => {
+export const calculateDuration = ({
+  startDate,
+  locale = 'es'
+}: {
+  startDate: Date | string
+  locale: 'en' | 'es'
+}): string => {
   /**
    * Convert a string or Date to a Date object.
    * @param {Date | string} date - The date to be converted.
@@ -13,6 +19,11 @@ export const calculateDuration = (startDate: Date | string): string => {
   const toDate = (date: Date | string): Date => {
     return typeof date === 'string' ? new Date(date) : date
   }
+
+  const translateMonth = locale === 'es' ? 'mes' : 'month'
+  const translateYear = locale === 'es' ? 'año' : 'year'
+  const translateMonths = locale === 'es' ? 'meses' : 'months'
+  const translateYears = locale === 'es' ? 'años' : 'years'
 
   const startDateObject = toDate(startDate)
   const currentDate = new Date()
@@ -23,10 +34,12 @@ export const calculateDuration = (startDate: Date | string): string => {
   if (monthDifference >= 12) {
     const years = Math.floor(monthDifference / 12)
     const months = monthDifference % 12
-    return `${years} ${years === 1 ? 'year' : 'years'} ${months} ${
-      months === 1 ? 'month' : 'months'
-    }`
+    return `${years} ${
+      years === 1 ? translateYear : translateYears
+    } ${months} ${months === 1 ? translateMonth : translateMonths}`
   } else {
-    return `${monthDifference} ${monthDifference === 1 ? 'month' : 'months'}`
+    return `${monthDifference} ${
+      monthDifference === 1 ? translateMonth : translateMonths
+    }`
   }
 }
