@@ -3,7 +3,7 @@ import type { iProject } from '@/types/project'
 export const works: iProject[] = [
   {
     title: 'Qantto.io',
-    description: 'Landing page for quote services online.',
+    description: 'Landing page para cotizador de servicios online.',
     descriptionEn: 'Landing page for quote services online.',
     url: 'https://qantto.io/',
     tags: ['Astro', 'TypeScript', 'Tailwind CSS', 'Figma', 'React']
