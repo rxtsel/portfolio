@@ -9,10 +9,11 @@ export interface Props {
 const { team } = Astro.props
 const { currentLocale } = Astro
 const teamTranslation = currentLocale === 'es' ? 'Equipo' : 'Team'
-const titleLabel = currentLocale === 'es' ? 'Miembros del equipo' : 'Team members'
+const titleLabel =
+  currentLocale === 'es' ? 'Miembros del equipo' : 'Team members'
 ---
 
-<div class="relative size-6 popover-content">
+<div class='relative size-6 popover-content'>
   <label
     class='popover-team hover:text-cBlue order-1 text-cWhite transition-colors duration-300 ease-in size-6 cursor-pointer'
     aria-label='Team members'
@@ -26,22 +27,24 @@ const titleLabel = currentLocale === 'es' ? 'Miembros del equipo' : 'Team member
     id='popover-team-options'
     class='text-cWhite grid place-content-start absolute transform right-0 lg:left-0 mx-auto w-max p-2 rounded-md bg-cPaper shadow-2xl z-10'
   >
-    <p class="font-bold text-cAccent">{teamTranslation}</p>
-    {team.sort((a, b) => a.localeCompare(b)).map(member => (
-      <a
-        class={`text-cWhite hover:text-cBlue rounded transition-colors duration-300 ease-in  flex place-items-center gap-2 size-full z-10 group space-x-1 flex items-center hover:bg-cBlack px-4 py-2`}
-        href={`https://github.com/${member}`}
-        aria-label={`Member ${member}`}
-        target="_blank" 
-      >
-        @{member}
-
-        <div class='size-3 inline-block text-cAccent transition-all duration-300 ease-in group-hover:-translate-y-[1px] group-hover:translate-x-[1px] group-hover:text-cBlue'>
-          <ArrowTr />
-        </div>
-      </a>
-        
-    ))}
+    <p class='font-bold text-cAccent'>{teamTranslation}</p>
+    {
+      team
+        .sort((a, b) => a.localeCompare(b))
+        .map((member) => (
+          <a
+            class={`text-cWhite hover:text-cBlue rounded transition-colors duration-300 ease-in  flex place-items-center gap-2 size-full z-10 group space-x-1 flex items-center hover:bg-cBlack px-4 py-2`}
+            href={`https://github.com/${member}`}
+            aria-label={`Member ${member}`}
+            target='_blank'
+          >
+            @{member}
+            <div class='size-3 inline-block text-cAccent transition-all duration-300 ease-in group-hover:-translate-y-[1px] group-hover:translate-x-[1px] group-hover:text-cBlue'>
+              <ArrowTr />
+            </div>
+          </a>
+        ))
+    }
   </nav>
 </div>
 
@@ -79,9 +82,9 @@ const titleLabel = currentLocale === 'es' ? 'Miembros del equipo' : 'Team member
     '.check-popover-team'
   ) as HTMLInputElement
 
-  $langBtn.addEventListener('click', (e) => {
+  $langBtn.addEventListener('click', () => {
     if ($langCheckbox.checked) {
-      const handleClickOutside = (e) => {
+      const handleClickOutside = (e: MouseEvent) => {
         if (!e.target.closest('.popover-team')) {
           $langCheckbox.checked = false
           document.body.removeEventListener('click', handleClickOutside)

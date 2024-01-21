@@ -135,16 +135,19 @@ const colorWhenLangIsEs =
     '.check-lang-desktop'
   ) as HTMLInputElement
 
+  const handleClickOutside = (e: MouseEvent) => {
+    if (
+      !e.target.closest('.lang-btn-desktop') &&
+      !e.target.closest('.lang-desktop')
+    ) {
+      $langCheckbox.checked = false
+      document.body.removeEventListener('click', handleClickOutside)
+    }
+  }
+
   $langBtn.addEventListener('click', () => {
     if ($langCheckbox.checked) {
-      window.document.body.addEventListener('click', (e) => {
-        if (
-          !e.target.closest('.lang-btn-desktop') &&
-          !e.target.closest('.lang-desktop')
-        ) {
-          $langCheckbox.checked = false
-        }
-      })
+      document.body.addEventListener('click', handleClickOutside)
     }
   })
 </script>
