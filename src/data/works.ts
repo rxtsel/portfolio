@@ -13,7 +13,17 @@ export const works: iProject[] = [
     description: 'Panel de control para gestionar los servicios de Qantto.io.',
     descriptionEn: 'Dashboard to manage Qantto.io services.',
     url: 'https://app.qantto.io/',
-    tags: ['Next.js', 'TypeScript', 'MUI']
+    tags: [
+      'Next.js',
+      'TypeScript',
+      'MUI',
+      'Django',
+      'PostgreSQL',
+      'AWS',
+      'Stripe',
+      'Redis'
+    ],
+    team: ['rxtsel', 'DongnutLa', 'andergcp', 'AlejoCasti']
   },
   {
     title: 'Isarte Portafolio',
