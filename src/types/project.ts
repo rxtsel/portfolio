@@ -8,4 +8,5 @@ export interface iProject {
   url?: string
   gh?: string
   tags?: Tecnologies[]
+  team?: string[]
 }

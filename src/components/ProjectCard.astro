@@ -3,6 +3,7 @@ import type { iProject } from '@/types'
 import ArrowTr from '@/icons/ArrowTr.astro'
 import Github from '@/icons/Github.astro'
 import Lock from '@/icons/Lock.astro'
+import Popover from '@/components/Popover.astro'
 
 export interface Props {
   props: iProject
@@ -14,7 +15,8 @@ const { currentLocale } = Astro
 const i18n = getI18N({ currentLocale })
 
 const { props } = Astro.props
-const { title, titleEn, url, gh, description, descriptionEn, tags } = props
+const { title, titleEn, url, gh, description, descriptionEn, tags, team } =
+  props
 
 // translations
 const titleT = titleEn && currentLocale === 'en' ? titleEn : title
@@ -27,18 +29,22 @@ const descriptionT = currentLocale === 'en' ? descriptionEn : description
       url ? (
         <a href={url} target='_blank' class='group text-xl font-medium'>
           <div class='flex items-center space-x-2 transition-colors duration-300 ease-in  hover:text-cBlue'>
-            <h3 class='capitalize'>{titleT}</h3>
+            <h3>{titleT}</h3>
             <div class='size-3 inline-block text-cAccent transition-all duration-300 ease-in group-hover:-translate-y-[1px] group-hover:translate-x-[1px] group-hover:text-cBlue'>
               <ArrowTr />
             </div>
           </div>
         </a>
       ) : (
-        <h3 class='text-xl font-medium capitalize'>{titleT}</h3>
+        <h3 class='text-xl font-medium'>{titleT}</h3>
       )
     }
 
     <div class='flex items-center space-x-3'>
+      <!-- Team -->
+      {team && <Popover team={team} />}
+
+      <!-- Github -->
       {
         gh ? (
           <a
@@ -46,6 +52,7 @@ const descriptionT = currentLocale === 'en' ? descriptionEn : description
             target='_blank'
             title={i18n.messages.repository}
             aria-label={i18n.messages.repository}
+            class='order-2'
           >
             <div class='text-cWhite transition-colors duration-300 ease-in hover:text-cBlue size-6'>
               <Github />
@@ -53,7 +60,7 @@ const descriptionT = currentLocale === 'en' ? descriptionEn : description
           </a>
         ) : (
           <div
-            class='text-cWhite transition-colors duration-300 ease-in hover:text-cBlue size-7'
+            class='order-2 text-cWhite transition-colors duration-300 ease-in hover:text-cBlue size-7'
             title={i18n.messages.private}
           >
             <Lock />
