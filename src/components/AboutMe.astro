@@ -20,7 +20,12 @@ const i18n = getI18N({ currentLocale })
     </p>
     <p class='text-pretty'>
       {i18n.aboutme.p3}
-      <a href={SOCIALS.twitter} class='text-cBlue'>twitter</a>
+      <a
+        href={SOCIALS.twitter}
+        aria-label='twitter profile'
+        class='text-cWhite hover:text-cBlue transition-colors duration-300 ease-in'
+        >twitter</a
+      >
       {i18n.aboutme.p4}
     </p>
   </article>
