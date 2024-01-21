@@ -11,13 +11,6 @@
 - [**Tailwind CSS**](https://tailwindcss.com/) - A utility-first CSS framework for rapidly building custom designs.
 - [**Iconoir**](https://iconoir.com/) with [**React-Symbols**](https://react-symbols.vercel.app/) - Beautifully crafted SVG icons & logos.
 
-I used:
-
-- [Figma](https://www.figma.com/) - For design.
-- [Astro](https://astro.build/) - For development.
-- [IconScout](https://iconscout.com/) - For icons.
-- [Simple Icons](https://simpleicons.org/) - For svgs.
-
 ## License
 
 - [Apache-2.0 license](https://github.com/rxtsel/portfolio/blob/main/LICENSE)
