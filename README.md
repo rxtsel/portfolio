@@ -2,7 +2,7 @@
 
 ### Results on Google Lighthouse:
 
-![image](https://user-images.githubusercontent.com/85462420/224804390-857f6f4f-71ac-4c50-9155-d1af53428fa2.png)
+![image](https://github.com/rxtsel/portfolio/assets/85462420/a2cba98c-d2de-464b-ac35-0dd21183df82)
 
 ## Stack
 
@@ -20,4 +20,4 @@ I used:
 
 ## License
 
-- [Apache-2.0 license]
+- [Apache-2.0 license](https://github.com/rxtsel/portfolio/blob/main/LICENSE)
