@@ -6,6 +6,7 @@ export const works: iProject[] = [
     description: 'Landing page para cotizador de servicios online.',
     descriptionEn: 'Landing page for quote services online.',
     url: 'https://qantto.io/',
+    gh: 'https://github.com/abouthernan/qantto',
     tags: ['Astro', 'TypeScript', 'Tailwind CSS', 'Figma', 'React']
   },
   {
@@ -33,6 +34,7 @@ export const works: iProject[] = [
     descriptionEn:
       'Discover the trajectory, works, exhibitions and awards of a Colombian artist.',
     url: 'https://isabelrengifo.art/',
+    gh: 'https://github.com/abouthernan/isarte',
     tags: ['Astro', 'CSS']
   },
   {
@@ -41,6 +43,7 @@ export const works: iProject[] = [
     description: 'Diseño y desarrollo de sitio web para agencia.',
     descriptionEn: 'Design and development of website for agency.',
     url: 'https://vehement.co/',
+    gh: 'https://github.com/abouthernan/vehement',
     tags: ['Astro', 'CSS', 'Figma', 'React']
   },
   {
@@ -50,6 +53,7 @@ export const works: iProject[] = [
     descriptionEn:
       'Website for Colombian writer, providing a control panel to manage all the information on the website.',
     url: 'https://mariaaliciacabrera.com/',
+    gh: 'https://github.com/abouthernan/maria-alicia-cabrera',
     tags: ['Astro', 'CSS', 'Strapi']
   }
 ]
