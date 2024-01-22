@@ -5,8 +5,9 @@
     "keywords": "desarrollador web, diseñador web, colombia, html, css, javascript, diseño responsivo, frameworks, adobe creative suite, experiencia de usuario (ux), optimización de motores de búsqueda (seo), wordpress, ecommerce, desarrollo de aplicaciones web, desarrollo móvil, tecnologías web emergentes, cristhian melo, rxtsel, rxtsel.dev, programador, frontend, frontend developer, web dev"
   },
   "messages": {
-    "private": "Privado",
-    "repository": "Repositorio"
+    "private": "Repositorio Privado",
+    "repository": "Repositorio",
+    "languages": "Lenguajes"
   },
   "nav": {
     "home": "Inicio",
