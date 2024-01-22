@@ -6,7 +6,8 @@
   },
   "messages": {
     "private": "Repositorio Privado",
-    "repository": "Repositorio"
+    "repository": "Repositorio",
+    "languages": "Lenguajes"
   },
   "nav": {
     "home": "Inicio",
