@@ -1,10 +1,12 @@
 ---
+import type { TMetatags } from '@/types'
 interface Props {
-  metaFor: 'Base' | 'Blog'
+  metaFor: TMetatags
 }
 
 import MetaBase from '@/components/MetaBase.astro'
 import MetaBlog from '@/components/MetaBlog.astro'
+import MetaPost from '@/components/MetaPost.astro'
 
 const { metaFor } = Astro.props
 ---
@@ -12,7 +14,9 @@ const { metaFor } = Astro.props
 <meta name='author' content='Cristhian Melo' />
 <meta name='copyright' content='Cristhian Melo' />
 
-{metaFor === 'Base' ? <MetaBase /> : <MetaBlog />}
+{metaFor === 'Base' && <MetaBase />}
+{metaFor === 'Blog' && <MetaBlog />}
+{metaFor === 'Post' && <MetaPost />}
 
 <!-- WPA	 -->
 <link rel='icon' type='image/svg+xml' href='/16x16.svg' sizes='16x16' />
