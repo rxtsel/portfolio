@@ -1,0 +1,65 @@
+---
+import Layout from '@/layouts/Layout.astro'
+import Header from '@/components/Header.astro'
+import Post from '@/components/Post.astro'
+import Footer from '@/components/Footer.astro'
+import { getCollection } from 'astro:content'
+
+const allPosts = await getCollection('blog')
+const noDrafts = allPosts.filter((post) => !post.data.draft)
+const formattedPosts = noDrafts.sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+)
+---
+
+<Layout title='Cristhian Melo · Blog' metaFor='Blog'>
+  <Header />
+
+  <main class='max-w-4xl py-20 lg:pb-10 sm:py-44 mx-auto px-2'>
+    <h1
+      class='text-cWhite text-[clamp(1.875rem,2vw+1rem,5rem)] font-bold flex flex-col leading-none mb-10'
+    >
+      Blog
+    </h1>
+
+    {
+      formattedPosts.length === 0 ? (
+        <h2 class='text-cWhite text-[clamp(1.875rem,2vw+1rem,4rem)] font-bold leading-none mb-10 text-center min-h-[calc(100dvh-37dvh)] grid place-items-center'>
+          No posts yet. 🥲
+        </h2>
+      ) : (
+        <ul>
+          {formattedPosts.map((post) => (
+            <li>
+              <Post
+                title={post.data.title}
+                description={post.data.description}
+                date={post.data.pubDate}
+                url={`/blog/${post.slug}`}
+              />
+            </li>
+          ))}
+        </ul>
+      )
+    }
+  </main>
+  <Footer />
+</Layout>
+
+<style>
+  .line::after {
+    position: absolute;
+    content: url('/subline.webp');
+    height: 10px;
+    width: 100%;
+    top: 30px;
+    left: 0px;
+  }
+
+  @media (width >= 1024px) {
+    .line::after {
+      top: 35px;
+      left: 40px;
+    }
+  }
+</style>
