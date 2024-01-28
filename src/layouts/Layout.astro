@@ -1,31 +1,27 @@
 ---
+import type { TMetatags } from '@/types'
 export interface Props {
   title: string
+  metaFor: TMetatags
 }
 
-import Metatags from '@/components/Metatags.astro'
-import Analitycs from '@/components/Analitycs.astro'
-import { ViewTransitions } from 'astro:transitions'
+import Head from '@/components/Head.astro'
 
-const { title } = Astro.props
+const { title, metaFor } = Astro.props
 const { currentLocale } = Astro
+
+const bgHero =
+  metaFor === 'Base'
+    ? 'absolute w-full h-screen bottom-0 left-0 right-0 top-0 bg-[linear-gradient(to_right,#4f4f4f2e_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f2e_1px,transparent_1px)] bg-[size:40px_40px] md:bg-[size:50px_50px] lg:bg-[size:70px_70px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] -z-10'
+    : 'absolute top-0 z-[-2] h-screen w-full bg-transparent bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(0,68,149,0.1),rgba(255,255,255,0))]'
 ---
 
 <!doctype html>
 <html lang={currentLocale}>
-  <head>
-    <meta charset='UTF-8' />
-    <meta name='viewport' content='width=device-width' />
-    <title>{title}</title>
-    <Metatags metaFor='Base' />
-    <Analitycs />
-    <ViewTransitions />
-  </head>
+  <Head title={title} metaFor={metaFor} />
+
   <body class='antialiased relative bg-cBlack'>
-    <div
-      class='absolute w-full h-screen bottom-0 left-0 right-0 top-0 bg-[linear-gradient(to_right,#4f4f4f2e_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f2e_1px,transparent_1px)] bg-[size:40px_40px] md:bg-[size:50px_50px] lg:bg-[size:70px_70px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] -z-10'
-    >
-    </div>
+    <div class={bgHero}></div>
     <slot />
   </body>
 </html>
