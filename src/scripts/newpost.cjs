@@ -52,7 +52,9 @@ rl.on('close', () => {
     postData['fileName'] =
       `${digitsInDate[1]}${digitsInDate[2]}${digitsInDate[3]}-${slug}.md`
   } else {
-    console.error('Error getting digits from date. Using default values.')
+    console.error(
+      '\n\x1b[31mError getting digits from date. Using default values.\x1b[0m'
+    )
     postData['fileName'] =
       `draft-${Math.floor(Math.random() * 10000000)}-default.md`
   }
@@ -75,7 +77,7 @@ rl.on('close', () => {
 
   try {
     fs.statSync(`src/content/blog/${postData.fileName}`)
-    console.error('\nError!: The post has already been created')
+    console.error('\n\x1b[31mERROR: The post has already been created.\x1b[0m')
   } catch (err) {
     fs.writeFileSync(
       `src/content/blog/${postData.fileName}`,
@@ -90,7 +92,9 @@ tags: ["all"]
 author: '["${postData.author}"]'
 ---\n\nEnter your content here...`
     )
-    console.info(`\nSuccess!!: content/blog/${postData.fileName} was created`)
+    console.info(
+      `\n\x1b[32m\nSUCCESS!!: content/blog/${postData.fileName} was created\x1b[0m`
+    )
   }
 })
 
