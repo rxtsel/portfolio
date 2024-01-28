@@ -3,21 +3,20 @@ export interface Props {
   title: string
 }
 
-import Metatags from '@/components/Metatags.astro'
 import Analitycs from '@/components/Analitycs.astro'
+import Metatags from '@/components/Metatags.astro'
 import { ViewTransitions } from 'astro:transitions'
 
 const { title } = Astro.props
-const { currentLocale } = Astro
 ---
 
 <!doctype html>
-<html lang={currentLocale}>
+<html lang='es'>
   <head>
     <meta charset='UTF-8' />
     <meta name='viewport' content='width=device-width' />
     <title>{title}</title>
-    <Metatags metaFor='Base' />
+    <Metatags metaFor='Blog' />
     <Analitycs />
     <ViewTransitions />
   </head>
