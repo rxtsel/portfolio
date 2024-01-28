@@ -26,80 +26,112 @@ const textToSlug = (text) => {
   )
 }
 
-const rl = readline.Interface({
+const rl = readline.createInterface({
   input: process.stdin,
   output: process.stdout
 })
 
-console.info('Welcome to command line interface to creating new post!\n')
+console.info('Welcome to the command line interface for creating a new post!\n')
 
 const postData = {}
-let finish = false
+let currentQuestion = 1
+let fileName
+let fullFileName
 
-rl.question('Post title: ', (answer1) => {
-  postData['title'] = answer1
-  finish = true
-  rl.close()
-})
+// Function to ask a question based on the current question number
+const askQuestion = () => {
+  switch (currentQuestion) {
+    case 1:
+      rl.question('Post title: ', (answer1) => {
+        postData['title'] = answer1
+        currentQuestion++
+        askQuestion()
+      })
+      break
+    case 2:
+      // Logic to check if the file already exists
+      const slug = textToSlug(postData.title)
+      const now = new Date()
+      const regexDigitsInDate = /([0-9]{2})/g
+      const digitsInDate = now.toISOString().match(regexDigitsInDate)
 
-rl.on('close', () => {
-  const now = new Date()
-  const regexDigitsInDate = /([0-9]{2})/g
-  const digitsInDate = now.toISOString().match(regexDigitsInDate)
-  const slug = textToSlug(postData.title)
+      if (digitsInDate) {
+        fileName = `${digitsInDate[1]}${digitsInDate[2]}${digitsInDate[3]}-${slug}.md`
+      } else {
+        console.error(
+          '\n\x1b[31mError getting digits from date. Using default values.\x1b[0m'
+        )
+        fileName = `draft-${Math.floor(Math.random() * 10000000)}-default.md`
+      }
 
-  if (digitsInDate) {
-    postData['fileName'] =
-      `${digitsInDate[1]}${digitsInDate[2]}${digitsInDate[3]}-${slug}.md`
-  } else {
-    console.error(
-      '\n\x1b[31mError getting digits from date. Using default values.\x1b[0m'
-    )
-    postData['fileName'] =
-      `draft-${Math.floor(Math.random() * 10000000)}-default.md`
+      fullFileName = `src/content/blog/${fileName}`
+
+      postData['date'] = now.toISOString()
+
+      // Get the author name from git config
+      try {
+        postData['author'] = exec('git config --get user.name')
+          .toString()
+          .slice(0, -1)
+      } catch (err) {
+        postData['author'] = ''
+      }
+
+      try {
+        fs.statSync(fullFileName)
+        // Display an error message if the post has already been created
+        console.error(
+          '\n\x1b[31mERROR: The post has already been created.\x1b[0m'
+        )
+        rl.close()
+      } catch (err) {
+        rl.question('Is Draft (N/y): ', (answer2) => {
+          postData['draft'] = answer2.trim().toLowerCase() === 'y'
+          currentQuestion++
+          askQuestion()
+        })
+      }
+      break
+    case 3:
+      rl.question('Enter a description: ', (answer3) => {
+        postData['description'] = answer3
+        currentQuestion++
+        askQuestion()
+      })
+      break
+    default:
+      // Continue with the rest of the code for creating the post
+      rl.close()
+      createPost()
+      break
   }
+}
 
-  postData['date'] = now.toISOString()
-
+// Function to create the post
+const createPost = () => {
   try {
-    postData['author'] = exec('git config --get user.name')
-      .toString()
-      .slice(0, -1)
-  } catch (err) {
-    postData['author'] = ''
-  }
-
-  try {
+    // Create the 'blog' directory if it doesn't exist
     fs.statSync(`src/content/blog`)
   } catch (err) {
     fs.mkdirSync(`src/content/blog`)
   }
 
-  try {
-    fs.statSync(`src/content/blog/${postData.fileName}`)
-    console.error('\n\x1b[31mERROR: The post has already been created.\x1b[0m')
-  } catch (err) {
-    fs.writeFileSync(
-      `src/content/blog/${postData.fileName}`,
-      `---
+  // Write the post content to the file
+  fs.writeFileSync(
+    fullFileName,
+    `---
 title: '${postData.title}'
-draft: true
-description: ''
+draft: ${postData.draft}
+description: '${postData.description}'
 pubDate: '${postData.date}'
 heroImage: ''
 categories: ["all"]
 tags: ["all"]
 author: '["${postData.author}"]'
 ---\n\nEnter your content here...`
-    )
-    console.info(
-      `\n\x1b[32m\nSUCCESS!!: content/blog/${postData.fileName} was created\x1b[0m`
-    )
-  }
-})
+  )
 
-rl.on('SIGINT', () => rl.pause())
+  console.info(`\n\x1b[32m\nSUCCESS!!: ${fileName} was created\x1b[0m`)
+}
 
-rl.on('pause', () => {
-  if (!finish) console.log('\nBye!\n')
-})
+askQuestion()
