@@ -4,6 +4,15 @@ import tailwind from '@astrojs/tailwind'
 import expressiveCode from 'astro-expressive-code'
 import mdx from '@astrojs/mdx'
 
+// Mdx plugins
+import rehypeExternalLinks from 'rehype-external-links'
+
+/** @type {import('rehype-external-links').Options} */
+const externalLinksOptions = {
+  target: '_blank',
+  rel: ['noopener', 'noreferrer']
+}
+
 // https://astro.build/config
 export default defineConfig({
   base: '/',
@@ -32,8 +41,13 @@ export default defineConfig({
         borderRadius: '0.375rem'
       }
     }),
-    mdx()
+    mdx({
+      rehypePlugins: [[rehypeExternalLinks, externalLinksOptions]]
+    })
   ],
+  markdown: {
+    rehypePlugins: [[rehypeExternalLinks, externalLinksOptions]]
+  },
   i18n: {
     defaultLocale: 'es',
     locales: ['es', 'en'],
