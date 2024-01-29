@@ -1,4 +1,8 @@
 ---
+interface Props {
+  trailingSlash: string
+}
+
 import { ROUTES, LANGUAGES } from '@/constants/routes'
 import Logo from '@/icons/Logo.astro'
 import HomeIcon from '@/icons/Home.astro'
@@ -11,11 +15,16 @@ const { currentLocale } = Astro
 
 const colorWhenLangIsEn = currentLocale === 'en' ? 'text-cBlue' : 'text-cWhite'
 const colorWhenLangIsEs = currentLocale === 'es' ? 'text-cBlue' : 'text-cWhite'
+
+// add slash before path if stay in blog page
+const { trailingSlash } = Astro.props
+
+const slash = trailingSlash ? '/' : ''
 ---
 
 <nav class='flex w-full max-w-6xl mx-auto items-center justify-between'>
   <a
-    href={ROUTES.home.path}
+    href={slash + ROUTES.home.path}
     class='h-10 w-10 flex-grow max-w-16 order-2'
     aria-label='logo of the website rxtel.dev'
   >
@@ -29,7 +38,7 @@ const colorWhenLangIsEs = currentLocale === 'es' ? 'text-cBlue' : 'text-cWhite'
     <li class='size-full z-10'>
       <a
         class='text-cWhite hover:text-cBlue transition-colors duration-300 ease-in h-full w-full flex flex-col place-items-center gap-2'
-        href={ROUTES.home.path}
+        href={slash + ROUTES.home.path}
         aria-label={currentLocale === 'en'
           ? ROUTES.home.nameEn
           : ROUTES.home.name}
@@ -47,7 +56,7 @@ const colorWhenLangIsEs = currentLocale === 'es' ? 'text-cBlue' : 'text-cWhite'
         aria-label={currentLocale === 'en'
           ? ROUTES.portfolio.nameEn
           : ROUTES.portfolio.name}
-        href={ROUTES.portfolio.path}
+        href={slash + ROUTES.portfolio.path}
       >
         <div class='size-6'>
           <PortfolioIcon />
@@ -65,7 +74,7 @@ const colorWhenLangIsEs = currentLocale === 'es' ? 'text-cBlue' : 'text-cWhite'
         aria-label={currentLocale === 'en'
           ? ROUTES.aboutMe.nameEn
           : ROUTES.aboutMe.name}
-        href={ROUTES.aboutMe.path}
+        href={slash + ROUTES.aboutMe.path}
       >
         <div class='size-6'>
           <UserIcon />
@@ -79,7 +88,7 @@ const colorWhenLangIsEs = currentLocale === 'es' ? 'text-cBlue' : 'text-cWhite'
         aria-label={currentLocale === 'en'
           ? ROUTES.blog.nameEn
           : ROUTES.blog.name}
-        href={ROUTES.blog.path}
+        href={slash + ROUTES.blog.path}
       >
         <div class='size-6'>
           <Blog />
