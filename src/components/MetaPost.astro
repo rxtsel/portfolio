@@ -1,31 +1,37 @@
 ---
+import type { Data } from '@/types'
+
 interface Props {
-  title: string
-  description: string
-  image: string
-  keywords: string
+  postData: Partial<Data>
+  slug: string
 }
+
+const { postData, slug } = Astro.props
+const { title, description, keywords } = postData
+const baseUrl =
+  import.meta.env.MODE === 'development'
+    ? 'http://localhost:4321'
+    : import.meta.env.SITE
+const url = `${baseUrl}/blog/${slug}`
+const ogImage = `${baseUrl}/blog/${slug}/og.png`
 ---
 
-<meta name='keywords' content={'post'} />
+<meta name='keywords' content={keywords} />
 <!-- Primary Meta Tags -->
-<meta name='title' content={'post'} />
-<meta name='description' content={'post'} />
+<meta name='title' content={title} />
+<meta name='description' content={description} />
 <!-- Open Graph / Facebook -->
-<meta property='og:type' content='website' />
-<meta property='og:url' content='https://www.rxtsel.dev' />
-<meta property='og:title' content={'post'} />
-<meta property='og:description' content={'post'} />
-<meta
-  property='og:image'
-  content='https://www.rxtsel.dev/meta_tags_large_icon.png'
-/>
+<meta property='og:type' content='article' />
+<meta property='og:url' content={url} />
+<meta property='og:title' content={title} />
+<meta property='og:description' content={description} />
+<meta property='og:image' content={ogImage} />
 <!-- Twitter -->
 <meta property='twitter:card' content='summary_large_image' />
-<meta property='twitter:url' content='https://www.rxtsel.dev' />
-<meta property='twitter:title' content={'post'} />
-<meta property='twitter:description' content={'post'} />
-<meta
-  property='twitter:image'
-  content='https://www.rxtsel.dev/meta_tags_large_icon.png'
-/>
+<meta property='twitter:url' content={url} />
+<meta property='twitter:title' content={title} />
+<meta property='twitter:description' content={description} />
+<meta property='twitter:image' content={ogImage} />
+
+<!-- <link rel='alternate' hreflang='es' href='https://rxtsel.dev/blog/' /> -->
+<!-- <link rel='alternate' hreflang='en' href='https://rxtsel.dev/en/blog/' /> -->
