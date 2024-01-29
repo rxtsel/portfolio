@@ -73,4 +73,11 @@ const { Content } = await post.render()
   .content .expressive-code {
     @apply my-10;
   }
+
+  @media (width <= 768px) {
+    .content .expressive-code .copy button {
+      width: 1.7rem!important;
+      height: 1.7rem!important;
+    }
+  }
 </style>
