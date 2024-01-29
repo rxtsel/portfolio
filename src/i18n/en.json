@@ -61,6 +61,7 @@
     "cta": "Go back to home."
   },
   "blog": {
-    "latestPosts": "Latest Posts"
+    "latestPosts": "Latest Posts",
+    "description": "Articles about web development, technology and productivity."
   }
 }

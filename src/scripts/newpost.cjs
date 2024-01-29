@@ -118,10 +118,11 @@ title: '${postData.title}'
 draft: ${postData.draft}
 description: '${postData.description}'
 pubDate: '${postData.date}'
-heroImage: ''
+cover: ''
 categories: ["all"]
 tags: ["all"]
-author: '["${postData.author}"]'
+author: ["${postData.author}"]
+keywords: ["rxtsel", "Cristhian Melo", "Blog"]
 ---\n\nEnter your content here...`
   )
 
