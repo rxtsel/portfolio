@@ -6,7 +6,7 @@ pubDate: '2024-01-29T14:58:19.163Z'
 heroImage: 'PWA.png'
 categories: ['Terminal', 'Neovim']
 tags: ['Terminal', 'Neovim']
-author: ['Cristhian Melo'],
+author: ['Cristhian Melo']
 keywords: 'rxtsel, Cristhian Melo, Blog'
 ---
 

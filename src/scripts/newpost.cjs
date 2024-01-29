@@ -121,7 +121,7 @@ pubDate: '${postData.date}'
 cover: ''
 categories: ["all"]
 tags: ["all"]
-author: ["${postData.author}"],
+author: ["${postData.author}"]
 keywords: ["rxtsel", "Cristhian Melo", "Blog"]
 ---\n\nEnter your content here...`
   )

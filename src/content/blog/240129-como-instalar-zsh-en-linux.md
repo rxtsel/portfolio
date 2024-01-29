@@ -6,7 +6,7 @@ pubDate: '2024-01-29T03:01:36.434Z'
 heroImage: 'PWA.png'
 categories: ['all', 'linux', 'terminal']
 tags: ['all', 'linux', 'terminal']
-author: ['Cristhian Melo'],
+author: ['Cristhian Melo']
 keywords: 'rxtsel, Cristhian Melo, Blog'
 ---
 
