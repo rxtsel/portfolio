@@ -1,0 +1,19 @@
+---
+export interface Props {
+  date: Date
+}
+const { date } = Astro.props
+const { currentLocale } = Astro
+
+const formatLang = currentLocale === 'en' ? 'en' : 'es'
+---
+
+<time datetime={date.toISOString()} class='text-neutral-400 text-sm'>
+  {
+    date.toLocaleDateString(`${formatLang}-us`, {
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric'
+    })
+  }
+</time>
