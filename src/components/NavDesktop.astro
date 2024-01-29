@@ -1,4 +1,8 @@
 ---
+interface Props {
+  trailingSlash: boolean
+}
+
 import { getI18N } from '@/i18n'
 import { LANGUAGES, ROUTES, SOCIALS } from '@/constants/routes'
 import Logo from '@/icons/Logo.astro'
@@ -14,11 +18,16 @@ const colorWhenLangIsEn =
   currentLocale === 'en' ? 'text-cBlue bg-cBlack' : 'text-cWhite'
 const colorWhenLangIsEs =
   currentLocale === 'es' ? 'text-cBlue bg-cBlack' : 'text-cWhite'
+
+// add slash before path if stay in blog page
+const { trailingSlash } = Astro.props
+
+const slash = trailingSlash ? '/' : ''
 ---
 
 <nav class='flex w-full max-w-6xl mx-auto items-center justify-between'>
   <a
-    href={ROUTES.home.path}
+    href={slash + ROUTES.home.path}
     class='h-16 w-16 flex-grow max-w-36'
     aria-label='logo of the website rxtel.dev'
   >
@@ -32,7 +41,11 @@ const colorWhenLangIsEs =
           <a
             class='text-cWhite hover:text-cBlue transition-colors duration-300 ease-in'
             aria-label={currentLocale === 'en' ? route.nameEn : route.name}
-            href={route.path}
+            href={
+              route.name.toLowerCase() !== 'blog'
+                ? slash + route.path
+                : route.path
+            }
           >
             {currentLocale === 'en' ? route.nameEn : route.name}
           </a>

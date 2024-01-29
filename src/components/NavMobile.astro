@@ -1,21 +1,30 @@
 ---
+interface Props {
+  trailingSlash: string
+}
+
 import { ROUTES, LANGUAGES } from '@/constants/routes'
 import Logo from '@/icons/Logo.astro'
 import HomeIcon from '@/icons/Home.astro'
 import UserIcon from '@/icons/User.astro'
 import PortfolioIcon from '@/icons/Portfolio.astro'
-import Message from '@/icons/Message.astro'
+import Blog from '@/icons/Blog.astro'
 import TranslateIcon from '@/icons/Translate.astro'
 
 const { currentLocale } = Astro
 
 const colorWhenLangIsEn = currentLocale === 'en' ? 'text-cBlue' : 'text-cWhite'
 const colorWhenLangIsEs = currentLocale === 'es' ? 'text-cBlue' : 'text-cWhite'
+
+// add slash before path if stay in blog page
+const { trailingSlash } = Astro.props
+
+const slash = trailingSlash ? '/' : ''
 ---
 
 <nav class='flex w-full max-w-6xl mx-auto items-center justify-between'>
   <a
-    href={ROUTES.home.path}
+    href={slash + ROUTES.home.path}
     class='h-10 w-10 flex-grow max-w-16 order-2'
     aria-label='logo of the website rxtel.dev'
   >
@@ -29,7 +38,7 @@ const colorWhenLangIsEs = currentLocale === 'es' ? 'text-cBlue' : 'text-cWhite'
     <li class='size-full z-10'>
       <a
         class='text-cWhite hover:text-cBlue transition-colors duration-300 ease-in h-full w-full flex flex-col place-items-center gap-2'
-        href={ROUTES.home.path}
+        href={slash + ROUTES.home.path}
         aria-label={currentLocale === 'en'
           ? ROUTES.home.nameEn
           : ROUTES.home.name}
@@ -47,7 +56,7 @@ const colorWhenLangIsEs = currentLocale === 'es' ? 'text-cBlue' : 'text-cWhite'
         aria-label={currentLocale === 'en'
           ? ROUTES.portfolio.nameEn
           : ROUTES.portfolio.name}
-        href={ROUTES.portfolio.path}
+        href={slash + ROUTES.portfolio.path}
       >
         <div class='size-6'>
           <PortfolioIcon />
@@ -65,7 +74,7 @@ const colorWhenLangIsEs = currentLocale === 'es' ? 'text-cBlue' : 'text-cWhite'
         aria-label={currentLocale === 'en'
           ? ROUTES.aboutMe.nameEn
           : ROUTES.aboutMe.name}
-        href={ROUTES.aboutMe.path}
+        href={slash + ROUTES.aboutMe.path}
       >
         <div class='size-6'>
           <UserIcon />
@@ -77,14 +86,14 @@ const colorWhenLangIsEs = currentLocale === 'es' ? 'text-cBlue' : 'text-cWhite'
       <a
         class='text-cWhite hover:text-cBlue transition-colors duration-300 ease-in h-full w-full flex flex-col place-items-center gap-2'
         aria-label={currentLocale === 'en'
-          ? ROUTES.contact.nameEn
-          : ROUTES.contact.name}
-        href={ROUTES.contact.path}
+          ? ROUTES.blog.nameEn
+          : ROUTES.blog.name}
+        href={slash + ROUTES.blog.path}
       >
         <div class='size-6'>
-          <Message />
+          <Blog />
         </div>
-        {currentLocale === 'en' ? ROUTES.contact.nameEn : ROUTES.contact.name}
+        {currentLocale === 'en' ? ROUTES.blog.nameEn : ROUTES.blog.name}
       </a>
     </li>
   </ul>
@@ -230,38 +239,40 @@ const colorWhenLangIsEs = currentLocale === 'es' ? 'text-cBlue' : 'text-cWhite'
 </style>
 
 <script>
-  const $hamburgerBtn = document.querySelector(
-    '.check-hamburger'
-  ) as HTMLInputElement
-  const $hamburgerCheckbox = document.querySelector(
-    '.check-hamburger'
-  ) as HTMLInputElement
-  const $toggleLangBtn = document.querySelector('.lang') as HTMLInputElement
-  const $langCheckbok = document.querySelector(
-    '.check-lang'
-  ) as HTMLInputElement
+  document.addEventListener('astro:page-load', () => {
+    const $hamburgerBtn = document.querySelector(
+      '.check-hamburger'
+    ) as HTMLInputElement
+    const $hamburgerCheckbox = document.querySelector(
+      '.check-hamburger'
+    ) as HTMLInputElement
+    const $toggleLangBtn = document.querySelector('.lang') as HTMLInputElement
+    const $langCheckbok = document.querySelector(
+      '.check-lang'
+    ) as HTMLInputElement
 
-  const $itemsLang = document.querySelectorAll('#lang-options li')
-  const $itemsNav = document.querySelectorAll('#nav-mobile li')
+    const $itemsLang = document.querySelectorAll('#lang-options li')
+    const $itemsNav = document.querySelectorAll('#nav-mobile li')
 
-  // close nav if other nav item is open
-  const onClickNav = (elem, checkbox) =>
-    elem.addEventListener('click', () => {
-      if (checkbox.checked) {
-        checkbox.checked = false
-        return
-      }
-    })
-  onClickNav($toggleLangBtn, $hamburgerCheckbox)
-  onClickNav($hamburgerBtn, $langCheckbok)
-
-  // close nav when click on nav item
-  const onClickNavItem = (btn, checkbok) =>
-    btn.forEach((item) => {
-      item.addEventListener('click', () => {
-        checkbok.checked = false
+    // close nav if other nav item is open
+    const onClickNav = (elem, checkbox) =>
+      elem.addEventListener('click', () => {
+        if (checkbox.checked) {
+          checkbox.checked = false
+          return
+        }
       })
-    })
-  onClickNavItem($itemsLang, $langCheckbok)
-  onClickNavItem($itemsNav, $hamburgerCheckbox)
+    onClickNav($toggleLangBtn, $hamburgerCheckbox)
+    onClickNav($hamburgerBtn, $langCheckbok)
+
+    // close nav when click on nav item
+    const onClickNavItem = (btn, checkbok) =>
+      btn.forEach((item) => {
+        item.addEventListener('click', () => {
+          checkbok.checked = false
+        })
+      })
+    onClickNavItem($itemsLang, $langCheckbok)
+    onClickNavItem($itemsNav, $hamburgerCheckbox)
+  })
 </script>

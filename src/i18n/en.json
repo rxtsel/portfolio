@@ -1,6 +1,6 @@
 {
   "site": {
-    "title": "Cristhian Melo - Software Developer",
+    "title": "Cristhian Melo · Software Developer",
     "description": "Specialized in Performance, SEO, and Accessibility. Firm believer in the importance of UX/UI design and how it can impact the user experience on a website.",
     "keywords": "web developer, web designer, colombia, html, css, javascript, responsive design, frameworks, adobe creative suite, user experience (ux), search engine optimization (seo), wordpress, ecommerce, web application development, mobile development, emerging web technologies, cristhian melo, rxtsel, rxtsel.dev, programmer, frontend, frontend developer, web dev"
   },
@@ -54,5 +54,13 @@
   "footer": {
     "p1": "Made with",
     "p2": "by"
+  },
+  "notFoundPage": {
+    "title": "Page not found",
+    "description": "The page you're looking for doesn't exist.",
+    "cta": "Go back to home."
+  },
+  "blog": {
+    "latestPosts": "Latest Posts"
   }
 }
