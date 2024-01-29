@@ -185,13 +185,6 @@ declare module 'astro:content' {
 
 	type ContentEntryMap = {
 		"blog": {
-"240129-how-to-add-light-dark-mode-in-next-js-13.md": {
-	id: "240129-how-to-add-light-dark-mode-in-next-js-13.md";
-  slug: "240129-how-to-add-light-dark-mode-in-next-js-13";
-  body: string;
-  collection: "blog";
-  data: InferEntrySchema<"blog">
-} & { render(): Render[".md"] };
 "example.md": {
 	id: "example.md";
   slug: "example";

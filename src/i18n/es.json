@@ -54,5 +54,10 @@
   "footer": {
     "p1": "Hecho con",
     "p2": "por"
+  },
+  "notFoundPage": {
+    "title": "Página no encontrada",
+    "description": "La página que estás buscando no existe.",
+    "cta": "Volver al inicio"
   }
 }
