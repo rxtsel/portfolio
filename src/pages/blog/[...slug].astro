@@ -1,0 +1,76 @@
+---
+import { type CollectionEntry, getCollection } from 'astro:content'
+
+import Layout from '@/layouts/Layout.astro'
+import { Code } from 'astro-expressive-code/components'
+import Header from '@/components/Header.astro'
+import Footer from '@/components/Footer.astro'
+import FormatDate from '@/components/FormatDate.astro'
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog')
+  return posts.map((post) => ({
+    params: { slug: post.slug },
+    props: post
+  }))
+}
+type Props = CollectionEntry<'blog'>
+
+const post = Astro.props
+const { title, description, date, url, pubDate, tags } = post.data
+const { Content } = await post.render()
+---
+
+<Layout title={`Blog · ${title}`} metaFor='Post'>
+  <Header />
+
+  <main class='mx-auto pt-10 sm:pt-44 max-w-4xl px-4 md:px-0 text-cWhite'>
+    <header class='pb-8'>
+      <h1
+        class='mb-2 text-4xl font-semibold pb-5'
+        transition:name={`post ${title}`}
+      >
+        {title}
+      </h1>
+      <p
+        class='text-xl
+        text-[#d1d5db]
+        font-medium'
+        transition:name={`post ${description}`}
+      >
+        {description}
+      </p>
+
+      <footer class='flex justify-between items-center'>
+        <div class='flex items-center gap-2 my-5 flex-wrap'>
+          {
+            tags.sort().map((tag: string) => (
+              <p
+                class='truncate capitalize rounded-md border border-neutral-800 bg-neutral-900 px-2 py-1 font-mono text-xs'
+                title={tag}
+              >
+                {tag}
+              </p>
+            ))
+          }
+        </div>
+
+        <FormatDate class='text-sm text-[#d1d5db]' date={pubDate} />
+      </footer>
+    </header>
+
+    <article
+      class='content prose prose-invert mt-8 max-w-none prose-h3:mb-0 prose-code:bg-transparent'
+    >
+      <Content components={{ pre: Code }} />
+    </article>
+  </main>
+
+  <Footer />
+</Layout>
+
+<style is:global>
+  .content .expressive-code {
+    @apply my-10;
+  }
+</style>
