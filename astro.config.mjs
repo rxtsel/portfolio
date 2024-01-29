@@ -1,13 +1,34 @@
 import { defineConfig } from 'astro/config'
 import sitemap from '@astrojs/sitemap'
 import tailwind from '@astrojs/tailwind'
+import expressiveCode from 'astro-expressive-code'
 import mdx from '@astrojs/mdx'
 
 // https://astro.build/config
 export default defineConfig({
   base: '/',
   site: 'https://rxtsel.dev',
-  integrations: [sitemap(), tailwind(), mdx()],
+  integrations: [
+    sitemap(),
+    tailwind(),
+    expressiveCode({
+      themes: ['github-dark', 'solarized-dark'],
+      styleOverrides: {
+        frames: {
+          shadowColor: 'transparent',
+          editorBackground: 'transparent',
+          editorTabBarBackground: '#262626',
+          editorTabBarBorderColor: 'transparent',
+          editorActiveTabBackground: '#1d1d1d',
+          editorActiveTabIndicatorTopColor: '#4895EF',
+          tooltipSuccessBackground: '#4895EF'
+        },
+        borderColor: '#262626',
+        borderRadius: '0.375rem'
+      }
+    }),
+    mdx()
+  ],
   i18n: {
     defaultLocale: 'es',
     locales: ['es', 'en'],
@@ -17,4 +38,3 @@ export default defineConfig({
   },
   trailingSlash: 'never'
 })
-
