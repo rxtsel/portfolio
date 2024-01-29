@@ -52,6 +52,9 @@ Yo tengo un plugin que me muestra en que modo estoy, pero si tu no lo tienes, pu
 | **zz**       | Centra el cursor en la pantalla                                |
 | **u**        | Deshacer cambios                                               |
 | **Ctrl + r** | Rehacer cambios                                                |
+| **:q**       | Salir de neovim                                                |
+| **:w**       | Guardar cambios                                                |
+| **:wq**      | Guardar cambios y salir de neovim                              |
 
 ### Navegación:
 
