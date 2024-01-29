@@ -185,6 +185,13 @@ declare module 'astro:content' {
 
 	type ContentEntryMap = {
 		"blog": {
+"240129-como-instalar-zsh-en-linux.md": {
+	id: "240129-como-instalar-zsh-en-linux.md";
+  slug: "240129-como-instalar-zsh-en-linux";
+  body: string;
+  collection: "blog";
+  data: InferEntrySchema<"blog">
+} & { render(): Render[".md"] };
 "example.md": {
 	id: "example.md";
   slug: "example";
