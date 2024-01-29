@@ -17,11 +17,15 @@ export async function getStaticPaths() {
 type Props = CollectionEntry<'blog'>
 
 const post = Astro.props
-const { title, description, pubDate, tags } = post.data
+const { title, description, pubDate, tags, keywords } = post.data
 const { Content } = await post.render()
 ---
 
-<Layout title={`Blog · ${title}`} metaFor='Post'>
+<Layout
+  title={`Blog · ${title}`}
+  metaFor='Post'
+  postData={post}
+>
   <Header />
 
   <main class='mx-auto pt-10 sm:pt-44 max-w-4xl px-4 md:px-0 text-cWhite'>
