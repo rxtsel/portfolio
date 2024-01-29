@@ -16,7 +16,7 @@ const { currentLocale } = Astro
 const i18n = getI18N({ currentLocale })
 ---
 
-<Layout title={i18n.site.title}>
+<Layout title={i18n.site.title} metaFor='Base'>
   <Header />
   <main class='w-full px-2 z-0'>
     <Hero />
