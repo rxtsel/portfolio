@@ -18,7 +18,7 @@ const i18n = getI18N({ currentLocale })
 ---
 
 <Section title={i18n.blog.latestPosts}>
-  <ul>
+  <ul class='grid gap-4'>
     {
       formattedPosts.slice(0, 3).map((post: Post) => (
         <li>

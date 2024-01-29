@@ -192,6 +192,13 @@ declare module 'astro:content' {
   collection: "blog";
   data: InferEntrySchema<"blog">
 } & { render(): Render[".md"] };
+"240129-how-to-install-arch-linux.md": {
+	id: "240129-how-to-install-arch-linux.md";
+  slug: "240129-how-to-install-arch-linux";
+  body: string;
+  collection: "blog";
+  data: InferEntrySchema<"blog">
+} & { render(): Render[".md"] };
 "example.md": {
 	id: "example.md";
   slug: "example";

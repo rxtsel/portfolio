@@ -30,7 +30,7 @@ const formattedPosts = noDrafts.sort(
           No posts yet. 🥲
         </h2>
       ) : (
-        <ul>
+        <ul class="grid gap-4">
           {formattedPosts.map((post) => (
             <li>
               <Post
