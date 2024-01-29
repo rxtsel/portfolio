@@ -20,8 +20,8 @@ const textToSlug = (text) => {
       .replace(/¿/gi, '')
       .replace(/!/gi, '')
       .replace(/¡/gi, '')
-      .replace(/ /g, '-')
-      .replace(/\./g, '-')
+      .replace(/[^a-zA-Z0-9ñ]/g, '-')
+      .replace(/-+/g, '-')
       .toLowerCase()
   )
 }
@@ -36,7 +36,7 @@ console.info('Welcome to the command line interface for creating a new post!\n')
 const postData = {}
 let currentQuestion = 1
 let fileName
-let fullFileName
+let fullPath
 
 // Function to ask a question based on the current question number
 const askQuestion = () => {
@@ -55,16 +55,9 @@ const askQuestion = () => {
       const regexDigitsInDate = /([0-9]{2})/g
       const digitsInDate = now.toISOString().match(regexDigitsInDate)
 
-      if (digitsInDate) {
-        fileName = `${digitsInDate[1]}${digitsInDate[2]}${digitsInDate[3]}-${slug}.md`
-      } else {
-        console.error(
-          '\n\x1b[31mError getting digits from date. Using default values.\x1b[0m'
-        )
-        fileName = `draft-${Math.floor(Math.random() * 10000000)}-default.md`
-      }
+      fileName = `${digitsInDate[1]}${digitsInDate[2]}${digitsInDate[3]}-${slug}.md`
 
-      fullFileName = `src/content/blog/${fileName}`
+      fullPath = `src/content/blog/${fileName}`
 
       postData['date'] = now.toISOString()
 
@@ -78,7 +71,7 @@ const askQuestion = () => {
       }
 
       try {
-        fs.statSync(fullFileName)
+        fs.statSync(fullPath)
         // Display an error message if the post has already been created
         console.error(
           '\n\x1b[31mERROR: The post has already been created.\x1b[0m'
@@ -111,14 +104,15 @@ const askQuestion = () => {
 const createPost = () => {
   try {
     // Create the 'blog' directory if it doesn't exist
-    fs.statSync(`src/content/blog`)
+    fs.statSync(`src/content/blog`, { recursive: true })
   } catch (err) {
-    fs.mkdirSync(`src/content/blog`)
+    rl.close()
+    return
   }
 
   // Write the post content to the file
   fs.writeFileSync(
-    fullFileName,
+    fullPath,
     `---
 title: '${postData.title}'
 draft: ${postData.draft}
