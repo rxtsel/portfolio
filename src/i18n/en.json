@@ -59,5 +59,8 @@
     "title": "Page not found",
     "description": "The page you're looking for doesn't exist.",
     "cta": "Go back to home."
+  },
+  "blog": {
+    "latestPosts": "Latest Posts"
   }
 }
