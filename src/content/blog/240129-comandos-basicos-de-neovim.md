@@ -3,7 +3,7 @@ title: 'Comandos básicos de Neovim'
 draft: false
 description: 'Aprende algunos comandos básicos para que uses en neovim.'
 pubDate: '2024-01-29T14:58:19.163Z'
-heroImage: ''
+heroImage: './PWA.png'
 categories: ['Terminal', 'Neovim']
 tags: ['Terminal', 'Neovim']
 author: '["Cristhian Melo"]'

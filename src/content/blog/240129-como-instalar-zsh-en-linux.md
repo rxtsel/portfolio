@@ -3,7 +3,7 @@ title: 'Cómo instalar zsh en linux'
 draft: false
 description: 'Instala y configura Zsh en tu sistema con estos simples pasos. Optimiza tu terminal con oh-my-zsh para una experiencia de línea de comandos mejorada.'
 pubDate: '2024-01-29T03:01:36.434Z'
-heroImage: ''
+heroImage: 'PWA.png'
 categories: ['all', 'linux', 'terminal']
 tags: ['all', 'linux', 'terminal']
 author: '["Cristhian Melo"]'
@@ -112,4 +112,3 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 - Reinicia tu terminal para aplicar los cambios.
 
 ¡Listo! Ahora tienes zsh instalado, configurado con oh-my-zsh, y tu terminal está lista para ser utilizada de manera eficiente.
-
