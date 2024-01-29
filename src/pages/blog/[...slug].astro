@@ -17,7 +17,7 @@ export async function getStaticPaths() {
 type Props = CollectionEntry<'blog'>
 
 const post = Astro.props
-const { title, description, date, url, pubDate, tags } = post.data
+const { title, description, pubDate, tags } = post.data
 const { Content } = await post.render()
 ---
 
@@ -55,7 +55,7 @@ const { Content } = await post.render()
           }
         </div>
 
-        <FormatDate class='text-sm text-[#d1d5db]' date={pubDate} />
+        <FormatDate date={pubDate} />
       </footer>
     </header>
 
@@ -76,8 +76,8 @@ const { Content } = await post.render()
 
   @media (width <= 768px) {
     .content .expressive-code .copy button {
-      width: 1.7rem!important;
-      height: 1.7rem!important;
+      width: 1.7rem !important;
+      height: 1.7rem !important;
     }
   }
 </style>
