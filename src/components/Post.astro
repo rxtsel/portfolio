@@ -1,0 +1,28 @@
+---
+import FormatDate from '@/components/FormatDate.astro'
+export interface PostProps {
+  title: string
+  description: string
+  date: string
+  url?: string
+}
+
+const { title, description, date, url } = Astro.props
+---
+
+<a href={url ? url : ''}>
+  <div
+    class='flex flex-col rounded-md border border-neutral-800 p-4 transition-all duration-300 ease-in hover:bg-neutral-800/40'
+  >
+    <h2
+      class='text-xl font-medium text-cWhite'
+      transition:name={`post ${title}`}
+    >
+      {title}
+    </h2>
+    <p class='my-2 text-cAccent'
+      transition:name={`post ${description}`}
+    >{description}</p>
+    <FormatDate date={date} />
+  </div>
+</a>
