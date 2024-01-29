@@ -239,38 +239,40 @@ const slash = trailingSlash ? '/' : ''
 </style>
 
 <script>
-  const $hamburgerBtn = document.querySelector(
-    '.check-hamburger'
-  ) as HTMLInputElement
-  const $hamburgerCheckbox = document.querySelector(
-    '.check-hamburger'
-  ) as HTMLInputElement
-  const $toggleLangBtn = document.querySelector('.lang') as HTMLInputElement
-  const $langCheckbok = document.querySelector(
-    '.check-lang'
-  ) as HTMLInputElement
+  document.addEventListener('astro:page-load', () => {
+    const $hamburgerBtn = document.querySelector(
+      '.check-hamburger'
+    ) as HTMLInputElement
+    const $hamburgerCheckbox = document.querySelector(
+      '.check-hamburger'
+    ) as HTMLInputElement
+    const $toggleLangBtn = document.querySelector('.lang') as HTMLInputElement
+    const $langCheckbok = document.querySelector(
+      '.check-lang'
+    ) as HTMLInputElement
 
-  const $itemsLang = document.querySelectorAll('#lang-options li')
-  const $itemsNav = document.querySelectorAll('#nav-mobile li')
+    const $itemsLang = document.querySelectorAll('#lang-options li')
+    const $itemsNav = document.querySelectorAll('#nav-mobile li')
 
-  // close nav if other nav item is open
-  const onClickNav = (elem, checkbox) =>
-    elem.addEventListener('click', () => {
-      if (checkbox.checked) {
-        checkbox.checked = false
-        return
-      }
-    })
-  onClickNav($toggleLangBtn, $hamburgerCheckbox)
-  onClickNav($hamburgerBtn, $langCheckbok)
-
-  // close nav when click on nav item
-  const onClickNavItem = (btn, checkbok) =>
-    btn.forEach((item) => {
-      item.addEventListener('click', () => {
-        checkbok.checked = false
+    // close nav if other nav item is open
+    const onClickNav = (elem, checkbox) =>
+      elem.addEventListener('click', () => {
+        if (checkbox.checked) {
+          checkbox.checked = false
+          return
+        }
       })
-    })
-  onClickNavItem($itemsLang, $langCheckbok)
-  onClickNavItem($itemsNav, $hamburgerCheckbox)
+    onClickNav($toggleLangBtn, $hamburgerCheckbox)
+    onClickNav($hamburgerBtn, $langCheckbok)
+
+    // close nav when click on nav item
+    const onClickNavItem = (btn, checkbok) =>
+      btn.forEach((item) => {
+        item.addEventListener('click', () => {
+          checkbok.checked = false
+        })
+      })
+    onClickNavItem($itemsLang, $langCheckbok)
+    onClickNavItem($itemsNav, $hamburgerCheckbox)
+  })
 </script>
