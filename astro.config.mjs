@@ -21,7 +21,12 @@ export default defineConfig({
           editorTabBarBorderColor: 'transparent',
           editorActiveTabBackground: '#1d1d1d',
           editorActiveTabIndicatorTopColor: '#4895EF',
-          tooltipSuccessBackground: '#4895EF'
+          tooltipSuccessBackground: '#4895EF',
+          terminalBackground: '#1d1d1d',
+          terminalBorder: 'transparent',
+          terminalTabActiveBorder: '#4895EF',
+          terminalTabActiveBackground: '#1d1d1d',
+          terminalTitlebarBackground: '#1d1d1d'
         },
         borderColor: '#262626',
         borderRadius: '0.375rem'
