@@ -1,0 +1,23 @@
+---
+import type { TMetatags } from '@/types'
+
+export interface Props {
+  title: string
+  metaFor: TMetatags
+}
+
+import Metatags from '@/components/Metatags.astro'
+import Analitycs from '@/components/Analitycs.astro'
+import { ViewTransitions } from 'astro:transitions'
+
+const { title, metaFor } = Astro.props
+---
+
+<head>
+  <meta charset='UTF-8' />
+  <meta name='viewport' content='width=device-width' />
+  <title>{title}</title>
+  <Metatags metaFor={metaFor} />
+  <Analitycs />
+  <ViewTransitions />
+</head>

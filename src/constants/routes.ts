@@ -14,10 +14,10 @@ export const ROUTES = {
     name: 'Sobre mí',
     nameEn: 'About me'
   },
-  contact: {
-    path: '#contact',
-    name: 'Contacto',
-    nameEn: 'Contact'
+  blog: {
+    path: '/blog',
+    name: 'Blog',
+    nameEn: 'Blog'
   }
 }
 
