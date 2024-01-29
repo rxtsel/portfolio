@@ -61,6 +61,7 @@
     "cta": "Volver al inicio"
   },
   "blog": {
-    "latestPosts": "Últimas publicaciones"
+    "latestPosts": "Últimas publicaciones",
+    "description": "Artículos sobre desarrollo web, tecnología y productividad."
   }
 }
