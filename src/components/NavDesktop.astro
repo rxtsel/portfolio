@@ -41,7 +41,11 @@ const slash = trailingSlash ? '/' : ''
           <a
             class='text-cWhite hover:text-cBlue transition-colors duration-300 ease-in'
             aria-label={currentLocale === 'en' ? route.nameEn : route.name}
-            href={slash + route.path}
+            href={
+              route.name.toLowerCase() !== 'blog'
+                ? slash + route.path
+                : route.path
+            }
           >
             {currentLocale === 'en' ? route.nameEn : route.name}
           </a>
