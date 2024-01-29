@@ -7,7 +7,7 @@ heroImage: 'PWA.png'
 categories: ['Terminal', 'Neovim']
 tags: ['Terminal', 'Neovim']
 author: ['Cristhian Melo'],
-keywords: ['rxtsel', 'Cristhian Melo', 'Blog']
+keywords: 'rxtsel, Cristhian Melo, Blog'
 ---
 
 ## ¿Qué es neovim?

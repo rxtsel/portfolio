@@ -11,7 +11,7 @@ const blog = defineCollection({
     categories: z.array(z.string()).default(['all']),
     tags: z.array(z.string()).default(['all']),
     authors: z.array(z.string()).default(['rxtsel']),
-    keywords: z.array(z.string()).default(['rxtsel', 'Cristhian Melo', 'Blog'])
+    keywords: z.string().default('rxtsel, Cristhian Melo, Blog')
   })
 })
 

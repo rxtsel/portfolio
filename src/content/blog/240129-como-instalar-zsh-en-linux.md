@@ -7,7 +7,7 @@ heroImage: 'PWA.png'
 categories: ['all', 'linux', 'terminal']
 tags: ['all', 'linux', 'terminal']
 author: ['Cristhian Melo'],
-keywords: ['rxtsel', 'Cristhian Melo', 'Blog']
+keywords: 'rxtsel, Cristhian Melo, Blog'
 ---
 
 ## Instalación
