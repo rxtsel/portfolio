@@ -47,13 +47,5 @@ export default defineConfig({
   ],
   markdown: {
     rehypePlugins: [[rehypeExternalLinks, externalLinksOptions]]
-  },
-  i18n: {
-    defaultLocale: 'es',
-    locales: ['es', 'en'],
-    routing: {
-      prefixDefaultLocale: false
-    }
-  },
-  trailingSlash: 'never'
+  }
 })
