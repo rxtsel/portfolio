@@ -170,32 +170,45 @@ import TranslateIcon from '@/icons/Translate.astro'
       '.check-hamburger'
     ) as HTMLInputElement
     const $toggleLangBtn = document.querySelector('.lang') as HTMLInputElement
-    const $langCheckbok = document.querySelector(
+    const $langCheckbox = document.querySelector(
       '.check-lang'
     ) as HTMLInputElement
 
-    const $itemsLang = document.querySelectorAll('#lang-options li')
-    const $itemsNav = document.querySelectorAll('#nav-mobile li')
+    const $itemsLang = Array.from(
+      document.querySelectorAll('#lang-options li')
+    ) as HTMLAnchorElement[]
+    const $itemsNav = Array.from(
+      document.querySelectorAll('#nav-mobile li')
+    ) as HTMLButtonElement[]
 
-    // close nav if other nav item is open
-    const onClickNav = (elem, checkbox) =>
+    // close nav if another nav item is open
+    const onClickNav = (elem: HTMLInputElement, checkbox: HTMLInputElement) => {
       elem.addEventListener('click', () => {
         if (checkbox.checked) {
           checkbox.checked = false
           return
         }
       })
+    }
+
     onClickNav($toggleLangBtn, $hamburgerCheckbox)
-    onClickNav($hamburgerBtn, $langCheckbok)
+    onClickNav($hamburgerBtn, $langCheckbox)
+
+    type HTMLElementArray = HTMLButtonElement[] | HTMLAnchorElement[]
 
     // close nav when click on nav item
-    const onClickNavItem = (btn, checkbok) =>
-      btn.forEach((item) => {
+    const onClickNavItem = (
+      elements: HTMLElementArray,
+      checkbox: HTMLInputElement
+    ) => {
+      elements.forEach((item: HTMLButtonElement | HTMLAnchorElement) => {
         item.addEventListener('click', () => {
-          checkbok.checked = false
+          checkbox.checked = false
         })
       })
-    onClickNavItem($itemsLang, $langCheckbok)
+    }
+
+    onClickNavItem($itemsLang, $langCheckbox)
     onClickNavItem($itemsNav, $hamburgerCheckbox)
   })
 </script>
