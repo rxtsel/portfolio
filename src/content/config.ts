@@ -1,4 +1,4 @@
-import { defineCollection, z } from 'astro:content'
+import { defineCollection, z, getCollection } from 'astro:content'
 
 const blog = defineCollection({
   schema: z.object({
@@ -17,3 +17,15 @@ const blog = defineCollection({
 })
 
 export const collections = { blog }
+
+export async function getBlogPosts() {
+  const posts = await getCollection('blog')
+
+  return posts.map((post) => {
+    const blog_slug = post.slug.split('/')[0]
+    return {
+      ...post,
+      blog_slug
+    }
+  })
+}
