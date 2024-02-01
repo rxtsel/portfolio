@@ -9,21 +9,27 @@ const t = useTranslations(lang)
 export const ROUTES = {
   home: {
     path: '#top',
-    name: t('nav.home')
+    name: t('nav.home'),
+    icon: 'Home'
   },
   portfolio: {
     path: '#portfolio',
-    name: t('nav.portfolio')
+    name: t('nav.portfolio'),
+    icon: 'Portfolio'
   },
   aboutMe: {
     path: '#about-me',
-    name: t('nav.about')
+    name: t('nav.about'),
+    icon: 'About'
   },
   blog: {
     path: '/blog',
-    name: 'Blog'
+    name: 'Blog',
+    icon: 'Blog'
   }
 }
+
+export type TIconRoutes = keyof typeof ROUTES
 
 export const SOCIALS = {
   github: 'https://github.com/rxtsel',
