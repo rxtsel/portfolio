@@ -19,6 +19,9 @@ export const ui = {
     'single.contactMe': 'Contáctame',
     'single.by': 'por',
 
+    'lang.es': 'Español',
+    'lang.us': 'Inglés',
+
     'nav.home': 'Inicio',
     'nav.about': 'Sobre mí',
     'nav.portfolio': 'Portafolio',
@@ -72,6 +75,9 @@ export const ui = {
     'single.techs': 'Technologies',
     'single.contactMe': 'Contact Me',
     'single.by': 'by',
+
+    'lang.es': 'Spanish',
+    'lang.us': 'English',
 
     'nav.home': 'Home',
     'nav.about': 'About',
