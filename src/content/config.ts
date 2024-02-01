@@ -22,10 +22,10 @@ export async function getBlogPosts() {
   const posts = await getCollection('blog')
 
   return posts.map((post) => {
-    const blog_slug = post.slug.split('/')[0]
+    const slug = post.slug.split('/')[0]
     return {
       ...post,
-      blog_slug
+      slug
     }
   })
 }

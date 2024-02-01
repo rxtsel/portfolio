@@ -1,18 +1,30 @@
 ---
+import { LANGUAGES, useTranslations } from '@/i18n/utils'
 import Layout from '@/layouts/Layout.astro'
 import Header from '@/components/Header.astro'
 import Post from '@/components/Post.astro'
 import Footer from '@/components/Footer.astro'
-import { getCollection } from 'astro:content'
+import { getBlogPosts } from '@/content/config'
 
-const allPosts = await getCollection('blog')
-const noDrafts = allPosts.filter((post) => !post.data.draft)
-const formattedPosts = noDrafts.sort(
-  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
-)
+const { lang } = Astro.params
+
+const posts = (await getBlogPosts())
+  ?.filter((blog) => {
+    return blog?.data?.lang === lang
+  })
+  .sort((a, b) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf())
+
+export async function getStaticPaths() {
+  const keys = Object.keys(LANGUAGES)
+  return keys.map((lang) => {
+    return { params: { lang } }
+  })
+}
+
+const t = useTranslations()
 ---
 
-<Layout title='Cristhian Melo · Blog' metaFor='Blog'>
+<Layout title='Cristhian Melo · Blog' description={t('blog.p1')} lang={lang}>
   <Header />
 
   <main class='max-w-4xl py-20 lg:pb-10 sm:py-44 mx-auto px-2'>
@@ -25,19 +37,19 @@ const formattedPosts = noDrafts.sort(
     <hr class='pb-5 lg:pb-10 border-neutral-800' />
 
     {
-      formattedPosts.length === 0 ? (
+      posts.length === 0 ? (
         <h2 class='text-cWhite text-[clamp(1.875rem,2vw+1rem,4rem)] font-bold leading-none mb-10 text-center min-h-[calc(100dvh-37dvh)] grid place-items-center'>
           No posts yet. 🥲
         </h2>
       ) : (
-        <ul class="grid gap-4">
-          {formattedPosts.map((post) => (
+        <ul class='grid gap-4'>
+          {posts.map((post) => (
             <li>
               <Post
                 title={post.data.title}
                 description={post.data.description}
                 date={post.data.pubDate}
-                url={`/blog/${post.slug}`}
+                url={`/${lang || ''}/blog/${post.slug}`}
               />
             </li>
           ))}

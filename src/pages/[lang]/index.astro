@@ -1,4 +1,5 @@
 ---
+import { LANGUAGES, type LANG, useTranslations } from '@/i18n/utils'
 import Layout from '@/layouts/Layout.astro'
 import Header from '@/components/Header.astro'
 import Hero from '@/components/Hero.astro'
@@ -10,10 +11,16 @@ import Tech from '@/components/Tech.astro'
 import AboutMe from '@/components/AboutMe.astro'
 import Contact from '@/components/Contact.astro'
 import Footer from '@/components/Footer.astro'
-import { getLangFromUrl, useTranslations } from '@/i18n/utils'
 
-const lang = getLangFromUrl(Astro.url)
+const { lang } = Astro.params
 const t = useTranslations(lang)
+
+export async function getStaticPaths() {
+  const keys = Object.keys(LANGUAGES)
+  return keys.map((lang) => {
+    return { params: { lang } }
+  })
+}
 ---
 
 <Layout lang={lang} title={t('site.title')} description={t('site.description')}>

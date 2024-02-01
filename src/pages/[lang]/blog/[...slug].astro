@@ -1,31 +1,33 @@
 ---
-import { type CollectionEntry, getCollection } from 'astro:content'
-
 import Layout from '@/layouts/Layout.astro'
 import { Code } from 'astro-expressive-code/components'
 import Header from '@/components/Header.astro'
 import Footer from '@/components/Footer.astro'
 import FormatDate from '@/components/FormatDate.astro'
+import { getBlogPosts } from '@/content/config'
 
 export async function getStaticPaths() {
-  const posts = await getCollection('blog')
-  return posts.map((post) => ({
-    params: { slug: post.slug },
-    props: post
-  }))
-}
-type Props = CollectionEntry<'blog'>
+  const pages = await getBlogPosts()
 
-const post = Astro.props
-const { title, description, pubDate, tags } = post.data
-const { Content } = await post.render()
+  const paths = pages.map((page) => {
+    return {
+      params: { lang: page?.data.lang || 'en', slug: page.slug },
+      props: page
+    }
+  })
+
+  return paths
+}
+
+const { lang } = Astro.params
+const page = Astro.props
+const { Content } = await page.render()
 ---
 
 <Layout
-  title={`Blog · ${title}`}
-  metaFor='Post'
-  postData={post.data}
-  slug={post.slug}
+  title={`Blog · ${page.data.title}`}
+  description={page.data.description}
+  lang={lang}
 >
   <Header />
 
@@ -33,23 +35,23 @@ const { Content } = await post.render()
     <header class='pb-8'>
       <h1
         class='mb-2 text-4xl font-semibold pb-5'
-        transition:name={`post ${title}`}
+        transition:name={`post ${page.data.title}`}
       >
-        {title}
+        {page.data.title}
       </h1>
       <p
         class='text-xl
         text-[#d1d5db]
         font-medium'
-        transition:name={`post ${description}`}
+        transition:name={`post ${page.data.description}`}
       >
-        {description}
+        {page.data.description}
       </p>
 
       <footer class='flex justify-between items-center'>
         <div class='flex items-center gap-2 my-5 flex-wrap'>
           {
-            tags.sort().map((tag: string) => (
+            page.data.tags.sort().map((tag: string) => (
               <p
                 class='truncate capitalize rounded-md border border-neutral-800 bg-neutral-900 px-2 py-1 font-mono text-xs'
                 title={tag}
@@ -60,7 +62,7 @@ const { Content } = await post.render()
           }
         </div>
 
-        <FormatDate date={pubDate} />
+        <FormatDate date={page.data.pubDate} />
       </footer>
     </header>
 

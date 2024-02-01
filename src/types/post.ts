@@ -1,19 +1,4 @@
-export interface Post {
-  id: string
-  slug: string
-  body: string
-  collection: string
-  data: Data
-}
+import type { CollectionEntry } from 'astro:content'
 
-export interface Data {
-  title: string
-  draft: boolean
-  description: string
-  pubDate: Date
-  heroImage: string
-  categories: string[]
-  tags: string[]
-  authors: string[]
-  keywords: string
-}
+export type TPost = CollectionEntry<'blog'>['data']
+export type TPostList = CollectionEntry<'blog'>
