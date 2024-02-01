@@ -1,23 +1,27 @@
+import { getLangFromUrl, useTranslations } from '@/i18n/utils'
+
+const lang = globalThis.window
+  ? getLangFromUrl(new URL(window.location.href))
+  : 'es'
+
+const t = useTranslations(lang)
+
 export const ROUTES = {
   home: {
     path: '#top',
-    name: 'Inicio',
-    nameEn: 'Home'
+    name: t('nav.home')
   },
   portfolio: {
     path: '#portfolio',
-    name: 'Portafolio',
-    nameEn: 'Portfolio'
+    name: t('nav.portfolio')
   },
   aboutMe: {
     path: '#about-me',
-    name: 'Sobre mí',
-    nameEn: 'About me'
+    name: t('nav.about')
   },
   blog: {
     path: '/blog',
-    name: 'Blog',
-    nameEn: 'Blog'
+    name: 'Blog'
   }
 }
 
@@ -33,14 +37,14 @@ export const SOCIALS = {
 
 export const LANGUAGES = {
   ES: {
-    name: 'Español',
+    name: t('lang.es'),
     nameEn: 'Spanish',
     path: '/',
     code: 'es',
     flag: '/flag-es.webp'
   },
   EN: {
-    name: 'Inglés',
+    name: t('lang.us'),
     nameEn: 'English',
     path: '/en',
     code: 'en',
