@@ -4,8 +4,11 @@ import BaseHead from '../components/BaseHead.astro'
 
 type TProps = CollectionEntry<'blog'>['data']
 
-interface Props extends TProps {
+interface Props extends Partial<TProps> {
   isNotHome?: boolean
+  title: string
+  description: string
+  lang: string
 }
 
 const { title, lang, description, isNotHome = false } = Astro.props
