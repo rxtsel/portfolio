@@ -1,14 +1,21 @@
 ---
-import { LANGUAGES, ROUTES, SOCIALS } from '@/constants/routes'
+import { LANGUAGES, type UiType } from '@/i18n/utils'
+import { ROUTES, SOCIALS } from '@/constants/routes'
 import Logo from '@/icons/Logo.astro'
 import TranslateIcon from '@/icons/Translate.astro'
 import LinkedinIcon from '@/icons/Linkedin.astro'
 import TwitterIcon from '@/icons/Twitter.astro'
 import GithubIcon from '@/icons/Github.astro'
-import { getLangFromUrl, useTranslations } from '@/i18n/utils'
+import {
+  getLangFromUrl,
+  useTranslations,
+  getLocalizedPathname
+} from '@/i18n/utils'
 
 const lang = getLangFromUrl(Astro.url)
 const t = useTranslations(lang)
+
+const { pathname } = Astro.url
 ---
 
 <nav class='flex w-full max-w-6xl mx-auto items-center justify-between'>
@@ -49,23 +56,24 @@ const t = useTranslations(lang)
         id='lang-options-desktop'
         class='text-cWhite grid place-content-start uppercase absolute transform left-0 right-0 mx-auto w-max p-2 rounded-md bg-cPaper shadow-md z-10'
       >
-        <li class='size-full z-10'>
-          <a
-            class={`${''} hover:text-cBlue hover:bg-cBlack px-10 py-2 rounded transition-colors duration-300 ease-in h-full w-full flex place-items-center gap-2`}
-            href={LANGUAGES.ES.path}
-            aria-label='Change language'
-          >
-            {LANGUAGES.ES.name}
-          </a>
-        </li>
-        <li class='size-full'>
-          <a
-            class={`${''} hover:text-cBlue hover:bg-cBlack px-10 py-2 rounded transition-colors duration-300 ease-in h-full w-full flex place-items-center gap-2`}
-            href={LANGUAGES.EN.path}
-          >
-            {LANGUAGES.EN.name}
-          </a>
-        </li>
+        {
+          Object.entries(LANGUAGES).map(([key, route]) => {
+            const href = getLocalizedPathname(pathname, key) as UiType
+            const isActive =
+              lang === key ? 'text-cBlue bg-cBlack' : 'text-cWhite'
+            return (
+              <li class='size-full'>
+                <a
+                  class={`${isActive} hover:text-cBlue hover:bg-cBlack px-10 py-2 rounded transition-colors duration-300 ease-in h-full w-full flex place-items-center gap-2`}
+                  href={href}
+                  aria-label={route}
+                >
+                  {route}
+                </a>
+              </li>
+            )
+          })
+        }
       </ul>
     </li>
 

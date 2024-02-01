@@ -1,8 +1,17 @@
 ---
-import { ROUTES, LANGUAGES, type TIconRoutes } from '@/constants/routes'
+import {
+  LANGUAGES,
+  getLocalizedPathname,
+  getLangFromUrl,
+  type UiType
+} from '@/i18n/utils'
+import { ROUTES, type TIconRoutes } from '@/constants/routes'
 import NavIcon from '@/components/NavIcon.astro'
 import Logo from '@/icons/Logo.astro'
 import TranslateIcon from '@/icons/Translate.astro'
+
+const { pathname } = Astro.url
+const lang = getLangFromUrl(Astro.url)
 ---
 
 <nav class='flex w-full max-w-6xl mx-auto items-center justify-between'>
@@ -52,25 +61,31 @@ import TranslateIcon from '@/icons/Translate.astro'
     class='text-cWhite grid grid-cols-2 place-content-center place-items-center justify-center gap-5 uppercase absolute transform -translate-y-20 left-0 right-0 mx-auto w-full p-5 rounded-2xl text-xxs bg-cPaper shadow-md z-10'
   >
     {
-      Object.entries(LANGUAGES).map(([_key, route]) => (
-        <li class='size-full'>
-          <a
-            class={`${''} hover:text-cBlue transition-colors duration-300 ease-in h-full w-full flex flex-col place-items-center gap-2`}
-            href={route.path}
-          >
-            <div class='size-6 flex items-end'>
-              <img
-                src={route.flag}
-                alt={route.name}
-                loading='lazy'
-                width='24'
-                height='24'
-              />
-            </div>
-            {route.name}
-          </a>
-        </li>
-      ))
+      Object.entries(LANGUAGES).map(([key, route]) => {
+        const href = getLocalizedPathname(pathname, key)
+        const isActive = lang === key ? 'text-cBlue' : 'text-cWhite'
+        const image = `/flag-${key}.webp`
+        return (
+          <li class='size-full'>
+            <a
+              class={`${isActive} hover:text-cBlue transition-colors duration-300 ease-in h-full w-full flex flex-col place-items-center gap-2`}
+              href={href}
+              aria-label={route}
+            >
+              <div class='size-6 flex items-end'>
+                <img
+                  src={image}
+                  alt={`flag for ${key}`}
+                  loading='lazy'
+                  width='24'
+                  height='24'
+                />
+              </div>
+              {route}
+            </a>
+          </li>
+        )
+      })
     }
   </ul>
 
