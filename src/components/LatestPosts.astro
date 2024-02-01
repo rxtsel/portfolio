@@ -16,7 +16,7 @@ const posts = (await getBlogPosts())
   ?.filter((blog) => {
     return blog?.data?.lang === lang
   })
-  .sort((a, b) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf())
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
 ---
 
 <Section title={t('messages.latestPosts')}>
