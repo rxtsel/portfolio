@@ -7,27 +7,28 @@ import FormatDate from '@/components/FormatDate.astro'
 import { getBlogPosts } from '@/content/config'
 
 export async function getStaticPaths() {
-  const pages = await getBlogPosts()
+  const blogPosts = await getBlogPosts()
 
-  const paths = pages.map((page) => {
+  const posts = blogPosts.map((post) => {
     return {
-      params: { lang: page?.data.lang || 'en', slug: page.slug },
-      props: page
+      params: { lang: post?.data.lang || 'en', slug: post.slug },
+      props: post
     }
   })
 
-  return paths
+  return posts
 }
 
 const { lang } = Astro.params
-const page = Astro.props
-const { Content } = await page.render()
+const post = Astro.props
+const { Content } = await post.render()
 ---
 
 <Layout
-  title={`Blog · ${page.data.title}`}
-  description={page.data.description}
+  title={`Blog · ${post.data.title}`}
+  description={post.data.description}
   lang={lang}
+  isNotHome={true}
 >
   <Header />
 
@@ -35,23 +36,23 @@ const { Content } = await page.render()
     <header class='pb-8'>
       <h1
         class='mb-2 text-4xl font-semibold pb-5'
-        transition:name={`post ${page.data.title}`}
+        transition:name={`post ${post.data.title}`}
       >
-        {page.data.title}
+        {post.data.title}
       </h1>
       <p
         class='text-xl
         text-[#d1d5db]
         font-medium'
-        transition:name={`post ${page.data.description}`}
+        transition:name={`post ${post.data.description}`}
       >
-        {page.data.description}
+        {post.data.description}
       </p>
 
       <footer class='flex justify-between items-center'>
         <div class='flex items-center gap-2 my-5 flex-wrap'>
           {
-            page.data.tags.sort().map((tag: string) => (
+            post.data.tags.sort().map((tag: string) => (
               <p
                 class='truncate capitalize rounded-md border border-neutral-800 bg-neutral-900 px-2 py-1 font-mono text-xs'
                 title={tag}
@@ -62,7 +63,7 @@ const { Content } = await page.render()
           }
         </div>
 
-        <FormatDate date={page.data.pubDate} />
+        <FormatDate date={post.data.pubDate} />
       </footer>
     </header>
 
