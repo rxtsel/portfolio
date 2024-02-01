@@ -7,15 +7,15 @@ export const LANGUAGES = {
 
 export const DEFAULT_LANG = 'es'
 
-export type UiType = keyof typeof ui
+export type LANG = keyof typeof ui
 
 export function getLangFromUrl(url: URL) {
   const [, lang] = url.pathname.split('/')
-  if (lang in ui) return lang as UiType
+  if (lang in ui) return lang as LANG
   return DEFAULT_LANG
 }
 
-export function useTranslations(lang?: UiType) {
+export function useTranslations(lang?: LANG) {
   return function t(
     key: keyof (typeof ui)[typeof DEFAULT_LANG],
     ...args: any[]
@@ -39,7 +39,7 @@ export function useTranslations(lang?: UiType) {
   }
 }
 
-export function pathNameIsInLanguage(pathname: string, lang: UiType) {
+export function pathNameIsInLanguage(pathname: string, lang: LANG) {
   return (
     pathname.startsWith(`/${lang}`) ||
     (lang === DEFAULT_LANG && !pathNameStartsWithLanguage(pathname))
@@ -61,12 +61,7 @@ function pathNameStartsWithLanguage(pathname: string) {
   return startsWithLanguage
 }
 
-export function getLocalizedPathname(pathname: string, lang: UiType) {
-  // if the pathname is same, return it
-  if (pathNameIsInLanguage(pathname, lang)) {
-    return pathname
-  }
-
+export function getLocalizedPathname(pathname: string, lang: LANG) {
   if (pathNameStartsWithLanguage(pathname)) {
     const availableLanguages = Object.keys(LANGUAGES).join('|')
     const regex = new RegExp(`^\/(${availableLanguages})`)

@@ -6,7 +6,7 @@ import {
   pathNameIsInLanguage,
   DEFAULT_LANG,
   getLocalizedPathname,
-  type UiType
+  type LANG
 } from '@/i18n/utils'
 
 interface Props {
@@ -23,8 +23,8 @@ const canonicalURL = new URL(canonicalPathname, Astro.site)
 
 const { title, description, image = '/meta_tags_large_icon.png' } = Astro.props
 
-const alternateLang = Object.keys(LANGUAGES) as UiType[]
-const alternateLinks = alternateLang.map((_lang: UiType) => {
+const alternateLang = Object.keys(LANGUAGES) as LANG[]
+const alternateLinks = alternateLang.map((_lang: LANG) => {
   return {
     href: new URL(getLocalizedPathname(Astro.url.pathname, _lang), Astro.site),
     hreflang: _lang

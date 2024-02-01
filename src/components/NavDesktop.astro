@@ -1,5 +1,5 @@
 ---
-import { LANGUAGES, type UiType } from '@/i18n/utils'
+import { LANGUAGES } from '@/i18n/utils'
 import { ROUTES, SOCIALS } from '@/constants/routes'
 import Logo from '@/icons/Logo.astro'
 import TranslateIcon from '@/icons/Translate.astro'
@@ -58,7 +58,7 @@ const { pathname } = Astro.url
       >
         {
           Object.entries(LANGUAGES).map(([key, route]) => {
-            const href = getLocalizedPathname(pathname, key) as UiType
+            const href = getLocalizedPathname(pathname, key)
             const isActive =
               lang === key ? 'text-cBlue bg-cBlack' : 'text-cWhite'
             return (
