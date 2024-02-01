@@ -1,17 +1,14 @@
 ---
-import type { TMetatags, Data } from '@/types'
+import type { CollectionEntry } from 'astro:content'
+import BaseHead from '../components/BaseHead.astro'
 
-export interface Props {
-  title: string
-  metaFor: TMetatags
-  postData?: Partial<Data>
-  slug?: string
+type TProps = CollectionEntry<'blog'>['data']
+
+interface Props extends TProps {
+  metaFor?: string
 }
 
-import Head from '@/components/Head.astro'
-
-const { title, metaFor, postData, slug } = Astro.props
-const { currentLocale } = Astro
+const { title, lang, description, metaFor } = Astro.props
 
 const bgHero =
   metaFor === 'Base'
@@ -20,56 +17,59 @@ const bgHero =
 ---
 
 <!doctype html>
-<html lang={currentLocale}>
-  <Head title={title} metaFor={metaFor} postData={postData} slug={slug} />
+<html lang={lang}>
+  <head>
+    <BaseHead lang={lang} title={title} description={description} />
+  </head>
 
   <body class='antialiased relative bg-cBlack'>
     <div class={bgHero}></div>
     <slot />
-    <style is:global>
-      @font-face {
-        font-family: 'Satoshi';
-        src: url('/fonts/Satoshi.woff2') format('woff2');
-        font-style: normal;
-        font-weight: 300 900;
-        font-display: swap;
-      }
-
-      html {
-        scroll-behavior: smooth;
-        font-family:
-          Satoshi,
-          ui-sans-serif,
-          system-ui,
-          -apple-system,
-          BlinkMacSystemFont,
-          Segoe UI,
-          Roboto,
-          Helvetica Neue,
-          Arial,
-          Noto Sans,
-          sans-serif,
-          'Apple Color Emoji',
-          'Segoe UI Emoji',
-          Segoe UI Symbol,
-          'Noto Color Emoji';
-      }
-
-      ::-webkit-scrollbar {
-        width: 10px;
-      }
-
-      ::-webkit-scrollbar-track {
-        background: #121212;
-      }
-
-      ::-webkit-scrollbar-thumb {
-        background: #4b4b4b;
-      }
-
-      ::selection {
-        @apply text-cBlue;
-      }
-    </style>
   </body>
 </html>
+
+<style is:global>
+  @font-face {
+    font-family: 'Satoshi';
+    src: url('/fonts/Satoshi.woff2') format('woff2');
+    font-style: normal;
+    font-weight: 300 900;
+    font-display: swap;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    font-family:
+      Satoshi,
+      ui-sans-serif,
+      system-ui,
+      -apple-system,
+      BlinkMacSystemFont,
+      Segoe UI,
+      Roboto,
+      Helvetica Neue,
+      Arial,
+      Noto Sans,
+      sans-serif,
+      'Apple Color Emoji',
+      'Segoe UI Emoji',
+      Segoe UI Symbol,
+      'Noto Color Emoji';
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #121212;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #4b4b4b;
+  }
+
+  ::selection {
+    @apply text-cBlue;
+  }
+</style>
