@@ -1,5 +1,5 @@
 ---
-title: 'Comandos básicos de Neovim EN'
+title: 'Comandos básicos de Neovim'
 draft: false
 description: 'Aprende algunos comandos básicos para que uses en neovim.'
 pubDate: '2024-01-29T14:58:19.163Z'
@@ -7,8 +7,8 @@ heroImage: 'PWA.png'
 categories: ['Terminal', 'Neovim']
 tags: ['Terminal', 'Neovim']
 author: ['Cristhian Melo']
-keywords: 'rxtsel, Cristhian Melo, Blog'
-lang: 'en'
+keywords: 'rxtsel, Cristhian Melo, Blog, Neovim,Editor de texto,Modo normal,Modo insertar,Modo visual,Modo comando,Modo terminal,Comandos básicos,Navegación en Neovim,Configuración Neovim,LazyVim,Plugins Neovim,Temas Neovim,Cristhian Melo,Terminal,Blog,Tutorial Neovim,Texto en la terminal,Personalización Neovim,Experiencia de usuario'
+lang: 'es'
 ---
 
 ## ¿Qué es neovim?
