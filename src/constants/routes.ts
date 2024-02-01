@@ -1,32 +1,3 @@
-import { getLangFromUrl, useTranslations } from '@/i18n/utils'
-
-const lang = globalThis.window
-  ? getLangFromUrl(new URL(window.location.href))
-  : 'es'
-
-const t = useTranslations(lang)
-
-export const ROUTES = {
-  home: {
-    path: '#top',
-    name: t('nav.home')
-  },
-  portfolio: {
-    path: '#portfolio',
-    name: t('nav.portfolio')
-  },
-  aboutMe: {
-    path: '#about-me',
-    name: t('nav.about')
-  },
-  blog: {
-    path: '/blog',
-    name: 'Blog'
-  }
-}
-
-export type TIconRoutes = keyof typeof ROUTES
-
 export const SOCIALS = {
   github: 'https://github.com/rxtsel',
   linkedin: 'https://www.linkedin.com/in/rxtsel/',
