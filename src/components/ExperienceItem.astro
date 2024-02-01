@@ -1,5 +1,8 @@
 ---
 import { calculateDuration } from '@/utils'
+import { getLangFromUrl, useTranslations } from '@/i18n/utils'
+
+const lang = getLangFromUrl(Astro.url)
 
 export interface Props {
   data: Data
@@ -15,7 +18,6 @@ interface Data {
 
 const { data } = Astro.props
 const { company, role, startDate, endDate, description } = data
-const { currentLocale } = Astro
 ---
 
 <li class='mb-10 ms-4'>
@@ -24,7 +26,7 @@ const { currentLocale } = Astro
   ></span>
 
   <time class='mb-1 text-sm font-normal leading-none text-cAccent capitalize'>
-    {calculateDuration({startDate, locale: currentLocale})}
+    {calculateDuration({ startDate, locale: lang })}
   </time>
 
   <h3 class='text-lg font-semibold text-white mt-2 capitalize'>
