@@ -4,13 +4,13 @@ import Section from './Section.astro'
 import Linkedin from '@/icons/Linkedin.astro'
 import Mail from '@/icons/Mail.astro'
 import Twitter from '@/icons/Twitter.astro'
-import { getI18N } from '@/i18n'
+import { getLangFromUrl, useTranslations } from '@/i18n/utils'
 
-const { currentLocale } = Astro
-const i18n = getI18N({ currentLocale })
+const lang = getLangFromUrl(Astro.url)
+const t = useTranslations(lang)
 ---
 
-<Section title={i18n.contact.title} id='contact' container>
+<Section title={t('single.contact')} id='contact' container>
   <nav class='grid grid-cols-2 gap-4 md:grid-cols-6'>
     <a
       class='flex max-w-xs flex-col items-center space-y-2 rounded-lg border border-neutral-800 p-4'

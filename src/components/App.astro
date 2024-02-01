@@ -10,14 +10,13 @@ import Tech from '@/components/Tech.astro'
 import AboutMe from '@/components/AboutMe.astro'
 import Contact from '@/components/Contact.astro'
 import Footer from '@/components/Footer.astro'
+import { getLangFromUrl, useTranslations } from '@/i18n/utils'
 
-import { getI18N } from '@/i18n'
-
-const { currentLocale } = Astro
-const i18n = getI18N({ currentLocale })
+const lang = getLangFromUrl(Astro.url)
+const t = useTranslations(lang)
 ---
 
-<Layout title={i18n.site.title} metaFor='Base'>
+<Layout lang={lang} title={t('site.title')} description={t('site.description')}>
   <Header />
   <main class='w-full px-2 z-0'>
     <Hero />

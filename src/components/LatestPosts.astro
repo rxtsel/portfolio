@@ -2,6 +2,7 @@
 import Post from '@/components/Post.astro'
 import Section from '@/components/Section.astro'
 import { type CollectionEntry, getCollection } from 'astro:content'
+import { getLangFromUrl, useTranslations } from '@/i18n/utils'
 
 const allPosts = await getCollection('blog')
 const noDrafts = allPosts.filter((post) => !post.data.draft)
@@ -11,13 +12,11 @@ const formattedPosts = noDrafts.sort(
 
 type Post = CollectionEntry<'blog'>
 
-import { getI18N } from '@/i18n'
-
-const { currentLocale } = Astro
-const i18n = getI18N({ currentLocale })
+const lang = getLangFromUrl(Astro.url)
+const t = useTranslations(lang)
 ---
 
-<Section title={i18n.blog.latestPosts}>
+<Section title={t('messages.latestPosts')}>
   <ul class='grid gap-4'>
     {
       formattedPosts.slice(0, 3).map((post: Post) => (
