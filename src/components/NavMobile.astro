@@ -1,30 +1,13 @@
 ---
-interface Props {
-  trailingSlash: string
-}
-
 import { ROUTES, LANGUAGES } from '@/constants/routes'
+import NavIcon from '@/components/NavIcon.astro'
 import Logo from '@/icons/Logo.astro'
-import HomeIcon from '@/icons/Home.astro'
-import UserIcon from '@/icons/User.astro'
-import PortfolioIcon from '@/icons/Portfolio.astro'
-import Blog from '@/icons/Blog.astro'
 import TranslateIcon from '@/icons/Translate.astro'
-
-const { currentLocale } = Astro
-
-const colorWhenLangIsEn = currentLocale === 'en' ? 'text-cBlue' : 'text-cWhite'
-const colorWhenLangIsEs = currentLocale === 'es' ? 'text-cBlue' : 'text-cWhite'
-
-// add slash before path if stay in blog page
-const { trailingSlash } = Astro.props
-
-const slash = trailingSlash ? '/' : ''
 ---
 
 <nav class='flex w-full max-w-6xl mx-auto items-center justify-between'>
   <a
-    href={slash + ROUTES.home.path}
+    href={ROUTES.home.path}
     class='h-10 w-10 flex-grow max-w-16 order-2'
     aria-label='logo of the website rxtel.dev'
   >
@@ -35,67 +18,22 @@ const slash = trailingSlash ? '/' : ''
     id='nav-mobile'
     class='text-cWhite grid grid-cols-2 place-content-center place-items-center justify-center gap-5 uppercase absolute transform -translate-y-28 left-0 right-0 mx-auto w-full p-5 rounded-2xl text-xxs bg-cPaper shadow-md z-10'
   >
-    <li class='size-full z-10'>
-      <a
-        class='text-cWhite hover:text-cBlue transition-colors duration-300 ease-in h-full w-full flex flex-col place-items-center gap-2'
-        href={slash + ROUTES.home.path}
-        aria-label={currentLocale === 'en'
-          ? ROUTES.home.nameEn
-          : ROUTES.home.name}
-      >
-        <div class='size-6'>
-          <HomeIcon />
-        </div>
-
-        {currentLocale === 'en' ? ROUTES.home.nameEn : ROUTES.home.name}
-      </a>
-    </li>
-    <li class='size-full'>
-      <a
-        class='text-cWhite hover:text-cBlue transition-colors duration-300 ease-in h-full w-full flex flex-col place-items-center gap-2'
-        aria-label={currentLocale === 'en'
-          ? ROUTES.portfolio.nameEn
-          : ROUTES.portfolio.name}
-        href={slash + ROUTES.portfolio.path}
-      >
-        <div class='size-6'>
-          <PortfolioIcon />
-        </div>
-        {
-          currentLocale === 'en'
-            ? ROUTES.portfolio.nameEn
-            : ROUTES.portfolio.name
-        }
-      </a>
-    </li>
-    <li class='size-full'>
-      <a
-        class='text-cWhite hover:text-cBlue transition-colors duration-300 ease-in h-full w-full flex flex-col place-items-center gap-2'
-        aria-label={currentLocale === 'en'
-          ? ROUTES.aboutMe.nameEn
-          : ROUTES.aboutMe.name}
-        href={slash + ROUTES.aboutMe.path}
-      >
-        <div class='size-6'>
-          <UserIcon />
-        </div>
-        {currentLocale === 'en' ? ROUTES.aboutMe.nameEn : ROUTES.aboutMe.name}
-      </a>
-    </li>
-    <li class='size-full'>
-      <a
-        class='text-cWhite hover:text-cBlue transition-colors duration-300 ease-in h-full w-full flex flex-col place-items-center gap-2'
-        aria-label={currentLocale === 'en'
-          ? ROUTES.blog.nameEn
-          : ROUTES.blog.name}
-        href={ROUTES.blog.path}
-      >
-        <div class='size-6'>
-          <Blog />
-        </div>
-        {currentLocale === 'en' ? ROUTES.blog.nameEn : ROUTES.blog.name}
-      </a>
-    </li>
+    {
+      Object.entries(ROUTES).map(([_key, { name, path, icon }]) => (
+        <li class='size-full'>
+          <a
+            class='text-cWhite hover:text-cBlue transition-colors duration-300 ease-in h-full w-full flex flex-col place-items-center gap-2'
+            aria-label={name}
+            href={path}
+          >
+            <div class='size-6'>
+              <NavIcon name={icon} />
+            </div>
+            {name}
+          </a>
+        </li>
+      ))
+    }
   </ul>
 
   <label class='hamburger order-3'>
@@ -113,42 +51,27 @@ const slash = trailingSlash ? '/' : ''
     id='lang-options'
     class='text-cWhite grid grid-cols-2 place-content-center place-items-center justify-center gap-5 uppercase absolute transform -translate-y-20 left-0 right-0 mx-auto w-full p-5 rounded-2xl text-xxs bg-cPaper shadow-md z-10'
   >
-    <li class='size-full z-10'>
-      <a
-        class={`${colorWhenLangIsEs} hover:text-cBlue transition-colors duration-300 ease-in h-full w-full flex flex-col place-items-center gap-2`}
-        href={LANGUAGES.ES.path}
-        aria-label='Change language'
-      >
-        <div class='size-6 flex items-end'>
-          <img
-            src={LANGUAGES.ES.flag}
-            alt={LANGUAGES.ES.name}
-            loading='lazy'
-            width='24'
-            height='24'
-          />
-        </div>
-
-        {currentLocale === 'en' ? LANGUAGES.ES.nameEn : LANGUAGES.ES.name}
-      </a>
-    </li>
-    <li class='size-full'>
-      <a
-        class={`${colorWhenLangIsEn} hover:text-cBlue transition-colors duration-300 ease-in h-full w-full flex flex-col place-items-center gap-2`}
-        href={LANGUAGES.EN.path}
-      >
-        <div class='size-6 flex items-end'>
-          <img
-            src={LANGUAGES.EN.flag}
-            alt={LANGUAGES.EN.name}
-            loading='lazy'
-            width='24'
-            height='24'
-          />
-        </div>
-        {currentLocale === 'en' ? LANGUAGES.EN.nameEn : LANGUAGES.EN.name}
-      </a>
-    </li>
+    {
+      Object.entries(LANGUAGES).map(([_key, route]) => (
+        <li class='size-full'>
+          <a
+            class={`${''} hover:text-cBlue transition-colors duration-300 ease-in h-full w-full flex flex-col place-items-center gap-2`}
+            href={route.path}
+          >
+            <div class='size-6 flex items-end'>
+              <img
+                src={route.flag}
+                alt={route.name}
+                loading='lazy'
+                width='24'
+                height='24'
+              />
+            </div>
+            {route.name}
+          </a>
+        </li>
+      ))
+    }
   </ul>
 
   <label

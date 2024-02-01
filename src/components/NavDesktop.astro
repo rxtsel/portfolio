@@ -1,33 +1,19 @@
 ---
-interface Props {
-  trailingSlash: boolean
-}
-
-import { getI18N } from '@/i18n'
 import { LANGUAGES, ROUTES, SOCIALS } from '@/constants/routes'
 import Logo from '@/icons/Logo.astro'
 import TranslateIcon from '@/icons/Translate.astro'
 import LinkedinIcon from '@/icons/Linkedin.astro'
 import TwitterIcon from '@/icons/Twitter.astro'
 import GithubIcon from '@/icons/Github.astro'
+import { getLangFromUrl, useTranslations } from '@/i18n/utils'
 
-const { currentLocale } = Astro
-const i18n = getI18N({ currentLocale })
-
-const colorWhenLangIsEn =
-  currentLocale === 'en' ? 'text-cBlue bg-cBlack' : 'text-cWhite'
-const colorWhenLangIsEs =
-  currentLocale === 'es' ? 'text-cBlue bg-cBlack' : 'text-cWhite'
-
-// add slash before path if stay in blog page
-const { trailingSlash } = Astro.props
-
-const slash = trailingSlash ? '/' : ''
+const lang = getLangFromUrl(Astro.url)
+const t = useTranslations(lang)
 ---
 
 <nav class='flex w-full max-w-6xl mx-auto items-center justify-between'>
   <a
-    href={slash + ROUTES.home.path}
+    href={ROUTES.home.path}
     class='h-16 w-16 flex-grow max-w-36'
     aria-label='logo of the website rxtel.dev'
   >
@@ -40,14 +26,10 @@ const slash = trailingSlash ? '/' : ''
         <li>
           <a
             class='text-cWhite hover:text-cBlue transition-colors duration-300 ease-in'
-            aria-label={currentLocale === 'en' ? route.nameEn : route.name}
-            href={
-              route.name.toLowerCase() !== 'blog'
-                ? slash + route.path
-                : route.path
-            }
+            aria-label={route.name}
+            href={route.path}
           >
-            {currentLocale === 'en' ? route.nameEn : route.name}
+            {route.name}
           </a>
         </li>
       ))
@@ -55,10 +37,7 @@ const slash = trailingSlash ? '/' : ''
   </ul>
 
   <ul class='text-cWhite flex space-x-4 flex-shrink-0'>
-    <li
-      class='w-6 h-6 relative lang-btn-desktop'
-      title={i18n.messages.languages}
-    >
+    <li class='w-6 h-6 relative lang-btn-desktop' title={t('single.languages')}>
       <label
         class='lang-desktop hover:text-cBlue order-1 text-cWhite transition-colors duration-300 ease-in size-6 cursor-pointer'
       >
@@ -72,19 +51,19 @@ const slash = trailingSlash ? '/' : ''
       >
         <li class='size-full z-10'>
           <a
-            class={`${colorWhenLangIsEs} hover:text-cBlue hover:bg-cBlack px-10 py-2 rounded transition-colors duration-300 ease-in h-full w-full flex place-items-center gap-2`}
+            class={`${''} hover:text-cBlue hover:bg-cBlack px-10 py-2 rounded transition-colors duration-300 ease-in h-full w-full flex place-items-center gap-2`}
             href={LANGUAGES.ES.path}
             aria-label='Change language'
           >
-            {currentLocale === 'en' ? LANGUAGES.ES.nameEn : LANGUAGES.ES.name}
+            {LANGUAGES.ES.name}
           </a>
         </li>
         <li class='size-full'>
           <a
-            class={`${colorWhenLangIsEn} hover:text-cBlue hover:bg-cBlack px-10 py-2 rounded transition-colors duration-300 ease-in h-full w-full flex place-items-center gap-2`}
+            class={`${''} hover:text-cBlue hover:bg-cBlack px-10 py-2 rounded transition-colors duration-300 ease-in h-full w-full flex place-items-center gap-2`}
             href={LANGUAGES.EN.path}
           >
-            {currentLocale === 'en' ? LANGUAGES.EN.nameEn : LANGUAGES.EN.name}
+            {LANGUAGES.EN.name}
           </a>
         </li>
       </ul>
