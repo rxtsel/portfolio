@@ -8,6 +8,7 @@ categories: ['all', 'linux', 'terminal']
 tags: ['all', 'linux', 'terminal']
 author: ['Cristhian Melo']
 keywords: 'rxtsel, Cristhian Melo, Blog'
+lang: 'es'
 ---
 
 ## Instalación

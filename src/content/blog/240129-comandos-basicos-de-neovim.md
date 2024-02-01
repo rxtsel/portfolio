@@ -8,6 +8,7 @@ categories: ['Terminal', 'Neovim']
 tags: ['Terminal', 'Neovim']
 author: ['Cristhian Melo']
 keywords: 'rxtsel, Cristhian Melo, Blog'
+lang: 'es'
 ---
 
 ## ¿Qué es neovim?
