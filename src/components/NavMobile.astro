@@ -1,12 +1,38 @@
 ---
-import { LANGUAGES, getLocalizedPathname, getLangFromUrl } from '@/i18n/utils'
-import { ROUTES, type TIconRoutes } from '@/constants/routes'
+import {
+  LANGUAGES,
+  getLocalizedPathname,
+  getLangFromUrl,
+  useTranslations
+} from '@/i18n/utils'
+import { type TIconRoutes } from '@/constants/routes'
 import NavIcon from '@/components/NavIcon.astro'
 import Logo from '@/icons/Logo.astro'
 import TranslateIcon from '@/icons/Translate.astro'
 
 const { pathname } = Astro.url
 const lang = getLangFromUrl(Astro.url)
+
+const t = useTranslations(lang)
+
+const ROUTES = {
+  home: {
+    path: `/${lang || ''}#top`,
+    name: t('nav.home')
+  },
+  portfolio: {
+    path: `/${lang || ''}#portfolio`,
+    name: t('nav.portfolio')
+  },
+  aboutMe: {
+    path: `/${lang || ''}#about-me`,
+    name: t('nav.about')
+  },
+  blog: {
+    path: `/${lang || ''}/blog`,
+    name: 'Blog'
+  }
+}
 ---
 
 <nav class='flex w-full max-w-6xl mx-auto items-center justify-between'>
