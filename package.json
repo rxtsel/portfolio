@@ -9,7 +9,7 @@
     "preview": "astro preview",
     "astro": "astro",
     "newpost": "node ./src/scripts/newpost.cjs",
-    "phoenix": "rm ./node_modules/ && rm ./bun.lockb"
+    "phoenix": "rm ./node_modules/ -rf && rm ./bun.lockb && ni"
   },
   "dependencies": {
     "@astrojs/mdx": "^2.1.0",
