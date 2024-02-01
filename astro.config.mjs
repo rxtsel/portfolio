@@ -47,5 +47,11 @@ export default defineConfig({
   ],
   markdown: {
     rehypePlugins: [[rehypeExternalLinks, externalLinksOptions]]
+  },
+  redirects: {
+    '/blog/240129-comandos-basicos-de-neovim/': {
+      status: 301,
+      destination: '/es/blog/240129-basic-commands-for-neovim/'
+    }
   }
 })
