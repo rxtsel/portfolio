@@ -1,5 +1,5 @@
 ---
-import { ROUTES, LANGUAGES } from '@/constants/routes'
+import { ROUTES, LANGUAGES, type TIconRoutes } from '@/constants/routes'
 import NavIcon from '@/components/NavIcon.astro'
 import Logo from '@/icons/Logo.astro'
 import TranslateIcon from '@/icons/Translate.astro'
@@ -19,7 +19,7 @@ import TranslateIcon from '@/icons/Translate.astro'
     class='text-cWhite grid grid-cols-2 place-content-center place-items-center justify-center gap-5 uppercase absolute transform -translate-y-28 left-0 right-0 mx-auto w-full p-5 rounded-2xl text-xxs bg-cPaper shadow-md z-10'
   >
     {
-      Object.entries(ROUTES).map(([_key, { name, path, icon }]) => (
+      Object.entries(ROUTES).map(([key, { name, path }]) => (
         <li class='size-full'>
           <a
             class='text-cWhite hover:text-cBlue transition-colors duration-300 ease-in h-full w-full flex flex-col place-items-center gap-2'
@@ -27,7 +27,7 @@ import TranslateIcon from '@/icons/Translate.astro'
             href={path}
           >
             <div class='size-6'>
-              <NavIcon name={icon} />
+              <NavIcon name={key as TIconRoutes} />
             </div>
             {name}
           </a>

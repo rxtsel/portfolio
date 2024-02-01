@@ -9,23 +9,19 @@ const t = useTranslations(lang)
 export const ROUTES = {
   home: {
     path: '#top',
-    name: t('nav.home'),
-    icon: 'Home'
+    name: t('nav.home')
   },
   portfolio: {
     path: '#portfolio',
-    name: t('nav.portfolio'),
-    icon: 'Portfolio'
+    name: t('nav.portfolio')
   },
   aboutMe: {
     path: '#about-me',
-    name: t('nav.about'),
-    icon: 'About'
+    name: t('nav.about')
   },
   blog: {
     path: '/blog',
-    name: 'Blog',
-    icon: 'Blog'
+    name: 'Blog'
   }
 }
 

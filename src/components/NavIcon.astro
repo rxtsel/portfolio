@@ -1,5 +1,5 @@
 ---
-import { TIconRoutes } from '@/types'
+import type { TIconRoutes } from '@/constants/routes'
 import HomeIcon from '@/icons/Home.astro'
 import UserIcon from '@/icons/User.astro'
 import PortfolioIcon from '@/icons/Portfolio.astro'
@@ -12,10 +12,10 @@ interface Props {
 const { name } = Astro.props
 ---
 
-{name === 'Home' && <HomeIcon />}
+{name === 'home' && <HomeIcon />}
 
-{name === 'About' && <UserIcon />}
+{name === 'aboutMe' && <UserIcon />}
 
-{name === 'Portfolio' && <PortfolioIcon />}
+{name === 'portfolio' && <PortfolioIcon />}
 
-{name === 'Blog' && <BlogIcon />}
+{name === 'blog' && <BlogIcon />}
