@@ -9,7 +9,7 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "newpost": "node ./src/scripts/newpost.cjs",
+    "newpost": "node ./src/scripts/newpost/index.js",
     "phoenix": "rm ./node_modules/ -rf && rm ./bun.lockb && ni"
   },
   "dependencies": {
