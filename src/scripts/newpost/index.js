@@ -21,7 +21,7 @@ cover: ''
 categories: ["all"]
 tags: ["all"]
 author: ["${postData.author}"]
-keywords: ["rxtsel", "Cristhian Melo", "Blog"]
+keywords: 'rxtsel, Cristhian Melo, Blog'
 lang: ${lang}
 ---\n\nEnter your content here...`
 
