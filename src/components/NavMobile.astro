@@ -1,11 +1,5 @@
 ---
-import {
-  LANGUAGES,
-  getLocalizedPathname,
-  getLangFromUrl,
-  useTranslations
-} from '@/i18n/utils'
-import { type TIconRoutes } from '@/constants/routes'
+import { LANGUAGES, getLocalizedPathname, getLangFromUrl } from '@/i18n/utils'
 import NavIcon from '@/components/NavIcon.astro'
 import Logo from '@/icons/Logo.astro'
 import TranslateIcon from '@/icons/Translate.astro'
@@ -13,31 +7,12 @@ import TranslateIcon from '@/icons/Translate.astro'
 const { pathname } = Astro.url
 const lang = getLangFromUrl(Astro.url)
 
-const t = useTranslations(lang)
-
-const ROUTES = {
-  home: {
-    path: `/${lang || ''}#top`,
-    name: t('nav.home')
-  },
-  portfolio: {
-    path: `/${lang || ''}#portfolio`,
-    name: t('nav.portfolio')
-  },
-  aboutMe: {
-    path: `/${lang || ''}#about-me`,
-    name: t('nav.about')
-  },
-  blog: {
-    path: `/${lang || ''}/blog`,
-    name: 'Blog'
-  }
-}
+const { routes } = Astro.props
 ---
 
 <nav class='flex w-full max-w-6xl mx-auto items-center justify-between'>
   <a
-    href={ROUTES.home.path}
+    href={routes.home.path}
     class='h-10 w-10 flex-grow max-w-16 order-2'
     aria-label='logo of the website rxtel.dev'
   >
@@ -49,7 +24,7 @@ const ROUTES = {
     class='text-cWhite grid grid-cols-2 place-content-center place-items-center justify-center gap-5 uppercase absolute transform -translate-y-28 left-0 right-0 mx-auto w-full p-5 rounded-2xl text-xxs bg-cPaper shadow-md z-10'
   >
     {
-      Object.entries(ROUTES).map(([key, { name, path }]) => (
+      Object.entries(routes).map(([key, { name, path }]) => (
         <li class='size-full'>
           <a
             class='text-cWhite hover:text-cBlue transition-colors duration-300 ease-in h-full w-full flex flex-col place-items-center gap-2'
@@ -57,7 +32,7 @@ const ROUTES = {
             href={path}
           >
             <div class='size-6'>
-              <NavIcon name={key as TIconRoutes} />
+              <NavIcon name={key} />
             </div>
             {name}
           </a>

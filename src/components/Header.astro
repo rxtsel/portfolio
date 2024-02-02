@@ -1,19 +1,42 @@
 ---
 import NavDesktop from '@/components/NavDesktop.astro'
 import NavMobile from '@/components/NavMobile.astro'
+import { getLangFromUrl, useTranslations } from '@/i18n/utils'
+
+const lang = getLangFromUrl(Astro.url)
+const t = useTranslations(lang)
+
+const ROUTES = {
+  home: {
+    path: `/${lang || ''}#top`,
+    name: t('nav.home')
+  },
+  portfolio: {
+    path: `/${lang || ''}#portfolio`,
+    name: t('nav.portfolio')
+  },
+  aboutMe: {
+    path: `/${lang || ''}#about-me`,
+    name: t('nav.about')
+  },
+  blog: {
+    path: `/${lang || ''}/blog`,
+    name: 'Blog'
+  }
+}
 ---
 
 <header
   id='header'
   class='hidden lg:block full p-2 fixed top-0 left-0 right-0 z-10'
 >
-  <NavDesktop />
+  <NavDesktop routes={ROUTES} />
 </header>
 
 <header
   class='block lg:hidden full px-4 py-3 fixed bottom-5 sm:bottom-10 left-0 right-0 z-50 bg-cPaper/10 backdrop-blur-xl shadow-md max-w-xs sm:max-w-sm mx-auto w-full rounded-2xl'
 >
-  <NavMobile />
+  <NavMobile routes={ROUTES} />
 </header>
 
 <style>

@@ -17,29 +17,12 @@ const t = useTranslations(lang)
 
 const { pathname } = Astro.url
 
-const ROUTES = {
-  home: {
-    path: `/${lang || ''}#top`,
-    name: t('nav.home')
-  },
-  portfolio: {
-    path: `/${lang || ''}#portfolio`,
-    name: t('nav.portfolio')
-  },
-  aboutMe: {
-    path: `/${lang || ''}#about-me`,
-    name: t('nav.about')
-  },
-  blog: {
-    path: `/${lang || ''}/blog`,
-    name: 'Blog'
-  }
-}
+const { routes } = Astro.props
 ---
 
 <nav class='flex w-full max-w-6xl mx-auto items-center justify-between'>
   <a
-    href={ROUTES.home.path}
+    href={routes.home.path}
     class='h-16 w-16 flex-grow max-w-36'
     aria-label='logo of the website rxtel.dev'
   >
@@ -48,7 +31,7 @@ const ROUTES = {
 
   <ul class='text-cWhite flex space-x-4 uppercase'>
     {
-      Object.entries(ROUTES).map(([_key, route]) => (
+      Object.entries(routes).map(([_key, route]) => (
         <li>
           <a
             class='text-cWhite hover:text-cBlue transition-colors duration-300 ease-in'
