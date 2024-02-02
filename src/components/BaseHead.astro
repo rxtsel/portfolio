@@ -21,7 +21,7 @@ const canonicalPathname = pathNameIsInLanguage(Astro.url.pathname, DEFAULT_LANG)
   : getLocalizedPathname(Astro.url.pathname, DEFAULT_LANG)
 const canonicalURL = new URL(canonicalPathname, Astro.site)
 
-const { title, description, image = '/meta_tags_large_icon.png' } = Astro.props
+const { title, description, image } = Astro.props
 
 const alternateLang = Object.keys(LANGUAGES) as LANG[]
 const alternateLinks = alternateLang.map((_lang: LANG) => {
@@ -30,6 +30,8 @@ const alternateLinks = alternateLang.map((_lang: LANG) => {
     hreflang: _lang
   }
 })
+
+console.log(image)
 ---
 
 <!-- Global Metadata -->
