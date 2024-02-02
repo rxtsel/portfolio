@@ -1,7 +1,7 @@
 ---
 title: 'Cómo instalar Arch Linux usando la línea de comandos'
 draft: false
-description: 'Explore the comprehensive guide on installing Arch Linux effortlessly using the command line interface.'
+description: 'Explora la guía completa sobre cómo instalar Arch Linux de manera sencilla utilizando la interfaz de línea de comandos.'
 pubDate: '2024-02-02T20:29:07.661Z'
 cover: ''
 categories: ['all']
@@ -401,4 +401,3 @@ Puedes buscar sobre ello y elegir el que más te guste, en mi caso prefiero **TW
 ![2022-02-08_23-54](https://user-images.githubusercontent.com/85462420/153124501-184c5032-5d63-4e65-8555-d28113140f6c.png)
 
 </details>
-
