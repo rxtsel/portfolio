@@ -1,10 +1,11 @@
 ---
+import { getLangFromUrl } from '@/i18n/utils'
 export interface Props {
   date: Date
 }
 const { date } = Astro.props
 
-const { lang } = Astro.params
+const lang = getLangFromUrl(Astro.url)
 ---
 
 <time datetime={date.toISOString()} class='text-neutral-400 text-sm'>

@@ -1,15 +1,10 @@
 ---
 import Post from '@/components/Post.astro'
 import Section from '@/components/Section.astro'
-import { useTranslations } from '@/i18n/utils'
+import { getLangFromUrl, useTranslations } from '@/i18n/utils'
 import { getBlogPosts } from '@/content/config'
-import type { TPostList } from '@/types'
 
-interface TPostWithSlug extends Partial<TPostList> {
-  slug: string
-}
-
-const { lang } = Astro.params
+const lang = getLangFromUrl(Astro.url)
 const t = useTranslations(lang)
 
 const posts = (await getBlogPosts())
@@ -22,12 +17,12 @@ const posts = (await getBlogPosts())
 <Section title={t('messages.latestPosts')}>
   <ul class='grid gap-4'>
     {
-      posts.slice(0, 3).map((post: TPostWithSlug) => (
+      posts.slice(0, 3).map((post) => (
         <li>
           <Post
             title={post.data.title}
             description={post.data.description}
-            date={post.data.pubDate}
+            date={post.data.pubDate || '2023-01-01T00:00:00.000Z'}
             url={`/${lang || ''}/blog/${post.slug}`}
           />
         </li>
