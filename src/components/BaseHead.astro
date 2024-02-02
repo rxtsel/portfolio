@@ -16,10 +16,17 @@ interface Props {
   lang: string
 }
 
-const canonicalPathname = pathNameIsInLanguage(Astro.url.pathname, DEFAULT_LANG)
-  ? Astro.url.pathname
-  : getLocalizedPathname(Astro.url.pathname, DEFAULT_LANG)
-const canonicalURL = new URL(canonicalPathname, Astro.site)
+const canonicalPathname = () => {
+  if (Astro.url.pathname.includes('/es')) {
+    return '/'
+  } else {
+    return pathNameIsInLanguage(Astro.url.pathname, DEFAULT_LANG)
+      ? Astro.url.pathname
+      : getLocalizedPathname(Astro.url.pathname, DEFAULT_LANG)
+  }
+}
+
+const canonicalURL = new URL(canonicalPathname(), Astro.site)
 
 const { title, description, image } = Astro.props
 
@@ -30,8 +37,6 @@ const alternateLinks = alternateLang.map((_lang: LANG) => {
     hreflang: _lang
   }
 })
-
-console.log(image)
 ---
 
 <!-- Global Metadata -->
