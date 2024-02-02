@@ -2,13 +2,14 @@
   "name": "portfolio",
   "version": "0.0.1",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "newpost": "node ./src/scripts/newpost.cjs",
+    "newpost": "node ./src/scripts/newpost/index.js",
     "phoenix": "rm ./node_modules/ -rf && rm ./bun.lockb && ni"
   },
   "dependencies": {
@@ -23,6 +24,8 @@
   },
   "devDependencies": {
     "@astrojs/sitemap": "1.2.1",
+    "@inquirer/confirm": "2.0.17",
+    "@inquirer/input": "1.2.16",
     "@tailwindcss/typography": "^0.5.10",
     "prettier": "^3.1.1",
     "prettier-plugin-astro": "^0.12.3"
