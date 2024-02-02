@@ -3,6 +3,7 @@ import sitemap from '@astrojs/sitemap'
 import tailwind from '@astrojs/tailwind'
 import expressiveCode from 'astro-expressive-code'
 import mdx from '@astrojs/mdx'
+import robotsTxt from 'astro-robots-txt'
 
 // Mdx plugins
 import rehypeExternalLinks from 'rehype-external-links'
@@ -20,6 +21,7 @@ export default defineConfig({
   integrations: [
     sitemap(),
     tailwind(),
+    robotsTxt(),
     expressiveCode({
       themes: ['github-dark', 'solarized-dark'],
       styleOverrides: {
@@ -55,3 +57,4 @@ export default defineConfig({
     }
   }
 })
+
