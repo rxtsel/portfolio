@@ -24,7 +24,13 @@ export async function getStaticPaths() {
 const t = useTranslations()
 ---
 
-<Layout title='Cristhian Melo · Blog' description={t('blog.p1')} lang={lang} isNotHome>
+<Layout
+  title='Cristhian Melo · Blog'
+  description={t('blog.p1')}
+  lang={lang}
+  isNotHome
+  keywords={t('site.keywords')}
+>
   <Header />
 
   <main class='max-w-4xl py-20 lg:pb-10 sm:py-44 mx-auto px-2'>

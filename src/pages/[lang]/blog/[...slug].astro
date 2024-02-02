@@ -32,6 +32,7 @@ const imageOG = new URL(`${Astro.url}/og.png`).href
   lang={lang}
   isNotHome={true}
   image={imageOG}
+  keywords={post.data.keywords}
 >
   <Header />
 

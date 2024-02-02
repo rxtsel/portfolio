@@ -23,7 +23,12 @@ export async function getStaticPaths() {
 }
 ---
 
-<Layout lang={lang} title={t('site.title')} description={t('site.description')}>
+<Layout
+  lang={lang}
+  title={t('site.title')}
+  description={t('site.description')}
+  keywords={t('site.keywords')}
+>
   <Header />
   <main class='w-full px-2 z-0'>
     <Hero />

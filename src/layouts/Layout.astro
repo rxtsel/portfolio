@@ -8,9 +8,17 @@ interface Props extends Partial<TPost> {
   description: string
   lang: string
   image?: string
+  keywords: string
 }
 
-const { title, lang, description, isNotHome = false, image } = Astro.props
+const {
+  title,
+  lang,
+  description,
+  isNotHome = false,
+  image,
+  keywords
+} = Astro.props
 
 const bgHero = isNotHome
   ? 'bg-transparent bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(0,68,149,0.1),rgba(255,255,255,0))]'
@@ -27,6 +35,7 @@ const ogImage = image || new URL(`${Astro.site}meta_tags_large_icon.png`).href
       title={title}
       description={description}
       image={ogImage}
+      keywords={keywords}
     />
   </head>
 
