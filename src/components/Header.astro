@@ -6,17 +6,19 @@ import { getLangFromUrl, useTranslations } from '@/i18n/utils'
 const lang = getLangFromUrl(Astro.url)
 const t = useTranslations(lang)
 
+const path = lang === 'en' ? `/${lang}` : ''
+
 const ROUTES = {
   home: {
-    path: `/#top`,
+    path: `${path}/#top`,
     name: t('nav.home')
   },
   portfolio: {
-    path: `/#portfolio`,
+    path: `${path}/#portfolio`,
     name: t('nav.portfolio')
   },
   aboutMe: {
-    path: `/#about-me`,
+    path: `${path}/#about-me`,
     name: t('nav.about')
   },
   blog: {
