@@ -10,7 +10,7 @@ export interface PostProps {
 const { title, description, date, url } = Astro.props
 ---
 
-<a href={url ? url : ''}>
+<a href={url || ''}>
   <div
     class='flex flex-col rounded-md border border-neutral-800 p-4 transition-all duration-300 ease-in hover:bg-neutral-800/40'
   >
@@ -20,9 +20,9 @@ const { title, description, date, url } = Astro.props
     >
       {title}
     </h2>
-    <p class='my-2 text-cAccent'
-      transition:name={`post ${description}`}
-    >{description}</p>
+    <p class='my-2 text-cAccent' transition:name={`post ${description}`}>
+      {description}
+    </p>
     <FormatDate date={date} />
   </div>
 </a>

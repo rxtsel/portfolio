@@ -7,7 +7,8 @@ heroImage: 'PWA.png'
 categories: ['Terminal', 'Neovim']
 tags: ['Terminal', 'Neovim']
 author: ['Cristhian Melo']
-keywords: 'rxtsel, Cristhian Melo, Blog'
+keywords: 'rxtsel, Cristhian Melo, Blog, Neovim,Editor de texto,Modo normal,Modo insertar,Modo visual,Modo comando,Modo terminal,Comandos básicos,Navegación en Neovim,Configuración Neovim,LazyVim,Plugins Neovim,Temas Neovim,Cristhian Melo,Terminal,Blog,Tutorial Neovim,Texto en la terminal,Personalización Neovim,Experiencia de usuario'
+lang: 'es'
 ---
 
 ## ¿Qué es neovim?
@@ -32,11 +33,11 @@ Debe saber que neovim tiene diferentes modos, que son:
 
 Yo tengo un plugin que me muestra en que modo estoy, pero si tu no lo tienes, puedes verlo en la esquina inferior izquierda, te mostrará el modo en el que estás:
 
-- Modo normal: ![image](../../../public/blog/240129-comandos-basicos-de-neovim/lualine-normal-mode.webp)
-- Modo insertar: ![image](../../../public/blog/240129-comandos-basicos-de-neovim/lualine-insert-mode.webp)
-- Modo visual: ![image](../../../public/blog/240129-comandos-basicos-de-neovim/lualine-visual-mode.webp)
-- Modo comando: ![image](../../../public/blog/240129-comandos-basicos-de-neovim/lualine-command-mode.webp)
-- Modo terminal: ![image](../../../public/blog/240129-comandos-basicos-de-neovim/lualine-terminal-mode.webp)
+- Modo normal: ![image](/blog/240129-comandos-basicos-de-neovim/lualine-normal-mode.webp)
+- Modo insertar: ![image](/blog/240129-comandos-basicos-de-neovim/lualine-insert-mode.webp)
+- Modo visual: ![image](/blog/240129-comandos-basicos-de-neovim/lualine-visual-mode.webp)
+- Modo comando: ![image](/blog/240129-comandos-basicos-de-neovim/lualine-command-mode.webp)
+- Modo terminal: ![image](/blog/240129-comandos-basicos-de-neovim/lualine-terminal-mode.webp)
 
 ## Comandos
 

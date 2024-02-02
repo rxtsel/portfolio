@@ -1,75 +1,75 @@
 ---
-import type { TMetatags, Data } from '@/types'
+import BaseHead from '../components/BaseHead.astro'
+import type { TPost } from '@/types'
 
-export interface Props {
+interface Props extends Partial<TPost> {
+  isNotHome?: boolean
   title: string
-  metaFor: TMetatags
-  postData?: Partial<Data>
-  slug?: string
+  description: string
+  lang: string
 }
 
-import Head from '@/components/Head.astro'
+const { title, lang, description, isNotHome = false } = Astro.props
 
-const { title, metaFor, postData, slug } = Astro.props
-const { currentLocale } = Astro
-
-const bgHero =
-  metaFor === 'Base'
-    ? 'absolute w-full h-screen bottom-0 left-0 right-0 top-0 bg-[linear-gradient(to_right,#4f4f4f2e_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f2e_1px,transparent_1px)] bg-[size:40px_40px] md:bg-[size:50px_50px] lg:bg-[size:70px_70px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] -z-10'
-    : 'absolute top-0 -z-10 h-screen w-full bg-transparent bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(0,68,149,0.1),rgba(255,255,255,0))]'
+const bgHero = isNotHome
+  ? 'bg-transparent bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(0,68,149,0.1),rgba(255,255,255,0))]'
+  : 'bottom-0 left-0 right-0 bg-[linear-gradient(to_right,#4f4f4f2e_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f2e_1px,transparent_1px)] bg-[size:40px_40px] md:bg-[size:50px_50px] lg:bg-[size:70px_70px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]'
 ---
 
 <!doctype html>
-<html lang={currentLocale}>
-  <Head title={title} metaFor={metaFor} postData={postData} slug={slug} />
+<html lang={lang}>
+  <head>
+    <BaseHead lang={lang} title={title} description={description} />
+  </head>
 
   <body class='antialiased relative bg-cBlack'>
-    <div class={bgHero}></div>
+    <div class={`w-full h-screen absolute top-0 -z-10 ${bgHero}`}></div>
     <slot />
-    <style is:global>
-      @font-face {
-        font-family: 'Satoshi';
-        src: url('/fonts/Satoshi.woff2') format('woff2');
-        font-style: normal;
-        font-weight: 300 900;
-        font-display: swap;
-      }
-
-      html {
-        scroll-behavior: smooth;
-        font-family:
-          Satoshi,
-          ui-sans-serif,
-          system-ui,
-          -apple-system,
-          BlinkMacSystemFont,
-          Segoe UI,
-          Roboto,
-          Helvetica Neue,
-          Arial,
-          Noto Sans,
-          sans-serif,
-          'Apple Color Emoji',
-          'Segoe UI Emoji',
-          Segoe UI Symbol,
-          'Noto Color Emoji';
-      }
-
-      ::-webkit-scrollbar {
-        width: 10px;
-      }
-
-      ::-webkit-scrollbar-track {
-        background: #121212;
-      }
-
-      ::-webkit-scrollbar-thumb {
-        background: #4b4b4b;
-      }
-
-      ::selection {
-        @apply text-cBlue;
-      }
-    </style>
   </body>
 </html>
+
+<style is:global>
+  @font-face {
+    font-family: 'Satoshi';
+    src: url('/fonts/Satoshi.woff2') format('woff2');
+    font-style: normal;
+    font-weight: 300 900;
+    font-display: swap;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    font-family:
+    Satoshi,
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    Segoe UI,
+    Roboto,
+    Helvetica Neue,
+    Arial,
+    Noto Sans,
+    sans-serif,
+    'Apple Color Emoji',
+    'Segoe UI Emoji',
+    Segoe UI Symbol,
+    'Noto Color Emoji';
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #121212;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #4b4b4b;
+  }
+
+  ::selection {
+    @apply text-cBlue;
+  }
+</style>

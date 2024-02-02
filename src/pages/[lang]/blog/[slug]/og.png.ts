@@ -1,15 +1,16 @@
-import { getCollection, type CollectionEntry } from 'astro:content'
 import fs from 'fs'
 import path from 'path'
 import { ImageResponse } from '@vercel/og'
+import { getBlogPosts } from '@/content/config'
+import type { TPostList } from '@/types'
 
 interface Props {
   params: { slug: string }
-  props: { post: CollectionEntry<'blog'> }
+  props: { page: TPostList }
 }
 
 export async function GET({ props }: Props) {
-  const { post } = props
+  const post = props
 
   // using custom font files
   const Satoshi = fs.readFileSync(path.resolve('./public/fonts/Satoshi.woff'))
@@ -124,9 +125,14 @@ export async function GET({ props }: Props) {
 
 // to generate an image for each blog posts in a collection
 export async function getStaticPaths() {
-  const blogPosts = await getCollection('blog')
-  return blogPosts.map((post) => ({
-    params: { slug: post.slug },
-    props: { post }
-  }))
+  const blogPosts = await getBlogPosts()
+
+  const posts = blogPosts.map((post) => {
+    return {
+      params: { lang: post?.data.lang || 'en', slug: post.slug },
+      props: post
+    }
+  })
+
+  return posts
 }

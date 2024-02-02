@@ -4,23 +4,21 @@ import ArrowTr from '@/icons/ArrowTr.astro'
 import Github from '@/icons/Github.astro'
 import Lock from '@/icons/Lock.astro'
 import Popover from '@/components/Popover.astro'
+import { getLangFromUrl, useTranslations } from '@/i18n/utils'
 
 export interface Props {
   props: iProject
 }
 
-import { getI18N } from '@/i18n'
-
-const { currentLocale } = Astro
-const i18n = getI18N({ currentLocale })
+const lang = getLangFromUrl(Astro.url)
+const t = useTranslations(lang)
 
 const { props } = Astro.props
 const { title, titleEn, url, gh, description, descriptionEn, tags, team } =
   props
 
-// translations
-const titleT = titleEn && currentLocale === 'en' ? titleEn : title
-const descriptionT = currentLocale === 'en' ? descriptionEn : description
+const titleT = lang === 'en' ? titleEn : title
+const descriptionT = lang === 'en' ? descriptionEn : description
 ---
 
 <article class='flex flex-col rounded-md border border-neutral-800 p-4'>
@@ -29,7 +27,7 @@ const descriptionT = currentLocale === 'en' ? descriptionEn : description
       url ? (
         <a href={url} target='_blank' class='group text-xl font-medium'>
           <div class='flex items-center space-x-2 transition-colors duration-300 ease-in  hover:text-cBlue'>
-            <h3>{titleT}</h3>
+            <h3>{title}</h3>
             <div class='size-3 inline-block text-cAccent transition-all duration-300 ease-in group-hover:-translate-y-[1px] group-hover:translate-x-[1px] group-hover:text-cBlue'>
               <ArrowTr />
             </div>
@@ -50,8 +48,8 @@ const descriptionT = currentLocale === 'en' ? descriptionEn : description
           <a
             href={gh}
             target='_blank'
-            title={i18n.messages.repository}
-            aria-label={i18n.messages.repository}
+            title={t('single.repository')}
+            aria-label={t('single.repository')}
             class='order-2'
           >
             <div class='text-cWhite transition-colors duration-300 ease-in hover:text-cBlue size-6'>
@@ -61,7 +59,7 @@ const descriptionT = currentLocale === 'en' ? descriptionEn : description
         ) : (
           <div
             class='order-2 text-neutral-600 size-6'
-            title={i18n.messages.private}
+            title={t('messages.ghPrivate')}
           >
             <Lock />
           </div>

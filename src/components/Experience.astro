@@ -1,28 +1,28 @@
 ---
 import Section from '@/components/Section.astro'
 import ExperienceItem from './ExperienceItem.astro'
-import { getI18N } from '@/i18n'
+import { getLangFromUrl, useTranslations } from '@/i18n/utils'
 
-const { currentLocale } = Astro
-const i18n = getI18N({ currentLocale })
+const lang = getLangFromUrl(Astro.url)
+const t = useTranslations(lang)
 
 const works = [
   {
     company: 'Visual Dealers',
     role: 'Front-end Developer',
     startDate: new Date('2023-04-01'),
-    description: i18n.experience.visualdealers.desc
+    description: t('experiense.vsdlrs')
   },
   {
     company: 'Vehement S.A.S',
     role: 'Front-end Developer',
     startDate: new Date('2022-09-01'),
-    description: i18n.experience.vehement.desc
+    description: t('experiense.vehement')
   }
 ]
 ---
 
-<Section title={i18n.experience.title}>
+<Section title={t('single.experience')}>
   <article class='section w-full lg:w-full max-w-3xl'>
     <ol
       class='relative border-s border-neutral-800 md:border-cAccent ml-2 md:ml-3'

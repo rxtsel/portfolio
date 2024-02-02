@@ -1,32 +1,34 @@
 ---
 import Post from '@/components/Post.astro'
 import Section from '@/components/Section.astro'
-import { type CollectionEntry, getCollection } from 'astro:content'
+import { useTranslations } from '@/i18n/utils'
+import { getBlogPosts } from '@/content/config'
+import type { TPostList } from '@/types'
 
-const allPosts = await getCollection('blog')
-const noDrafts = allPosts.filter((post) => !post.data.draft)
-const formattedPosts = noDrafts.sort(
-  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
-)
+interface TPostWithSlug extends Partial<TPostList> {
+  slug: string
+}
 
-type Post = CollectionEntry<'blog'>
+const { lang } = Astro.params
+const t = useTranslations(lang)
 
-import { getI18N } from '@/i18n'
-
-const { currentLocale } = Astro
-const i18n = getI18N({ currentLocale })
+const posts = (await getBlogPosts())
+  ?.filter((blog) => {
+    return blog?.data?.lang === lang
+  })
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
 ---
 
-<Section title={i18n.blog.latestPosts}>
+<Section title={t('messages.latestPosts')}>
   <ul class='grid gap-4'>
     {
-      formattedPosts.slice(0, 3).map((post: Post) => (
+      posts.slice(0, 3).map((post: TPostWithSlug) => (
         <li>
           <Post
             title={post.data.title}
             description={post.data.description}
             date={post.data.pubDate}
-            url={`/blog/${post.slug}`}
+            url={`/${lang || ''}/blog/${post.slug}`}
           />
         </li>
       ))

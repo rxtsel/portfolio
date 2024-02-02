@@ -1,31 +1,34 @@
 ---
-import { type CollectionEntry, getCollection } from 'astro:content'
-
 import Layout from '@/layouts/Layout.astro'
 import { Code } from 'astro-expressive-code/components'
 import Header from '@/components/Header.astro'
 import Footer from '@/components/Footer.astro'
 import FormatDate from '@/components/FormatDate.astro'
+import { getBlogPosts } from '@/content/config'
 
 export async function getStaticPaths() {
-  const posts = await getCollection('blog')
-  return posts.map((post) => ({
-    params: { slug: post.slug },
-    props: post
-  }))
-}
-type Props = CollectionEntry<'blog'>
+  const blogPosts = await getBlogPosts()
 
+  const posts = blogPosts.map((post) => {
+    return {
+      params: { lang: post?.data.lang || 'en', slug: post.slug },
+      props: post
+    }
+  })
+
+  return posts
+}
+
+const { lang } = Astro.params
 const post = Astro.props
-const { title, description, pubDate, tags } = post.data
 const { Content } = await post.render()
 ---
 
 <Layout
-  title={`Blog · ${title}`}
-  metaFor='Post'
-  postData={post.data}
-  slug={post.slug}
+  title={`Blog · ${post.data.title}`}
+  description={post.data.description}
+  lang={lang}
+  isNotHome={true}
 >
   <Header />
 
@@ -33,23 +36,23 @@ const { Content } = await post.render()
     <header class='pb-8'>
       <h1
         class='mb-2 text-4xl font-semibold pb-5'
-        transition:name={`post ${title}`}
+        transition:name={`post ${post.data.title}`}
       >
-        {title}
+        {post.data.title}
       </h1>
       <p
         class='text-xl
         text-[#d1d5db]
         font-medium'
-        transition:name={`post ${description}`}
+        transition:name={`post ${post.data.description}`}
       >
-        {description}
+        {post.data.description}
       </p>
 
       <footer class='flex justify-between items-center'>
         <div class='flex items-center gap-2 my-5 flex-wrap'>
           {
-            tags.sort().map((tag: string) => (
+            post.data.tags.sort().map((tag: string) => (
               <p
                 class='truncate capitalize rounded-md border border-neutral-800 bg-neutral-900 px-2 py-1 font-mono text-xs'
                 title={tag}
@@ -60,7 +63,7 @@ const { Content } = await post.render()
           }
         </div>
 
-        <FormatDate date={pubDate} />
+        <FormatDate date={post.data.pubDate} />
       </footer>
     </header>
 

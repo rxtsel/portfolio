@@ -1,30 +1,43 @@
 ---
-interface Props {
-  trailingSlash: string
-}
-
-import { ROUTES, LANGUAGES } from '@/constants/routes'
+import {
+  LANGUAGES,
+  getLocalizedPathname,
+  getLangFromUrl,
+  useTranslations
+} from '@/i18n/utils'
+import { type TIconRoutes } from '@/constants/routes'
+import NavIcon from '@/components/NavIcon.astro'
 import Logo from '@/icons/Logo.astro'
-import HomeIcon from '@/icons/Home.astro'
-import UserIcon from '@/icons/User.astro'
-import PortfolioIcon from '@/icons/Portfolio.astro'
-import Blog from '@/icons/Blog.astro'
 import TranslateIcon from '@/icons/Translate.astro'
 
-const { currentLocale } = Astro
+const { pathname } = Astro.url
+const lang = getLangFromUrl(Astro.url)
 
-const colorWhenLangIsEn = currentLocale === 'en' ? 'text-cBlue' : 'text-cWhite'
-const colorWhenLangIsEs = currentLocale === 'es' ? 'text-cBlue' : 'text-cWhite'
+const t = useTranslations(lang)
 
-// add slash before path if stay in blog page
-const { trailingSlash } = Astro.props
-
-const slash = trailingSlash ? '/' : ''
+const ROUTES = {
+  home: {
+    path: `/${lang || ''}#top`,
+    name: t('nav.home')
+  },
+  portfolio: {
+    path: `/${lang || ''}#portfolio`,
+    name: t('nav.portfolio')
+  },
+  aboutMe: {
+    path: `/${lang || ''}#about-me`,
+    name: t('nav.about')
+  },
+  blog: {
+    path: `/${lang || ''}/blog`,
+    name: 'Blog'
+  }
+}
 ---
 
 <nav class='flex w-full max-w-6xl mx-auto items-center justify-between'>
   <a
-    href={slash + ROUTES.home.path}
+    href={ROUTES.home.path}
     class='h-10 w-10 flex-grow max-w-16 order-2'
     aria-label='logo of the website rxtel.dev'
   >
@@ -35,67 +48,22 @@ const slash = trailingSlash ? '/' : ''
     id='nav-mobile'
     class='text-cWhite grid grid-cols-2 place-content-center place-items-center justify-center gap-5 uppercase absolute transform -translate-y-28 left-0 right-0 mx-auto w-full p-5 rounded-2xl text-xxs bg-cPaper shadow-md z-10'
   >
-    <li class='size-full z-10'>
-      <a
-        class='text-cWhite hover:text-cBlue transition-colors duration-300 ease-in h-full w-full flex flex-col place-items-center gap-2'
-        href={slash + ROUTES.home.path}
-        aria-label={currentLocale === 'en'
-          ? ROUTES.home.nameEn
-          : ROUTES.home.name}
-      >
-        <div class='size-6'>
-          <HomeIcon />
-        </div>
-
-        {currentLocale === 'en' ? ROUTES.home.nameEn : ROUTES.home.name}
-      </a>
-    </li>
-    <li class='size-full'>
-      <a
-        class='text-cWhite hover:text-cBlue transition-colors duration-300 ease-in h-full w-full flex flex-col place-items-center gap-2'
-        aria-label={currentLocale === 'en'
-          ? ROUTES.portfolio.nameEn
-          : ROUTES.portfolio.name}
-        href={slash + ROUTES.portfolio.path}
-      >
-        <div class='size-6'>
-          <PortfolioIcon />
-        </div>
-        {
-          currentLocale === 'en'
-            ? ROUTES.portfolio.nameEn
-            : ROUTES.portfolio.name
-        }
-      </a>
-    </li>
-    <li class='size-full'>
-      <a
-        class='text-cWhite hover:text-cBlue transition-colors duration-300 ease-in h-full w-full flex flex-col place-items-center gap-2'
-        aria-label={currentLocale === 'en'
-          ? ROUTES.aboutMe.nameEn
-          : ROUTES.aboutMe.name}
-        href={slash + ROUTES.aboutMe.path}
-      >
-        <div class='size-6'>
-          <UserIcon />
-        </div>
-        {currentLocale === 'en' ? ROUTES.aboutMe.nameEn : ROUTES.aboutMe.name}
-      </a>
-    </li>
-    <li class='size-full'>
-      <a
-        class='text-cWhite hover:text-cBlue transition-colors duration-300 ease-in h-full w-full flex flex-col place-items-center gap-2'
-        aria-label={currentLocale === 'en'
-          ? ROUTES.blog.nameEn
-          : ROUTES.blog.name}
-        href={ROUTES.blog.path}
-      >
-        <div class='size-6'>
-          <Blog />
-        </div>
-        {currentLocale === 'en' ? ROUTES.blog.nameEn : ROUTES.blog.name}
-      </a>
-    </li>
+    {
+      Object.entries(ROUTES).map(([key, { name, path }]) => (
+        <li class='size-full'>
+          <a
+            class='text-cWhite hover:text-cBlue transition-colors duration-300 ease-in h-full w-full flex flex-col place-items-center gap-2'
+            aria-label={name}
+            href={path}
+          >
+            <div class='size-6'>
+              <NavIcon name={key as TIconRoutes} />
+            </div>
+            {name}
+          </a>
+        </li>
+      ))
+    }
   </ul>
 
   <label class='hamburger order-3'>
@@ -113,42 +81,33 @@ const slash = trailingSlash ? '/' : ''
     id='lang-options'
     class='text-cWhite grid grid-cols-2 place-content-center place-items-center justify-center gap-5 uppercase absolute transform -translate-y-20 left-0 right-0 mx-auto w-full p-5 rounded-2xl text-xxs bg-cPaper shadow-md z-10'
   >
-    <li class='size-full z-10'>
-      <a
-        class={`${colorWhenLangIsEs} hover:text-cBlue transition-colors duration-300 ease-in h-full w-full flex flex-col place-items-center gap-2`}
-        href={LANGUAGES.ES.path}
-        aria-label='Change language'
-      >
-        <div class='size-6 flex items-end'>
-          <img
-            src={LANGUAGES.ES.flag}
-            alt={LANGUAGES.ES.name}
-            loading='lazy'
-            width='24'
-            height='24'
-          />
-        </div>
-
-        {currentLocale === 'en' ? LANGUAGES.ES.nameEn : LANGUAGES.ES.name}
-      </a>
-    </li>
-    <li class='size-full'>
-      <a
-        class={`${colorWhenLangIsEn} hover:text-cBlue transition-colors duration-300 ease-in h-full w-full flex flex-col place-items-center gap-2`}
-        href={LANGUAGES.EN.path}
-      >
-        <div class='size-6 flex items-end'>
-          <img
-            src={LANGUAGES.EN.flag}
-            alt={LANGUAGES.EN.name}
-            loading='lazy'
-            width='24'
-            height='24'
-          />
-        </div>
-        {currentLocale === 'en' ? LANGUAGES.EN.nameEn : LANGUAGES.EN.name}
-      </a>
-    </li>
+    {
+      Object.entries(LANGUAGES).map(([key, route]) => {
+        const href = getLocalizedPathname(pathname, key)
+        const isActive = lang === key ? 'text-cBlue' : 'text-cWhite'
+        const image = `/flag-${key}.webp`
+        return (
+          <li class='size-full'>
+            <a
+              class={`${isActive} hover:text-cBlue transition-colors duration-300 ease-in h-full w-full flex flex-col place-items-center gap-2`}
+              href={href}
+              aria-label={route}
+            >
+              <div class='size-6 flex items-end'>
+                <img
+                  src={image}
+                  alt={`flag for ${key}`}
+                  loading='lazy'
+                  width='24'
+                  height='24'
+                />
+              </div>
+              {route}
+            </a>
+          </li>
+        )
+      })
+    }
   </ul>
 
   <label
@@ -247,32 +206,45 @@ const slash = trailingSlash ? '/' : ''
       '.check-hamburger'
     ) as HTMLInputElement
     const $toggleLangBtn = document.querySelector('.lang') as HTMLInputElement
-    const $langCheckbok = document.querySelector(
+    const $langCheckbox = document.querySelector(
       '.check-lang'
     ) as HTMLInputElement
 
-    const $itemsLang = document.querySelectorAll('#lang-options li')
-    const $itemsNav = document.querySelectorAll('#nav-mobile li')
+    const $itemsLang = Array.from(
+      document.querySelectorAll('#lang-options li')
+    ) as HTMLAnchorElement[]
+    const $itemsNav = Array.from(
+      document.querySelectorAll('#nav-mobile li')
+    ) as HTMLButtonElement[]
 
-    // close nav if other nav item is open
-    const onClickNav = (elem, checkbox) =>
+    // close nav if another nav item is open
+    const onClickNav = (elem: HTMLInputElement, checkbox: HTMLInputElement) => {
       elem.addEventListener('click', () => {
         if (checkbox.checked) {
           checkbox.checked = false
           return
         }
       })
+    }
+
     onClickNav($toggleLangBtn, $hamburgerCheckbox)
-    onClickNav($hamburgerBtn, $langCheckbok)
+    onClickNav($hamburgerBtn, $langCheckbox)
+
+    type HTMLElementArray = HTMLButtonElement[] | HTMLAnchorElement[]
 
     // close nav when click on nav item
-    const onClickNavItem = (btn, checkbok) =>
-      btn.forEach((item) => {
+    const onClickNavItem = (
+      elements: HTMLElementArray,
+      checkbox: HTMLInputElement
+    ) => {
+      elements.forEach((item: HTMLButtonElement | HTMLAnchorElement) => {
         item.addEventListener('click', () => {
-          checkbok.checked = false
+          checkbox.checked = false
         })
       })
-    onClickNavItem($itemsLang, $langCheckbok)
+    }
+
+    onClickNavItem($itemsLang, $langCheckbox)
     onClickNavItem($itemsNav, $hamburgerCheckbox)
   })
 </script>

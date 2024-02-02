@@ -1,4 +1,5 @@
 ---
+import { LANGUAGES, type LANG, useTranslations } from '@/i18n/utils'
 import Layout from '@/layouts/Layout.astro'
 import Header from '@/components/Header.astro'
 import Hero from '@/components/Hero.astro'
@@ -11,13 +12,18 @@ import AboutMe from '@/components/AboutMe.astro'
 import Contact from '@/components/Contact.astro'
 import Footer from '@/components/Footer.astro'
 
-import { getI18N } from '@/i18n'
+const { lang } = Astro.params
+const t = useTranslations(lang)
 
-const { currentLocale } = Astro
-const i18n = getI18N({ currentLocale })
+export async function getStaticPaths() {
+  const keys = Object.keys(LANGUAGES)
+  return keys.map((lang) => {
+    return { params: { lang } }
+  })
+}
 ---
 
-<Layout title={i18n.site.title} metaFor='Base'>
+<Layout lang={lang} title={t('site.title')} description={t('site.description')}>
   <Header />
   <main class='w-full px-2 z-0'>
     <Hero />

@@ -7,7 +7,8 @@ heroImage: 'PWA.png'
 categories: ['all', 'linux', 'terminal']
 tags: ['all', 'linux', 'terminal']
 author: ['Cristhian Melo']
-keywords: 'rxtsel, Cristhian Melo, Blog'
+keywords: 'Zsh, Terminal Linux, Instalación Zsh, Configuración Zsh, Oh-my-zsh, Línea de comandos, Pacman, Terminal mejorada, Shell predeterminada, Chsh, Archivo .zshrc, Plugins Zsh, Git, Nvim, Tmux, Fnm, Bun, Tema Zsh, Sintaxis resaltada Zsh, Alias en Zsh'
+lang: 'es'
 ---
 
 ## Instalación

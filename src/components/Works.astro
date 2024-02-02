@@ -2,13 +2,13 @@
 import Section from '@/components/Section.astro'
 import ProjectCard from '@/components/ProjectCard.astro'
 import { works } from '@/data'
-import { getI18N } from '@/i18n'
+import { getLangFromUrl, useTranslations } from '@/i18n/utils'
 
-const { currentLocale } = Astro
-const i18n = getI18N({ currentLocale })
+const lang = getLangFromUrl(Astro.url)
+const t = useTranslations(lang)
 ---
 
-<Section title={i18n.works.title} id='portfolio'>
+<Section title={t('messages.latestWorks')} id='portfolio'>
   <div class='grid grid-cols-1 gap-4 sm:grid-cols-2'>
     {works.sort().map((work) => <ProjectCard props={work} />)}
   </div>
