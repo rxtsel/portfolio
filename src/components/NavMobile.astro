@@ -60,7 +60,7 @@ const { routes } = Astro.props
       Object.entries(LANGUAGES).map(([key, route]) => {
         const href = getLocalizedPathname(pathname, key)
         // redirect es to /
-        const fallbackLang = href.includes('es') ? '/' : href
+        const fallbackLang = href === `/${lang}` ? '/' : href
         const isActive = lang === key ? 'text-cBlue' : 'text-cWhite'
         const image = `/flag-${key}.webp`
         return (
