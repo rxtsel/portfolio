@@ -1,1 +1,39 @@
-<meta http-equiv='refresh' content='0;url=/es/' />
+---
+import { LANGUAGES, useTranslations, getLangFromUrl } from '@/i18n/utils'
+import Layout from '@/layouts/Layout.astro'
+import Header from '@/components/Header.astro'
+import Hero from '@/components/Hero.astro'
+import Experience from '@/components/Experience.astro'
+import Works from '@/components/Works.astro'
+import Projects from '@/components/Projects.astro'
+import LatestPosts from '@/components/LatestPosts.astro'
+import Tech from '@/components/Tech.astro'
+import AboutMe from '@/components/AboutMe.astro'
+import Contact from '@/components/Contact.astro'
+import Footer from '@/components/Footer.astro'
+
+const lang = getLangFromUrl(Astro.url)
+const t = useTranslations(lang)
+
+export async function getStaticPaths() {
+  const keys = Object.keys(LANGUAGES)
+  return keys.map((lang) => {
+    return { params: { lang } }
+  })
+}
+---
+
+<Layout lang={lang} title={t('site.title')} description={t('site.description')}>
+  <Header />
+  <main class='w-full px-2 z-0'>
+    <Hero />
+    <Experience />
+    <Works />
+    <Projects />
+    <LatestPosts />
+    <Tech />
+  </main>
+  <AboutMe />
+  <Contact />
+  <Footer />
+</Layout>

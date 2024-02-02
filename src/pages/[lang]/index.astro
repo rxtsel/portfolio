@@ -21,7 +21,14 @@ export async function getStaticPaths() {
     return { params: { lang } }
   })
 }
+
+const fallbackHomeEs = () => {
+  return Astro.url.pathname === '/es' || Astro.url.pathname === '/es/'
+}
+
 ---
+
+{fallbackHomeEs() ? (<meta http-equiv='refresh' content='0;url=/' />) : (
 
 <Layout lang={lang} title={t('site.title')} description={t('site.description')}>
   <Header />
@@ -37,3 +44,4 @@ export async function getStaticPaths() {
   <Contact />
   <Footer />
 </Layout>
+)}
