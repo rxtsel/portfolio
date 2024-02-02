@@ -61,14 +61,13 @@ const { routes } = Astro.props
         {
           Object.entries(LANGUAGES).map(([key, route]) => {
             const href = getLocalizedPathname(pathname, key)
-            const fallbackLang = href === `/${lang}` ? '/' : href
             const isActive =
               lang === key ? 'text-cBlue bg-cBlack' : 'text-cWhite'
             return (
               <li class='size-full'>
                 <a
                   class={`${isActive} hover:text-cBlue hover:bg-cBlack px-10 py-2 rounded transition-colors duration-300 ease-in h-full w-full flex place-items-center gap-2`}
-                  href={fallbackLang}
+                  href={href}
                   aria-label={route}
                 >
                   {route}
