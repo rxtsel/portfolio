@@ -1,7 +1,0 @@
-User-agent: *
-Allow: /
-
-# Host
-Host: https://rxtsel.dev
-
-Sitemap: https://rxtsel.dev/sitemap-index.xml
