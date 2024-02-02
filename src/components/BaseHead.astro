@@ -15,6 +15,7 @@ interface Props {
   description: string
   image?: string
   lang: string
+  keywords: string
 }
 
 const canonicalPathname = () => {
@@ -29,7 +30,7 @@ const canonicalPathname = () => {
 
 const canonicalURL = new URL(canonicalPathname(), Astro.site)
 
-const { title, description, image } = Astro.props
+const { title, description, image, keywords } = Astro.props
 
 const alternateLang = Object.keys(LANGUAGES) as LANG[]
 const alternateLinks = alternateLang.map((_lang: LANG) => {
@@ -44,8 +45,10 @@ const alternateLinks = alternateLang.map((_lang: LANG) => {
 <meta charset='UTF-8' />
 <meta name='viewport' content='width=device-width,initial-scale=1' />
 <meta name='generator' content={Astro.generator} />
+<meta name='author' content='Cristhian Melo' />
+<meta name='keywords' content={keywords} />
 <link rel='manifest' href='/site.webmanifest' />
-<link rel="sitemap" href="/sitemap-index.xml" />
+<link rel='sitemap' href='/sitemap-index.xml' />
 <Favicons />
 <ViewTransitions />
 
