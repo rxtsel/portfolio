@@ -1,0 +1,48 @@
+---
+import Layout from '@/layouts/Layout.astro'
+import Header from '@/components/Header.astro'
+import Footer from '@/components/Footer.astro'
+import { LANGUAGES, useTranslations } from '@/i18n/utils'
+
+export async function getStaticPaths() {
+  const keys = Object.keys(LANGUAGES)
+  return keys.map((lang) => {
+    return { params: { lang } }
+  })
+}
+
+const { lang } = Astro.params
+const t = useTranslations(lang)
+---
+
+<Layout
+  title={t('notFound.p1')}
+  description={t('notFound.p2')}
+  lang={lang}
+  keywords={t('site.keywords')}
+>
+  <Header />
+  <main
+    class='w-full px-2 z-0 text-cWhite min-h-[calc(100dvh-24dvh)] lg:min-h-[calc(100dvh-10dvh)] grid place-items-center'
+  >
+    <article>
+      <h1
+        class='text-[clamp(1.875rem,2vw+1rem,4rem)] font-bold leading-none mb-10 text-center'
+      >
+        {t('notFound.p1')}. 🥲
+      </h1>
+
+      <p class='text-center mb-10'>
+        {t('notFound.p2')}
+      </p>
+
+      <a
+        href='/'
+        class='block text-center border-b border-b-white max-w-max pb-3 mx-auto text-xl md:text-3xl'
+        >&LeftArrow; {t('notFound.p3')}</a
+      >
+    </article>
+  </main>
+
+  <Footer />
+</Layout>
