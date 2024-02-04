@@ -152,13 +152,13 @@ genfstab -U /mnt >> /mnt/etc/fstab
 
 ### 10. Ejecutar chroot:
 
-En mi caso, usaré la zona horaria de Bogotá, pero puedes elegir la que necesites.
-
 ```bash
 arch-chroot /mnt
 ```
 
 ### 11. Configurar zona horaria:
+
+En mi caso, usaré la zona horaria de Bogotá, pero puedes elegir la que necesites.
 
 ```bash
 ln -sf /usr/share/zoneinfo/America/Bogota /etc/localtime
@@ -225,7 +225,7 @@ nvim /etc/hosts
 
 ![image](https://user-images.githubusercontent.com/85462420/152463120-22b7cd94-42d2-40a1-8dda-d3320d9fc1a0.png)
 
-- _Escribe tal cuál la imagen. sólo reemplaza `myhostname` por el nombre que pusiste en tu `host`_
+- _Escribe tal cuál la imagen. sólo reemplaza `myhostname` por el nombre que pusiste en tu `hostname`_
 
 ### 17. Ejecutar initframs:
 
@@ -332,7 +332,7 @@ pacman -S vulkan-radeon vulkan-icd-loader mesa
 pacman -S xorg xorg-server xorg-xinit
 ```
 
-### En este punto ta tenemos toda la base de arch linux, apartir de aqui ya puedes reiniciar y volver a conectarte a internet para poder instalar un entorno de escritorio o un gestor de ventanas de tu preferencia.
+### En este punto ya tenemos toda la base de arch linux, apartir de aqui ya puedes reiniciar y volver a conectarte a internet para poder instalar un entorno de escritorio o un gestor de ventanas de tu preferencia.
 
 <br/>
 

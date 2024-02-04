@@ -225,7 +225,7 @@ nvim /etc/hosts
 
 ![image](https://user-images.githubusercontent.com/85462420/152463120-22b7cd94-42d2-40a1-8dda-d3320d9fc1a0.png)
 
-- _Write exactly as shown in the image. Just replace `myhostname` with the name you set in your `host`_
+- _Write exactly as shown in the image. Just replace `myhostname` with the name you set in your `hostname`_
 
 ### 17. Execute initramfs:
 
@@ -401,4 +401,3 @@ You can explore and choose the one you like the most. In my case, I prefer **TWM
 ![2022-02-08_23-54](https://user-images.githubusercontent.com/85462420/153124501-184c5032-5d63-4e65-8555-d28113140f6c.png)
 
 </details>
-
