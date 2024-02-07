@@ -2,11 +2,13 @@
 import { Code, TabItem, Tabs } from '@astrojs/starlight/components'
 
 type Props = {
-  exec?: string | undefined
   pkg?: string | undefined
+  exec?: string | undefined
+  prefix?: string | undefined
+  peer: boolean
 }
 
-const { pkg, exec } = Astro.props
+const { pkg, peer, exec, prefix } = Astro.props
 
 const buildCode = (...parts: (string | undefined)[]) => {
   const code = parts.filter(Boolean).join('\n')
@@ -16,19 +18,47 @@ const buildCode = (...parts: (string | undefined)[]) => {
 const tabContents = [
   {
     label: 'npm',
-    code: buildCode(pkg && exec ? `npx ${pkg} ${exec}` : `npm i ${exec}`)
+    code: buildCode(
+      prefix,
+      pkg
+        ? exec
+          ? `npx ${pkg} ${exec}`
+          : `npm i ${peer ? '--save-peer ' : ''}${pkg}`
+        : `npm i`
+    )
   },
   {
     label: 'pnpm',
-    code: buildCode(pkg && exec ? `pnpm ${pkg} ${exec}` : `pnpm i ${exec}`)
+    code: buildCode(
+      prefix,
+      pkg
+        ? exec
+          ? `pnpm ${pkg} ${exec}`
+          : `pnpm i ${peer ? '--save-peer ' : ''}${pkg}`
+        : `pnpm i`
+    )
   },
   {
     label: 'yarn',
-    code: buildCode(pkg && exec ? `yarn ${pkg} ${exec}` : `yarn add ${exec}`)
+    code: buildCode(
+      prefix,
+      pkg
+        ? exec
+          ? `yarn ${pkg} ${exec}`
+          : `yarn add ${pkg}${peer ? ' --peer ' : ''}`
+        : `yarn`
+    )
   },
   {
     label: 'bun',
-    code: buildCode(pkg && exec ? `bunx ${pkg} ${exec}` : `bun i ${exec}`)
+    code: buildCode(
+      prefix,
+      pkg
+        ? exec
+          ? `bunx ${pkg} ${exec}`
+          : `bun i ${pkg}${peer ? ' --peer' : ''}`
+        : `bun i`
+    )
   }
 ]
 ---
@@ -42,3 +72,4 @@ const tabContents = [
     ))
   }
 </Tabs>
+
