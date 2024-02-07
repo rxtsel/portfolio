@@ -4,23 +4,32 @@ draft: false
 description: 'Aprende cómo mejorar la calidad y consistencia de tus commits en proyectos de software con Husky y Commitlint. Esta guía proporciona instrucciones paso a paso sobre cómo instalar y configurar estas poderosas herramientas, asegurando una mejor colaboración y mantenimiento del código a través de mensajes de commit estandarizados.'
 pubDate: '2024-02-07T18:40:10.762Z'
 cover: ''
-categories: ["Commits", "Linter"]
-tags: ["Commits", "Linter", "Automation", "Quality", "Conventions", "Tools", "Collaboration"]
+categories: ['Commits', 'Linter']
+tags:
+  [
+    'Commits',
+    'Linter',
+    'Automation',
+    'Quality',
+    'Conventions',
+    'Tools',
+    'Collaboration'
+  ]
 author: ['Cristhian Melo']
 keywords: 'Desarrollo de software, calidad del código, commits consistentes, convenciones de commit, Husky, Commitlint, Git Hooks, automatización de procesos, control de versiones'
 lang: es
 ---
-
-import PackageManagers from '@/components/PackageManagers.astro'
 
 # Introducción
 
 **Husky** y **Commitlint** son herramientas poderosas que pueden mejorar la calidad y consistencia de tus commits en proyectos de desarrollo de software. [Husky](https://typicode.github.io/husky/) te permite configurar [Git Hooks](#qué-es-un-git-hook) en tu repositorio de Git, mientras que [Commitlint](https://commitlint.js.org/#/) te ayuda a aplicar convenciones de mensajes de commit consistentes. ([Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/)). En esta guía paso a paso, aprenderás cómo instalar y configurar Husky y Commitlint en tus proyectos.
 
 ## ❌
+
 ![image](/blog/how-to-install-husky-and-commitlint-in-your-projects-a-step-by-step-guide/no-conventional-commit.webp)
 
 ## ✅
+
 ![image](/blog/how-to-install-husky-and-commitlint-in-your-projects-a-step-by-step-guide/conventional-commit.webp)
 
 ## ¿Qué es un Git Hook?
@@ -51,11 +60,9 @@ git init
 
 Husky se puede instalar fácilmente usando cualquier gestor de paquetes. En tu terminal, ejecuta el siguiente comando para instalar Husky como una dependencia de desarrollo en tu proyecto:
 
-<PackageManagers pkg='husky-init' exec=' ' />
-
-Y actualizamos las dependencias:
-
-<PackageManagers />
+```shell
+npx husky-init && npm i
+```
 
 Esto te creará una carpeta llamada `.husky` en la raíz de tu proyecto, que contiene los ganchos predefinidos de Husky. Husky también añadirá un script `prepare` a tu archivo `package.json` que se ejecutará automáticamente después de que se instalen las dependencias de tu proyecto.
 
@@ -63,6 +70,7 @@ Esto te creará una carpeta llamada `.husky` en la raíz de tu proyecto, que con
 
 Ahora, necesitas agregar los scripts que quieras que se ejecuten antes de hacer commit. Por ejemplo, puedes hacer que corra el script `lint` de tu `package.json`
 para que ejecute el linter antes de cada commit y resuelva los errores automáticamente. En este caso, usaremos `eslint` como linter.
+
 ```json
   "scripts": {
     "lint": "eslint \"*/**/*.{js,ts,jsx,tsx}\" --fix",
@@ -79,6 +87,7 @@ Entonces, vamos a modificar el script `pre-commit` en el archivo `.husky/pre-com
 - npm test
 + npm run lint
 ```
+
 - _Reemplaza `npm` por el gestor de paquetes que estés utilizando._
 
 > Nota: puedes agregar cualquier script que desees ejecutar antes de cada commit en el archivo `.husky/pre-commit`, como ejecutar pruebas automáticas, comprobar la calidad del código, etc.
@@ -86,7 +95,6 @@ Entonces, vamos a modificar el script `pre-commit` en el archivo `.husky/pre-com
 ### Paso 4: Instalar Commitlint
 
 Ahora que Husky está configurado para ejecutar Commitlint antes de cada commit, necesitas instalar Commitlint en tu proyecto. Puedes hacerlo ejecutando el siguiente comando en tu terminal:
-
 
 <PackageManagers pkg='@commitlint/cli @commitlint/config-conventional -D' />
 
@@ -115,4 +123,3 @@ node node_modules/husky/lib/bin add .husky/commit-msg 'npx --no -- commitlint --
 En esta guía, has aprendido cómo instalar y configurar Husky y Commitlint en tus proyectos de desarrollo de software. Al seguir estas instrucciones, puedes mejorar la calidad y consistencia de los mensajes de commit en tu repositorio de Git, lo que facilita la colaboración y el mantenimiento del código a lo largo del tiempo.
 
 ¡Ahora estás listo para empezar a commitear con confianza!
-
