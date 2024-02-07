@@ -95,7 +95,9 @@ Then, let's modify the `pre-commit` script in the `.husky/pre-commit` file to ex
 
 Now that Husky is set up to run Commitlint before each commit, you need to install Commitlint in your project. You can do this by running the following command in your terminal:
 
-<PackageManagers pkg='@commitlint/cli @commitlint/config-conventional -D' />
+```shell
+npm i @commitlint/cli @commitlint/config-conventional -D
+```
 
 ### Step 5: Configure Commitlint
 
