@@ -20,7 +20,7 @@ keywords: 'Software development, code quality, consistent commits, commit conven
 lang: en
 ---
 
-# Introduction
+## Introduction
 
 **Husky** and **Commitlint** are powerful tools that can enhance the quality and consistency of your commits in software development projects. [Husky](https://typicode.github.io/husky/) allows you to set up [Git Hooks](#what-is-a-git-hook) in your Git repository, while [Commitlint](https://commitlint.js.org/#/) helps enforce consistent commit message conventions ([Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/)). In this step-by-step guide, you will learn how to install and configure Husky and Commitlint in your projects.
 
