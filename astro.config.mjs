@@ -7,6 +7,7 @@ import robotsTxt from 'astro-robots-txt'
 
 // Mdx plugins
 import rehypeExternalLinks from 'rehype-external-links'
+import starlight from '@astrojs/starlight'
 
 /** @type {import('rehype-external-links').Options} */
 const externalLinksOptions = {
@@ -45,7 +46,8 @@ export default defineConfig({
     }),
     mdx({
       rehypePlugins: [[rehypeExternalLinks, externalLinksOptions]]
-    })
+    }),
+    starlight()
   ],
   markdown: {
     rehypePlugins: [[rehypeExternalLinks, externalLinksOptions]]
