@@ -24,6 +24,12 @@ lang: es
 
 **Husky** y **Commitlint** son herramientas poderosas que pueden mejorar la calidad y consistencia de tus commits en proyectos de desarrollo de software. [Husky](https://typicode.github.io/husky/) te permite configurar [Git Hooks](#qué-es-un-git-hook) en tu repositorio de Git, mientras que [Commitlint](https://commitlint.js.org/#/) te ayuda a aplicar convenciones de mensajes de commit consistentes. ([Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/)). En esta guía paso a paso, aprenderás cómo instalar y configurar Husky y Commitlint en tus proyectos.
 
+### ¿Por qué Husky y Commitlint?
+
+¿Te ha pasado que has subido cambios a tu repositorio y el CI hace un deploy automático, pero algo falla? Cuando ves los logs, te das cuenta de que a veces es algo tan simple como un error de identación. Pues con Husky, puedes evitar estos problemas haciendo que corra el linter antes de cada commit. Así, evitas, por un lado, que se suban cambios con errores y, además, que ese commit quede registrado en el historial.
+
+![image](/blog/how-to-install-husky-and-commitlint-in-your-projects-a-step-by-step-guide/indent-problem.webp)
+
 ## ❌
 
 ![image](/blog/how-to-install-husky-and-commitlint-in-your-projects-a-step-by-step-guide/no-conventional-commit.webp)
