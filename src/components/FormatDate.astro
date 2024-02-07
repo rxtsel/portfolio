@@ -8,7 +8,10 @@ const { date } = Astro.props
 const lang = getLangFromUrl(Astro.url)
 ---
 
-<time datetime={date.toISOString()} class='text-neutral-400 text-sm'>
+<time
+  datetime={date.toISOString()}
+  class='text-neutral-400 text-sm min-w-[80px] text-right'
+>
   {
     date.toLocaleDateString(`${lang}-us`, {
       year: 'numeric',
