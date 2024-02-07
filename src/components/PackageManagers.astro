@@ -1,0 +1,44 @@
+---
+import { Code, TabItem, Tabs } from '@astrojs/starlight/components'
+
+type Props = {
+  exec?: string | undefined
+  pkg?: string | undefined
+}
+
+const { pkg, exec } = Astro.props
+
+const buildCode = (...parts: (string | undefined)[]) => {
+  const code = parts.filter(Boolean).join('\n')
+  return code
+}
+
+const tabContents = [
+  {
+    label: 'npm',
+    code: buildCode(pkg && exec ? `npx ${pkg} ${exec}` : `npm i ${exec}`)
+  },
+  {
+    label: 'pnpm',
+    code: buildCode(pkg && exec ? `pnpm ${pkg} ${exec}` : `pnpm i ${exec}`)
+  },
+  {
+    label: 'yarn',
+    code: buildCode(pkg && exec ? `yarn ${pkg} ${exec}` : `yarn add ${exec}`)
+  },
+  {
+    label: 'bun',
+    code: buildCode(pkg && exec ? `bunx ${pkg} ${exec}` : `bun i ${exec}`)
+  }
+]
+---
+
+<Tabs>
+  {
+    tabContents.map(({ label, code }) => (
+      <TabItem label={label}>
+        <Code code={code} lang='sh' />
+      </TabItem>
+    ))
+  }
+</Tabs>
