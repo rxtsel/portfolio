@@ -4,23 +4,32 @@ draft: false
 description: 'Learn how to enhance commit quality and consistency in your software projects with Husky and Commitlint. This guide provides step-by-step instructions on installing and configuring these powerful tools, ensuring better collaboration and code maintenance through standardized commit messages.'
 pubDate: '2024-02-07T18:40:10.762Z'
 cover: ''
-categories: ["Commits", "Linter"]
-tags: ["Commits", "Linter", "Automation", "Quality", "Conventions", "Tools", "Collaboration"]
-author: ["Cristhian Melo"]
+categories: ['Commits', 'Linter']
+tags:
+  [
+    'Commits',
+    'Linter',
+    'Automation',
+    'Quality',
+    'Conventions',
+    'Tools',
+    'Collaboration'
+  ]
+author: ['Cristhian Melo']
 keywords: 'Software development, code quality, consistent commits, commit conventions, Husky, Commitlint, Git Hooks, process automation, version control'
 lang: en
 ---
-
-import PackageManagers from '@/components/PackageManagers.astro'
 
 # Introduction
 
 **Husky** and **Commitlint** are powerful tools that can enhance the quality and consistency of your commits in software development projects. [Husky](https://typicode.github.io/husky/) allows you to set up [Git Hooks](#what-is-a-git-hook) in your Git repository, while [Commitlint](https://commitlint.js.org/#/) helps enforce consistent commit message conventions ([Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/)). In this step-by-step guide, you will learn how to install and configure Husky and Commitlint in your projects.
 
 ## ❌
+
 ![image](/blog/how-to-install-husky-and-commitlint-in-your-projects-a-step-by-step-guide/no-conventional-commit.webp)
 
 ## ✅
+
 ![image](/blog/how-to-install-husky-and-commitlint-in-your-projects-a-step-by-step-guide/conventional-commit.webp)
 
 ## What is a Git Hook?
@@ -51,17 +60,16 @@ git init
 
 Husky can be easily installed using any package manager. In your terminal, run the following command to install Husky as a development dependency in your project:
 
-<PackageManagers pkg='husky-init' exec=' ' />
-
-And update the dependencies:
-
-<PackageManagers />
+```shell
+npx husky-init && npm i
+```
 
 This will create a folder named `.husky` in the root of your project, which contains Husky's predefined hooks. Husky will also add a `prepare` script to your `package.json` file that will automatically run after your project dependencies are installed.
 
 ### Step 3: Configure Husky
 
 Now, you need to add the scripts you want to run before committing. For example, you can have it run the `lint` script from your `package.json` to execute the linter before each commit and automatically fix errors. In this case, we'll use `eslint` as the linter.
+
 ```json
   "scripts": {
     "lint": "eslint \"*/**/*.{js,ts,jsx,tsx}\" --fix",
@@ -78,6 +86,7 @@ Then, let's modify the `pre-commit` script in the `.husky/pre-commit` file to ex
 - npm test
 + npm run lint
 ```
+
 - _Replace `npm` with the package manager you are using._
 
 > Note: You can add any script you want to run before each commit in the `.husky/pre-commit` file, such as running automated tests, checking code quality, etc.
@@ -85,7 +94,6 @@ Then, let's modify the `pre-commit` script in the `.husky/pre-commit` file to ex
 ### Step 4: Install Commitlint
 
 Now that Husky is set up to run Commitlint before each commit, you need to install Commitlint in your project. You can do this by running the following command in your terminal:
-
 
 <PackageManagers pkg='@commitlint/cli @commitlint/config-conventional -D' />
 

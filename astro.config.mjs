@@ -46,10 +46,6 @@ export default defineConfig({
     }),
     mdx({
       rehypePlugins: [[rehypeExternalLinks, externalLinksOptions]]
-    }),
-    starlight({
-      title: 'rxtsel.dev',
-      tableOfContents: { minHeadingLevel: 2, maxHeadingLevel: 4 }
     })
   ],
   markdown: {
