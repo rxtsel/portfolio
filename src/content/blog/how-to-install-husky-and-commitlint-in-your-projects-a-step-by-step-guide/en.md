@@ -24,6 +24,12 @@ lang: en
 
 **Husky** and **Commitlint** are powerful tools that can enhance the quality and consistency of your commits in software development projects. [Husky](https://typicode.github.io/husky/) allows you to set up [Git Hooks](#what-is-a-git-hook) in your Git repository, while [Commitlint](https://commitlint.js.org/#/) helps enforce consistent commit message conventions ([Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/)). In this step-by-step guide, you will learn how to install and configure Husky and Commitlint in your projects.
 
+### Why Husky and Commitlint?
+
+Have you ever experienced uploading changes to your repository and the CI performs an automatic deployment, but something goes wrong? When you check the logs, you realize that sometimes it's as simple as an indentation error. Well, with Husky, you can avoid these issues by running the linter before each commit. This way, you prevent changes with errors from being pushed and also ensure that such commits are not recorded in the history.
+
+![image](/blog/how-to-install-husky-and-commitlint-in-your-projects-a-step-by-step-guide/indent-problem.webp)
+
 ## ❌
 
 ![image](/blog/how-to-install-husky-and-commitlint-in-your-projects-a-step-by-step-guide/no-conventional-commit.webp)
