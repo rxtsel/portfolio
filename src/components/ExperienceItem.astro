@@ -26,7 +26,7 @@ const { company, role, startDate, endDate, description } = data
   ></span>
 
   <time class='mb-1 text-sm font-normal leading-none text-cAccent capitalize'>
-    {calculateDuration({ startDate, locale: lang })}
+    {calculateDuration({ startDate, locale: lang, endDate })}
   </time>
 
   <h3 class='text-lg font-semibold text-white mt-2 capitalize'>
