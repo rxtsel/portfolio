@@ -34,7 +34,7 @@ const { routes } = Astro.props
       Object.entries(routes).map(([_key, route]) => (
         <li>
           <a
-            class='text-cWhite hover:text-cBlue transition-colors duration-300 ease-in'
+            class='text-cWhite hover:text-cBlue transition-colors duration-150 ease-in'
             aria-label={route.name}
             href={route.path}
           >
@@ -48,7 +48,7 @@ const { routes } = Astro.props
   <ul class='text-cWhite flex space-x-4 flex-shrink-0'>
     <li class='w-6 h-6 relative lang-btn-desktop' title={t('single.languages')}>
       <label
-        class='lang-desktop hover:text-cBlue order-1 text-cWhite transition-colors duration-300 ease-in size-6 cursor-pointer'
+        class='lang-desktop hover:text-cBlue order-1 text-cWhite transition-colors duration-150 ease-in size-6 cursor-pointer'
       >
         <input type='checkbox' class='check-lang-desktop' />
         <TranslateIcon />
@@ -66,7 +66,7 @@ const { routes } = Astro.props
             return (
               <li class='size-full'>
                 <a
-                  class={`${isActive} hover:text-cBlue hover:bg-cBlack px-10 py-2 rounded transition-colors duration-300 ease-in h-full w-full flex place-items-center gap-2`}
+                  class={`${isActive} hover:text-cBlue hover:bg-cBlack px-10 py-2 rounded transition-colors duration-150 ease-in h-full w-full flex place-items-center gap-2`}
                   href={href}
                   aria-label={route}
                 >
@@ -84,7 +84,7 @@ const { routes } = Astro.props
         href={SOCIALS.twitter}
         target='_blank'
         aria-label='Twitter'
-        class='text-cWhite hover:text-cBlue transition-colors duration-300 ease-in'
+        class='text-cWhite hover:text-cBlue transition-colors duration-150 ease-in'
         ><TwitterIcon /></a
       >
     </li>
@@ -92,7 +92,7 @@ const { routes } = Astro.props
       <a
         href={SOCIALS.linkedin}
         target='_blank'
-        class='text-cWhite hover:text-cBlue transition-colors duration-300 ease-in'
+        class='text-cWhite hover:text-cBlue transition-colors duration-150 ease-in'
         aria-label='Linkedin'><LinkedinIcon /></a
       >
     </li>
@@ -101,7 +101,7 @@ const { routes } = Astro.props
         href={SOCIALS.github}
         target='_blank'
         aria-label='Github'
-        class='text-cWhite hover:text-cBlue transition-colors duration-300 ease-in'
+        class='text-cWhite hover:text-cBlue transition-colors duration-150 ease-in'
         ><GithubIcon /></a
       >
     </li>
@@ -116,7 +116,7 @@ const { routes } = Astro.props
   #lang-options-desktop {
     opacity: 0;
     visibility: hidden;
-    transition: all 600ms cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 150ms cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   :has(.check-lang-desktop:checked) #lang-options-desktop {
