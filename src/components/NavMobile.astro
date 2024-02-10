@@ -27,7 +27,7 @@ const { routes } = Astro.props
       Object.entries(routes).map(([key, { name, path }]) => (
         <li class='size-full'>
           <a
-            class='text-cWhite hover:text-cBlue transition-colors duration-300 ease-in h-full w-full flex flex-col place-items-center gap-2'
+            class='text-cWhite hover:text-cBlue transition-colors duration-150 ease-in h-full w-full flex flex-col place-items-center gap-2'
             aria-label={name}
             href={path}
           >
@@ -64,7 +64,7 @@ const { routes } = Astro.props
         return (
           <li class='size-full'>
             <a
-              class={`${isActive} hover:text-cBlue transition-colors duration-300 ease-in h-full w-full flex flex-col place-items-center gap-2`}
+              class={`${isActive} hover:text-cBlue transition-colors duration-150 ease-in h-full w-full flex flex-col place-items-center gap-2`}
               href={href}
               aria-label={route}
             >
@@ -86,7 +86,7 @@ const { routes } = Astro.props
   </ul>
 
   <label
-    class='lang order-1 text-cWhite transition-colors duration-300 ease-in size-6 cursor-pointer'
+    class='lang order-1 text-cWhite transition-colors duration-150 ease-in size-6 cursor-pointer'
   >
     <input type='checkbox' class='check-lang' />
     <TranslateIcon />

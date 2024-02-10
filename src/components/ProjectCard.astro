@@ -26,9 +26,9 @@ const descriptionT = lang === 'en' ? descriptionEn : description
     {
       url ? (
         <a href={url} target='_blank' class='group text-xl font-medium'>
-          <div class='flex items-center space-x-2 transition-colors duration-300 ease-in  hover:text-cBlue'>
+          <div class='flex items-center space-x-2 transition-colors duration-150 ease-in  hover:text-cBlue'>
             <h3>{title}</h3>
-            <div class='size-3 inline-block text-cAccent transition-all duration-300 ease-in group-hover:-translate-y-[1px] group-hover:translate-x-[1px] group-hover:text-cBlue'>
+            <div class='size-3 inline-block text-cAccent transition-all duration-150 ease-in group-hover:-translate-y-[1px] group-hover:translate-x-[1px] group-hover:text-cBlue'>
               <ArrowTr />
             </div>
           </div>
@@ -52,7 +52,7 @@ const descriptionT = lang === 'en' ? descriptionEn : description
             aria-label={t('single.repository')}
             class='order-2'
           >
-            <div class='text-cWhite transition-colors duration-300 ease-in hover:text-cBlue size-6'>
+            <div class='text-cWhite transition-colors duration-150 ease-in hover:text-cBlue size-6'>
               <Github />
             </div>
           </a>
