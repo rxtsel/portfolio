@@ -1,7 +1,7 @@
 # My Portfolio ❤️
 
 > [!IMPORTANT]
-> If you are going to use this portfolio make sure to change or remove the google analytics tag.
+> If you are going to use this portfolio make sure to change or remove the Google Analytics tag from `src/components/Analitycs.astro`.
 
 ### Results on Google Lighthouse:
 
@@ -10,9 +10,9 @@
 > [!NOTE]
 > Features and improvements are still being added to the project.
 
-- Intuitive CLI for generating new projects
+- Intuitive CLI for generating new blog posts
 - Full support for internationalization (i18n), even within posts
-- Achieve a 100% score in Google Lighthouse results.
+- Achieve a 100% score in Google Lighthouse results
 - SEO friendly
 - Dinamic Open Graph for posts
 - Responsive Design
