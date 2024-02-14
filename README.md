@@ -1,5 +1,8 @@
 # My Portfolio ❤️
 
+> [!IMPORTANT]
+> If you are going to use this portfolio make sure to change or remove the google analytics tag.
+
 ### Results on Google Lighthouse:
 
 ![image](https://github.com/rxtsel/portfolio/assets/85462420/a2cba98c-d2de-464b-ac35-0dd21183df82)
