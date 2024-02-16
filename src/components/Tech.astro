@@ -10,6 +10,11 @@ import React from '@/icons/color/React.astro'
 import Git from '@/icons/color/Git.astro'
 import JavaScript from '@/icons/color/JavaScript.astro'
 import Lua from '@/icons/color/Lua.astro'
+import Supabase from '@/icons/color/Supabase.astro'
+import MySQL from '@/icons/color/MySQL.astro'
+import Prisma from '@/icons/color/Prisma.astro'
+import Sass from '@/icons/color/Sass.astro'
+import Figma from '@/icons/color/Figma.astro'
 import { getLangFromUrl, useTranslations } from '@/i18n/utils'
 
 const lang = getLangFromUrl(Astro.url)
@@ -52,6 +57,22 @@ const techs: iTechnology[] = [
   {
     name: 'Lua',
     Icon: Lua
+  },
+  {
+    name: 'Supabase',
+    Icon: Supabase
+  },
+  {
+    name: 'MySQL',
+    Icon: MySQL
+  },
+  {
+    name: 'Prisma',
+    Icon: Prisma
+  },
+  {
+    name: 'Sass',
+    Icon: Sass
   }
 ]
 ---
