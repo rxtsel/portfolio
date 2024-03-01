@@ -25,3 +25,4 @@ export type Tecnologies =
   | 'Supabase'
   | 'Prisma'
   | 'Sass'
+  | 'Inertia.js'

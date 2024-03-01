@@ -1,6 +1,6 @@
-import type { TPostt, Tecnologies } from '@/types'
+import type { TPost, Tecnologies } from '@/types'
 
-export interface iProject extends Partial<TPostt> {
+export interface iProject extends Partial<TPost> {
   title: string
   titleEn?: string
   description: string

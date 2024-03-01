@@ -2,6 +2,15 @@ import type { iProject } from '@/types/project'
 
 export const works: iProject[] = [
   {
+    title: 'Novadeha React.js',
+    description:
+      'Diseño y desarrollo de sitio web con react por elección del cliente.',
+    descriptionEn:
+      'Design and development of website with react by client choice.',
+    url: 'https://reactjs.agency/',
+    tags: ['React', 'TypeScript', 'Tailwind CSS', 'CSS', 'Inertia.js']
+  },
+  {
     title: 'Qantto.io',
     description: 'Landing page para cotizador de servicios online.',
     descriptionEn: 'Landing page for quote services online.',
