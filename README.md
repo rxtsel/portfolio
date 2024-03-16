@@ -27,3 +27,5 @@
 ## License
 
 - [Apache-2.0 license](https://github.com/rxtsel/portfolio/blob/main/LICENSE)
+
+View old design [here](https://old-rxtsel-dev.netlify.app/).
