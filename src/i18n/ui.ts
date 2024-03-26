@@ -18,6 +18,7 @@ export const ui = {
     'single.techs': 'Tecnologías',
     'single.contactMe': 'Contáctame',
     'single.by': 'por',
+    'single.remote': 'Remoto',
 
     'lang.es': 'Español',
     'lang.us': 'Inglés',
@@ -75,6 +76,7 @@ export const ui = {
     'single.techs': 'Technologies',
     'single.contactMe': 'Contact Me',
     'single.by': 'by',
+    'single.remote': 'Remote',
 
     'lang.es': 'Spanish',
     'lang.us': 'English',

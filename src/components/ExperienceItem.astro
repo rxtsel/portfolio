@@ -3,6 +3,7 @@ import { calculateDuration } from '@/utils'
 import { getLangFromUrl, useTranslations } from '@/i18n/utils'
 
 const lang = getLangFromUrl(Astro.url)
+const t = useTranslations(lang)
 
 export interface Props {
   data: Data
@@ -13,11 +14,14 @@ interface Data {
   role: string
   startDate: Date
   endDate?: Date
-  description: string
+  description?: string
+  location: string
+  remote?: boolean
 }
 
 const { data } = Astro.props
-const { company, role, startDate, endDate, description } = data
+const { company, role, startDate, endDate, description, location, remote } =
+  data
 ---
 
 <li class='mb-10 ms-4'>
@@ -25,15 +29,26 @@ const { company, role, startDate, endDate, description } = data
     class='absolute block w-3 h-3 rounded-full mt-1.5 -start-1.5 border border-cBlue bg-cBlue'
   ></span>
 
-  <time class='mb-1 text-sm font-normal leading-none text-cAccent capitalize'>
+  <time class='text-sm font-normal leading-none text-cAccent capitalize'>
     {calculateDuration({ startDate, locale: lang, endDate })}
   </time>
+
+  <span
+    class='text-sm mt-1 block font-normal leading-none text-cAccent capitalize'
+  >
+    {location}
+    {remote && `· ${t('single.remote')}`}
+  </span>
 
   <h3 class='text-lg font-semibold text-white mt-2 capitalize'>
     {role} − {company}
   </h3>
 
-  <p class='mb-4 text-base font-normal text-cAccent text-pretty'>
-    {description}
-  </p>
+  {
+    description && (
+      <p class='mb-4 text-base font-normal text-cAccent text-pretty'>
+        {description}
+      </p>
+    )
+  }
 </li>
