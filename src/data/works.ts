@@ -11,18 +11,10 @@ export const works: iProject[] = [
     tags: ['React', 'TypeScript', 'Tailwind CSS', 'CSS', 'Inertia.js']
   },
   {
-    title: 'Qantto.io',
-    description: 'Landing page para cotizador de servicios online.',
-    descriptionEn: 'Landing page for quote services online.',
-    url: 'https://www.cuantto.io/',
-    gh: 'https://github.com/abouthernan/qantto',
-    tags: ['Astro', 'TypeScript', 'Tailwind CSS', 'Figma', 'React']
-  },
-  {
     title: 'Qantto Dashboard',
     description: 'Panel de control para gestionar los servicios de Qantto.io.',
     descriptionEn: 'Dashboard to manage Qantto.io services.',
-    url: 'https://app.qantto.io/',
+    url: 'https://app.cuantto.io/',
     tags: [
       'Next.js',
       'TypeScript',
