@@ -33,7 +33,7 @@ export const ui = {
     'hero.p3': 'Apasionado por crear productos digitales',
     'hero.p3.0': 'increíbles.',
     'hero.p4':
-      'Estudiante de ingeniería de software con +1 año de experiencia como desarrollador web. Amante del diseño y la innovación.',
+      'Estudiante de Ingeniería de Software con más de 2 años de experiencia como desarrollador web. Apasionado por el diseño y la innovación.',
 
     'experiense.vsdlrs':
       'Desarrollador de E-commerce, plantillas de email marketing, SEO y landing pages. Mejora del 70% en Core Web Vitals. Apasionado por la creación de experiencias web excepcionales y orientadas al rendimiento.',
@@ -93,7 +93,7 @@ export const ui = {
     'hero.p3': 'Passionate about creating digital products',
     'hero.p3.0': 'amazing.',
     'hero.p4':
-      'Software engineering student with +1 year of experience as a web developer. Lover of design and innovation.',
+      'Software Engineering student with over 2 years of experience as a web developer. Passionate about design and innovation.',
 
     'experiense.vsdlrs':
       'E-commerce developer, email marketing templates, SEO, and landing pages. 70% improvement in Core Web Vitals. Passionate about creating exceptional web experiences and performance-oriented.',
