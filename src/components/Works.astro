@@ -9,7 +9,7 @@ const t = useTranslations(lang)
 ---
 
 <Section title={t('messages.latestWorks')} id='portfolio'>
-  <div class='grid grid-cols-1 gap-4 sm:grid-cols-2'>
+  <div class='grid grid-cols-1 gap-4 lg:grid-cols-2'>
     {works.sort().map((work) => <ProjectCard props={work} />)}
   </div>
 </Section>
