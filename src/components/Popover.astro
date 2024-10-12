@@ -1,9 +1,11 @@
 ---
 import Users from '@/icons/Users.astro'
 import ArrowTr from '@/icons/ArrowTr.astro'
+import Tooltip from '@/components/Tooltip.astro'
+import type { TTeam } from '@/types'
 
 export interface Props {
-  team: string[]
+  team: TTeam[]
 }
 
 const { team } = Astro.props
@@ -24,24 +26,24 @@ const titleLabel =
   </label>
 
   <nav
-    id='popover-team-options'
-    class='text-cWhite grid place-content-start absolute transform right-0 lg:left-0 mx-auto w-max p-2 rounded-md bg-cPaper shadow-2xl z-10'
+    class='popover-team-options text-cWhite grid place-content-start absolute transform right-0 lg:left-0 mx-auto w-max p-2 rounded-md bg-cPaper shadow-2xl z-10'
   >
     <p class='font-bold text-cAccent'>{teamTranslation}</p>
     {
       team
-        .sort((a, b) => a.localeCompare(b))
-        .map((member) => (
+        .sort((a, b) => a.username.localeCompare(b.username))
+        .map(({ username, url, social, role }) => (
           <a
-            class={`text-cWhite hover:text-cBlue rounded transition-colors duration-150 ease-in flex place-items-center gap-2 size-full z-10 group space-x-1 items-center hover:bg-cBlack px-4 py-2`}
-            href={`https://github.com/${member}`}
-            aria-label={`Member ${member}`}
+            class={`text-cWhite relative hover:text-cBlue rounded transition-colors duration-150 ease-in flex place-items-center gap-2 size-full z-10 group space-x-1 items-center hover:bg-cBlack px-4 py-2`}
+            href={social === 'github' ? `https://github.com/${username}` : url}
+            aria-label={`Member ${username}`}
             target='_blank'
           >
-            @{member}
+            @{username}
             <div class='size-3 inline-block text-cAccent transition-all duration-150 ease-in group-hover:-translate-y-[1px] group-hover:translate-x-[1px] group-hover:text-cBlue'>
               <ArrowTr />
             </div>
+            <Tooltip content={role} />
           </a>
         ))
     }
@@ -53,13 +55,13 @@ const titleLabel =
     display: none;
   }
 
-  #popover-team-options {
+  .popover-team-options {
     opacity: 0;
     visibility: hidden;
     transition: all 150ms cubic-bezier(0.4, 0, 0.2, 1);
   }
 
-  :has(.check-popover-team:checked) #popover-team-options {
+  :has(.check-popover-team:checked) .popover-team-options {
     animation: slide linear both;
     visibility: visible;
     @apply translate-y-[5px] opacity-100;
@@ -77,21 +79,43 @@ const titleLabel =
 </style>
 
 <script>
-  const $langBtn = document.querySelector('.popover-team') as HTMLElement
-  const $langCheckbox = document.querySelector(
+  const $langBtns = document.querySelectorAll(
+    '.popover-team'
+  ) as NodeListOf<HTMLElement>
+  const $langCheckboxs = document.querySelectorAll(
     '.check-popover-team'
-  ) as HTMLInputElement
+  ) as NodeListOf<HTMLInputElement>
 
-  $langBtn.addEventListener('click', () => {
-    if ($langCheckbox.checked) {
-      const handleClickOutside = (e: MouseEvent) => {
-        if (!e.target.closest('.popover-team')) {
-          $langCheckbox.checked = false
-          document.body.removeEventListener('click', handleClickOutside)
-        }
-      }
-
-      document.body.addEventListener('click', handleClickOutside)
+  const handleClickOutside = (e: MouseEvent, checkbox: HTMLInputElement) => {
+    const target = e.target as HTMLElement
+    // If the click is not inside the popovers, close the popover
+    if (target && !Array.from($langBtns).some((btn) => btn.contains(target))) {
+      checkbox.checked = false
+      document.body.removeEventListener('click', (event) =>
+        handleClickOutside(event, checkbox)
+      )
     }
+  }
+
+  $langBtns.forEach(($langBtn, index) => {
+    const $langCheckbox = $langCheckboxs[index]
+
+    $langBtn.addEventListener('click', (e) => {
+      e.stopPropagation()
+
+      // Close any other popover before opening the current one
+      $langCheckboxs.forEach((checkbox) => {
+        if (checkbox !== $langCheckbox) {
+          checkbox.checked = false // Cierra los demás popovers
+        }
+      })
+
+      if ($langCheckbox.checked) {
+        // Add the click outside event only if the checkbox is checked
+        document.body.addEventListener('click', (event) =>
+          handleClickOutside(event, $langCheckbox)
+        )
+      }
+    })
   })
 </script>

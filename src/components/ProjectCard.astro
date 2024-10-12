@@ -14,8 +14,16 @@ const lang = getLangFromUrl(Astro.url)
 const t = useTranslations(lang)
 
 const { props } = Astro.props
-const { title, titleEn, url, gh, description, descriptionEn, tags, team } =
-  props
+const {
+  title,
+  titleEn,
+  url,
+  gh,
+  description,
+  descriptionEn,
+  technologies,
+  team
+} = props
 
 const titleT = lang === 'en' ? titleEn : title
 const descriptionT = lang === 'en' ? descriptionEn : description
@@ -25,7 +33,12 @@ const descriptionT = lang === 'en' ? descriptionEn : description
   <header class='mb-2 flex items-center justify-between text-cWhite'>
     {
       url ? (
-        <a href={url} target='_blank' rel="nofollow" class='group text-xl font-medium'>
+        <a
+          href={url}
+          target='_blank'
+          rel='nofollow'
+          class='group text-xl font-medium'
+        >
           <div class='flex items-center space-x-2 transition-colors duration-150 ease-in  hover:text-cBlue'>
             <h3>{title}</h3>
             <div class='size-3 inline-block text-cAccent transition-all duration-150 ease-in group-hover:-translate-y-[1px] group-hover:translate-x-[1px] group-hover:text-cBlue'>
@@ -48,7 +61,7 @@ const descriptionT = lang === 'en' ? descriptionEn : description
           <a
             href={gh}
             target='_blank'
-            rel="nofollow"
+            rel='nofollow'
             title={t('single.repository')}
             aria-label={t('single.repository')}
             class='order-2'
@@ -74,7 +87,7 @@ const descriptionT = lang === 'en' ? descriptionEn : description
   <footer class='mt-3 flex items-center justify-between text-cWhite'>
     <div class='flex items-center gap-2 flex-wrap'>
       {
-        tags?.sort().map((tag: string) => (
+        technologies?.sort().map((tag: string) => (
           <p
             class='truncate rounded-md border border-neutral-800 bg-neutral-900 px-2 py-1 font-mono text-xs'
             title={tag}

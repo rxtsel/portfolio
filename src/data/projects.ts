@@ -8,7 +8,7 @@ export const projects: iProject[] = [
     descriptionEn: 'App to correct spelling mistakes using AI.',
     url: 'https://spell-check-ai.vercel.app/',
     gh: 'https://github.com/rxtsel/spell-check-ai',
-    tags: ['Astro', 'Open IA', 'Tailwind CSS']
+    technologies: ['Astro', 'Open IA', 'Tailwind CSS']
   },
   {
     title: 'Cotizador de servicios',
@@ -18,7 +18,7 @@ export const projects: iProject[] = [
     descriptionEn:
       'Designed to simplify and streamline the process of getting quotes.',
     url: 'https://quoter.vehement.co/',
-    tags: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Strapi']
+    technologies: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Strapi']
   },
   {
     title: "Gold's Gym",
@@ -26,7 +26,7 @@ export const projects: iProject[] = [
     descriptionEn: 'Design and development of landing page for gym.',
     url: 'https://rxtsel.github.io/gold-s-gym/',
     gh: 'https://github.com/rxtsel/gold-s-gym',
-    tags: ['Figma', 'Astro', 'CSS']
+    technologies: ['Figma', 'Astro', 'CSS']
   },
   {
     title: 'BioLinks',
@@ -36,7 +36,7 @@ export const projects: iProject[] = [
       'My alternative to linktree to show links in social media biographies.',
     url: 'https://links.rxtsel.dev/',
     gh: 'https://github.com/rxtsel/biolink',
-    tags: ['HTML', 'CSS', 'JavaScript']
+    technologies: ['HTML', 'CSS', 'JavaScript']
   },
   {
     title: 'LCA Desktop App',
@@ -45,7 +45,7 @@ export const projects: iProject[] = [
     descriptionEn: 'Water quality measurement software. Mintic 2022 project.',
     url: 'https://github.com/rxtsel/LCA/releases/tag/v.0.0.1',
     gh: 'https://github.com/rxtsel/LCA/tree/reto-4',
-    tags: ['Java', 'SQLite']
+    technologies: ['Java', 'SQLite']
   },
   {
     title: 'Administrador de gastos',
@@ -55,6 +55,6 @@ export const projects: iProject[] = [
     descriptionEn: 'Web app to manage and keep track of our money.',
     url: 'https://expense-manager-react.netlify.app/',
     gh: 'https://github.com/rxtsel/Expense-control-react',
-    tags: ['React', 'CSS']
+    technologies: ['React', 'CSS']
   }
 ]

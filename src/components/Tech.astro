@@ -1,5 +1,5 @@
 ---
-import type { Tecnologies } from '@/types'
+import type { Technologies } from '@/types'
 import Section from './Section.astro'
 import TechCard from './TechCard.astro'
 import NextJs from '@/icons/color/NextJs.astro'
@@ -21,7 +21,7 @@ const lang = getLangFromUrl(Astro.url)
 const t = useTranslations(lang)
 
 interface iTechnology {
-  name: Tecnologies
+  name: Technologies
   Icon: HTMLElement | any
 }
 

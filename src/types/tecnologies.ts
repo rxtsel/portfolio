@@ -1,4 +1,4 @@
-export type Tecnologies =
+export type Technologies =
   | 'Next.js'
   | 'TypeScript'
   | 'Tailwind CSS'
@@ -26,3 +26,10 @@ export type Tecnologies =
   | 'Prisma'
   | 'Sass'
   | 'Inertia.js'
+  | 'TanStack Query'
+  | 'Playwright'
+  | 'Azure'
+  | 'CI/CD'
+  | 'GitHub Actions'
+  | 'Docker'
+  | 'Drizzle'

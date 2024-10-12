@@ -1,4 +1,4 @@
-import type { TPost, Tecnologies } from '@/types'
+import type { TPost, Technologies, TTeam } from '@/types'
 
 export interface iProject extends Partial<TPost> {
   title: string
@@ -7,6 +7,6 @@ export interface iProject extends Partial<TPost> {
   descriptionEn?: string
   url?: string
   gh?: string
-  tags?: Tecnologies[]
-  team?: string[]
+  technologies?: Technologies[]
+  team?: TTeam[]
 }
