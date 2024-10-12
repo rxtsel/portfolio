@@ -32,10 +32,10 @@ const titleLabel =
     {
       team
         .sort((a, b) => a.username.localeCompare(b.username))
-        .map(({ username, url, social, role }) => (
+        .map(({ username, url, role }) => (
           <a
             class={`text-cWhite relative hover:text-cBlue rounded transition-colors duration-150 ease-in flex place-items-center gap-2 size-full z-10 group space-x-1 items-center hover:bg-cBlack px-4 py-2`}
-            href={social === 'github' ? `https://github.com/${username}` : url}
+            href={!url ? `https://github.com/${username}` : url}
             aria-label={`Member ${username}`}
             target='_blank'
           >

@@ -20,24 +20,20 @@ export const works: iProject[] = [
     team: [
       {
         username: 'rxtsel',
-        social: 'github',
         role: 'Software Developer'
       },
       {
         username: 'mattypiotrowski',
-        social: 'web',
         url: 'https://mattypiotrowski.com/',
         role: 'UX/UI Designer'
       },
       {
         username: 'aggrey',
-        social: 'web',
         url: 'https://www.linkedin.com/in/aggrey/',
         role: 'Founder'
       },
       {
         username: 'jason-burgos',
-        social: 'web',
         url: 'https://www.linkedin.com/in/jason-burgos/',
         role: 'Founder'
       }
@@ -66,52 +62,43 @@ export const works: iProject[] = [
     team: [
       {
         username: 'rxtsel',
-        social: 'github',
         role: 'Software Developer'
       },
       {
         username: 'glanikali',
-        social: 'github',
         role: 'Lead Software Developer'
       },
       {
         username: 'devevangel',
-        social: 'github',
         role: 'Software Developer'
       },
       {
         username: 'aggrey',
-        social: 'web',
         url: 'https://www.linkedin.com/in/aggrey/',
         role: 'Founder'
       },
       {
         username: 'jason-burgos',
-        social: 'web',
         url: 'https://www.linkedin.com/in/jason-burgos/',
         role: 'Founder'
       },
       {
         username: 'jasonlau96',
-        social: 'web',
         url: 'https://www.linkedin.com/in/jasonlau96/',
         role: 'UX Designer'
       },
       {
         username: 'noeliavalle',
-        social: 'web',
         url: 'https://www.linkedin.com/in/noeliavalle/',
         role: 'UX/UI Designer'
       },
       {
         username: 'briannabaysahunt',
-        social: 'web',
         url: 'https://www.linkedin.com/in/briannabaysahunt/',
         role: 'UX Designer'
       },
       {
         username: 'anurgazin',
-        social: 'github',
         role: 'Software Developer'
       }
     ]
@@ -143,22 +130,18 @@ export const works: iProject[] = [
     team: [
       {
         username: 'rxtsel',
-        social: 'github',
         role: 'Front-end Developer'
       },
       {
         username: 'DongnutLa',
-        social: 'github',
         role: 'Front-end Developer'
       },
       {
         username: 'andergcp',
-        social: 'github',
         role: 'Back-end Developer'
       },
       {
         username: 'AlejoCasti',
-        social: 'github',
         role: 'Back-end Developer'
       }
     ]
