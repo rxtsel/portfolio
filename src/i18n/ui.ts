@@ -29,7 +29,7 @@ export const ui = {
     'nav.blog': 'Blog',
 
     'hero.p1': 'Hola, Soy Cristhian',
-    'hero.p2': 'Desarrollador Web Front-end',
+    'hero.p2': 'Desarrollador de Software',
     'hero.p3': 'Apasionado por crear productos digitales',
     'hero.p3.0': 'increíbles.',
     'hero.p4':
@@ -89,7 +89,7 @@ export const ui = {
     'nav.blog': 'Blog',
 
     'hero.p1': 'Hi, I’m Cristhian',
-    'hero.p2': 'Front-end Web Developer',
+    'hero.p2': 'Software Developer',
     'hero.p3': 'Passionate about creating digital products',
     'hero.p3.0': 'amazing.',
     'hero.p4':
