@@ -5,6 +5,7 @@ import Github from '@/icons/Github.astro'
 import Lock from '@/icons/Lock.astro'
 import Popover from '@/components/Popover.astro'
 import { getLangFromUrl, useTranslations } from '@/i18n/utils'
+import Tooltip from '@/components/Tooltip.astro'
 
 export interface Props {
   props: iProject
@@ -62,20 +63,20 @@ const descriptionT = lang === 'en' ? descriptionEn : description
             href={gh}
             target='_blank'
             rel='nofollow'
-            title={t('single.repository')}
             aria-label={t('single.repository')}
             class='order-2'
           >
-            <div class='text-cWhite transition-colors duration-150 ease-in hover:text-cBlue size-6'>
+            <div class='text-cWhite group relative transition-colors duration-150 ease-in hover:text-cBlue size-6'>
               <Github />
+              <Tooltip content={t('single.repository')} />
             </div>
           </a>
         ) : (
           <div
-            class='order-2 text-neutral-600 size-6'
-            title={t('messages.ghPrivate')}
+            class='order-2 relative group text-neutral-600 size-6'
           >
             <Lock />
+            <Tooltip content={t('messages.ghPrivate')} />
           </div>
         )
       }

@@ -17,12 +17,12 @@ const titleLabel =
 
 <div class='relative size-6 popover-content'>
   <label
-    class='popover-team hover:text-cBlue order-1 text-cWhite transition-colors duration-150 ease-in size-6 cursor-pointer'
+    class='popover-team relative group hover:text-cBlue order-1 text-cWhite transition-colors duration-150 ease-in size-6 cursor-pointer'
     aria-label='Team members'
-    title={titleLabel}
   >
     <input type='checkbox' class='check-popover-team' />
     <Users />
+    <Tooltip content={titleLabel} />
   </label>
 
   <nav
