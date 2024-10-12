@@ -1,6 +1,6 @@
 ---
 export interface Props {
-  content: string
+  content: string;
 }
 
 const { content } = Astro.props
@@ -8,7 +8,7 @@ const { content } = Astro.props
 
 <div
   role='tooltip'
-  class='inline-block absolute right-[106%] lg:right-auto lg:left-[104%] group-hover:visible pointer-events-none z-10 w-max text-sm px-3 py-2 text-cWhite transition-all duration-150 border border-neutral-800 bg-cPaper rounded-md shadow-sm invisible opacity-0 group-hover:opacity-100'
+  class='inline-block absolute right-[107%] 2xl:right-auto 2xl:left-[104%] group-hover:visible pointer-events-none z-10 w-max text-sm px-2 py-1 text-cWhite transition-all duration-150 border border-neutral-800 bg-cPaper rounded-md shadow-sm invisible opacity-0 group-hover:opacity-100'
 >
   {content}
 </div>
