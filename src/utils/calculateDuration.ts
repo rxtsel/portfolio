@@ -18,7 +18,7 @@ export const calculateDuration = ({
   const localeYears = locale === 'es' ? 'Años' : 'Years'
   const localeMonth = locale === 'es' ? 'Mes' : 'Month'
   const localeYear = locale === 'es' ? 'Año' : 'Year'
-  const localeCurrently = locale === 'es' ? 'Actualidad' : 'Currently'
+  const localeCurrently = locale === 'es' ? 'Presente' : 'Present'
 
   // Si endDate no está presente, usar la fecha actual
   const endDateActual = endDate || new Date()
