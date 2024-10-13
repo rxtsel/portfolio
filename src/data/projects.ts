@@ -2,59 +2,178 @@ import type { iProject } from '@/types/project'
 
 export const projects: iProject[] = [
   {
-    title: 'Corrector Ortográfico IA',
-    titleEn: 'AI Spelling Checker',
-    description: 'App para corregir errores ortográficos usando IA.',
-    descriptionEn: 'App to correct spelling mistakes using AI.',
-    url: 'https://spell-check-ai.vercel.app/',
-    gh: 'https://github.com/rxtsel/spell-check-ai',
-    technologies: ['Astro', 'Open IA', 'Tailwind CSS']
-  },
-  {
-    title: 'Cotizador de servicios',
-    titleEn: 'Service Quoter',
+    title: 'SoundAdvice Landing Page',
     description:
-      'Diseñado para simplificar y agilizar el proceso de obtener cotizaciones.',
+      'Desarrollo de landing page. Conectando músicos con mentores de la industria musical y ofreciendo eventos como talleres y retiros.',
     descriptionEn:
-      'Designed to simplify and streamline the process of getting quotes.',
-    url: 'https://quoter.vehement.co/',
-    technologies: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Strapi']
+      'Landing page for SoundAdvice, connecting musicians with music industry mentors and offering access to events such as workshops and retreats.',
+    url: 'https://soundadvice.club/',
+    technologies: [
+      'Next.js',
+      'TypeScript',
+      'Tailwind CSS',
+      'CSS',
+      'PostgreSQL',
+      'TanStack Query',
+      'Supabase'
+    ],
+    team: [
+      {
+        username: 'rxtsel',
+        role: 'Software Developer'
+      },
+      {
+        username: 'mattypiotrowski',
+        url: 'https://mattypiotrowski.com/',
+        role: 'UX/UI Designer'
+      },
+      {
+        username: 'aggrey',
+        url: 'https://www.linkedin.com/in/aggrey/',
+        role: 'Founder'
+      },
+      {
+        username: 'jason-burgos',
+        url: 'https://www.linkedin.com/in/jason-burgos/',
+        role: 'Founder'
+      }
+    ]
   },
   {
-    title: "Gold's Gym",
-    description: 'Diseño y desarrollo de landing page para gymnasio.',
-    descriptionEn: 'Design and development of landing page for gym.',
-    url: 'https://rxtsel.github.io/gold-s-gym/',
-    gh: 'https://github.com/rxtsel/gold-s-gym',
-    technologies: ['Figma', 'Astro', 'CSS']
-  },
-  {
-    title: 'BioLinks',
+    title: 'SoundAdvice Mentorship Platform',
     description:
-      'Mi alternativa a linktree para mostrar enlaces en la biografías de las redes sociales.',
+      'Desarrollo de plataforma web para conectar a profesionales de la música con mentores expertos para el crecimiento de su carrera.',
     descriptionEn:
-      'My alternative to linktree to show links in social media biographies.',
-    url: 'https://links.rxtsel.dev/',
-    gh: 'https://github.com/rxtsel/biolink',
-    technologies: ['HTML', 'CSS', 'JavaScript']
+      'Development of a web platform connecting music professionals with expert mentors for career growth.',
+    url: 'https://app.soundadvice.club/',
+    technologies: [
+      'Next.js',
+      'TypeScript',
+      'Tailwind CSS',
+      'Supabase',
+      'PostgreSQL',
+      'Azure',
+      'CI/CD',
+      'GitHub Actions',
+      'Playwright',
+      'Docker',
+      'Drizzle'
+    ],
+    team: [
+      {
+        username: 'rxtsel',
+        role: 'Software Developer'
+      },
+      {
+        username: 'glanikali',
+        role: 'Lead Software Developer'
+      },
+      {
+        username: 'devevangel',
+        role: 'Software Developer'
+      },
+      {
+        username: 'aggrey',
+        url: 'https://www.linkedin.com/in/aggrey/',
+        role: 'Founder'
+      },
+      {
+        username: 'jason-burgos',
+        url: 'https://www.linkedin.com/in/jason-burgos/',
+        role: 'Founder'
+      },
+      {
+        username: 'jasonlau96',
+        url: 'https://www.linkedin.com/in/jasonlau96/',
+        role: 'UX Designer'
+      },
+      {
+        username: 'noeliavalle',
+        url: 'https://www.linkedin.com/in/noeliavalle/',
+        role: 'UX/UI Designer'
+      },
+      {
+        username: 'briannabaysahunt',
+        url: 'https://www.linkedin.com/in/briannabaysahunt/',
+        role: 'UX Designer'
+      },
+      {
+        username: 'anurgazin',
+        role: 'Software Developer'
+      }
+    ]
   },
   {
-    title: 'LCA Desktop App',
+    title: 'Novadeha React.js',
     description:
-      'Software de medición de la calidad del agua. Proyecto mintic 2022.',
-    descriptionEn: 'Water quality measurement software. Mintic 2022 project.',
-    url: 'https://github.com/rxtsel/LCA/releases/tag/v.0.0.1',
-    gh: 'https://github.com/rxtsel/LCA/tree/reto-4',
-    technologies: ['Java', 'SQLite']
+      'Diseño y desarrollo de sitio web con react por elección del cliente.',
+    descriptionEn:
+      'Design and development of website with react by client choice.',
+    url: 'https://reactjs.agency/',
+    technologies: ['React', 'TypeScript', 'Tailwind CSS', 'CSS', 'Inertia.js']
   },
   {
-    title: 'Administrador de gastos',
-    titleEn: 'Expense Manager',
+    title: 'Qantto Dashboard',
+    description: 'Panel de control para gestionar los servicios de Qantto.io.',
+    descriptionEn: 'Dashboard to manage Qantto.io services.',
+    url: 'https://app.cuantto.io/',
+    technologies: [
+      'Next.js',
+      'TypeScript',
+      'MUI',
+      'Django',
+      'PostgreSQL',
+      'AWS',
+      'Stripe',
+      'Redis'
+    ],
+    team: [
+      {
+        username: 'rxtsel',
+        role: 'Front-end Developer'
+      },
+      {
+        username: 'DongnutLa',
+        role: 'Front-end Developer'
+      },
+      {
+        username: 'andergcp',
+        role: 'Back-end Developer'
+      },
+      {
+        username: 'AlejoCasti',
+        role: 'Back-end Developer'
+      }
+    ]
+  },
+  {
+    title: 'Isarte Portafolio',
+    titleEn: 'Isart Portfolio',
     description:
-      'App web para gestionar y llevar el control de nuestro dinero.',
-    descriptionEn: 'Web app to manage and keep track of our money.',
-    url: 'https://expense-manager-react.netlify.app/',
-    gh: 'https://github.com/rxtsel/Expense-control-react',
-    technologies: ['React', 'CSS']
+      'Descubre la trayectoria, obras, exposiciones y premios de una artista colombiana.',
+    descriptionEn:
+      'Discover the trajectory, works, exhibitions and awards of a Colombian artist.',
+    url: 'https://isabelrengifo.art/',
+    gh: 'https://github.com/abouthernan/isarte',
+    technologies: ['Astro', 'CSS']
+  },
+  {
+    title: 'Agencia Vehement',
+    titleEn: 'Vehement Agency',
+    description: 'Diseño y desarrollo de sitio web para agencia.',
+    descriptionEn: 'Design and development of website for agency.',
+    url: 'https://vehement.co/',
+    gh: 'https://github.com/abouthernan/vehement',
+    technologies: ['Astro', 'CSS', 'Figma', 'React']
+  },
+  {
+    title: 'María Alicia Cabrera',
+    description:
+      'Website para escritora Colombiana, proporcionándole un panel de control para gestionar toda la información del sitio web.',
+    descriptionEn:
+      'Website for Colombian writer, providing a control panel to manage all the information on the website.',
+    url: 'https://mariaaliciacabrera.com/',
+    gh: 'https://github.com/abouthernan/maria-alicia-cabrera',
+    technologies: ['Astro', 'CSS', 'Strapi']
   }
 ]

@@ -38,14 +38,13 @@ const descriptionT = lang === 'en' ? descriptionEn : description
           href={url}
           target='_blank'
           rel='nofollow'
-          class='group text-xl font-medium'
+          class='group text-xl font-medium flex items-center gap-[6px] transition-colors duration-150 ease-in hover:text-cBlue'
         >
-          <div class='flex items-center space-x-2 transition-colors duration-150 ease-in  hover:text-cBlue'>
-            <h3>{title}</h3>
-            <div class='size-3 inline-block text-cAccent transition-all duration-150 ease-in group-hover:-translate-y-[1px] group-hover:translate-x-[1px] group-hover:text-cBlue'>
-              <ArrowTr />
-            </div>
-          </div>
+          {title}
+
+          <span class='size-3 inline-block text-cAccent transition-all duration-150 ease-in group-hover:-translate-y-[1px] group-hover:translate-x-[1px] group-hover:text-cBlue'>
+            <ArrowTr />
+          </span>
         </a>
       ) : (
         <h3 class='text-xl font-medium'>{titleT}</h3>
@@ -72,9 +71,7 @@ const descriptionT = lang === 'en' ? descriptionEn : description
             </div>
           </a>
         ) : (
-          <div
-            class='order-2 relative group text-neutral-600 size-6'
-          >
+          <div class='order-2 relative group text-neutral-600 size-6'>
             <Lock />
             <Tooltip content={t('messages.ghPrivate')} />
           </div>

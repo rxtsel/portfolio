@@ -1,7 +1,7 @@
 ---
 import Section from '@/components/Section.astro'
 import ProjectCard from '@/components/ProjectCard.astro'
-import { projects } from '@/data/projects'
+import { personalProjects } from '@/data'
 import { getLangFromUrl, useTranslations } from '@/i18n/utils'
 
 const lang = getLangFromUrl(Astro.url)
@@ -10,6 +10,6 @@ const t = useTranslations(lang)
 
 <Section title={t('messages.featuredProjects')}>
   <div class='grid grid-cols-1 gap-4 lg:grid-cols-2'>
-    {projects.map((project) => <ProjectCard props={project} />)}
+    {personalProjects.map((project) => <ProjectCard props={project} />)}
   </div>
 </Section>

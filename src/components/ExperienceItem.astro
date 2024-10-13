@@ -1,27 +1,47 @@
 ---
 import { calculateDuration } from '@/utils'
 import { getLangFromUrl, useTranslations } from '@/i18n/utils'
+import type { TWorkEntry } from '@/types'
+import ArrowTr from '@/icons/ArrowTr.astro'
 
 const lang = getLangFromUrl(Astro.url)
 const t = useTranslations(lang)
 
 export interface Props {
-  data: Data
-}
-
-interface Data {
-  company: string
-  role: string
-  startDate: Date
-  endDate?: Date
-  description?: string
-  location: string
-  remote?: boolean
+  data: TWorkEntry
 }
 
 const { data } = Astro.props
-const { company, role, startDate, endDate, description, location, remote } =
-  data
+
+const { company, location, remote } = data
+
+let startDate: Date
+let endDate: Date | undefined = undefined
+
+// Verify if there are jobs or if it is an individual job
+const jobs = data.jobs
+
+if (jobs.length > 0) {
+  startDate = new Date(Math.min(...jobs.map((job) => job.startDate.getTime())))
+
+  const hasEndDate = jobs.every((job) => job.endDate !== undefined)
+
+  if (hasEndDate) {
+    // If all jobs have endDate, get the most recent
+    const endDates = jobs.map((job) => job.endDate!)
+    endDate = new Date(Math.max(...endDates.map((date) => date.getTime())))
+  } else {
+    // If there is at least one job without endDate, return null
+    endDate = undefined
+  }
+}
+
+// Calcular duración
+const duration = calculateDuration({
+  startDate: startDate!,
+  endDate: endDate,
+  locale: lang
+})
 ---
 
 <li class='mb-10 ms-4'>
@@ -30,7 +50,7 @@ const { company, role, startDate, endDate, description, location, remote } =
   ></span>
 
   <time class='text-sm font-normal leading-none text-cAccent capitalize'>
-    {calculateDuration({ startDate, locale: lang, endDate })}
+    {duration}
   </time>
 
   <span
@@ -40,15 +60,45 @@ const { company, role, startDate, endDate, description, location, remote } =
     {remote && `· ${t('single.remote')}`}
   </span>
 
-  <h3 class='text-lg font-semibold text-white mt-2 capitalize'>
-    {role} − {company}
-  </h3>
+  {
+    data.companyUrl ? (
+      <a
+        href={data.companyUrl}
+        target='_blank nofollow'
+        aria-label={company}
+        class='text-xl w-fit font-semibold hover:text-cBlue transition-all duration-150 ease-in text-white mt-2 capitalize group flex items-center gap-[6px]'
+      >
+        {company}
+        <span class='size-3 inline-block text-cAccent transition-all duration-150 ease-in group-hover:-translate-y-[1px] group-hover:translate-x-[1px] group-hover:text-cBlue'>
+          <ArrowTr />
+        </span>
+      </a>
+    ) : (
+      <h3 class='text-xl font-semibold text-white mt-2 capitalize'>
+        {company}
+      </h3>
+    )
+  }
 
   {
-    description && (
-      <p class='mb-4 text-base font-normal text-cAccent text-pretty'>
-        {description}
-      </p>
-    )
+    data.jobs.map((job) => (
+      <div class='first-of-type:mt-0 mt-5'>
+        <h4 class='text-cAccent font-bold mt-2 capitalize'>{job.role}</h4>
+        {data.jobs.length > 1 && (
+          <time class='text-sm font-normal leading-none text-cAccent capitalize'>
+            {calculateDuration({
+              startDate: job.startDate,
+              endDate: job.endDate,
+              locale: lang
+            })}
+          </time>
+        )}
+        {job.description && (
+          <p class='my-3 text-base font-normal text-cAccent text-pretty'>
+            {job.description}
+          </p>
+        )}
+      </div>
+    ))
   }
 </li>

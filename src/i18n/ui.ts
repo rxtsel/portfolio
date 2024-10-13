@@ -41,6 +41,8 @@ export const ui = {
       'Responsable de la plataforma, componentes y utilidades para la creación y desarrollo de aplicaciones web. Mejora de un 90% en la entrega de software. Implantación de medidas de integración continua y despliegue.',
     'experiense.qantto':
       'Responsable del diseño y desarrollo Front-end de una herramienta de automatización de cotizaciones para empresas globales. Lanzamos con éxito el producto (SaaS), superando las expectativas del cliente y mejorando la eficiencia de cotizaciones.',
+    'experiense.SoundAdviceFrontEnd':
+      'Como Front-end Developer en SoundAdvice, he colaborado estrechamente con el equipo de diseño para crear interfaces intuitivas y responsivas. He implementado soluciones eficientes que mejoran la experiencia del usuario y optimizan el rendimiento de la aplicación, siempre con un enfoque en la calidad y la innovación.',
 
     'about.p1': 'Me encanta crear algo simple y limpio',
     'about.p2':
@@ -101,6 +103,8 @@ export const ui = {
       'Responsible for the platform, components, and utilities for the creation and development of web applications. 90% improvement in software delivery. Implementation of continuous integration and deployment measures.',
     'experiense.qantto':
       'Responsible for the Front-end design and development of a global company’s quotation automation tool. We successfully launched the product (SaaS), exceeding customer expectations and improving quotation efficiency.',
+    'experiense.SoundAdviceFrontEnd':
+      'As a Front-end Developer at SoundAdvice, I have closely collaborated with the design team to create intuitive and responsive interfaces. I have implemented efficient solutions that enhance the user experience and optimize application performance, always with a focus on quality and innovation.',
 
     'about.p1': 'I love creating something simple and clean',
     'about.p2':

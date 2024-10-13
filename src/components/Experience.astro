@@ -2,44 +2,75 @@
 import Section from '@/components/Section.astro'
 import ExperienceItem from './ExperienceItem.astro'
 import { getLangFromUrl, useTranslations } from '@/i18n/utils'
+import type { TWorkEntry } from '@/types'
 
 const lang = getLangFromUrl(Astro.url)
 const t = useTranslations(lang)
 
-const works = [
+export type TWorks = {
+  company: string
+  role: string
+}
+
+const works: TWorkEntry[] = [
   {
     company: 'SoundAdvice',
-    role: 'Front-end Developer',
-    startDate: new Date('2024-03-01'),
+    companyUrl: 'https://soundadvice.club',
     location: 'Toronto, Canadá',
-    remote: true
+    remote: true,
+    jobs: [
+      {
+        role: 'Full Stack Developer',
+        startDate: new Date('2024-06-01')
+      },
+      {
+        role: 'Front-end Developer',
+        startDate: new Date('2024-03-01'),
+        endDate: new Date('2024-06-01'),
+        description: t('experiense.SoundAdviceFrontEnd')
+      }
+    ]
   },
   {
     company: 'Qantto, LLC',
-    role: 'Front-end Developer',
-    startDate: new Date('2023-07-01'),
-    endDate: new Date('2024-02-01'),
-    description: t('experiense.qantto'),
     location: 'Bogotá, Colombia',
-    remote: true
+    remote: true,
+    jobs: [
+      {
+        role: 'Front-end Developer',
+        startDate: new Date('2023-07-01'),
+        endDate: new Date('2024-02-01'),
+        description: t('experiense.qantto')
+      }
+    ]
   },
   {
     company: 'Visual Dealers',
-    role: 'Front-end Developer',
-    startDate: new Date('2023-04-01'),
-    endDate: new Date('2024-02-01'),
-    description: t('experiense.vsdlrs'),
+    companyUrl: 'https://visualdealers.com',
     location: 'Los Angeles, CA',
-    remote: true
+    remote: true,
+    jobs: [
+      {
+        role: 'Front-end Developer',
+        startDate: new Date('2023-04-01'),
+        endDate: new Date('2024-02-01'),
+        description: t('experiense.vsdlrs')
+      }
+    ]
   },
   {
-    company: 'Vehement S.A.S',
-    role: 'Front-end Developer',
-    startDate: new Date('2022-09-01'),
-    endDate: new Date('2024-02-07'),
-    description: t('experiense.vehement'),
+    company: 'Vehement',
+    companyUrl: 'https://vehement.co',
     location: 'Bogotá, Colombia',
-    remote: true
+    remote: true,
+    jobs: [
+      {
+        role: 'Front-end Developer',
+        startDate: new Date('2022-09-01'),
+        endDate: new Date('2024-02-07'),
+        description: t('experiense.vehement')
+      }
+    ]
   }
 ]
 ---
