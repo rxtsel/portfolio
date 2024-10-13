@@ -7,7 +7,7 @@ const t = useTranslations(lang)
 
 <section class='max-w-4xl py-20 lg:pb-10 sm:py-44 mx-auto'>
   <article class='text-cWhite text-center px-2 space-y-5'>
-    <header>
+    <header class='space-y-2'>
       <picture>
         <source media='(max-width: 767px)' srcset='/profile-mobile.webp' />
         <source media='(min-width: 768px)' srcset='/profile-desktop.webp' />
@@ -20,7 +20,8 @@ const t = useTranslations(lang)
         />
       </picture>
 
-      <strong class='text-[clamp(14px,6vw,18px)] font-normal text-base'
+      <strong
+        class='text-[clamp(14px,6vw,18px)] font-normal text-base block w-fit mx-auto rounded-md bg-cPaper'
         >@rxtsel</strong
       >
     </header>
@@ -38,7 +39,7 @@ const t = useTranslations(lang)
     </h2>
 
     <h3
-      class='text-[clamp(2.125rem,2vw+1rem,5rem)] font-medium leading-none text-pretty'
+      class='text-[clamp(2.125rem,2vw+1rem,3rem)] font-medium leading-none text-pretty'
     >
       {t('hero.p3')}
       <span class='line relative'>{t('hero.p3.0')}</span>
