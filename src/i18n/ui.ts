@@ -39,8 +39,6 @@ export const ui = {
       'Desarrollador de E-commerce, plantillas de email marketing, SEO y landing pages. Mejora del 70% en Core Web Vitals. Apasionado por la creación de experiencias web excepcionales y orientadas al rendimiento.',
     'experiense.vehement':
       'Responsable de la plataforma, componentes y utilidades para la creación y desarrollo de aplicaciones web. Mejora de un 90% en la entrega de software. Implantación de medidas de integración continua y despliegue.',
-    'experiense.qantto':
-      'Responsable del diseño y desarrollo Front-end de una herramienta de automatización de cotizaciones para empresas globales. Lanzamos con éxito el producto (SaaS), superando las expectativas del cliente y mejorando la eficiencia de cotizaciones.',
     'experiense.SoundAdvice':
       'Soluciones de desarrollo para la industria de la música utilizando tecnologías avanzadas. En mi rol, he mejorado la agilidad en el desarrollo implementando técnicas modernas, realizando diseños de bases de datos, análisis, diagramas UML y ERD, escribiendo documentación y actualizando proyectos obsoletos a nuevas tecnologías.',
 
@@ -101,8 +99,6 @@ export const ui = {
       'E-commerce developer, email marketing templates, SEO, and landing pages. 70% improvement in Core Web Vitals. Passionate about creating exceptional web experiences and performance-oriented.',
     'experiense.vehement':
       'Responsible for the platform, components, and utilities for the creation and development of web applications. 90% improvement in software delivery. Implementation of continuous integration and deployment measures.',
-    'experiense.qantto':
-      'Responsible for the Front-end design and development of a global company’s quotation automation tool. We successfully launched the product (SaaS), exceeding customer expectations and improving quotation efficiency.',
     'experiense.SoundAdvice':
       'Development solutions for the music industry using advanced technologies. In my role, I have improved development agility by implementing modern techniques, designing databases, conducting analysis, creating UML and ERD diagrams, writing documentation, and updating outdated projects to new technologies.',
 
