@@ -1,9 +1,10 @@
-import { defineConfig } from 'astro/config'
+import mdx from '@astrojs/mdx'
+import preact from '@astrojs/preact'
 import sitemap from '@astrojs/sitemap'
 import tailwind from '@astrojs/tailwind'
 import expressiveCode from 'astro-expressive-code'
-import mdx from '@astrojs/mdx'
 import robotsTxt from 'astro-robots-txt'
+import { defineConfig } from 'astro/config'
 
 // Mdx plugins
 import rehypeExternalLinks from 'rehype-external-links'
@@ -45,7 +46,8 @@ export default defineConfig({
     }),
     mdx({
       rehypePlugins: [[rehypeExternalLinks, externalLinksOptions]]
-    })
+    }),
+    preact()
   ],
   markdown: {
     rehypePlugins: [[rehypeExternalLinks, externalLinksOptions]]
@@ -57,3 +59,4 @@ export default defineConfig({
     }
   }
 })
+

@@ -1,9 +1,7 @@
 ---
 import { SOCIALS } from '@/constants/routes'
 import Section from './Section.astro'
-import Linkedin from '@/icons/Linkedin.astro'
-import Mail from '@/icons/Mail.astro'
-import Twitter from '@/icons/Twitter.astro'
+import { Icon } from '@/icons'
 import { getLangFromUrl, useTranslations } from '@/i18n/utils'
 
 const lang = getLangFromUrl(Astro.url)
@@ -18,7 +16,7 @@ const t = useTranslations(lang)
       aria-label='Email'
     >
       <div class='size-14 text-[#e94134]'>
-        <Mail />
+        <Icon.mail />
       </div>
       <h2 class='text-cWhite'>Email</h2>
     </a>
@@ -30,21 +28,21 @@ const t = useTranslations(lang)
       target='_blank'
     >
       <div class='size-14 text-[#0077B5]'>
-        <Linkedin />
+        <Icon.linkedin />
       </div>
       <h2 class='text-cWhite'>Linkedin</h2>
     </a>
 
     <a
       class='flex max-w-xs flex-col items-center space-y-2 rounded-lg border border-neutral-800 p-4 transition-all duration-150 ease-in hover:bg-neutral-800/40'
-      href={SOCIALS.twitter}
+      href={SOCIALS.x}
       aria-label='Twitter'
       target='_blank'
     >
       <div class='size-14 text-cWhite'>
-        <Twitter />
+        <Icon.twitter />
       </div>
-      <h2 class='text-cWhite'>Twitter</h2>
+      <h2 class='text-cWhite'>X</h2>
     </a>
   </nav>
 </Section>

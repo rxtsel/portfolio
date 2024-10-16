@@ -15,12 +15,14 @@ export function getLangFromUrl(url: URL) {
   return DEFAULT_LANG
 }
 
-export function useTranslations(lang?: LANG) {
+export function useTranslations(lang?: string) {
+  const castedLang = lang as LANG
+
   return function t(
     key: keyof (typeof ui)[typeof DEFAULT_LANG],
     ...args: any[]
   ) {
-    const language = lang ?? DEFAULT_LANG
+    const language = castedLang ?? DEFAULT_LANG
 
     const translationKey = ui[language][key] || ui[DEFAULT_LANG][key]
 
@@ -61,11 +63,13 @@ function pathNameStartsWithLanguage(pathname: string) {
   return startsWithLanguage
 }
 
-export function getLocalizedPathname(pathname: string, lang: LANG) {
+export function getLocalizedPathname(pathname: string, lang: string) {
+  const castedLang = lang as LANG
+
   if (pathNameStartsWithLanguage(pathname)) {
     const availableLanguages = Object.keys(LANGUAGES).join('|')
     const regex = new RegExp(`^\/(${availableLanguages})`)
-    return pathname.replace(regex, `/${lang}`)
+    return pathname.replace(regex, `/${castedLang}`)
   }
-  return `/${lang}${pathname}`
+  return `/${castedLang}${pathname}`
 }

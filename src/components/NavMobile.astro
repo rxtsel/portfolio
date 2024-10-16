@@ -1,8 +1,12 @@
 ---
 import { LANGUAGES, getLocalizedPathname, getLangFromUrl } from '@/i18n/utils'
 import NavIcon from '@/components/NavIcon.astro'
-import Logo from '@/icons/Logo.astro'
-import TranslateIcon from '@/icons/Translate.astro'
+import { Icon } from '@/icons'
+import type { RouteNames } from './Header.astro'
+
+export interface Props {
+  routes: Record<RouteNames, { path: string; name: string }>
+}
 
 const { pathname } = Astro.url
 const lang = getLangFromUrl(Astro.url)
@@ -16,7 +20,7 @@ const { routes } = Astro.props
     class='h-10 w-10 flex-grow max-w-16 order-2'
     aria-label='logo of the website rxtel.dev'
   >
-    <Logo />
+    <Icon.logo class='h-full mx-auto' />
   </a>
 
   <ul
@@ -89,7 +93,7 @@ const { routes } = Astro.props
     class='lang order-1 text-cWhite transition-colors duration-150 ease-in size-6 cursor-pointer'
   >
     <input type='checkbox' class='check-lang' />
-    <TranslateIcon />
+    <Icon.translate />
   </label>
 </nav>
 
