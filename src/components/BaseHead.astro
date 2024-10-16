@@ -39,7 +39,6 @@ const alternateLinks = alternateLang.map((_lang: LANG) => {
     hreflang: _lang
   }
 })
-
 ---
 
 <!-- Global Metadata -->
@@ -85,7 +84,12 @@ const alternateLinks = alternateLang.map((_lang: LANG) => {
 <Analitycs />
 
 <!-- Ads -->
-{Astro.url.pathname.includes('/blog')) && (
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6984927047139306"
-     crossorigin="anonymous"></script>
-)}
+{
+  Astro.url.pathname.includes('/blog') && (
+    <script
+      async
+      src='https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6984927047139306'
+      crossorigin='anonymous'
+    />
+  )
+}
