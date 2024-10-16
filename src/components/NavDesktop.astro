@@ -1,16 +1,17 @@
 ---
 import { LANGUAGES } from '@/i18n/utils'
 import { SOCIALS } from '@/constants/routes'
-import Logo from '@/icons/Logo.astro'
-import TranslateIcon from '@/icons/Translate.astro'
-import LinkedinIcon from '@/icons/Linkedin.astro'
-import TwitterIcon from '@/icons/Twitter.astro'
-import GithubIcon from '@/icons/Github.astro'
+import { Icon } from '@/icons/index'
 import {
   getLangFromUrl,
   useTranslations,
   getLocalizedPathname
 } from '@/i18n/utils'
+import type { RouteNames } from './Header.astro'
+
+export interface Props {
+  routes: Record<RouteNames, { path: string; name: string }>
+}
 
 const lang = getLangFromUrl(Astro.url)
 const t = useTranslations(lang)
@@ -26,7 +27,7 @@ const { routes } = Astro.props
     class='h-16 w-16 flex-grow max-w-36'
     aria-label='logo of the website rxtel.dev'
   >
-    <Logo />
+    <Icon.logo />
   </a>
 
   <ul class='text-cWhite flex space-x-4 uppercase'>
@@ -51,7 +52,7 @@ const { routes } = Astro.props
         class='lang-desktop hover:text-cBlue order-1 text-cWhite transition-colors duration-150 ease-in size-6 cursor-pointer'
       >
         <input type='checkbox' class='check-lang-desktop' />
-        <TranslateIcon />
+        <Icon.translate />
       </label>
 
       <ul
@@ -85,7 +86,7 @@ const { routes } = Astro.props
         target='_blank'
         aria-label='Twitter'
         class='text-cWhite hover:text-cBlue transition-colors duration-150 ease-in'
-        ><TwitterIcon /></a
+        ><Icon.twitter /></a
       >
     </li>
     <li class='w-6 h-6'>
@@ -93,7 +94,7 @@ const { routes } = Astro.props
         href={SOCIALS.linkedin}
         target='_blank'
         class='text-cWhite hover:text-cBlue transition-colors duration-150 ease-in'
-        aria-label='Linkedin'><LinkedinIcon /></a
+        aria-label='Linkedin'><Icon.linkedin /></a
       >
     </li>
     <li class='w-6 h-6'>
@@ -102,7 +103,7 @@ const { routes } = Astro.props
         target='_blank'
         aria-label='Github'
         class='text-cWhite hover:text-cBlue transition-colors duration-150 ease-in'
-        ><GithubIcon /></a
+        ><Icon.github /></a
       >
     </li>
   </ul>

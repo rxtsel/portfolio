@@ -1,6 +1,5 @@
 ---
-import Users from '@/icons/Users.astro'
-import ArrowTr from '@/icons/ArrowTr.astro'
+import { Icon } from '@/icons'
 import Tooltip from '@/components/Tooltip.astro'
 import type { TTeam } from '@/types'
 
@@ -21,7 +20,7 @@ const titleLabel =
     aria-label='Team members'
   >
     <input type='checkbox' class='check-popover-team' />
-    <Users />
+    <Icon.users />
     <Tooltip content={titleLabel} />
   </label>
 
@@ -41,7 +40,7 @@ const titleLabel =
           >
             @{username}
             <div class='size-3 inline-block text-cAccent transition-all duration-150 ease-in group-hover:-translate-y-[1px] group-hover:translate-x-[1px] group-hover:text-cBlue'>
-              <ArrowTr />
+              <Icon.arrowtr />
             </div>
             <Tooltip content={role} />
           </a>

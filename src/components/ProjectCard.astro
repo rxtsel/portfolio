@@ -1,8 +1,6 @@
 ---
 import type { iProject } from '@/types'
-import ArrowTr from '@/icons/ArrowTr.astro'
-import Github from '@/icons/Github.astro'
-import Lock from '@/icons/Lock.astro'
+import { Icon } from '@/icons'
 import Popover from '@/components/Popover.astro'
 import { getLangFromUrl, useTranslations } from '@/i18n/utils'
 import Tooltip from '@/components/Tooltip.astro'
@@ -43,7 +41,7 @@ const descriptionT = lang === 'en' ? descriptionEn : description
           {title}
 
           <span class='size-3 inline-block text-cAccent transition-all duration-150 ease-in group-hover:-translate-y-[1px] group-hover:translate-x-[1px] group-hover:text-cBlue'>
-            <ArrowTr />
+            <Icon.arrowtr />
           </span>
         </a>
       ) : (
@@ -66,13 +64,13 @@ const descriptionT = lang === 'en' ? descriptionEn : description
             class='order-2'
           >
             <div class='text-cWhite group relative transition-colors duration-150 ease-in hover:text-cBlue size-6'>
-              <Github />
+              <Icon.github />
               <Tooltip content={t('single.repository')} />
             </div>
           </a>
         ) : (
           <div class='order-2 relative group text-neutral-600 size-6'>
-            <Lock />
+            <Icon.lock />
             <Tooltip content={t('messages.ghPrivate')} />
           </div>
         )

@@ -2,19 +2,7 @@
 import type { Technologies } from '@/types'
 import Section from './Section.astro'
 import TechCard from './TechCard.astro'
-import NextJs from '@/icons/color/NextJs.astro'
-import TypeScript from '@/icons/color/TypeScript.astro'
-import Tailwind from '@/icons/color/Tailwind.astro'
-import AstroIcon from '@/icons/color/AstroIcon.astro'
-import React from '@/icons/color/React.astro'
-import Git from '@/icons/color/Git.astro'
-import JavaScript from '@/icons/color/JavaScript.astro'
-import Lua from '@/icons/color/Lua.astro'
-import Supabase from '@/icons/color/Supabase.astro'
-import MySQL from '@/icons/color/MySQL.astro'
-import Prisma from '@/icons/color/Prisma.astro'
-import Sass from '@/icons/color/Sass.astro'
-import Figma from '@/icons/color/Figma.astro'
+import { IconColor } from '@/icons'
 import { getLangFromUrl, useTranslations } from '@/i18n/utils'
 
 const lang = getLangFromUrl(Astro.url)
@@ -23,56 +11,115 @@ const t = useTranslations(lang)
 interface iTechnology {
   name: Technologies
   Icon: HTMLElement | any
+  className?: string
 }
 
 const techs: iTechnology[] = [
   {
     name: 'Next.js',
-    Icon: NextJs
+    Icon: IconColor.nextjs,
+    className: 'size-12 mx-auto'
   },
   {
     name: 'TypeScript',
-    Icon: TypeScript
+    Icon: IconColor.ts
   },
   {
     name: 'JavaScript',
-    Icon: JavaScript
+    Icon: IconColor.js
   },
   {
     name: 'Tailwind CSS',
-    Icon: Tailwind
+    Icon: IconColor.tailwind
   },
   {
     name: 'Astro',
-    Icon: AstroIcon
+    Icon: IconColor.astro
   },
   {
     name: 'React',
-    Icon: React
+    Icon: IconColor.react
   },
   {
     name: 'Git',
-    Icon: Git
+    Icon: IconColor.git
   },
   {
     name: 'Lua',
-    Icon: Lua
+    Icon: IconColor.lua
   },
   {
     name: 'Supabase',
-    Icon: Supabase
+    Icon: IconColor.supabase,
+    className: 'h-full'
   },
   {
     name: 'MySQL',
-    Icon: MySQL
+    Icon: IconColor.database,
+    className: 'text-[#F472B6]'
   },
   {
-    name: 'Prisma',
-    Icon: Prisma
+    name: 'PostgreSQL',
+    Icon: IconColor.database,
+    className: 'text-[#60A5FA]'
   },
   {
-    name: 'Sass',
-    Icon: Sass
+    name: 'Docker',
+    Icon: IconColor.docker
+  },
+  {
+    name: 'Drizzle',
+    Icon: IconColor.drizzle
+  },
+  {
+    name: 'Vitest',
+    Icon: IconColor.vitest
+  },
+  {
+    name: 'Python',
+    Icon: IconColor.python
+  },
+  {
+    name: 'MDX',
+    Icon: IconColor.mdx
+  },
+  {
+    name: 'Jest',
+    Icon: IconColor.jest
+  },
+  {
+    name: 'I18n',
+    Icon: IconColor.i18n,
+    className: 'w-full'
+  },
+  {
+    name: 'Playwright',
+    Icon: IconColor.playwright
+  },
+  {
+    name: 'Linux',
+    Icon: IconColor.linux,
+    className: 'h-full'
+  },
+  {
+    name: 'TanStack Query',
+    Icon: IconColor.tanStackQuery,
+    className: 'w-full'
+  },
+  {
+    name: 'AWS',
+    Icon: IconColor.aws,
+    className: 'w-full relative top-4'
+  },
+  {
+    name: 'GitHub',
+    Icon: IconColor.github,
+    className: 'text-white'
+  },
+  {
+    name: 'Figma',
+    Icon: IconColor.figma,
+    className: 'w-full h-12 relative top-2'
   }
 ]
 ---
@@ -82,9 +129,9 @@ const techs: iTechnology[] = [
     {
       techs
         .sort((a, b) => a.name.localeCompare(b.name))
-        .map(({ name, Icon }: iTechnology) => (
+        .map(({ name, Icon, className }: iTechnology) => (
           <TechCard name={name}>
-            <Icon />
+            <Icon {className} />
           </TechCard>
         ))
     }
