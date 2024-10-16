@@ -3,7 +3,7 @@ import { Icon } from '@/icons'
 import type { RouteNames } from './Header.astro'
 
 interface Props {
-  name: RouteNames
+  name: RouteNames | string
 }
 
 const { name } = Astro.props

@@ -144,12 +144,13 @@ const { routes } = Astro.props
   ) as HTMLInputElement
 
   const handleClickOutside = (e: MouseEvent) => {
-    if (
-      !e.target.closest('.lang-btn-desktop') &&
-      !e.target.closest('.lang-desktop')
-    ) {
+    const target = e.target as HTMLElement
+    // If the click is not inside the popovers, close the popover
+    if (target && !$langBtn.contains(target)) {
       $langCheckbox.checked = false
-      document.body.removeEventListener('click', handleClickOutside)
+      document.body.removeEventListener('click', (event) =>
+        handleClickOutside(event)
+      )
     }
   }
 
