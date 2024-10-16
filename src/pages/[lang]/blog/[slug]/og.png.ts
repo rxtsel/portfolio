@@ -6,7 +6,7 @@ import type { TPostList } from '@/types'
 
 interface Props {
   params: { slug: string }
-  props: { page: TPostList }
+  props: TPostList
 }
 
 export async function GET({ props }: Props) {
