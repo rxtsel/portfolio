@@ -2,7 +2,7 @@ import type { iProject } from '@/types/project'
 
 export const projects: iProject[] = [
   {
-    title: 'SoundAdvice Landing Page',
+    title: 'SoundAdvice',
     description:
       'Desarrollo de landing page. Conectando músicos con mentores de la industria musical y ofreciendo eventos como talleres y retiros.',
     descriptionEn:
@@ -40,7 +40,8 @@ export const projects: iProject[] = [
     ]
   },
   {
-    title: 'SoundAdvice Mentorship Platform',
+    title: 'Plataforma de Mentoría',
+    titleEn: 'Mentorship Platform',
     description:
       'Desarrollo de plataforma web para conectar a profesionales de la música con mentores expertos para el crecimiento de su carrera.',
     descriptionEn:
@@ -104,7 +105,7 @@ export const projects: iProject[] = [
     ]
   },
   {
-    title: 'Novadeha React.js',
+    title: 'Novadeha',
     description:
       'Diseño y desarrollo de sitio web con react por elección del cliente.',
     descriptionEn:
@@ -113,7 +114,7 @@ export const projects: iProject[] = [
     technologies: ['React', 'TypeScript', 'Tailwind CSS', 'CSS', 'Inertia.js']
   },
   {
-    title: 'Qantto Dashboard',
+    title: 'Qantto',
     description: 'Panel de control para gestionar los servicios de Qantto.io.',
     descriptionEn: 'Dashboard to manage Qantto.io services.',
     url: 'https://app.cuantto.io/',
@@ -168,6 +169,7 @@ export const projects: iProject[] = [
   },
   {
     title: 'María Alicia Cabrera',
+    titleEn: 'Maria Alicia Cabrera',
     description:
       'Website para escritora Colombiana, proporcionándole un panel de control para gestionar toda la información del sitio web.',
     descriptionEn:
