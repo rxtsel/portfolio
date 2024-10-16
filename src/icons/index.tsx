@@ -568,8 +568,6 @@ export const IconColor = {
 export const Icon = {
   arrowtr: (props: IconProps) => (
     <svg
-      width='100%'
-      height='100%'
       viewBox='0 0 24 24'
       stroke-width='3.5'
       fill='none'
@@ -587,8 +585,6 @@ export const Icon = {
   ),
   blog: (props: IconProps) => (
     <svg
-      width='100%'
-      height='100%'
       stroke-width='1.5'
       viewBox='0 0 24 24'
       fill='none'
@@ -620,8 +616,6 @@ export const Icon = {
   ),
   github: (props: IconProps) => (
     <svg
-      height='100%'
-      width='100%'
       stroke-width='1.5'
       viewBox='0 0 24 24'
       fill='none'
@@ -646,8 +640,6 @@ export const Icon = {
   ),
   home: (props: IconProps) => (
     <svg
-      width='100%'
-      height='100%'
       viewBox='0 0 24 24'
       stroke-width='1.5'
       fill='none'
@@ -675,8 +667,6 @@ export const Icon = {
       stroke-width='1.5'
       viewBox='0 0 24 24'
       fill='none'
-      width='100%'
-      height='100%'
       xmlns='http://www.w3.org/2000/svg'
       {...props}
     >
@@ -713,8 +703,6 @@ export const Icon = {
   lock: (props: IconProps) => (
     <svg
       xmlns='http://www.w3.org/2000/svg'
-      width='100%'
-      height='100%'
       viewBox='0 0 24 24'
       fill='none'
       {...props}
@@ -747,8 +735,6 @@ export const Icon = {
       {...props}
       xmlns='http://www.w3.org/2000/svg'
       fill='none'
-      width='100%'
-      height='100%'
       viewBox='0 0 72 72'
     >
       <mask id='a' fill='#fff'>
@@ -774,8 +760,6 @@ export const Icon = {
   ),
   mail: (props: IconProps) => (
     <svg
-      width='100%'
-      height='100%'
       stroke-width='1.5'
       viewBox='0 0 24 24'
       fill='none'
@@ -798,8 +782,6 @@ export const Icon = {
   ),
   message: (props: IconProps) => (
     <svg
-      width='100%'
-      height='100%'
       stroke-width='1.5'
       viewBox='0 0 24 24'
       fill='none'
@@ -816,8 +798,6 @@ export const Icon = {
   portfolio: (props: IconProps) => (
     <svg
       {...props}
-      width='100%'
-      height='100%'
       stroke-width='1.5'
       viewBox='0 0 24 24'
       fill='none'
@@ -833,8 +813,6 @@ export const Icon = {
   translate: (props: IconProps) => (
     <svg
       stroke-width='1.5'
-      height='100%'
-      width='100%'
       viewBox='0 0 24 24'
       fill='none'
       xmlns='http://www.w3.org/2000/svg'
@@ -879,8 +857,6 @@ export const Icon = {
   ),
   twitter: (props: IconProps) => (
     <svg
-      height='100%'
-      width='100%'
       viewBox='0 0 24 24'
       stroke-width='1.5'
       fill='none'
@@ -902,8 +878,6 @@ export const Icon = {
   ),
   user: (props: IconProps) => (
     <svg
-      width='100%'
-      height='100%'
       stroke-width='1.5'
       viewBox='0 0 24 24'
       fill='none'
@@ -928,8 +902,6 @@ export const Icon = {
   ),
   users: (props: IconProps) => (
     <svg
-      width='100%'
-      height='100%'
       stroke-width='1.5'
       viewBox='0 0 24 24'
       fill='none'
