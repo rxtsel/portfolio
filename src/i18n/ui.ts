@@ -44,7 +44,9 @@ export const ui = {
 
     'about.p1': 'Me encanta crear algo simple y limpio',
     'about.p2':
-      'Desde niño me ha gustado el mundo de la tecnología. Actualmente desempeño el rol de Desarrollador Web Front-end. He trabajado cómo profesional independiente para empresas en Europa y Estados Unidos.',
+      'Desde niño me ha gustado el mundo de la tecnología. Actualmente desempeño el rol de Desarrollador Web. He trabajado cómo profesional independiente para empresas en',
+    'about.countries':
+      'Europa, Estados Unidos, Canadá, Colombia, Argentina y México.',
     'about.p3':
       'Vivo en Colombia, donde disfruto de buena comida y paisajes increíbles. Me gusta explorar diseños minimalistas que prioricen la funcionalidad.',
     'about.p4': 'También estoy activo en',
@@ -104,7 +106,10 @@ export const ui = {
 
     'about.p1': 'I love creating something simple and clean',
     'about.p2':
-      'Since I was a child, I have liked the world of technology. I currently work as a Front-end Web Developer. I have worked as a freelancer for companies in Europe and the United States.',
+      "Since I was a child, I've been interested in the world of technology. I currently work as a Web Developer. I have worked as a freelancer for companies in",
+    'about.countries':
+      'Europe, the United States, Canada, Colombia, Argentina and Mexico.',
+
     'about.p3':
       'I live in Colombia, where I enjoy good food and incredible landscapes. I like to explore minimalist designs that prioritize functionality.',
     'about.p4': 'I am also active on',
