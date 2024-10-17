@@ -6,6 +6,12 @@ import expressiveCode from 'astro-expressive-code'
 import robotsTxt from 'astro-robots-txt'
 import { defineConfig } from 'astro/config'
 
+import { fileURLToPath } from 'url'
+import { dirname, join } from 'path'
+
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = dirname(__filename)
+
 // Mdx plugins
 import rehypeExternalLinks from 'rehype-external-links'
 
@@ -57,6 +63,12 @@ export default defineConfig({
       status: 301,
       destination: '/es/blog/basic-commands-for-neovim/'
     }
+  },
+  vite: {
+    resolve: {
+      alias: {
+        '@': join(__dirname, 'src')
+      }
+    }
   }
 })
-
