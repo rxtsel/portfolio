@@ -62,7 +62,19 @@ export default defineConfig({
     '/blog/240129-comandos-basicos-de-neovim/': {
       status: 301,
       destination: '/es/blog/basic-commands-for-neovim/'
-    }
+    },
+    '/en/blog/how-to-install-husky-and-commitlint-in-your-projects-a-step-by-step-guide':
+      {
+        status: 301,
+        destination:
+          '/en/blog/how-to-install-husky-commitlint-and-lint-staged-in-your-projects-a-step-by-step-guide/'
+      },
+    'es/blog/how-to-install-husky-and-commitlint-in-your-projects-a-step-by-step-guide':
+      {
+        status: 301,
+        destination:
+          '/es/blog/how-to-install-husky-commitlint-and-lint-staged-in-your-projects-a-step-by-step-guide/'
+      }
   },
   vite: {
     resolve: {
