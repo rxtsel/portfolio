@@ -126,7 +126,7 @@ node node_modules/husky/lib/bin add .husky/commit-msg 'npx --no -- commitlint --
 
 Congratulations! You have successfully configured Husky and Commitlint in your project. Now, whenever you make a commit in your Git repository, Husky will run Commitlint to ensure your commit message follows the defined conventions.
 
-## lint-staged (Optional)
+## lint-staged
 
 If you want to run the linter only on modified files before each commit, you can install `lint-staged` and configure it in your project.
 
