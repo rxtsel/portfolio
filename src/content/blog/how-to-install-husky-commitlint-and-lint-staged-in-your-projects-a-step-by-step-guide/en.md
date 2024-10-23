@@ -22,7 +22,7 @@ lang: en
 
 ## Introduction
 
-**Husky**, **Commitlint** and **lint-staged** are powerful tools that can improve the quality and consistency of your commits in software development projects. [Husky](https://typicode.github.io/husky/) allows you to configure [Git Hooks](#what-is-a-git-hook) in your Git repository, while [Commitlint](https://commitlint.js.org/#/) helps enforce consistent commit message conventions. ([Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/)). [lint-staged]() allows you to run linters on staged files before committing them.
+**Husky**, **Commitlint** and **lint-staged** are powerful tools that can improve the quality and consistency of your commits in software development projects. [Husky](https://typicode.github.io/husky/) allows you to configure [Git Hooks](#what-is-a-git-hook) in your Git repository, while [Commitlint](https://commitlint.js.org/#/) helps enforce consistent commit message conventions. ([Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/)). [lint-staged](https://github.com/lint-staged/lint-staged) allows you to run linters on staged files before committing them.
 
 In this step-by-step guide, you'll learn how to install and configure Husky, Commitlint and lint-staged in your projects.
 
