@@ -161,6 +161,6 @@ Listo, ahora `lint-staged` ejecutará el linter solo en los archivos modificados
 
 ## Conclusion
 
-En esta guía, has aprendido cómo instalar y configurar Husky y Commitlint en tus proyectos de desarrollo de software. Al seguir estas instrucciones, puedes mejorar la calidad y consistencia de los mensajes de commit en tu repositorio de Git, lo que facilita la colaboración y el mantenimiento del código a lo largo del tiempo.
+En esta guía, has aprendido cómo instalar y configurar Husky, Commitlint y lint-staged en tus proyectos de desarrollo de software. Al seguir estas instrucciones, puedes mejorar la calidad y consistencia de los mensajes de commit en tu repositorio de Git, lo que facilita la colaboración y el mantenimiento del código a lo largo del tiempo.
 
 ¡Ahora estás listo para empezar a commitear con confianza!

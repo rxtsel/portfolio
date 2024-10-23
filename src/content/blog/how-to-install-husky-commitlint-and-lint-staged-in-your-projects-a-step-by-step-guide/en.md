@@ -160,6 +160,6 @@ Now, `lint-staged` will run the linter only on modified files before each commit
 
 ## Conclusion
 
-In this guide, you've learned how to install and configure Husky and Commitlint in your software development projects. By following these instructions, you can improve the quality and consistency of commit messages in your Git repository, making collaboration and code maintenance easier over time.
+In this guide, you've learned how to install and configure Husky, Commitlint and lint-staged in your software development projects. By following these instructions, you can improve the quality and consistency of commit messages in your Git repository, making collaboration and code maintenance easier over time.
 
 Now you're ready to start committing with confidence!
