@@ -1,7 +1,7 @@
 ---
 title: 'Cómo Instalar Husky, Commitlint y lint-staged en tus Proyectos: Una Guía Paso a Paso'
 draft: false
-description: 'Aprende cómo mejorar la calidad y consistencia de tus commits en proyectos de software con Husky y Commitlint. Esta guía proporciona instrucciones paso a paso sobre cómo instalar y configurar estas poderosas herramientas, asegurando una mejor colaboración y mantenimiento del código a través de mensajes de commit estandarizados.'
+description: 'Aprende cómo mejorar la calidad y consistencia de tus commits en proyectos de software con Husky, Commitlint y lint-staged. Esta guía proporciona instrucciones paso a paso sobre cómo instalar y configurar estas poderosas herramientas, asegurando una mejor colaboración y mantenimiento del código a través de mensajes de commit estandarizados.'
 pubDate: '2024-02-07T18:40:10.762Z'
 cover: ''
 categories: ['Commits', 'Linter']
@@ -22,9 +22,11 @@ lang: es
 
 ## Introducción
 
-**Husky** y **Commitlint** son herramientas poderosas que pueden mejorar la calidad y consistencia de tus commits en proyectos de desarrollo de software. [Husky](https://typicode.github.io/husky/) te permite configurar [Git Hooks](#qué-es-un-git-hook) en tu repositorio de Git, mientras que [Commitlint](https://commitlint.js.org/#/) te ayuda a aplicar convenciones de mensajes de commit consistentes. ([Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/)). En esta guía paso a paso, aprenderás cómo instalar y configurar Husky y Commitlint en tus proyectos.
+**Husky**, **Commitlint** y **lint-staged** son herramientas poderosas que pueden mejorar la calidad y consistencia de tus commits en proyectos de desarrollo de software. [Husky](https://typicode.github.io/husky/) te permite configurar [Git Hooks](#qué-es-un-git-hook) en tu repositorio de Git, mientras que [Commitlint](https://commitlint.js.org/#/) te ayuda a aplicar convenciones de mensajes de commit consistentes. ([Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/)). [lint-staged]() te permite ejecutar linters en los archivos añadidos al área de staging antes de hacer un commit.
 
-### ¿Por qué Husky y Commitlint?
+En esta guía paso a paso, aprenderás cómo instalar y configurar Husky y Commitlint en tus proyectos.
+
+### ¿Por qué Husky, Commitlint y lint-staged?
 
 ¿Te ha pasado que has subido cambios a tu repositorio y el CI hace un deploy automático, pero algo falla? Cuando ves los logs, te das cuenta de que a veces es algo tan simple como un error de identación. Pues con Husky, puedes evitar estos problemas haciendo que corra el linter antes de cada commit. Así, evitas, por un lado, que se suban cambios con errores y, además, que ese commit quede registrado en el historial.
 
