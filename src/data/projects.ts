@@ -110,7 +110,7 @@ export const projects: iProject[] = [
       'Diseño y desarrollo de sitio web con react por elección del cliente.',
     descriptionEn:
       'Design and development of website with react by client choice.',
-    url: 'https://reactjs.agency/',
+    url: 'https://novadeha.com/',
     technologies: ['React', 'TypeScript', 'Tailwind CSS', 'CSS', 'Inertia.js']
   },
   {
