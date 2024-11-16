@@ -37,8 +37,7 @@ export const ui = {
     'experiense.SoundAdvice':
       'Soluciones de desarrollo para la industria de la música utilizando tecnologías avanzadas. En mi rol, he mejorado la agilidad en el desarrollo implementando técnicas modernas, realizando diseños de bases de datos, análisis, diagramas UML y ERD, escribiendo documentación y actualizando proyectos obsoletos a nuevas tecnologías.',
 
-    'about.p2':
-      'Actualmente desempeño el rol de desarrollador fullstack. He trabajado cómo profesional independiente para empresas en',
+    'about.p2': 'He trabajado para empresas en',
     'about.countries':
       'Europa, Estados Unidos, Canadá, Colombia, Argentina y México.',
     'about.p3':
