@@ -7,18 +7,17 @@ export const ui = {
       'desarrollador web, diseñador web, colombia, html, css, javascript, diseño responsivo, frameworks, adobe creative suite, experiencia de usuario (ux), optimización de motores de búsqueda (seo), wordpress, ecommerce, desarrollo de aplicaciones web, desarrollo móvil, tecnologías web emergentes, cristhian melo, rxtsel, rxtsel.dev, programador, frontend, frontend developer, web dev',
 
     'messages.ghPrivate': 'Repositorio Privado',
-    'messages.latestWorks': 'Últimos trabajos',
-    'messages.featuredProjects': 'Proyectos destacados',
     'messages.latestPosts': 'Últimas publicaciones',
 
     'single.repository': 'Repositorio',
     'single.languages': 'Lenguajes',
     'single.contact': 'Contacto',
     'single.experience': 'Experiencia',
-    'single.techs': 'Tecnologías',
+    'single.techs': 'Stack',
     'single.contactMe': 'Contáctame',
     'single.by': 'por',
     'single.remote': 'Remoto',
+    'single.projects': 'Proyectos',
 
     'lang.es': 'Español',
     'lang.us': 'Inglés',
@@ -29,11 +28,7 @@ export const ui = {
     'nav.blog': 'Blog',
 
     'hero.p1': 'Hola, Soy Cristhian',
-    'hero.p2': 'Desarrollador de Software',
-    'hero.p3': 'Apasionado por crear productos digitales',
-    'hero.p3.0': 'increíbles.',
-    'hero.p4':
-      'Estudiante de Ingeniería de Software con más de 2 años de experiencia como desarrollador web. Apasionado por el diseño y la innovación.',
+    'hero.p2': 'Desarrollador de software con 3+ años de experiencia.',
 
     'experiense.vsdlrs':
       'Desarrollador de E-commerce, plantillas de email marketing, SEO y landing pages. Mejora del 70% en Core Web Vitals. Apasionado por la creación de experiencias web excepcionales y orientadas al rendimiento.',
@@ -42,16 +37,14 @@ export const ui = {
     'experiense.SoundAdvice':
       'Soluciones de desarrollo para la industria de la música utilizando tecnologías avanzadas. En mi rol, he mejorado la agilidad en el desarrollo implementando técnicas modernas, realizando diseños de bases de datos, análisis, diagramas UML y ERD, escribiendo documentación y actualizando proyectos obsoletos a nuevas tecnologías.',
 
-    'about.p1': 'Me encanta crear algo simple y limpio',
     'about.p2':
-      'Desde niño me ha gustado el mundo de la tecnología. Actualmente desempeño el rol de Desarrollador Web. He trabajado cómo profesional independiente para empresas en',
+      'Actualmente desempeño el rol de desarrollador fullstack. He trabajado cómo profesional independiente para empresas en',
     'about.countries':
       'Europa, Estados Unidos, Canadá, Colombia, Argentina y México.',
     'about.p3':
       'Vivo en Colombia, donde disfruto de buena comida y paisajes increíbles. Me gusta explorar diseños minimalistas que prioricen la funcionalidad.',
-    'about.p4': 'También estoy activo en',
     'about.p5':
-      'y si tienes alguna pregunta no dudes en mencionarme, estoy seguro de que será una charla interesante.',
+      'Si tienes alguna pregunta o proyecto en mente, no dudes en contactarme, estoy seguro de que será una charla interesante.',
 
     'notFound.p1': 'Parece que te has perdido',
     'notFound.p2': 'El recurso que buscas no está disponible o no existe.',
@@ -69,18 +62,17 @@ export const ui = {
       'web developer, web designer, colombia, html, css, javascript, responsive design, frameworks, adobe creative suite, user experience (ux), search engine optimization (seo), wordpress, ecommerce, web application development, mobile development, emerging web technologies, cristhian melo, rxtsel, rxtsel.dev, programmer, frontend, frontend developer, web dev',
 
     'messages.ghPrivate': 'Private Repository',
-    'messages.latestWorks': 'Latest Works',
-    'messages.featuredProjects': 'Featured Projects',
     'messages.latestPosts': 'Latest Posts',
 
     'single.repository': 'Repository',
     'single.languages': 'Languages',
     'single.contact': 'Contact',
     'single.experience': 'Experience',
-    'single.techs': 'Technologies',
+    'single.techs': 'Stack',
     'single.contactMe': 'Contact Me',
     'single.by': 'by',
     'single.remote': 'Remote',
+    'single.projects': 'Projects',
 
     'lang.es': 'Spanish',
     'lang.us': 'English',
@@ -91,11 +83,7 @@ export const ui = {
     'nav.blog': 'Blog',
 
     'hero.p1': 'Hi, I’m Cristhian',
-    'hero.p2': 'Software Developer',
-    'hero.p3': 'Passionate about creating digital products',
-    'hero.p3.0': 'amazing.',
-    'hero.p4':
-      'Software Engineering student with over 2 years of experience as a web developer. Passionate about design and innovation.',
+    'hero.p2': 'Software developer with 3+ years of experience.',
 
     'experiense.vsdlrs':
       'E-commerce developer, email marketing templates, SEO, and landing pages. 70% improvement in Core Web Vitals. Passionate about creating exceptional web experiences and performance-oriented.',
@@ -104,17 +92,15 @@ export const ui = {
     'experiense.SoundAdvice':
       'Development solutions for the music industry using advanced technologies. In my role, I have improved development agility by implementing modern techniques, designing databases, conducting analysis, creating UML and ERD diagrams, writing documentation, and updating outdated projects to new technologies.',
 
-    'about.p1': 'I love creating something simple and clean',
     'about.p2':
-      "Since I was a child, I've been interested in the world of technology. I currently work as a Web Developer. I have worked as a freelancer for companies in",
+      'I currently work as a fullstack developer. I have worked as a freelancer for companies in',
     'about.countries':
       'Europe, the United States, Canada, Colombia, Argentina and Mexico.',
 
     'about.p3':
       'I live in Colombia, where I enjoy good food and incredible landscapes. I like to explore minimalist designs that prioritize functionality.',
-    'about.p4': 'I am also active on',
     'about.p5':
-      'and if you have any questions, feel free to mention me, I am sure it will be an interesting chat.',
+      "If you have any questions or projects in mind, feel free to contact me; I'm sure it will be an interesting conversation.",
 
     'notFound.p1': 'It seems you are lost',
     'notFound.p2':

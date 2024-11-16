@@ -1,17 +1,27 @@
 ---
-import { SOCIALS } from '@/constants/routes'
-import Section from './Section.astro'
 import { getLangFromUrl, useTranslations } from '@/i18n/utils'
 
 const lang = getLangFromUrl(Astro.url)
 const t = useTranslations(lang)
 ---
 
-<Section title={t('nav.about')} container id='about-me'>
+<section class='max-w-6xl mb-6 pt-8 lg:pt-32 mx-auto' id='about-me'>
+  <picture>
+    <source media='(max-width: 767px)' srcset='/profile-mobile.webp' />
+    <source media='(min-width: 768px)' srcset='/profile-desktop.webp' />
+    <img
+      src='/profile-mobile.webp'
+      width='64'
+      height='64'
+      alt='puede ser una foto de Cristhian Melo'
+      class='aspect-square lg:size-[80px] mb-3 rounded-full border border-cPaper shadow-md'
+    />
+  </picture>
+  <h1 class='text-2xl font-semibold text-cWhite mb-3'>{t('hero.p1')}</h1>
+  <h2 class='text-cWhite leading-none mb-4'>
+    {t('hero.p2')}
+  </h2>
   <article class='text-cAccent max-w-3xl'>
-    <h3 class='text-xl font-medium text-cWhite leading-none mb-4'>
-      {t('about.p1')}
-    </h3>
     <p class='text-pretty'>
       {t('about.p2')}
       {' '}
@@ -21,15 +31,7 @@ const t = useTranslations(lang)
       {t('about.p3')}
     </p>
     <p class='text-pretty'>
-      {t('about.p4')}
-      <a
-        href={SOCIALS.x}
-        target='_blank'
-        aria-label='twitter profile'
-        class='text-cWhite hover:text-cBlue transition-colors duration-150 ease-in decoration-neutral-500 decoration-dotted underline-offset-[5px] underline'
-        >x.com</a
-      >
       {t('about.p5')}
     </p>
   </article>
-</Section>
+</section>

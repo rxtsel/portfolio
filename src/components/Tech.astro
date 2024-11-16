@@ -58,19 +58,18 @@ const techs: iTechnology[] = [
     name: 'Linux',
     Icon: IconColor.linux,
     className: 'h-full'
-  },
-  ]
+  }
+]
 ---
 
 <Section title={t('single.techs')}>
   <div class='grid grid-cols-2 gap-4 md:grid-cols-6'>
     {
-      techs
-        .map(({ name, Icon, className }: iTechnology) => (
-          <TechCard name={name}>
-            <Icon {className} />
-          </TechCard>
-        ))
+      techs.map(({ name, Icon, className }: iTechnology) => (
+        <TechCard name={name}>
+          <Icon {className} />
+        </TechCard>
+      ))
     }
   </div>
 </Section>

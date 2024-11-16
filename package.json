@@ -13,12 +13,12 @@
     "phoenix": "rm ./node_modules/ -rf && rm ./bun.lockb && ni"
   },
   "dependencies": {
-    "@astrojs/mdx": "^2.1.0",
+    "@astrojs/mdx": "3.1.9",
     "@astrojs/preact": "^3.5.3",
-    "@astrojs/rss": "^4.0.4",
-    "@astrojs/tailwind": "^5.1.0",
+    "@astrojs/rss": "4.0.9",
+    "@astrojs/tailwind": "5.1.2",
     "@vercel/og": "^0.6.2",
-    "astro": "^4.16.5",
+    "astro": "4.16.13",
     "astro-expressive-code": "^0.32.2",
     "astro-robots-txt": "^1.0.0",
     "date-fns": "^3.2.0",
@@ -27,7 +27,7 @@
     "tailwindcss": "^3.4.0"
   },
   "devDependencies": {
-    "@astrojs/sitemap": "1.2.1",
+    "@astrojs/sitemap": "3.2.1",
     "@inquirer/confirm": "2.0.17",
     "@inquirer/input": "1.2.16",
     "@tailwindcss/typography": "^0.5.10",
