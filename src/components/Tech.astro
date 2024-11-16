@@ -16,47 +16,21 @@ interface iTechnology {
 
 const techs: iTechnology[] = [
   {
+    name: 'Astro',
+    Icon: IconColor.astro
+  },
+  {
     name: 'Next.js',
     Icon: IconColor.nextjs,
     className: 'size-12 mx-auto'
-  },
-  {
-    name: 'TypeScript',
-    Icon: IconColor.ts
-  },
-  {
-    name: 'JavaScript',
-    Icon: IconColor.js
-  },
-  {
-    name: 'Tailwind CSS',
-    Icon: IconColor.tailwind
-  },
-  {
-    name: 'Astro',
-    Icon: IconColor.astro
   },
   {
     name: 'React',
     Icon: IconColor.react
   },
   {
-    name: 'Git',
-    Icon: IconColor.git
-  },
-  {
-    name: 'Lua',
-    Icon: IconColor.lua
-  },
-  {
-    name: 'Supabase',
-    Icon: IconColor.supabase,
-    className: 'h-full'
-  },
-  {
-    name: 'MySQL',
-    Icon: IconColor.database,
-    className: 'text-[#F472B6]'
+    name: 'TypeScript',
+    Icon: IconColor.ts
   },
   {
     name: 'PostgreSQL',
@@ -64,71 +38,34 @@ const techs: iTechnology[] = [
     className: 'text-[#60A5FA]'
   },
   {
+    name: 'Git',
+    Icon: IconColor.git
+  },
+  {
+    name: 'Supabase',
+    Icon: IconColor.supabase,
+    className: 'h-full'
+  },
+  {
     name: 'Docker',
     Icon: IconColor.docker
-  },
-  {
-    name: 'Drizzle',
-    Icon: IconColor.drizzle
-  },
-  {
-    name: 'Vitest',
-    Icon: IconColor.vitest
   },
   {
     name: 'Python',
     Icon: IconColor.python
   },
   {
-    name: 'MDX',
-    Icon: IconColor.mdx
-  },
-  {
-    name: 'Jest',
-    Icon: IconColor.jest
-  },
-  {
-    name: 'I18n',
-    Icon: IconColor.i18n,
-    className: 'w-full'
-  },
-  {
-    name: 'Playwright',
-    Icon: IconColor.playwright
-  },
-  {
     name: 'Linux',
     Icon: IconColor.linux,
     className: 'h-full'
   },
-  {
-    name: 'TanStack Query',
-    Icon: IconColor.tanStackQuery,
-    className: 'w-full'
-  },
-  {
-    name: 'AWS',
-    Icon: IconColor.aws,
-    className: 'w-full relative top-4'
-  },
-  {
-    name: 'GitHub',
-    Icon: IconColor.github,
-    className: 'text-white'
-  },
-  {
-    name: 'Figma',
-    Icon: IconColor.figma,
-    className: 'w-full h-12 relative top-2'
-  }
-]
+  ]
 ---
 
 <Section title={t('single.techs')}>
   <div class='grid grid-cols-2 gap-4 md:grid-cols-6'>
     {
       techs
-        .sort((a, b) => a.name.localeCompare(b.name))
         .map(({ name, Icon, className }: iTechnology) => (
           <TechCard name={name}>
             <Icon {className} />
