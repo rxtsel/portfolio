@@ -40,8 +40,6 @@ export const ui = {
     'about.p2': 'He trabajado para empresas en',
     'about.countries':
       'Europa, Estados Unidos, Canadá, Colombia, Argentina y México.',
-    'about.p3':
-      'Vivo en Colombia, donde disfruto de buena comida y paisajes increíbles. Me gusta explorar diseños minimalistas que prioricen la funcionalidad.',
     'about.p5':
       'Si tienes alguna pregunta o proyecto en mente, no dudes en contactarme, estoy seguro de que será una charla interesante.',
 
@@ -91,13 +89,10 @@ export const ui = {
     'experiense.SoundAdvice':
       'Development solutions for the music industry using advanced technologies. In my role, I have improved development agility by implementing modern techniques, designing databases, conducting analysis, creating UML and ERD diagrams, writing documentation, and updating outdated projects to new technologies.',
 
-    'about.p2':
-      'I currently work as a fullstack developer. I have worked as a freelancer for companies in',
+    'about.p2': 'I have worked for companies in',
     'about.countries':
       'Europe, the United States, Canada, Colombia, Argentina and Mexico.',
 
-    'about.p3':
-      'I live in Colombia, where I enjoy good food and incredible landscapes. I like to explore minimalist designs that prioritize functionality.',
     'about.p5':
       "If you have any questions or projects in mind, feel free to contact me; I'm sure it will be an interesting conversation.",
 
