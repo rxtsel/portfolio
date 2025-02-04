@@ -159,15 +159,6 @@ export const projects: iProject[] = [
     technologies: ['Astro', 'CSS']
   },
   {
-    title: 'Agencia Vehement',
-    titleEn: 'Vehement Agency',
-    description: 'Diseño y desarrollo de sitio web para agencia.',
-    descriptionEn: 'Design and development of website for agency.',
-    url: 'https://vehement.co/',
-    gh: 'https://github.com/abouthernan/vehement',
-    technologies: ['Astro', 'CSS', 'Figma', 'React']
-  },
-  {
     title: 'María Alicia Cabrera',
     titleEn: 'Maria Alicia Cabrera',
     description:
