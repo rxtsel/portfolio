@@ -56,13 +56,13 @@ const imageOG = new URL(`${Astro.url}/og.png`).href
       <footer class='flex justify-between items-center'>
         <div class='flex items-center gap-2 my-5 flex-wrap'>
           {
-            post.data.technologies.sort().map((tag: string) => (
-              <p
+            post.data.tags.sort().map((tag: string) => (
+              <strong
                 class='truncate capitalize rounded-md border border-neutral-800 bg-neutral-900 px-2 py-1 font-mono text-xs'
                 title={tag}
               >
                 {tag}
-              </p>
+              </strong>
             ))
           }
         </div>

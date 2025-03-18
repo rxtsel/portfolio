@@ -4,7 +4,18 @@ draft: false
 description: 'Guía para sincronizar dispositivos Bluetooth en entornos de arranque múltiple, evitando problemas de conexión al cambiar de sistema operativo.'
 pubDate: '2025-03-17T20:35:45.145Z'
 categories: ['linux', 'windows', 'macos']
-tags: ['bluetooth', 'dual boot', 'triple boot']
+tags:
+  [
+    'Tutorial',
+    'dual boot',
+    'hackintosh',
+    'macOS',
+    'linux',
+    'Windows',
+    'Multiboot',
+    'Triple boot',
+    'Bluetooth'
+  ]
 author: ['Cristhian Melo']
 lang: es
 ---
