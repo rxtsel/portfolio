@@ -4,7 +4,18 @@ draft: false
 description: 'Guide to syncing Bluetooth devices in multi-boot environments, preventing connection issues when switching operating systems.'
 pubDate: '2025-03-17T20:35:45.145Z'
 categories: ['linux', 'windows', 'macos']
-tags: ['bluetooth', 'dual boot', 'triple boot']
+tags:
+  [
+    'Tutorial',
+    'dual boot',
+    'hackintosh',
+    'macOS',
+    'linux',
+    'Windows',
+    'Multiboot',
+    'Triple boot',
+    'Bluetooth'
+  ]
 author: ['Cristhian Melo']
 lang: en
 ---
