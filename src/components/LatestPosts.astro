@@ -17,7 +17,7 @@ const posts = (await getBlogPosts())
 <Section title={t('messages.latestPosts')}>
   <ul class='grid gap-4'>
     {
-      posts.slice(0, 3).map((post) => (
+      posts.slice(0, 6).map((post) => (
         <li>
           <Post
             title={post.data.title}
@@ -29,4 +29,11 @@ const posts = (await getBlogPosts())
       ))
     }
   </ul>
+
+  <a
+    href={`/${lang || ''}/blog`}
+    class='block mt-6 text-cAccent font-medium hover:underline w-fit mx-auto'
+  >
+    {t('messages.seeAllPosts')}
+  </a>
 </Section>

@@ -8,6 +8,7 @@ export const ui = {
 
     'messages.ghPrivate': 'Repositorio Privado',
     'messages.latestPosts': 'Últimas publicaciones',
+    'messages.seeAllPosts': 'Ver todas las publicaciones',
 
     'single.repository': 'Repositorio',
     'single.languages': 'Lenguajes',
@@ -60,6 +61,7 @@ export const ui = {
 
     'messages.ghPrivate': 'Private Repository',
     'messages.latestPosts': 'Latest Posts',
+    'messages.seeAllPosts': 'See all posts',
 
     'single.repository': 'Repository',
     'single.languages': 'Languages',
