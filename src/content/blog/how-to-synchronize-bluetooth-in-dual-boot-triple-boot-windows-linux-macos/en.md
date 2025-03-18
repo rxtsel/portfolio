@@ -1,6 +1,6 @@
 ---
 title: 'How to Sync Bluetooth in Dual Boot, Triple Boot (Windows, Linux, macOS)'
-draft: true
+draft: false
 description: 'Guide to syncing Bluetooth devices in multi-boot environments, preventing connection issues when switching operating systems.'
 pubDate: '2025-03-17T20:35:45.145Z'
 categories: ['linux', 'windows', 'macos']
@@ -196,4 +196,3 @@ With these steps, your Bluetooth devices will be synced across all your operatin
 
 - [YouTube](https://youtu.be/o5nPUUagW_c?si=Ar0cY_jQILe11uyU)
 - [Reddit](https://www.reddit.com/r/hackintosh/comments/p5ost3/macos_monterey_and_windows_bluetooth_pairing/)
-
