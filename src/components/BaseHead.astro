@@ -1,5 +1,4 @@
 ---
-import Analitycs from '@/components/Analitycs.astro'
 import Favicons from '@/components/Favicons.astro'
 import { ViewTransitions } from 'astro:transitions'
 import {
@@ -81,15 +80,29 @@ const alternateLinks = alternateLang.map((_lang: LANG) => {
 <meta property='twitter:description' content={description} />
 <meta property='twitter:image' content={new URL(image, Astro.url)} />
 
-<Analitycs />
-
 <!-- Ads -->
 {
   Astro.url.pathname.includes('/blog') && (
     <script
+      is:inline
       async
       src='https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6984927047139306'
       crossorigin='anonymous'
     />
   )
 }
+
+<!-- Google tag (gtag.js) -->
+<script
+  is:inline
+  async
+  src='https://www.googletagmanager.com/gtag/js?id=G-DCPSPRJWRR'></script>
+<script is:inline>
+  window.dataLayer = window.dataLayer || []
+  function gtag() {
+    dataLayer.push(arguments)
+  }
+  gtag('js', new Date())
+
+  gtag('config', 'G-DCPSPRJWRR')
+</script>

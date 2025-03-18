@@ -1,5 +1,6 @@
 ---
 import BaseHead from '../components/BaseHead.astro'
+import Gtag from '../components/Gtag.astro'
 import type { TPost } from '@/types'
 
 interface Props extends Partial<TPost> {
@@ -40,6 +41,7 @@ const ogImage = image || new URL(`${Astro.site}meta_tags_large_icon.png`).href
   </head>
 
   <body class='antialiased relative bg-cBlack'>
+    <Gtag />
     <div class={`w-full h-screen absolute top-0 -z-10 ${bgHero}`}></div>
     <slot />
   </body>
