@@ -21,11 +21,13 @@ export const collections = { blog }
 export async function getBlogPosts() {
   const posts = await getCollection('blog')
 
-  return posts.map((post) => {
-    const slug = post.slug.split('/')[0]
-    return {
-      ...post,
-      slug
-    }
-  })
+  return posts
+    .filter((post) => !post.data.draft)
+    .map((post) => {
+      const slug = post.slug.split('/')[0]
+      return {
+        ...post,
+        slug
+      }
+    })
 }
