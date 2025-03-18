@@ -9,6 +9,7 @@ export const ui = {
     'messages.ghPrivate': 'Repositorio Privado',
     'messages.latestPosts': 'Últimas publicaciones',
     'messages.seeAllPosts': 'Ver todas las publicaciones',
+    'messages.editOnGitHub': 'Editar en GitHub',
 
     'single.repository': 'Repositorio',
     'single.languages': 'Lenguajes',
@@ -62,6 +63,7 @@ export const ui = {
     'messages.ghPrivate': 'Private Repository',
     'messages.latestPosts': 'Latest Posts',
     'messages.seeAllPosts': 'See all posts',
+    'messages.editOnGitHub': 'Edit on GitHub',
 
     'single.repository': 'Repository',
     'single.languages': 'Languages',
