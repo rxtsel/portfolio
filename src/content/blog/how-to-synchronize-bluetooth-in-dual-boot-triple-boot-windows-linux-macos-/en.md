@@ -13,7 +13,6 @@ lang: en
 
 <!--toc:start-->
 
-- [Table of Contents](#table-of-contents)
 - [Introduction](#introduction)
   - [Why does this happen?](#why-does-this-happen)
   - [What’s the solution?](#whats-the-solution)

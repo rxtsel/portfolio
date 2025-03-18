@@ -13,7 +13,6 @@ lang: es
 
 <!--toc:start-->
 
-- [Tabla de contenido](#tabla-de-contenido)
 - [Introducción](#introducción)
   - [¿Por qué ocurre esto?](#por-qué-ocurre-esto)
   - [¿Cuál es la solución?](#cuál-es-la-solución)
