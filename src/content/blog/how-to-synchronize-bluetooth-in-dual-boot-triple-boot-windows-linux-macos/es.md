@@ -3,6 +3,7 @@ title: 'Cómo sincronizar Bluetooth en dual boot, triple boot (Windows, Linux, m
 draft: false
 description: 'Guía para sincronizar dispositivos Bluetooth en entornos de arranque múltiple, evitando problemas de conexión al cambiar de sistema operativo.'
 pubDate: '2025-03-17T20:35:45.145Z'
+updatedDate: '2025-03-17T20:35:45.145Z'
 categories: ['linux', 'windows', 'macos']
 tags:
   [

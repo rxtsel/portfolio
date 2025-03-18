@@ -3,7 +3,7 @@ import { getLangFromUrl } from '@/i18n/utils'
 export interface Props {
   date: Date
 }
-const { date } = Astro.props
+const { date, title } = Astro.props
 
 const lang = getLangFromUrl(Astro.url)
 ---
@@ -11,6 +11,7 @@ const lang = getLangFromUrl(Astro.url)
 <time
   datetime={date.toISOString()}
   class='text-neutral-400 text-sm min-w-[80px] text-right'
+  title={title}
 >
   {
     date.toLocaleDateString(`${lang}-us`, {
