@@ -6,19 +6,24 @@ const lang = getLangFromUrl(Astro.url)
 const t = useTranslations(lang)
 ---
 
-<Toggle title={t('single.theme')} class='size-6'>
+<Toggle title={t('single.theme')} class="w-full h-full" >
   <Fragment slot='icon-light'>
-    <Icon.moon
-      class='moon size-6 shrink-0 theme-icon dark:hidden block dark:text-cWhite hover:!text-cBlue transition-colors duration-150 ease-in'
-      data-theme-icon='moon'
-    />
+    <span class="flex flex-col !items-center !justify-center">
+      <Icon.moon
+        class='moon size-6 mx-auto shrink-0 theme-icon dark:hidden block dark:text-cWhite hover:!text-cBlue transition-colors duration-150 ease-in'
+        data-theme-icon='moon'
+      />
+      <span class='text-inherit uppercase mt-1 lg:!hidden'>{t('single.theme')}</span>
+    </span>
   </Fragment>
   <Fragment slot='icon-dark'>
-    <Icon.sun
-      class='sun size-6 shrink-0 theme-icon dark:block hidden dark:text-cWhite hover:text-cBlue transition-colors duration-150 ease-in'
-      data-theme-icon='sun'
-    />
+    <span class="flex flex-col !items-center !justify-center">
+      <Icon.sun
+        class='sun size-6 mx-auto shrink-0 theme-icon dark:block hidden dark:text-cWhite hover:text-cBlue transition-colors duration-150 ease-in'
+        data-theme-icon='sun'
+      />
+      <span class='text-inherit uppercase mt-1 lg:!hidden'>{t('single.theme')}</span>
+    </span>
   </Fragment>
 </Toggle>
 
-<span class='text-inherit lg:hidden uppercase mt-1'>{t('single.theme')}</span>
