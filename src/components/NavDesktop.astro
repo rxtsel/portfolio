@@ -23,13 +23,15 @@ const { routes } = Astro.props
 ---
 
 <nav class='flex w-full max-w-6xl mx-auto items-center justify-between'>
-  <a
-    href={routes.home.path}
-    class='h-16 w-16 flex-grow max-w-fit'
-    aria-label='logo of the website rxtel.dev'
-  >
-    <Icon.logo class='h-full' />
-  </a>
+  <div class='min-w-36'>
+    <a
+      href={routes.home.path}
+      class='h-16 w-fit block'
+      aria-label='logo of the website rxtel.dev'
+    >
+      <Icon.logo class='h-full size-16' />
+    </a>
+  </div>
 
   <ul class='dark:text-cWhite flex space-x-4 uppercase'>
     {
