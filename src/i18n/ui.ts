@@ -20,6 +20,7 @@ export const ui = {
     'single.by': 'por',
     'single.remote': 'Remoto',
     'single.projects': 'Proyectos',
+    'single.theme': 'Tema',
 
     'lang.es': 'Español',
     'lang.us': 'Inglés',
@@ -74,6 +75,7 @@ export const ui = {
     'single.by': 'by',
     'single.remote': 'Remote',
     'single.projects': 'Projects',
+    'single.theme': 'Theme',
 
     'lang.es': 'Spanish',
     'lang.us': 'English',

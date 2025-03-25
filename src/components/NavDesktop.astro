@@ -2,6 +2,7 @@
 import { LANGUAGES } from '@/i18n/utils'
 import { SOCIALS } from '@/constants/routes'
 import { Icon } from '@/icons/index'
+import ToggleTheme from './ToggleTheme.astro'
 import {
   getLangFromUrl,
   useTranslations,
@@ -30,12 +31,12 @@ const { routes } = Astro.props
     <Icon.logo class='h-full' />
   </a>
 
-  <ul class='text-cWhite flex space-x-4 uppercase'>
+  <ul class='dark:text-cWhite flex space-x-4 uppercase'>
     {
       Object.entries(routes).map(([_key, route]) => (
         <li>
           <a
-            class='text-cWhite hover:text-cBlue transition-colors duration-150 ease-in'
+            class='hover:text-cBlue transition-colors duration-150 ease-in'
             aria-label={route.name}
             href={route.path}
           >
@@ -46,10 +47,10 @@ const { routes } = Astro.props
     }
   </ul>
 
-  <ul class='text-cWhite flex space-x-4 flex-shrink-0'>
+  <ul class='dark:text-cWhite text-black flex space-x-4 flex-shrink-0'>
     <li class='w-6 h-6 relative lang-btn-desktop' title={t('single.languages')}>
       <label
-        class='lang-desktop hover:text-cBlue order-1 text-cWhite transition-colors duration-150 ease-in size-6 cursor-pointer'
+        class='lang-desktop hover:text-cBlue order-1 transition-colors duration-150 ease-in size-6 cursor-pointer'
       >
         <input type='checkbox' class='check-lang-desktop' />
         <Icon.translate />
@@ -57,17 +58,19 @@ const { routes } = Astro.props
 
       <ul
         id='lang-options-desktop'
-        class='text-cWhite grid place-content-start uppercase absolute transform left-0 right-0 mx-auto w-max p-2 rounded-md bg-cPaper shadow-md z-10'
+        class='grid place-content-start uppercase absolute transform left-0 right-0 mx-auto w-max p-2 rounded-md bg-neutral-100 dark:bg-cPaper shadow-md z-10 dark:text-cWhite text-black'
       >
         {
           Object.entries(LANGUAGES).map(([key, route]) => {
             const href = getLocalizedPathname(pathname, key)
             const isActive =
-              lang === key ? 'text-cBlue bg-cBlack' : 'text-cWhite'
+              lang === key
+                ? 'text-cBlue dark:bg-cBlack bg-neutral-300/30'
+                : 'dark:text-cWhite'
             return (
               <li class='size-full'>
                 <a
-                  class={`${isActive} hover:text-cBlue hover:bg-cBlack px-10 py-2 rounded transition-colors duration-150 ease-in h-full w-full flex place-items-center gap-2`}
+                  class={`${isActive} hover:text-cBlue hover:bg-neutral-300/30 dark:hover:bg-cBlack px-10 py-2 rounded transition-colors duration-150 ease-in h-full w-full flex place-items-center gap-2`}
                   href={href}
                   aria-label={route}
                 >
@@ -85,7 +88,7 @@ const { routes } = Astro.props
         href={SOCIALS.x}
         target='_blank'
         aria-label='Twitter'
-        class='text-cWhite hover:text-cBlue transition-colors duration-150 ease-in'
+        class='hover:text-cBlue transition-colors duration-150 ease-in'
         ><Icon.twitter /></a
       >
     </li>
@@ -93,7 +96,7 @@ const { routes } = Astro.props
       <a
         href={SOCIALS.linkedin}
         target='_blank'
-        class='text-cWhite hover:text-cBlue transition-colors duration-150 ease-in'
+        class='hover:text-cBlue transition-colors duration-150 ease-in'
         aria-label='Linkedin'><Icon.linkedin /></a
       >
     </li>
@@ -102,9 +105,12 @@ const { routes } = Astro.props
         href={SOCIALS.github}
         target='_blank'
         aria-label='Github'
-        class='text-cWhite hover:text-cBlue transition-colors duration-150 ease-in'
+        class='hover:text-cBlue transition-colors duration-150 ease-in'
         ><Icon.github /></a
       >
+    </li>
+    <li class='w-6 h-6'>
+      <ToggleTheme />
     </li>
   </ul>
 </nav>

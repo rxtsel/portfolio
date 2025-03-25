@@ -16,7 +16,7 @@ const titleLabel =
 
 <div class='relative size-6 popover-content'>
   <label
-    class='popover-team relative group hover:text-cBlue order-1 text-cWhite transition-colors duration-150 ease-in size-6 cursor-pointer'
+    class='popover-team relative group hover:text-cBlue order-1 dark:text-cWhite transition-colors duration-150 ease-in size-6 cursor-pointer'
     aria-label='Team members'
   >
     <input type='checkbox' class='check-popover-team' />
@@ -25,7 +25,7 @@ const titleLabel =
   </label>
 
   <nav
-    class='popover-team-options text-cWhite grid place-content-start absolute transform right-0 lg:left-auto mx-auto w-max p-2 rounded-md bg-cPaper shadow-2xl z-10'
+    class='popover-team-options dark:text-cWhite grid place-content-start absolute transform right-0 lg:left-auto mx-auto w-max p-2 rounded-md bg-neutral-100 dark:bg-cPaper shadow-2xl z-10'
   >
     <p class='font-bold text-cAccent'>{teamTranslation}</p>
     {
@@ -33,7 +33,7 @@ const titleLabel =
         .sort((a, b) => a.username.localeCompare(b.username))
         .map(({ username, url, role }) => (
           <a
-            class={`text-cWhite relative hover:text-cBlue rounded transition-colors duration-150 ease-in flex place-items-center gap-2 size-full z-10 group space-x-1 items-center hover:bg-cBlack px-4 py-2`}
+            class={`dark:text-cWhite relative hover:!text-cBlue rounded transition-colors duration-150 ease-in flex place-items-center gap-2 size-full z-10 group space-x-1 items-center hover:bg-neutral-300/30 dark:hover:bg-cBlack px-4 py-2`}
             href={!url ? `https://github.com/${username}` : url}
             aria-label={`Member ${username}`}
             target='_blank'

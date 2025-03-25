@@ -1,0 +1,89 @@
+---
+import { getLangFromUrl, useTranslations } from '../i18n/utils'
+import { Icon } from '../icons'
+const lang = getLangFromUrl(Astro.url)
+const t = useTranslations(lang)
+const uniqueId = Math.random().toString(36).substring(2)
+---
+
+<button
+  id={`theme-toggle-${uniqueId}`}
+  class='flex flex-col items-center group theme-toggle'
+  title={t('single.theme')}
+  aria-label={t('single.theme')}
+>
+  <Icon.sun
+    class='sun size-6 shrink-0 theme-icon dark:block hidden dark:text-cWhite hover:text-cBlue transition-colors duration-150 ease-in'
+    data-theme-icon='sun'
+  />
+  <Icon.moon
+    class='moon size-6 shrink-0 theme-icon dark:hidden block dark:text-cWhite hover:!text-cBlue transition-colors duration-150 ease-in'
+    data-theme-icon='moon'
+  />
+  <span class='text-inherit lg:hidden uppercase mt-1'>{t('single.theme')}</span>
+</button>
+<style>
+  .theme-toggle {
+    border: 0;
+    background: none;
+  }
+  .theme-icon {
+    fill: transparent;
+  }
+</style>
+<script define:vars={{ uniqueId }}>
+  // Usar una función de inicialización inmediata para evitar contaminar el ámbito global
+  ;(() => {
+    // Verificar si ya existe un listener global usando un patrón más robusto
+    if (window.themeToggleInitialized) return
+    window.themeToggleInitialized = true
+
+    // Obtener el tema inicial de manera más eficiente
+    const getInitialTheme = () => {
+      const localStorageTheme = localStorage?.getItem('theme')
+      if (localStorageTheme === 'dark' || localStorageTheme === 'light') {
+        return localStorageTheme
+      }
+      return window.matchMedia('(prefers-color-scheme: dark)').matches
+        ? 'dark'
+        : 'light'
+    }
+
+    // Optimizar la función de actualización de tema
+    const updateTheme = (currentTheme) => {
+      const htmlElement = document.documentElement
+      const isDark = currentTheme === 'dark'
+
+      // Usar toggle de clases para minimizar cambios de DOM
+      htmlElement.classList.toggle('dark', isDark)
+      htmlElement.classList.toggle('light', !isDark)
+
+      // Establecer el atributo de tema de manera condicional
+      htmlElement.setAttribute(
+        'data-theme',
+        isDark ? 'github-dark' : 'github-light'
+      )
+
+      // Almacenar el tema de manera más directa
+      localStorage.setItem('theme', currentTheme)
+    }
+
+    // Establecer tema inicial
+    const initialTheme = getInitialTheme()
+    updateTheme(initialTheme)
+
+    // Listener global con delegación de eventos más eficiente
+    const handleThemeToggle = (event) => {
+      const themeToggle = event.target.closest('.theme-toggle')
+      if (!themeToggle) return
+
+      const currentTheme = document.documentElement.classList.contains('dark')
+        ? 'dark'
+        : 'light'
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark'
+      updateTheme(newTheme)
+    }
+
+    document.addEventListener('click', handleThemeToggle)
+  })()
+</script>

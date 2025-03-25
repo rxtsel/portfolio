@@ -5,16 +5,21 @@ const lang = getLangFromUrl(Astro.url)
 const t = useTranslations(lang)
 ---
 
-<section class='max-w-6xl mb-6 pt-8 lg:pt-32 mx-auto' id='about-me'>
-  <h1 class='text-2xl font-semibold text-cWhite mb-3'>{t('hero.p1')}</h1>
-  <h2 class='text-cWhite leading-none mb-4'>
+<section
+  class='max-w-6xl mb-6 pt-8 lg:pt-32 mx-auto dark:text-cWhite'
+  id='about-me'
+>
+  <h1 class='text-2xl font-semibold mb-3'>{t('hero.p1')}</h1>
+  <h2 class='leading-none mb-4'>
     {t('hero.p2')}
   </h2>
   <article class='text-cAccent max-w-3xl'>
     <p class='text-pretty'>
       {t('about.p2')}
       {' '}
-      <strong class='font-normal text-white'>{t('about.countries')}</strong>
+      <strong class='font-normal text-black dark:text-white'
+        >{t('about.countries')}</strong
+      >
     </p>
 
     <p class='text-pretty mt-2'>

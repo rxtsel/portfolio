@@ -2,7 +2,7 @@ import mdx from '@astrojs/mdx'
 import preact from '@astrojs/preact'
 import sitemap from '@astrojs/sitemap'
 import tailwind from '@astrojs/tailwind'
-import expressiveCode from 'astro-expressive-code'
+import expressiveCode, { lighten } from 'astro-expressive-code'
 import robotsTxt from 'astro-robots-txt'
 import { defineConfig } from 'astro/config'
 
@@ -30,23 +30,28 @@ export default defineConfig({
     tailwind(),
     robotsTxt(),
     expressiveCode({
-      themes: ['github-dark', 'solarized-dark'],
+      themes: ['github-dark', 'github-light'],
+      useDarkModeMediaQuery: true,
+      themeCssRoot: 'html',
+      themeCssSelector: (theme) => {
+        return `.${theme.name}, [data-theme="${theme.name}"]`
+      },
+      removeUnusedThemes: true,
       styleOverrides: {
         frames: {
           shadowColor: 'transparent',
           editorBackground: 'transparent',
-          editorTabBarBackground: '#262626',
-          editorTabBarBorderColor: 'transparent',
-          editorActiveTabBackground: '#1d1d1d',
-          editorActiveTabIndicatorTopColor: '#4895EF',
+          terminalBackground: 'inherit',
+          terminalTitlebarBackground: 'inherit',
           tooltipSuccessBackground: '#4895EF',
-          terminalBackground: '#1d1d1d',
-          terminalBorder: 'transparent',
-          terminalTabActiveBorder: '#4895EF',
-          terminalTabActiveBackground: '#1d1d1d',
-          terminalTitlebarBackground: '#1d1d1d'
+          editorTabBarBackground: 'transparent',
+          terminalBorder: 'transparent'
         },
-        borderColor: '#262626',
+        borderColor: ({ theme }) =>
+          lighten(
+            theme.colors['editor.background'],
+            theme.type === 'dark' ? 0.1 : -0.15
+          ),
         borderRadius: '0.375rem'
       }
     }),

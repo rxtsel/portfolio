@@ -34,7 +34,7 @@ export type RouteNames = keyof typeof ROUTES
 </header>
 
 <header
-  class='block lg:hidden full px-4 py-3 fixed bottom-5 sm:bottom-10 left-0 right-0 z-50 bg-cPaper/10 backdrop-blur-xl shadow-md max-w-xs sm:max-w-sm mx-auto w-full rounded-2xl'
+  class='block lg:hidden full px-4 py-3 fixed bottom-5 sm:bottom-10 left-0 right-0 z-50 bg-neutral-100/10 dark:bg-cPaper/10 backdrop-blur-xl shadow-md max-w-xs sm:max-w-sm mx-auto w-full rounded-2xl'
 >
   <NavMobile routes={ROUTES} />
 </header>
@@ -48,7 +48,7 @@ export type RouteNames = keyof typeof ROUTES
 
   @keyframes blur {
     to {
-      @apply bg-cBlack/20 backdrop-blur shadow;
+      @apply dark:bg-cBlack/20 backdrop-blur dark:shadow shadow-sm;
     }
   }
 </style>
