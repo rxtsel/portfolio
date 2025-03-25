@@ -3,7 +3,7 @@
 > [!IMPORTANT]
 > If you are going to use this portfolio make sure to change or remove the Google Analytics tag from `src/components/Analitycs.astro`.
 
-### Results on Google Lighthouse:
+### Results on Google Lighthouse
 
 ![image](https://github.com/rxtsel/portfolio/assets/85462420/a2cba98c-d2de-464b-ac35-0dd21183df82)
 
@@ -15,6 +15,7 @@
 - Achieve a 100% score in Google Lighthouse results
 - SEO friendly
 - Dinamic Open Graph for posts
+- Light/Dark mode support
 - Responsive Design
 
 ## Stack
