@@ -28,8 +28,10 @@ const titleT = lang === 'en' ? titleEn : title
 const descriptionT = lang === 'en' ? descriptionEn : description
 ---
 
-<article class='flex flex-col rounded-md border border-neutral-800 p-4'>
-  <header class='mb-2 flex items-center justify-between text-cWhite'>
+<article
+  class='flex flex-col rounded-md border border-neutral-300 dark:border-neutral-800 p-4'
+>
+  <header class='mb-2 flex items-center justify-between dark:text-cWhite'>
     {
       url ? (
         <a
@@ -63,13 +65,13 @@ const descriptionT = lang === 'en' ? descriptionEn : description
             aria-label={t('single.repository')}
             class='order-2'
           >
-            <div class='text-cWhite group relative transition-colors duration-150 ease-in hover:text-cBlue size-6'>
+            <div class='dark:text-cWhite group relative transition-colors duration-150 ease-in hover:text-cBlue size-6'>
               <Icon.github />
               <Tooltip content={t('single.repository')} />
             </div>
           </a>
         ) : (
-          <div class='order-2 relative group text-neutral-600 size-6'>
+          <div class='order-2 relative group text-neutral-300 dark:text-neutral-600 size-6'>
             <Icon.lock />
             <Tooltip content={t('messages.ghPrivate')} />
           </div>
@@ -80,12 +82,12 @@ const descriptionT = lang === 'en' ? descriptionEn : description
 
   <p class='text-cAccent flex-grow'>{descriptionT}</p>
 
-  <footer class='mt-3 flex items-center justify-between text-cWhite'>
+  <footer class='mt-3 flex items-center justify-between dark:text-cWhite'>
     <div class='flex items-center gap-2 flex-wrap'>
       {
         technologies?.sort().map((tag: string) => (
           <p
-            class='truncate rounded-md border border-neutral-800 bg-neutral-900 px-2 py-1 font-mono text-xs'
+            class='truncate rounded-md border border-neutral-300 dark:border-neutral-800 bg-neutral-200/30  dark:bg-neutral-900 px-2 py-1 font-mono text-xs'
             title={tag}
           >
             {tag}

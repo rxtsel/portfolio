@@ -9,10 +9,10 @@ const { name } = Astro.props
 ---
 
 <div
-  class='flex max-w-xs flex-col items-center space-y-2 rounded-lg border border-neutral-800 p-4'
+  class='flex max-w-xs flex-col items-center space-y-2 rounded-lg border border-neutral-300 dark:border-neutral-800 p-4'
 >
   <div class='size-14'>
     <slot />
   </div>
-  <h2 class='text-cWhite'>{name}</h2>
+  <h2 class='dark:text-cWhite'>{name}</h2>
 </div>

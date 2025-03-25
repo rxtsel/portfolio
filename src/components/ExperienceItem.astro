@@ -66,7 +66,7 @@ const duration = calculateDuration({
         href={data.companyUrl}
         target='_blank nofollow'
         aria-label={company}
-        class='text-xl w-fit font-semibold hover:text-cBlue transition-all duration-150 ease-in text-white mt-2 capitalize group flex items-center gap-[6px]'
+        class='text-xl w-fit font-semibold hover:text-cBlue transition-all duration-150 ease-in dark:text-white mt-2 capitalize group flex items-center gap-[6px]'
       >
         {company}
         <span class='size-3 inline-block text-cAccent transition-all duration-150 ease-in group-hover:-translate-y-[1px] group-hover:translate-x-[1px] group-hover:text-cBlue'>
@@ -74,7 +74,7 @@ const duration = calculateDuration({
         </span>
       </a>
     ) : (
-      <h3 class='text-xl font-semibold text-white mt-2 capitalize'>
+      <h3 class='text-xl font-semibold dark:text-white mt-2 capitalize'>
         {company}
       </h3>
     )

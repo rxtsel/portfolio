@@ -39,12 +39,12 @@ const imageOG = new URL(`${Astro.url}/og.png`).href
 >
   <Header />
 
-  <main class='mx-auto pt-10 sm:pt-44 max-w-4xl px-4 md:px-0 text-cWhite'>
+  <main class='mx-auto pt-10 sm:pt-44 max-w-4xl px-4 md:px-0 dark:text-cWhite'>
     <a
       href={`https://github.com/rxtsel/portfolio/blob/main/src/content/blog/${post.slug}/${lang}.md`}
       target='_blank'
       rel='noopener noreferrer'
-      class='rounded-md border border-neutral-800 bg-neutral-900 px-2 py-1 font-mono text-xs flex w-fit mb-8 transition-colors duration-150 ease-in hover:bg-neutral-800/40'
+      class='rounded-md border border-neutral-300 dark:border-neutral-800 bg-neutral-200/30 dark:bg-neutral-900 px-2 py-1 font-mono text-xs flex w-fit mb-8 transition-[background] duration-150 ease-in hover:bg-neutral-300/80 dark:hover:bg-neutral-800/40'
     >
       <span>{t('messages.editOnGitHub')}</span>
       <Icon.arrowtr class='dark:text-neutral-400 text-neutral-500 size-3' />
@@ -59,7 +59,7 @@ const imageOG = new URL(`${Astro.url}/og.png`).href
       </h1>
       <p
         class='text-xl
-        text-[#d1d5db]
+        text-cAccent
         font-medium'
         transition:name={`post ${post.data.description}`}
       >
@@ -71,7 +71,7 @@ const imageOG = new URL(`${Astro.url}/og.png`).href
           {
             post.data.tags.sort().map((tag: string) => (
               <strong
-                class='truncate capitalize rounded-md border border-neutral-800 bg-neutral-900 px-2 py-1 font-mono text-xs'
+                class='truncate capitalize rounded-md border border-neutral-300 dark:border-neutral-800 bg-neutral-200/30 dark:bg-neutral-900 px-2 py-1 font-mono text-xs'
                 title={tag}
               >
                 {tag}
@@ -88,7 +88,7 @@ const imageOG = new URL(`${Astro.url}/og.png`).href
     </header>
 
     <article
-      class='content prose prose-invert mt-8 max-w-none prose-h3:mb-0 prose-code:bg-transparent'
+      class='content prose dark:prose-invert mt-8 max-w-none prose-h3:mb-0 prose-code:bg-transparent'
     >
       <Content components={{ pre: Code }} />
     </article>
