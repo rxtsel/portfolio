@@ -1,5 +1,6 @@
 ---
 import BaseHead from '../components/BaseHead.astro'
+import { ThemeScript } from 'astro-theme-toggle';
 import Gtag from '../components/Gtag.astro'
 import type { TPost } from '@/types'
 
@@ -38,6 +39,7 @@ const ogImage = image || new URL(`${Astro.site}meta_tags_large_icon.png`).href
       image={ogImage}
       keywords={keywords}
     />
+    <ThemeScript />
   </head>
 
   <body class='antialiased relative dark:bg-cBlack bg-neutral-100'>
