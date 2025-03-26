@@ -1,29 +1,80 @@
 ---
+import type { HTMLAttributes } from 'astro/types'
 import { getLangFromUrl, useTranslations } from '../i18n/utils'
 import { Toggle } from 'astro-theme-toggle'
 import { Icon } from '../icons'
+
 const lang = getLangFromUrl(Astro.url)
 const t = useTranslations(lang)
+
+type Props = HTMLAttributes<'div'>
+const props: Props = Astro.props
 ---
 
-<Toggle title={t('single.theme')} class="w-full h-full" >
-  <Fragment slot='icon-light'>
-    <span class="flex flex-col !items-center !justify-center">
-      <Icon.moon
-        class='moon size-6 mx-auto shrink-0 theme-icon dark:hidden block dark:text-cWhite hover:!text-cBlue transition-colors duration-150 ease-in'
-        data-theme-icon='moon'
-      />
-      <span class='text-inherit uppercase mt-1 lg:!hidden'>{t('single.theme')}</span>
-    </span>
-  </Fragment>
-  <Fragment slot='icon-dark'>
-    <span class="flex flex-col !items-center !justify-center">
-      <Icon.sun
-        class='sun size-6 mx-auto shrink-0 theme-icon dark:block hidden dark:text-cWhite hover:text-cBlue transition-colors duration-150 ease-in'
-        data-theme-icon='sun'
-      />
-      <span class='text-inherit uppercase mt-1 lg:!hidden'>{t('single.theme')}</span>
-    </span>
-  </Fragment>
-</Toggle>
+<astro-theme-toggle {...props}>
+  <div class='astro-theme-toggle-icon-light'>
+    <Icon.moon
+      class='moon size-6 mx-auto shrink-0 theme-icon dark:hidden block dark:text-cWhite hover:!text-cBlue transition-colors duration-150 ease-in'
+      data-theme-icon='moon'
+    />
+    <span class='text-inherit uppercase mt-1 lg:!hidden'
+      >{t('single.theme')}</span
+    >
+  </div>
+  <div class='astro-theme-toggle-icon-dark'>
+    <Icon.sun
+      class='sun size-6 mx-auto shrink-0 theme-icon dark:block hidden dark:text-cWhite hover:text-cBlue transition-colors duration-150 ease-in'
+      data-theme-icon='sun'
+    />
+    <span class='text-inherit uppercase mt-1 lg:!hidden'
+      >{t('single.theme')}</span
+    >
+  </div>
+</astro-theme-toggle>
 
+<script>
+  import { handleToggleClick } from '../utils/handle-toggle-click.ts'
+
+  class AstroThemeToggle extends HTMLElement {
+    connectedCallback() {
+      this.addEventListener('click', handleToggleClick)
+    }
+  }
+
+  customElements.define('astro-theme-toggle', AstroThemeToggle)
+</script>
+
+<style is:global>
+  astro-theme-toggle {
+    display: block;
+    cursor: pointer;
+    width: 100%;
+    height: 100%;
+  }
+
+  .astro-theme-toggle-icon-light,
+  .astro-theme-toggle-icon-dark {
+    width: 100%;
+    height: 100%;
+
+    & * {
+      display: block;
+    }
+  }
+
+  .astro-theme-toggle-icon-light {
+    display: block;
+
+    .dark & {
+      display: none;
+    }
+  }
+
+  .astro-theme-toggle-icon-dark {
+    display: none;
+
+    .dark & {
+      display: block;
+    }
+  }
+</style>

@@ -2,12 +2,12 @@ import mdx from '@astrojs/mdx'
 import preact from '@astrojs/preact'
 import sitemap from '@astrojs/sitemap'
 import tailwind from '@astrojs/tailwind'
-import expressiveCode, { lighten } from 'astro-expressive-code'
+import expressiveCode from 'astro-expressive-code'
 import robotsTxt from 'astro-robots-txt'
 import { defineConfig } from 'astro/config'
 
-import { fileURLToPath } from 'url'
 import { dirname, join } from 'path'
+import { fileURLToPath } from 'url'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
@@ -29,32 +29,7 @@ export default defineConfig({
     sitemap(),
     tailwind(),
     robotsTxt(),
-    expressiveCode({
-      themes: ['github-dark', 'github-light'],
-      useDarkModeMediaQuery: true,
-      themeCssRoot: 'html',
-      themeCssSelector: (theme) => {
-        return `.${theme.name}, [data-theme="${theme.name}"]`
-      },
-      removeUnusedThemes: true,
-      styleOverrides: {
-        frames: {
-          shadowColor: 'transparent',
-          editorBackground: 'transparent',
-          terminalBackground: 'inherit',
-          terminalTitlebarBackground: 'inherit',
-          tooltipSuccessBackground: '#4895EF',
-          editorTabBarBackground: 'transparent',
-          terminalBorder: 'transparent'
-        },
-        borderColor: ({ theme }) =>
-          lighten(
-            theme.colors['editor.background'],
-            theme.type === 'dark' ? 0.1 : -0.15
-          ),
-        borderRadius: '0.375rem'
-      }
-    }),
+    expressiveCode(),
     mdx({
       rehypePlugins: [[rehypeExternalLinks, externalLinksOptions]]
     }),
