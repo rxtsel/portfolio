@@ -11,9 +11,9 @@ declare global {
 
 export function getTheme(): 'light' | 'dark' {
   if (typeof window === 'undefined') {
-    return 'light'
+    return 'dark'
   }
-  return window.astroThemeToggle?.getTheme?.() || 'light'
+  return window.astroThemeToggle?.getTheme?.() || 'dark'
 }
 
 export function setTheme(theme: 'light' | 'dark') {
