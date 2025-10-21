@@ -1,7 +1,7 @@
 {
   "extends": "astro/tsconfigs/strict",
   "compilerOptions": {
-    "baseUrl": "/home/rxtsel/Projects/personal/portfolio",
+    "baseUrl": ".",
     "paths": {
       "@/*": ["src/*"]
     },
@@ -9,4 +9,3 @@
     "jsxImportSource": "preact"
   }
 }
-
