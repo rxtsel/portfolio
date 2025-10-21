@@ -2,9 +2,10 @@
 import { LANGUAGES, getLocalizedPathname, getLangFromUrl } from '@/i18n/utils'
 import NavIcon from '@/components/NavIcon.astro'
 import ToggleTheme from '@/components/ToggleTheme.astro'
-import { Icon } from '@/icons'
 import type { RouteNames } from './Header.astro'
-import { useTranslations } from '../i18n/utils'
+
+import LogoIcon from '@/icons/simple/logo.svg'
+import SettingsIcon from '@/icons/simple/settings.svg'
 
 export interface Props {
   routes: Record<RouteNames, { path: string; name: string }>
@@ -12,7 +13,6 @@ export interface Props {
 
 const { pathname } = Astro.url
 const lang = getLangFromUrl(Astro.url)
-const t = useTranslations(lang)
 
 const { routes } = Astro.props
 ---
@@ -23,7 +23,7 @@ const { routes } = Astro.props
     class='h-10 w-10 flex-grow max-w-16 order-2'
     aria-label='logo of the website rxtel.dev'
   >
-    <Icon.logo class='h-full mx-auto' />
+    <LogoIcon class='h-full mx-auto' />
   </a>
 
   <ul
@@ -99,7 +99,7 @@ const { routes } = Astro.props
     class='settings order-1 dark:text-cWhite transition-all duration-150 ease-in size-6 cursor-pointer'
   >
     <input type='checkbox' class='check-settings' />
-    <Icon.settings className='text-inherit' />
+    <SettingsIcon class='text-inherit' />
   </label>
 </nav>
 

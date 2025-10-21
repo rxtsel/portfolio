@@ -1,5 +1,4 @@
 import mdx from '@astrojs/mdx'
-import preact from '@astrojs/preact'
 import sitemap from '@astrojs/sitemap'
 import tailwind from '@astrojs/tailwind'
 import expressiveCode from 'astro-expressive-code'
@@ -32,8 +31,7 @@ export default defineConfig({
     expressiveCode(),
     mdx({
       rehypePlugins: [[rehypeExternalLinks, externalLinksOptions]]
-    }),
-    preact()
+    })
   ],
   markdown: {
     rehypePlugins: [[rehypeExternalLinks, externalLinksOptions]]

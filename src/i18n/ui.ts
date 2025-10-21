@@ -31,7 +31,7 @@ export const ui = {
     'nav.blog': 'Blog',
 
     'hero.p1': 'Hola, Soy Cristhian',
-    'hero.p2': 'Desarrollador de software con 3+ años de experiencia.',
+    'hero.p2': 'Desarrollador de software con 4+ años de experiencia.',
 
     'experiense.vsdlrs':
       'Desarrollador de E-commerce, plantillas de email marketing, SEO y landing pages. Mejora del 70% en Core Web Vitals. Apasionado por la creación de experiencias web excepcionales y orientadas al rendimiento.',
@@ -86,7 +86,7 @@ export const ui = {
     'nav.blog': 'Blog',
 
     'hero.p1': 'Hi, I’m Cristhian',
-    'hero.p2': 'Software developer with 3+ years of experience.',
+    'hero.p2': 'Software developer with 4+ years of experience.',
 
     'experiense.vsdlrs':
       'E-commerce developer, email marketing templates, SEO, and landing pages. 70% improvement in Core Web Vitals. Passionate about creating exceptional web experiences and performance-oriented.',

@@ -6,7 +6,8 @@ import Header from '@/components/Header.astro'
 import Footer from '@/components/Footer.astro'
 import FormatDate from '@/components/FormatDate.astro'
 import { getBlogPosts } from '@/content/config'
-import { Icon } from '@/icons'
+
+import ArrowIcon from '@/icons/simple/arrow-tr.svg'
 
 export async function getStaticPaths() {
   const blogPosts = await getBlogPosts()
@@ -47,7 +48,7 @@ const imageOG = new URL(`${Astro.url}/og.png`).href
       class='rounded-md border border-neutral-300 dark:border-neutral-800 bg-neutral-200/30 dark:bg-neutral-900 px-2 py-1 font-mono text-xs flex w-fit mb-8 transition-[background] duration-150 ease-in hover:bg-neutral-300/80 dark:hover:bg-neutral-800/40'
     >
       <span>{t('messages.editOnGitHub')}</span>
-      <Icon.arrowtr class='dark:text-neutral-400 text-neutral-500 size-3' />
+      <ArrowIcon class='dark:text-neutral-400 text-neutral-500 size-3' />
     </a>
 
     <header class='mb-4 md:mb-8'>

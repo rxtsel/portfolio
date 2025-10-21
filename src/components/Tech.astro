@@ -2,8 +2,18 @@
 import type { Technologies } from '@/types'
 import Section from './Section.astro'
 import TechCard from './TechCard.astro'
-import { IconColor } from '@/icons'
 import { getLangFromUrl, useTranslations } from '@/i18n/utils'
+
+import AstroIcon from '@/icons/logos/astro.svg'
+import NextjsIcon from '@/icons/logos/nextjs.svg'
+import ReactIcon from '@/icons/logos/react.svg'
+import TsIcon from '@/icons/logos/ts.svg'
+import DatabaseIcon from '@/icons/logos/database.svg'
+import GitIcon from '@/icons/logos/git.svg'
+import SupabaseIcon from '@/icons/logos/supabase.svg'
+import DockerIcon from '@/icons/logos/docker.svg'
+import PythonIcon from '@/icons/logos/python.svg'
+import LinuxIcon from '@/icons/logos/linux.svg'
 
 const lang = getLangFromUrl(Astro.url)
 const t = useTranslations(lang)
@@ -17,47 +27,57 @@ interface iTechnology {
 const techs: iTechnology[] = [
   {
     name: 'Astro',
-    Icon: IconColor.astro
+    Icon: AstroIcon
   },
   {
     name: 'Next.js',
-    Icon: IconColor.nextjs,
+    Icon: NextjsIcon,
     className: 'size-12 mx-auto'
   },
   {
     name: 'React',
-    Icon: IconColor.react
+    Icon: ReactIcon
   },
   {
     name: 'TypeScript',
-    Icon: IconColor.ts
+    Icon: TsIcon
   },
   {
     name: 'PostgreSQL',
-    Icon: IconColor.database,
+    Icon: DatabaseIcon,
     className: 'text-[#60A5FA]'
   },
   {
     name: 'Git',
-    Icon: IconColor.git
+    Icon: GitIcon
   },
   {
     name: 'Supabase',
-    Icon: IconColor.supabase,
+    Icon: SupabaseIcon,
     className: 'h-full'
   },
   {
     name: 'Docker',
-    Icon: IconColor.docker
+    Icon: DockerIcon
   },
   {
     name: 'Python',
-    Icon: IconColor.python
+    Icon: PythonIcon
   },
   {
     name: 'Linux',
-    Icon: IconColor.linux,
+    Icon: LinuxIcon,
     className: 'h-full'
+  },
+  {
+    name: 'MySQL',
+    Icon: DatabaseIcon,
+    className: 'h-full text-[#F29111]'
+  },
+  {
+    name: 'SQLite',
+    Icon: DatabaseIcon,
+    className: 'h-full text-[#003B57]'
   }
 ]
 ---

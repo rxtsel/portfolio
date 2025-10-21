@@ -2,7 +2,7 @@
 import { calculateDuration } from '@/utils'
 import { getLangFromUrl, useTranslations } from '@/i18n/utils'
 import type { TWorkEntry } from '@/types'
-import { Icon } from '@/icons'
+import ArrowIcon from '@/icons/simple/arrow-tr.svg'
 
 const lang = getLangFromUrl(Astro.url)
 const t = useTranslations(lang)
@@ -12,34 +12,25 @@ export interface Props {
 }
 
 const { data } = Astro.props
-
 const { company, location, remote } = data
 
 let startDate: Date
 let endDate: Date | undefined = undefined
 
-// Verify if there are jobs or if it is an individual job
 const jobs = data.jobs
-
 if (jobs.length > 0) {
   startDate = new Date(Math.min(...jobs.map((job) => job.startDate.getTime())))
-
   const hasEndDate = jobs.every((job) => job.endDate !== undefined)
-
   if (hasEndDate) {
-    // If all jobs have endDate, get the most recent
     const endDates = jobs.map((job) => job.endDate!)
-    endDate = new Date(Math.max(...endDates.map((date) => date.getTime())))
+    endDate = new Date(Math.max(...endDates.map((d) => d.getTime())))
   } else {
-    // If there is at least one job without endDate, return null
     endDate = undefined
   }
 }
-
-// Calcular duración
-const duration = calculateDuration({
+const initialDuration = calculateDuration({
   startDate: startDate!,
-  endDate: endDate,
+  endDate,
   locale: lang
 })
 ---
@@ -49,8 +40,14 @@ const duration = calculateDuration({
     class='absolute block w-3 h-3 rounded-full mt-1.5 -start-1.5 border border-cBlue bg-cBlue'
   ></span>
 
-  <time class='text-sm font-normal leading-none text-cAccent capitalize'>
-    {duration}
+  <time
+    class='text-sm font-normal leading-none text-cAccent capitalize ts-duration'
+    data-start={startDate!.toISOString()}
+    data-end={endDate ? endDate.toISOString() : ''}
+    data-locale={lang}
+    datetime={(endDate ?? new Date()).toISOString()}
+  >
+    {initialDuration}
   </time>
 
   <span
@@ -64,13 +61,14 @@ const duration = calculateDuration({
     data.companyUrl ? (
       <a
         href={data.companyUrl}
-        target='_blank nofollow'
+        target='_blank'
+        rel='noopener noreferrer'
         aria-label={company}
         class='text-xl w-fit font-semibold hover:text-cBlue transition-all duration-150 ease-in dark:text-white mt-2 capitalize group flex items-center gap-[6px]'
       >
         {company}
         <span class='size-3 inline-block text-cAccent transition-all duration-150 ease-in group-hover:-translate-y-[1px] group-hover:translate-x-[1px] group-hover:text-cBlue'>
-          <Icon.arrowtr />
+          <ArrowIcon />
         </span>
       </a>
     ) : (
@@ -81,24 +79,34 @@ const duration = calculateDuration({
   }
 
   {
-    data.jobs.map((job) => (
-      <div class='first-of-type:mt-0 mt-5'>
-        <h4 class='text-cAccent font-bold mt-2 capitalize'>{job.role}</h4>
-        {data.jobs.length > 1 && (
-          <time class='text-sm font-normal leading-none text-cAccent capitalize'>
-            {calculateDuration({
-              startDate: job.startDate,
-              endDate: job.endDate,
-              locale: lang
-            })}
-          </time>
-        )}
-        {job.description && (
-          <p class='my-3 text-base font-normal text-cAccent text-pretty'>
-            {job.description}
-          </p>
-        )}
-      </div>
-    ))
+    data.jobs.map((job) => {
+      const initialJobDuration = calculateDuration({
+        startDate: job.startDate,
+        endDate: job.endDate,
+        locale: lang
+      })
+      return (
+        <div class='first-of-type:mt-0 mt-5'>
+          <h4 class='text-cAccent font-bold mt-2 capitalize'>{job.role}</h4>
+          {data.jobs.length > 1 && (
+            <time
+              class='text-sm font-normal leading-none text-cAccent capitalize js-duration'
+              data-start={job.startDate.toISOString()}
+              data-end={job.endDate ? job.endDate.toISOString() : ''}
+              data-locale={lang}
+            >
+              {initialJobDuration}
+            </time>
+          )}
+          {job.description && (
+            <p class='my-3 text-base font-normal text-cAccent text-pretty'>
+              {job.description}
+            </p>
+          )}
+        </div>
+      )
+    })
   }
 </li>
+
+<script src='../utils/update-durations.ts'></script>

@@ -1,8 +1,11 @@
 ---
 import { SOCIALS } from '@/constants/routes'
 import Section from './Section.astro'
-import { Icon } from '@/icons'
 import { getLangFromUrl, useTranslations } from '@/i18n/utils'
+
+import MailIcon from '@/icons/simple/mail.svg'
+import LinkedinIcon from '@/icons/simple/linkedin.svg'
+import TwitterIcon from '@/icons/simple/x.svg'
 
 const lang = getLangFromUrl(Astro.url)
 const t = useTranslations(lang)
@@ -16,7 +19,7 @@ const t = useTranslations(lang)
       aria-label='Email'
     >
       <div class='size-14 text-[#e94134]'>
-        <Icon.mail />
+        <MailIcon />
       </div>
       <h2 class='text-cWhite'>Email</h2>
     </a>
@@ -28,7 +31,7 @@ const t = useTranslations(lang)
       target='_blank'
     >
       <div class='size-14 text-[#0077B5]'>
-        <Icon.linkedin />
+        <LinkedinIcon />
       </div>
       <h2 class='text-cWhite'>Linkedin</h2>
     </a>
@@ -40,7 +43,7 @@ const t = useTranslations(lang)
       target='_blank'
     >
       <div class='size-14 text-cWhite'>
-        <Icon.twitter />
+        <TwitterIcon />
       </div>
       <h2 class='text-cWhite'>X</h2>
     </a>
