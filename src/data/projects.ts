@@ -105,49 +105,6 @@ export const projects: iProject[] = [
     ]
   },
   {
-    title: 'Novadeha',
-    description:
-      'Diseño y desarrollo de sitio web con react por elección del cliente.',
-    descriptionEn:
-      'Design and development of website with react by client choice.',
-    url: 'https://novadeha.com/',
-    technologies: ['React', 'TypeScript', 'Tailwind CSS', 'CSS', 'Inertia.js']
-  },
-  {
-    title: 'Qantto',
-    description: 'Panel de control para gestionar los servicios de Qantto.io.',
-    descriptionEn: 'Dashboard to manage Qantto.io services.',
-    url: 'https://app.cuantto.io/',
-    technologies: [
-      'Next.js',
-      'TypeScript',
-      'MUI',
-      'Django',
-      'PostgreSQL',
-      'AWS',
-      'Stripe',
-      'Redis'
-    ],
-    team: [
-      {
-        username: 'rxtsel',
-        role: 'Front-end Developer'
-      },
-      {
-        username: 'DongnutLa',
-        role: 'Front-end Developer'
-      },
-      {
-        username: 'andergcp',
-        role: 'Back-end Developer'
-      },
-      {
-        username: 'AlejoCasti',
-        role: 'Back-end Developer'
-      }
-    ]
-  },
-  {
     title: 'Isarte Portafolio',
     titleEn: 'Isart Portfolio',
     description:
@@ -157,6 +114,44 @@ export const projects: iProject[] = [
     url: 'https://isabelrengifo.art/',
     gh: 'https://github.com/abouthernan/isarte',
     technologies: ['Astro', 'CSS']
+  },
+  {
+    title: 'WeAreTop',
+    description:
+      'Diseño y desarrollo personalizado de sitio web con CMS para consultoría en educación internacional y experiencias académicas.',
+    descriptionEn:
+      'Custom design and development of a CMS-powered website for an international education consultancy and academic experiences.',
+    url: 'https://wearetop.co/',
+    technologies: ['Astro', 'Tailwind CSS', 'Figma']
+  },
+  {
+    title: 'JPTradingBots',
+    description:
+      'Diseño y desarrollo personalizado en WordPress a petición del cliente. Rediseño completo, tema, plugins y sistema e-learning propio.',
+    descriptionEn:
+      'Custom design and development in WordPress at the client’s request. Full redesign with custom theme, plugins, and e-learning system.',
+    url: 'https://jptradingbots.com/',
+    technologies: ['WordPress', 'PHP', 'CSS', 'JavaScript', 'MySQL']
+  },
+  {
+    title: 'Las Pretas',
+    description:
+      'Desarrollo personalizado en WordPress a petición del cliente. Implementación completa del diseño entregado en Figma.',
+    descriptionEn:
+      'Custom WordPress development at the client’s request. Full implementation of the provided Figma design.',
+    url: 'https://laspretas.com/',
+    technologies: ['WordPress', 'PHP', 'CSS', 'JavaScript', 'Figma'],
+    team: [
+      {
+        role: 'Designer',
+        username: 'chino',
+        url: 'https://www.linkedin.com/in/jonathan-jones-8788a057'
+      },
+      {
+        username: 'rxtsel',
+        role: 'Developer'
+      }
+    ]
   },
   {
     title: 'María Alicia Cabrera',
