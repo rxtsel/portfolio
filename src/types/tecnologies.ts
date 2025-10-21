@@ -40,3 +40,5 @@ export type Technologies =
   | 'I18n'
   | 'Linux'
   | 'GitHub'
+  | 'PHP'
+  | 'WordPress'

@@ -40,7 +40,7 @@ const descriptionT = lang === 'en' ? descriptionEn : description
         <a
           href={url}
           target='_blank'
-          rel='nofollow'
+          rel='nofollow noopener'
           class='group text-xl font-medium flex items-center gap-[6px] transition-colors duration-150 ease-in hover:text-cBlue'
         >
           {titleT || title}
@@ -64,7 +64,7 @@ const descriptionT = lang === 'en' ? descriptionEn : description
           <a
             href={gh}
             target='_blank'
-            rel='nofollow'
+            rel='nofollow noopener'
             aria-label={t('single.repository')}
             class='order-2'
           >
