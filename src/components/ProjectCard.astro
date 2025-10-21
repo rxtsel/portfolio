@@ -1,9 +1,12 @@
 ---
 import type { iProject } from '@/types'
-import { Icon } from '@/icons'
 import Popover from '@/components/Popover.astro'
 import { getLangFromUrl, useTranslations } from '@/i18n/utils'
 import Tooltip from '@/components/Tooltip.astro'
+
+import ArrowIcon from '@/icons/simple/arrow-tr.svg'
+import GithubIcon from '@/icons/simple/github.svg'
+import LockIcon from '@/icons/simple/lock.svg'
 
 export interface Props {
   props: iProject
@@ -43,7 +46,7 @@ const descriptionT = lang === 'en' ? descriptionEn : description
           {titleT || title}
 
           <span class='size-3 inline-block text-cAccent transition-all duration-150 ease-in group-hover:-translate-y-[1px] group-hover:translate-x-[1px] group-hover:text-cBlue'>
-            <Icon.arrowtr />
+            <ArrowIcon />
           </span>
         </a>
       ) : (
@@ -66,13 +69,13 @@ const descriptionT = lang === 'en' ? descriptionEn : description
             class='order-2'
           >
             <div class='dark:text-cWhite group relative transition-colors duration-150 ease-in hover:text-cBlue size-6'>
-              <Icon.github />
+              <GithubIcon />
               <Tooltip content={t('single.repository')} />
             </div>
           </a>
         ) : (
           <div class='order-2 relative group text-neutral-300 dark:text-neutral-600 size-6'>
-            <Icon.lock />
+            <LockIcon />
             <Tooltip content={t('messages.ghPrivate')} />
           </div>
         )

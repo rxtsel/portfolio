@@ -1,7 +1,9 @@
 ---
 import type { HTMLAttributes } from 'astro/types'
 import { getLangFromUrl, useTranslations } from '../i18n/utils'
-import { Icon } from '../icons'
+
+import MoonIcon from '../icons/simple/moon.svg'
+import SunIcon from '../icons/simple/sun.svg'
 
 const lang = getLangFromUrl(Astro.url)
 const t = useTranslations(lang)
@@ -12,7 +14,7 @@ const props: Props = Astro.props
 
 <astro-theme-toggle {...props}>
   <div class='astro-theme-toggle-icon-light'>
-    <Icon.moon
+    <MoonIcon
       class='moon size-6 mx-auto shrink-0 theme-icon dark:hidden block dark:text-cWhite hover:!text-cBlue transition-colors duration-150 ease-in'
       data-theme-icon='moon'
     />
@@ -21,7 +23,7 @@ const props: Props = Astro.props
     >
   </div>
   <div class='astro-theme-toggle-icon-dark'>
-    <Icon.sun
+    <SunIcon
       class='sun size-6 mx-auto shrink-0 theme-icon dark:block hidden dark:text-cWhite hover:text-cBlue transition-colors duration-150 ease-in'
       data-theme-icon='sun'
     />

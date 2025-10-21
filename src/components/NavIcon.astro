@@ -1,6 +1,10 @@
 ---
-import { Icon } from '@/icons'
 import type { RouteNames } from './Header.astro'
+
+import HomeIcon from '@/icons/simple/home.svg'
+import UserIcon from '@/icons/simple/user.svg'
+import PortfolioIcon from '@/icons/simple/portfolio.svg'
+import BlogIcon from '@/icons/simple/blog.svg'
 
 interface Props {
   name: RouteNames | string
@@ -9,10 +13,10 @@ interface Props {
 const { name } = Astro.props
 ---
 
-{name === 'home' && <Icon.home />}
+{name === 'home' && <HomeIcon />}
 
-{name === 'aboutMe' && <Icon.user />}
+{name === 'aboutMe' && <UserIcon />}
 
-{name === 'portfolio' && <Icon.portfolio />}
+{name === 'portfolio' && <PortfolioIcon />}
 
-{name === 'blog' && <Icon.blog />}
+{name === 'blog' && <BlogIcon />}

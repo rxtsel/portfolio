@@ -1,7 +1,6 @@
 ---
 import { LANGUAGES } from '@/i18n/utils'
 import { SOCIALS } from '@/constants/routes'
-import { Icon } from '@/icons/index'
 import ToggleTheme from './ToggleTheme.astro'
 import {
   getLangFromUrl,
@@ -9,6 +8,12 @@ import {
   getLocalizedPathname
 } from '@/i18n/utils'
 import type { RouteNames } from './Header.astro'
+
+import LogoIcon from '@/icons/simple/logo.svg'
+import XIcon from '@/icons/simple/x.svg'
+import LinkedinIcon from '@/icons/simple/linkedin.svg'
+import GithubIcon from '@/icons/simple/github.svg'
+import TranslateIcon from '@/icons/simple/translate.svg'
 
 export interface Props {
   routes: Record<RouteNames, { path: string; name: string }>
@@ -29,7 +34,7 @@ const { routes } = Astro.props
       class='h-16 w-fit block'
       aria-label='logo of the website rxtel.dev'
     >
-      <Icon.logo class='h-full size-16' />
+      <LogoIcon class='h-full size-16' />
     </a>
   </div>
 
@@ -55,7 +60,7 @@ const { routes } = Astro.props
         class='lang-desktop hover:text-cBlue order-1 transition-colors duration-150 ease-in size-6 cursor-pointer'
       >
         <input type='checkbox' class='check-lang-desktop' />
-        <Icon.translate />
+        <TranslateIcon />
       </label>
 
       <ul
@@ -91,7 +96,7 @@ const { routes } = Astro.props
         target='_blank'
         aria-label='Twitter'
         class='hover:text-cBlue transition-colors duration-150 ease-in'
-        ><Icon.twitter /></a
+        ><XIcon /></a
       >
     </li>
     <li class='w-6 h-6'>
@@ -99,7 +104,7 @@ const { routes } = Astro.props
         href={SOCIALS.linkedin}
         target='_blank'
         class='hover:text-cBlue transition-colors duration-150 ease-in'
-        aria-label='Linkedin'><Icon.linkedin /></a
+        aria-label='Linkedin'><LinkedinIcon /></a
       >
     </li>
     <li class='w-6 h-6'>
@@ -108,7 +113,7 @@ const { routes } = Astro.props
         target='_blank'
         aria-label='Github'
         class='hover:text-cBlue transition-colors duration-150 ease-in'
-        ><Icon.github /></a
+        ><GithubIcon /></a
       >
     </li>
     <li class='w-6 h-6'>

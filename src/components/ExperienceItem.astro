@@ -2,7 +2,8 @@
 import { calculateDuration } from '@/utils'
 import { getLangFromUrl, useTranslations } from '@/i18n/utils'
 import type { TWorkEntry } from '@/types'
-import { Icon } from '@/icons'
+
+import ArrowIcon from '@/icons/simple/arrow-tr.svg'
 
 const lang = getLangFromUrl(Astro.url)
 const t = useTranslations(lang)
@@ -70,7 +71,7 @@ const duration = calculateDuration({
       >
         {company}
         <span class='size-3 inline-block text-cAccent transition-all duration-150 ease-in group-hover:-translate-y-[1px] group-hover:translate-x-[1px] group-hover:text-cBlue'>
-          <Icon.arrowtr />
+          <ArrowIcon />
         </span>
       </a>
     ) : (
