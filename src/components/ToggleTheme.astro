@@ -15,7 +15,7 @@ const props: Props = Astro.props
 <astro-theme-toggle {...props}>
   <div class='astro-theme-toggle-icon-light'>
     <MoonIcon
-      class='moon size-6 mx-auto shrink-0 theme-icon dark:hidden block dark:text-cWhite hover:!text-cBlue transition-colors duration-150 ease-in'
+      class='moon size-6 mx-auto shrink-0 theme-icon block dark:text-cWhite hover:!text-cBlue transition-colors duration-150 ease-in'
       data-theme-icon='moon'
     />
     <span class='text-inherit uppercase mt-1 lg:!hidden'
@@ -24,7 +24,7 @@ const props: Props = Astro.props
   </div>
   <div class='astro-theme-toggle-icon-dark'>
     <SunIcon
-      class='sun size-6 mx-auto shrink-0 theme-icon dark:block hidden dark:text-cWhite hover:text-cBlue transition-colors duration-150 ease-in'
+      class='sun size-6 mx-auto shrink-0 theme-icon block dark:text-cWhite hover:text-cBlue transition-colors duration-150 ease-in'
       data-theme-icon='sun'
     />
     <span class='text-inherit uppercase mt-1 lg:!hidden'
@@ -57,25 +57,20 @@ const props: Props = Astro.props
   .astro-theme-toggle-icon-dark {
     width: 100%;
     height: 100%;
-
-    & * {
-      display: block;
-    }
   }
 
   .astro-theme-toggle-icon-light {
     display: block;
-
-    .dark & {
-      display: none;
-    }
   }
-
   .astro-theme-toggle-icon-dark {
     display: none;
+  }
 
-    .dark & {
-      display: block;
-    }
+  .dark .astro-theme-toggle-icon-light {
+    display: none;
+  }
+
+  .dark .astro-theme-toggle-icon-dark {
+    display: block;
   }
 </style>
