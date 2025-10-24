@@ -13,6 +13,7 @@ const __dirname = dirname(__filename)
 
 // Mdx plugins
 import rehypeExternalLinks from 'rehype-external-links'
+import playformCompress from '@playform/compress'
 
 /** @type {import('rehype-external-links').Options} */
 const externalLinksOptions = {
@@ -31,7 +32,8 @@ export default defineConfig({
     expressiveCode(),
     mdx({
       rehypePlugins: [[rehypeExternalLinks, externalLinksOptions]]
-    })
+    }),
+    playformCompress()
   ],
   markdown: {
     rehypePlugins: [[rehypeExternalLinks, externalLinksOptions]]

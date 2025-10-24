@@ -17,6 +17,7 @@
     "@astrojs/rss": "4.0.12",
     "@astrojs/tailwind": "6.0.2",
     "@github/relative-time-element": "^4.4.8",
+    "@playform/compress": "^0.2.0",
     "@vercel/og": "^0.6.2",
     "astro": "5.14.7",
     "astro-expressive-code": "^0.32.2",
