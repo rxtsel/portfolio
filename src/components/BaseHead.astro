@@ -1,6 +1,6 @@
 ---
 import Favicons from '@/components/Favicons.astro'
-import { ViewTransitions } from 'astro:transitions'
+import { ClientRouter } from 'astro:transitions'
 import {
   LANGUAGES,
   pathNameIsInLanguage,
@@ -49,7 +49,7 @@ const alternateLinks = alternateLang.map((_lang: LANG) => {
 <link rel='manifest' href='/site.webmanifest' />
 <link rel='sitemap' href='/sitemap-index.xml' />
 <Favicons />
-<ViewTransitions />
+<ClientRouter />
 
 <!-- Canonical URL -->
 <link rel='canonical' href={canonicalURL} />
@@ -68,17 +68,29 @@ const alternateLinks = alternateLang.map((_lang: LANG) => {
 
 <!-- Open Graph / Facebook -->
 <meta property='og:type' content='website' />
-<meta property='og:url' content={Astro.url} />
+<meta property='og:url' content={Astro.url.origin} />
 <meta property='og:title' content={title} />
 <meta property='og:description' content={description} />
-<meta property='og:image' content={new URL(image, Astro.url)} />
+<meta
+  property='og:image'
+  content={new URL(
+    image || `${Astro.url.origin}/meta_tags_large_icon.png`,
+    Astro.url
+  )}
+/>
 
 <!-- Twitter -->
 <meta property='twitter:card' content='summary_large_image' />
-<meta property='twitter:url' content={Astro.url} />
+<meta property='twitter:url' content={Astro.url.origin} />
 <meta property='twitter:title' content={title} />
 <meta property='twitter:description' content={description} />
-<meta property='twitter:image' content={new URL(image, Astro.url)} />
+<meta
+  property='twitter:image'
+  content={new URL(
+    image || `${Astro.url.origin}/meta_tags_large_icon.png`,
+    Astro.url
+  )}
+/>
 
 <!-- Ads -->
 {
