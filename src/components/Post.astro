@@ -20,9 +20,15 @@ const { title, description, date, url } = Astro.props
     >
       {title}
     </h2>
-    <p class='my-2 text-cAccent' transition:name={`post ${description}`}>
+    <p
+      class='my-2 dark:text-cAccent text-neutral-600'
+      transition:name={`post ${description}`}
+    >
       {description}
     </p>
-    <FormatDate date={date} />
+    <FormatDate
+      date={date}
+      title={`Published on ${new Date(date).toDateString()}`}
+    />
   </div>
 </a>

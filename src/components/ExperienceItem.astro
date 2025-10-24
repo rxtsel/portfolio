@@ -38,10 +38,10 @@ const initialDuration = calculateDuration({
 <li class='mb-10 ms-4'>
   <span
     class='absolute block w-3 h-3 rounded-full mt-1.5 -start-1.5 border border-cBlue bg-cBlue'
-  ></span>
+    aria-hidden='true'></span>
 
   <time
-    class='text-sm font-normal leading-none text-cAccent capitalize ts-duration'
+    class='text-sm font-normal leading-none dark:text-cAccent text-neutral-600 capitalize ts-duration'
     data-start={startDate!.toISOString()}
     data-end={endDate ? endDate.toISOString() : ''}
     data-locale={lang}
@@ -51,7 +51,7 @@ const initialDuration = calculateDuration({
   </time>
 
   <span
-    class='text-sm mt-1 block font-normal leading-none text-cAccent capitalize'
+    class='text-sm mt-1 block font-normal leading-none dark:text-cAccent text-neutral-600 capitalize'
   >
     {location}
     {remote && `· ${t('single.remote')}`}
@@ -67,7 +67,7 @@ const initialDuration = calculateDuration({
         class='text-xl w-fit font-semibold hover:text-cBlue transition-all duration-150 ease-in dark:text-white mt-2 capitalize group flex items-center gap-[6px]'
       >
         {company}
-        <span class='size-3 inline-block text-cAccent transition-all duration-150 ease-in group-hover:-translate-y-[1px] group-hover:translate-x-[1px] group-hover:text-cBlue'>
+        <span class='size-3 inline-block dark:text-cAccent text-neutral-600 transition-all duration-150 ease-in group-hover:-translate-y-[1px] group-hover:translate-x-[1px] group-hover:text-cBlue'>
           <ArrowIcon />
         </span>
       </a>
@@ -87,10 +87,12 @@ const initialDuration = calculateDuration({
       })
       return (
         <div class='first-of-type:mt-0 mt-5'>
-          <h4 class='text-cAccent font-bold mt-2 capitalize'>{job.role}</h4>
+          <h3 class='dark:text-cAccent text-neutral-600 font-bold mt-2 capitalize'>
+            {job.role}
+          </h3>
           {data.jobs.length > 1 && (
             <time
-              class='text-sm font-normal leading-none text-cAccent capitalize js-duration'
+              class='text-sm font-normal leading-none dark:text-cAccent text-neutral-600 capitalize js-duration'
               data-start={job.startDate.toISOString()}
               data-end={job.endDate ? job.endDate.toISOString() : ''}
               data-locale={lang}
@@ -99,7 +101,7 @@ const initialDuration = calculateDuration({
             </time>
           )}
           {job.description && (
-            <p class='my-3 text-base font-normal text-cAccent text-pretty'>
+            <p class='my-3 text-base font-normal dark:text-cAccent text-neutral-600 text-pretty'>
               {job.description}
             </p>
           )}

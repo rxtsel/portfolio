@@ -5,7 +5,9 @@ const lang = getLangFromUrl(Astro.url)
 const t = useTranslations(lang)
 ---
 
-<footer class='pb-32 mt-14 lg:my-4 lg:py-4 w-full text-center text-cAccent'>
+<footer
+  class='pb-32 mt-14 lg:my-4 lg:py-4 w-full text-center dark:text-cAccent text-neutral-600'
+>
   <p>
     &copy; 2022 - {new Date().getFullYear()}. {t('footer.p1')} &hearts;
     {t('single.by')}

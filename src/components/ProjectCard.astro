@@ -45,7 +45,7 @@ const descriptionT = lang === 'en' ? descriptionEn : description
         >
           {titleT || title}
 
-          <span class='size-3 inline-block text-cAccent transition-all duration-150 ease-in group-hover:-translate-y-[1px] group-hover:translate-x-[1px] group-hover:text-cBlue'>
+          <span class='size-3 inline-block dark:text-cAccent text-neutral-600 transition-all duration-150 ease-in group-hover:-translate-y-[1px] group-hover:translate-x-[1px] group-hover:text-cBlue'>
             <ArrowIcon />
           </span>
         </a>
@@ -83,7 +83,7 @@ const descriptionT = lang === 'en' ? descriptionEn : description
     </div>
   </header>
 
-  <p class='text-cAccent flex-grow'>{descriptionT}</p>
+  <p class='dark:text-cAccent text-neutral-600 flex-grow'>{descriptionT}</p>
 
   <footer class='mt-3 flex items-center justify-between dark:text-cWhite'>
     <div class='flex items-center gap-2 flex-wrap'>
