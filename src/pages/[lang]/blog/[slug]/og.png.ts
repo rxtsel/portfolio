@@ -111,12 +111,12 @@ export async function GET({ props }: Props) {
     fonts: [
       {
         name: 'Satoshi',
-        data: Satoshi.buffer,
+        data: Satoshi,
         style: 'normal'
       },
       {
         name: 'Satoshi',
-        data: Satoshi.buffer,
+        data: Satoshi,
         style: 'normal'
       }
     ]
