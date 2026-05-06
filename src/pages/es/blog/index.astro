@@ -1,0 +1,30 @@
+---
+import { getCollection } from "astro:content"
+import MainLayout from "@/layouts/MainLayout.astro"
+import { getBlogPostPath } from "@/lib/i18n"
+
+const posts = (await getCollection("blog")).filter((post) => post.data.locale === "es" && !post.data.draft)
+---
+
+<MainLayout
+  alternatesPath="blog"
+  description="Artículos de Cristhian Melo sobre ingeniería de software, rendimiento web, accesibilidad y sistemas frontend mantenibles."
+  lang="es"
+  title="Blog de Ingeniería de Software"
+>
+  <main class="mx-auto max-w-3xl px-6 py-16">
+    <h1 class="text-4xl font-semibold">Blog</h1>
+    <div class="mt-8 space-y-6">
+      {
+        posts.map((post) => (
+          <article>
+            <h2 class="text-2xl font-medium">
+              <a href={getBlogPostPath(post)}>{post.data.title}</a>
+            </h2>
+            <p class="mt-2">{post.data.description}</p>
+          </article>
+        ))
+      }
+    </div>
+  </main>
+</MainLayout>

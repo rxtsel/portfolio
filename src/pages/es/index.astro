@@ -4,32 +4,32 @@ import MainLayout from "@/layouts/MainLayout.astro"
 import { getSelectedPublishedPosts } from "@/lib/blog"
 import { getBlogPostPath } from "@/lib/i18n"
 
-const home = await getEntry("home", "en")
+const home = await getEntry("home", "es")
 
 if (!home) {
-  throw new Error("Missing English home content")
+  throw new Error("Missing Spanish home content")
 }
 
 const { Content } = await render(home)
 const posts = await getCollection("blog")
-const latestPosts = getSelectedPublishedPosts(posts, home.data.latestPosts, "en")
+const latestPosts = getSelectedPublishedPosts(posts, home.data.latestPosts, "es")
 ---
 
 <MainLayout
   alternatesPath=""
   description={home.data.seo?.description ?? home.data.description}
-  lang="en"
+  lang="es"
   title={home.data.seo?.title ?? home.data.title}
   titleTemplate="%s"
 >
-  <main>
+  <main class="mx-auto max-w-3xl px-6 py-16">
     <h1 class="text-4xl font-semibold">{home.data.heroTitle}</h1>
     <p class="mt-4 text-lg">{home.data.intro}</p>
 
     {
       home.data.experience.length > 0 && (
         <section class="mt-12">
-          <h2 class="text-2xl font-semibold">Experience</h2>
+          <h2 class="text-2xl font-semibold">Experiencia</h2>
           <div class="mt-4 space-y-6">
             {home.data.experience.map((item) => (
               <article>
@@ -37,7 +37,7 @@ const latestPosts = getSelectedPublishedPosts(posts, home.data.latestPosts, "en"
                 <p>{item.company}</p>
                 <p>
                   {item.startDate}
-                  {item.endDate ? ` - ${item.endDate}` : " - Present"}
+                  {item.endDate ? ` - ${item.endDate}` : " - Actualidad"}
                 </p>
               </article>
             ))}
@@ -49,7 +49,7 @@ const latestPosts = getSelectedPublishedPosts(posts, home.data.latestPosts, "en"
     {
       home.data.projects.length > 0 && (
         <section class="mt-12">
-          <h2 class="text-2xl font-semibold">Projects</h2>
+          <h2 class="text-2xl font-semibold">Proyectos</h2>
           <div class="mt-4 space-y-6">
             {home.data.projects.map((project) => (
               <article>
@@ -67,7 +67,7 @@ const latestPosts = getSelectedPublishedPosts(posts, home.data.latestPosts, "en"
     {
       latestPosts.length > 0 && (
         <section class="mt-12">
-          <h2 class="text-2xl font-semibold">Latest posts</h2>
+          <h2 class="text-2xl font-semibold">Últimos posts</h2>
           <div class="mt-4 space-y-6">
             {latestPosts.map((post) => (
               <article>

@@ -1,6 +1,7 @@
 import type { SeoProps } from "@jdevalk/astro-seo-graph"
 import type { GraphEntity } from "@jdevalk/seo-graph-core"
 import { assembleGraph, buildPiece, buildWebPage, buildWebSite, makeIds } from "@jdevalk/seo-graph-core"
+import { getLocalizedPath, type Locale } from "@/lib/i18n"
 
 const SITE_URL = "https://rxtsel.dev"
 const SITE_NAME = "Cristhian Melo"
@@ -18,6 +19,8 @@ export const siteMetadata = {
 } as const
 
 export type LayoutSeoProps = Omit<SeoProps, "title"> & {
+  alternatesPath?: string
+  lang?: Locale
   title: string
 }
 
@@ -80,35 +83,55 @@ function buildDefaultGraph({ description, title, url }: GraphInput) {
 }
 
 export function buildLayoutSeoProps(props: LayoutSeoProps, pageUrl: URL): SeoProps {
-  const description = props.description ?? DEFAULT_DESCRIPTION
-  const canonical = props.canonical?.toString() ?? new URL(pageUrl.pathname, SITE_URL).toString()
+  const { alternatesPath, lang = "en", ...seoProps } = props
+  const description = seoProps.description ?? DEFAULT_DESCRIPTION
+  const canonical = seoProps.canonical?.toString() ?? new URL(pageUrl.pathname, SITE_URL).toString()
+  const alternates =
+    seoProps.alternates ??
+    (alternatesPath
+      ? {
+          defaultLocale: "en",
+          entries: [
+            {
+              href: new URL(getLocalizedPath("en", alternatesPath), SITE_URL).toString(),
+              hreflang: "en",
+            },
+            {
+              href: new URL(getLocalizedPath("es", alternatesPath), SITE_URL).toString(),
+              hreflang: "es",
+            },
+          ],
+        }
+      : undefined)
   const graph =
-    props.graph === undefined
+    seoProps.graph === undefined
       ? buildDefaultGraph({
           description,
-          title: props.title,
+          title: seoProps.title,
           url: canonical,
         })
-      : props.graph
+      : seoProps.graph
 
-  return {
-    ...props,
+  const builtProps = {
+    ...seoProps,
     canonical,
     description,
-    extraLinks: [...defaultExtraLinks, ...(props.extraLinks ?? [])],
-    extraMeta: [...defaultExtraMeta, ...(props.extraMeta ?? [])],
+    extraLinks: [...defaultExtraLinks, ...(seoProps.extraLinks ?? [])],
+    extraMeta: [...defaultExtraMeta, ...(seoProps.extraMeta ?? [])],
     graph,
-    locale: props.locale ?? siteMetadata.locale,
-    ogImage: props.ogImage ?? siteMetadata.ogImage,
-    ogImageAlt: props.ogImageAlt ?? `${siteMetadata.name} portfolio preview`,
-    ogImageHeight: props.ogImageHeight ?? 630,
-    ogImageWidth: props.ogImageWidth ?? 1200,
-    siteName: props.siteName ?? siteMetadata.name,
-    titleTemplate: props.titleTemplate ?? siteMetadata.titleTemplate,
+    locale: seoProps.locale ?? (lang === "es" ? "es_CO" : siteMetadata.locale),
+    ogImage: seoProps.ogImage ?? siteMetadata.ogImage,
+    ogImageAlt: seoProps.ogImageAlt ?? `${siteMetadata.name} portfolio preview`,
+    ogImageHeight: seoProps.ogImageHeight ?? 630,
+    ogImageWidth: seoProps.ogImageWidth ?? 1200,
+    siteName: seoProps.siteName ?? siteMetadata.name,
+    titleTemplate: seoProps.titleTemplate ?? siteMetadata.titleTemplate,
     twitter: {
-      card: "summary_large_image",
+      card: "summary_large_image" as const,
       site: "@rxtsel",
-      ...props.twitter,
+      ...seoProps.twitter,
     },
   }
+
+  return alternates ? { ...builtProps, alternates } : builtProps
 }
