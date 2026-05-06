@@ -32,7 +32,7 @@ const alternates = {
   languageLinks={getBlogPostLanguageLinks(posts, post)}
   title={post.data.seo?.title ?? post.data.title}
 >
-  <main class="mx-auto max-w-3xl px-6 py-16">
+  <main class="mx-auto max-w-prose">
     <article>
       <h1 class="text-4xl font-semibold" transition:name={getBlogPostTransitionName(post, "title")}>
         {post.data.title}

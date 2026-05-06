@@ -33,7 +33,7 @@ const posts = getPublishedBlogPosts(await getCollection("blog"), locale)
   languageLinks={getDefaultLanguageLinks("blog")}
   title={metadata[locale].title}
 >
-  <main class="mx-auto max-w-3xl px-6 py-16">
+  <main class="mx-auto max-w-prose">
     <h1 class="text-4xl font-semibold">Blog</h1>
     <ul class="mt-8 list-none space-y-6 p-0">
       {
