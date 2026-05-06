@@ -12,6 +12,10 @@ experience:
     company: SoundAdvice
     startDate: 24/04/2001
     endDate: ""
+stack:
+  - tech: JavaScript
+  - tech: TypeScript
+  - tech: Rust
 seo:
   title: Cristhian Melo - Ingeniero de Software
   description: Software Engineer con más de 4 años de experiencia creando experiencias web accesibles, rápidas y mantenibles.

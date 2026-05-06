@@ -1,0 +1,42 @@
+---
+import { render } from "astro:content"
+import MainLayout from "@/layouts/MainLayout.astro"
+import { getBlogPostAlternateHref, getBlogPostTransitionName, type BlogPost } from "@/lib/blog"
+import { getAlternateBlogPosts } from "@/lib/i18n"
+
+interface Props {
+  post: BlogPost
+  posts: BlogPost[]
+}
+
+const { post, posts } = Astro.props
+const { Content } = await render(post)
+const alternates = {
+  defaultLocale: "en",
+  entries: getAlternateBlogPosts(posts, post).map((entry) => ({
+    href: new URL(getBlogPostAlternateHref(entry), Astro.site).toString(),
+    hreflang: entry.data.locale,
+  })),
+}
+---
+
+<MainLayout
+  alternates={alternates}
+  description={post.data.seo?.description ?? post.data.description}
+  lang={post.data.locale}
+  title={post.data.seo?.title ?? post.data.title}
+>
+  <main class="mx-auto max-w-3xl px-6 py-16">
+    <article>
+      <h1 class="text-4xl font-semibold" transition:name={getBlogPostTransitionName(post, "title")}>
+        {post.data.title}
+      </h1>
+      <p class="mt-3" transition:name={getBlogPostTransitionName(post, "description")}>
+        {post.data.description}
+      </p>
+      <div class="mt-10">
+        <Content />
+      </div>
+    </article>
+  </main>
+</MainLayout>

@@ -1,0 +1,47 @@
+---
+import { getCollection } from "astro:content"
+import BlogPostLink from "@/components/BlogPostLink.astro"
+import MainLayout from "@/layouts/MainLayout.astro"
+import { getPublishedBlogPosts } from "@/lib/blog"
+import type { Locale } from "@/lib/i18n"
+
+interface Props {
+  locale: Locale
+}
+
+const { locale } = Astro.props
+const metadata = {
+  en: {
+    description:
+      "Articles by Cristhian Melo about software engineering, web performance, accessibility, and maintainable frontend systems.",
+    title: "Software Engineering Blog",
+  },
+  es: {
+    description:
+      "Artículos de Cristhian Melo sobre ingeniería de software, rendimiento web, accesibilidad y sistemas frontend mantenibles.",
+    title: "Blog de Ingeniería de Software",
+  },
+} satisfies Record<Locale, { description: string; title: string }>
+
+const posts = getPublishedBlogPosts(await getCollection("blog"), locale)
+---
+
+<MainLayout
+  alternatesPath="blog"
+  description={metadata[locale].description}
+  lang={locale}
+  title={metadata[locale].title}
+>
+  <main class="mx-auto max-w-3xl px-6 py-16">
+    <h1 class="text-4xl font-semibold">Blog</h1>
+    <ul class="mt-8 list-none space-y-6 p-0">
+      {
+        posts.map((post) => (
+          <li>
+            <BlogPostLink post={post} />
+          </li>
+        ))
+      }
+    </ul>
+  </main>
+</MainLayout>

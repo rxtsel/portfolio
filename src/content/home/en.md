@@ -1,7 +1,7 @@
 ---
 locale: en
 title: Cristhian Melo - Software Engineer
-intro: Software Engineer focused on accessible, high-performance interfaces and clean, maintainable systems.
+intro: Software Engineer with 4+ years of experience building accessible, high-performance web experiences with clean, maintainable code.
 projects:
   - name: First Project
     description: First project description

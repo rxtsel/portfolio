@@ -1,5 +1,6 @@
 ---
 import Seo from "@jdevalk/astro-seo-graph/Seo.astro"
+import { ClientRouter } from "astro:transitions"
 import { buildLayoutSeoProps, type LayoutSeoProps } from "@/lib/seo"
 import "@/styles/global.css"
 import "@fontsource-variable/geist/wght.css"
@@ -13,12 +14,13 @@ const { lang = "en", ...seoProps } = Astro.props
 const seo = buildLayoutSeoProps({ ...seoProps, lang }, Astro.url)
 ---
 
-<html class="dark" lang={lang}>
+<html lang={lang}>
   <head>
     <meta charset="utf-8" />
     <meta content="width=device-width" name="viewport" />
     <meta content={Astro.generator} name="generator" />
     <Seo {...seo} />
+    <ClientRouter />
   </head>
   <body
     class="mx-auto grid min-h-screen max-w-prose grid-rows-[auto_1fr_auto] gap-y-12 overflow-x-hidden px-4 py-4 font-sans md:px-0"
