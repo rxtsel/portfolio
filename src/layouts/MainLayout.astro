@@ -1,18 +1,24 @@
 ---
+import Seo from "@jdevalk/astro-seo-graph/Seo.astro"
+import { buildLayoutSeoProps, type LayoutSeoProps } from "@/lib/seo"
 import "@/styles/global.css"
+
+interface Props extends LayoutSeoProps {
+  lang?: string
+}
+
+const { lang = "en", ...seoProps } = Astro.props
+const seo = buildLayoutSeoProps(seoProps, Astro.url)
 ---
 
-<html lang="en">
+<html lang={lang}>
   <head>
     <meta charset="utf-8" />
-    <link href="/favicon.svg" rel="icon" type="image/svg+xml" />
-    <link href="/favicon.ico" rel="icon" />
     <meta content="width=device-width" name="viewport" />
     <meta content={Astro.generator} name="generator" />
-    <title>Astro</title>
-    <link href="/sitemap-index.xml" rel="sitemap" />
+    <Seo {...seo} />
   </head>
   <body>
-    <h1>Astro</h1>
+    <slot />
   </body>
 </html>
