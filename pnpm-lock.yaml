@@ -8,50 +8,50 @@ importers:
   .:
     dependencies:
       "@tailwindcss/vite":
-        specifier: ^4.2.4
+        specifier: 4.2.4
         version: 4.2.4(vite@7.3.2(@types/node@25.6.0)(jiti@2.7.0)(lightningcss@1.32.0))
       astro:
-        specifier: ^6.2.2
+        specifier: 6.2.2
         version: 6.2.2(@types/node@25.6.0)(jiti@2.7.0)(lightningcss@1.32.0)(rollup@4.60.3)
       tailwindcss:
-        specifier: ^4.2.4
+        specifier: 4.2.4
         version: 4.2.4
     devDependencies:
       "@commitlint/cli":
-        specifier: ^20.5.3
+        specifier: 20.5.3
         version: 20.5.3(@types/node@25.6.0)(conventional-commits-parser@6.4.0)(typescript@6.0.3)
       "@commitlint/config-conventional":
-        specifier: ^20.5.3
+        specifier: 20.5.3
         version: 20.5.3
       "@eslint/js":
-        specifier: ^9.39.4
+        specifier: 9.39.4
         version: 9.39.4
       "@typescript-eslint/parser":
-        specifier: ^8.59.2
+        specifier: 8.59.2
         version: 8.59.2(eslint@9.39.4(jiti@2.7.0))(typescript@6.0.3)
       eslint:
-        specifier: ^9.39.4
+        specifier: 9.39.4
         version: 9.39.4(jiti@2.7.0)
       eslint-plugin-astro:
-        specifier: ^1.7.0
+        specifier: 1.7.0
         version: 1.7.0(eslint@9.39.4(jiti@2.7.0))
       eslint-plugin-jsx-a11y:
-        specifier: ^6.10.2
+        specifier: 6.10.2
         version: 6.10.2(eslint@9.39.4(jiti@2.7.0))
       lefthook:
-        specifier: ^2.1.6
+        specifier: 2.1.6
         version: 2.1.6
       prettier:
-        specifier: ^3.8.3
+        specifier: 3.8.3
         version: 3.8.3
       prettier-plugin-astro:
-        specifier: ^0.14.1
+        specifier: 0.14.1
         version: 0.14.1
       prettier-plugin-tailwindcss:
-        specifier: ^0.8.0
+        specifier: 0.8.0
         version: 0.8.0(prettier-plugin-astro@0.14.1)(prettier@3.8.3)
       typescript:
-        specifier: ^6.0.3
+        specifier: 6.0.3
         version: 6.0.3
 
 packages:
