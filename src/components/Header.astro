@@ -29,8 +29,10 @@ const navLinkClass =
     <Logo aria-label="Rxtsel logo" height={30} width={29} />
   </a>
 
-  <nav class="flex justify-between gap-4">
+  <nav class="flex items-center">
     <a class:list={navLinkClass} data-active={isBlogActive ? "" : undefined} href={blogHref}>Blog</a>
+
+    <div class="bg-border mx-4 h-4 w-px shrink-0 self-center" data-slot="separator" role="none"></div>
 
     <div aria-label="Language selector" class="flex gap-2">
       {
