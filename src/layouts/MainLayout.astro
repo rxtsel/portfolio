@@ -2,6 +2,7 @@
 import Seo from "@jdevalk/astro-seo-graph/Seo.astro"
 import { buildLayoutSeoProps, type LayoutSeoProps } from "@/lib/seo"
 import "@/styles/global.css"
+import "@fontsource-variable/geist/wght.css"
 
 interface Props extends LayoutSeoProps {
   lang?: string
@@ -18,7 +19,7 @@ const seo = buildLayoutSeoProps(seoProps, Astro.url)
     <meta content={Astro.generator} name="generator" />
     <Seo {...seo} />
   </head>
-  <body>
+  <body class="font-sans">
     <slot />
   </body>
 </html>

@@ -10,6 +10,9 @@ importers:
       "@astrojs/sitemap":
         specifier: 3.7.2
         version: 3.7.2
+      "@fontsource-variable/geist":
+        specifier: 5.2.8
+        version: 5.2.8
       "@jdevalk/astro-seo-graph":
         specifier: 1.4.0
         version: 1.4.0(astro@6.2.2(@types/node@25.6.0)(jiti@2.7.0)(lightningcss@1.32.0)(rollup@4.60.3)(yaml@2.8.4))(typescript@6.0.3)
@@ -685,6 +688,12 @@ packages:
         integrity: sha512-43/qtrDUokr7LJqoF2c3+RInu/t4zfrpYdoSDfYyhg52rwLV6TnOvdG4fXm7IkSB3wErkcmJS9iEhjVtOSEjjA==,
       }
     engines: { node: ^18.18.0 || ^20.9.0 || >=21.1.0 }
+
+  "@fontsource-variable/geist@5.2.8":
+    resolution:
+      {
+        integrity: sha512-cJ6m9e+8MQ5dCYJsLylfZrgBh6KkG4bOLckB35Tr9J/EqdkEM6QllH5PxqP1dhTvFup+HtMRPuz9xOjxXJggxw==,
+      }
 
   "@humanfs/core@0.19.2":
     resolution:
@@ -5833,6 +5842,8 @@ snapshots:
     dependencies:
       "@eslint/core": 0.17.0
       levn: 0.4.1
+
+  "@fontsource-variable/geist@5.2.8": {}
 
   "@humanfs/core@0.19.2":
     dependencies:
