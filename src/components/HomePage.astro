@@ -3,7 +3,7 @@ import { getCollection, getEntry, render } from "astro:content"
 import BlogPostLink from "@/components/BlogPostLink.astro"
 import MainLayout from "@/layouts/MainLayout.astro"
 import { getSelectedPublishedPosts } from "@/lib/blog"
-import type { Locale } from "@/lib/i18n"
+import { getDefaultLanguageLinks, type Locale } from "@/lib/i18n"
 
 interface Props {
   locale: Locale
@@ -44,6 +44,7 @@ const latestPosts = getSelectedPublishedPosts(posts, home.data.latestPosts, loca
   alternatesPath=""
   description={home.data.seo?.description ?? home.data.description}
   lang={locale}
+  languageLinks={getDefaultLanguageLinks()}
   title={home.data.seo?.title ?? home.data.title}
   titleTemplate="%s"
 >

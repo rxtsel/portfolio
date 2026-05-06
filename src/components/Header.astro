@@ -1,16 +1,51 @@
 ---
 import Logo from "@/assets/logo.svg"
+import {
+  getDefaultLanguageLinks,
+  getLocaleLabel,
+  getLocalizedPath,
+  type LanguageLink,
+  type Locale,
+} from "@/lib/i18n"
+
+interface Props {
+  languageLinks?: LanguageLink[] | undefined
+  locale: Locale
+  pathname: string
+}
+
+const { languageLinks, locale, pathname } = Astro.props
+const links = languageLinks ?? getDefaultLanguageLinks()
+const logoHref = getLocalizedPath(locale)
+const blogHref = getLocalizedPath(locale, "blog")
+const normalizedPathname = pathname.replace(/\/$/, "") || "/"
+const isBlogActive = normalizedPathname === blogHref
+const navLinkClass =
+  "text-muted-foreground hover:text-foreground data-active:text-foreground text-sm font-medium transition-colors"
 ---
 
 <header class="flex items-center justify-between">
-  <a class="logo" href="/">
+  <a class="logo" href={logoHref}>
     <Logo aria-label="Rxtsel logo" height={30} width={29} />
   </a>
 
-  <nav class="flex justify-between gap-4 max-sm:hidden">
-    <a
-      class="text-muted-foreground hover:text-foreground data-active:text-foreground text-sm font-medium transition-colors"
-      href="/blog">Blog</a
-    >
+  <nav class="flex justify-between gap-4">
+    <a class:list={navLinkClass} data-active={isBlogActive ? "" : undefined} href={blogHref}>Blog</a>
+
+    <div aria-label="Language selector" class="flex gap-2">
+      {
+        links.map((link) => (
+          <a
+            aria-label={getLocaleLabel(link.locale)}
+            class:list={navLinkClass}
+            data-active={link.locale === locale ? "" : undefined}
+            href={link.href}
+            lang={link.locale}
+          >
+            {link.locale.toUpperCase()}
+          </a>
+        ))
+      }
+    </div>
   </nav>
 </header>

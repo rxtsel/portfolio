@@ -1,7 +1,12 @@
 ---
 import { render } from "astro:content"
 import MainLayout from "@/layouts/MainLayout.astro"
-import { getBlogPostAlternateHref, getBlogPostTransitionName, type BlogPost } from "@/lib/blog"
+import {
+  getBlogPostAlternateHref,
+  getBlogPostLanguageLinks,
+  getBlogPostTransitionName,
+  type BlogPost,
+} from "@/lib/blog"
 import { getAlternateBlogPosts } from "@/lib/i18n"
 
 interface Props {
@@ -24,6 +29,7 @@ const alternates = {
   alternates={alternates}
   description={post.data.seo?.description ?? post.data.description}
   lang={post.data.locale}
+  languageLinks={getBlogPostLanguageLinks(posts, post)}
   title={post.data.seo?.title ?? post.data.title}
 >
   <main class="mx-auto max-w-3xl px-6 py-16">

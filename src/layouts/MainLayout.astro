@@ -7,10 +7,13 @@ import "@fontsource-variable/geist/wght.css"
 
 import Header from "@/components/Header.astro"
 import Footer from "@/components/Footer.astro"
+import type { LanguageLink } from "@/lib/i18n"
 
-interface Props extends LayoutSeoProps {}
+interface Props extends LayoutSeoProps {
+  languageLinks?: LanguageLink[]
+}
 
-const { lang = "en", ...seoProps } = Astro.props
+const { lang = "en", languageLinks, ...seoProps } = Astro.props
 const seo = buildLayoutSeoProps({ ...seoProps, lang }, Astro.url)
 ---
 
@@ -25,7 +28,7 @@ const seo = buildLayoutSeoProps({ ...seoProps, lang }, Astro.url)
   <body
     class="mx-auto grid min-h-screen max-w-prose grid-rows-[auto_1fr_auto] gap-y-12 overflow-x-hidden px-4 py-4 font-sans md:px-0"
   >
-    <Header />
+    <Header languageLinks={languageLinks} locale={lang} pathname={Astro.url.pathname} />
     <slot />
     <Footer />
   </body>

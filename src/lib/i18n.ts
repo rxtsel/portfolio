@@ -5,6 +5,10 @@ export const locales = ["en", "es"] as const
 
 export type Locale = (typeof locales)[number]
 export type LocalizedBlogPost = CollectionEntry<"blog">
+export type LanguageLink = {
+  href: string
+  locale: Locale
+}
 
 const localeLabels = {
   en: "English",
@@ -53,4 +57,11 @@ export function getBlogPostPath(post: LocalizedBlogPost) {
 
 export function getAlternateBlogPosts(posts: LocalizedBlogPost[], post: LocalizedBlogPost) {
   return posts.filter((candidate) => candidate.data.translationKey === post.data.translationKey)
+}
+
+export function getDefaultLanguageLinks(path = "") {
+  return locales.map((locale) => ({
+    href: getLocalizedPath(locale, path),
+    locale,
+  }))
 }

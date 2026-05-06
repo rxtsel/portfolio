@@ -1,5 +1,5 @@
 import type { CollectionEntry } from "astro:content"
-import { getBlogPostSlug, type Locale } from "@/lib/i18n"
+import { getBlogPostSlug, getLocalizedPath, locales, type LanguageLink, type Locale } from "@/lib/i18n"
 
 export type BlogPost = CollectionEntry<"blog">
 
@@ -23,7 +23,21 @@ export function getPublishedBlogStaticPaths(posts: BlogPost[], locale: Locale) {
 export function getBlogPostAlternateHref(post: BlogPost) {
   const slug = getBlogPostSlug(post)
 
-  return post.data.locale === "en" ? `/blog/${slug}` : `/es/blog/${slug}`
+  return getLocalizedPath(post.data.locale, `blog/${slug}`)
+}
+
+export function getBlogPostLanguageLinks(posts: BlogPost[], post: BlogPost): LanguageLink[] {
+  return locales.map((locale) => {
+    const translatedPost = posts.find(
+      (candidate) =>
+        candidate.data.translationKey === post.data.translationKey && candidate.data.locale === locale,
+    )
+
+    return {
+      href: translatedPost ? getBlogPostAlternateHref(translatedPost) : getLocalizedPath(locale, "blog"),
+      locale,
+    }
+  })
 }
 
 export function getSelectedPublishedPosts(posts: BlogPost[], postIds: string[], locale: Locale) {

@@ -3,7 +3,7 @@ import { getCollection } from "astro:content"
 import BlogPostLink from "@/components/BlogPostLink.astro"
 import MainLayout from "@/layouts/MainLayout.astro"
 import { getPublishedBlogPosts } from "@/lib/blog"
-import type { Locale } from "@/lib/i18n"
+import { getDefaultLanguageLinks, type Locale } from "@/lib/i18n"
 
 interface Props {
   locale: Locale
@@ -30,6 +30,7 @@ const posts = getPublishedBlogPosts(await getCollection("blog"), locale)
   alternatesPath="blog"
   description={metadata[locale].description}
   lang={locale}
+  languageLinks={getDefaultLanguageLinks("blog")}
   title={metadata[locale].title}
 >
   <main class="mx-auto max-w-3xl px-6 py-16">
