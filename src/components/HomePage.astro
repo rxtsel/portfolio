@@ -80,9 +80,9 @@ const projects = home.data.projects.map((project) => ({
       projects.length > 0 && (
         <section>
           <h2>{labels[locale].projects}</h2>
-          <ul class="not-prose grid grid-cols-1 gap-2 sm:grid-cols-2">
+          <ul class="not-prose grid grid-cols-1 gap-0 sm:grid-cols-2 sm:gap-2">
             {projects.map((project) => (
-              <li class="border">
+              <li class="border odd:border-0 odd:border-x first-of-type:border-t sm:odd:border">
                 <article class="flex h-full flex-col gap-2 p-4">
                   <h3 class="flex items-center justify-between text-lg font-medium">
                     {project.href ? (
