@@ -61,7 +61,7 @@ const projectSchema = z.object({
   description: z.string().min(1),
   href: z.url().min(1).optional(),
   stack: z.array(stackReferenceSchema).default([]),
-  tags: z.array(tagReferenceSchema).default([]),
+  tags: z.array(tagReferenceSchema).optional().default([]),
 })
 
 const latestPostsSchema = z
@@ -110,7 +110,7 @@ const blog = defineCollection({
       published: z.boolean().default(false),
       publishDate: z.coerce.date(),
       seo: seoSchema.optional(),
-      tags: z.array(tagReferenceSchema).default([]),
+      tags: z.array(tagReferenceSchema).optional().default([]),
       title: z.string().min(1),
       translationKey: z.string().min(1),
       updatedDate: optionalDateSchema,

@@ -36,12 +36,12 @@ export function getTagItemsBySlug(tagsEntry: TagsEntry, slugs: string[]) {
 export function getProjectTaxonomyItems({
   stackEntry,
   stackSlugs,
-  tagSlugs,
+  tagSlugs = [],
   tagsEntry,
 }: {
   stackEntry: StackEntry
   stackSlugs: string[]
-  tagSlugs: string[]
+  tagSlugs?: string[]
   tagsEntry: TagsEntry
 }) {
   return [...getStackItemsBySlug(stackEntry, stackSlugs), ...getTagItemsBySlug(tagsEntry, tagSlugs)]
