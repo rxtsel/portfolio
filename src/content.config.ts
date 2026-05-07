@@ -16,7 +16,7 @@ const stackReferenceSchema = z.string().min(1)
 const tagReferenceSchema = z.string().min(1)
 const projectReferenceSchema = z.string().min(1)
 
-const stackItemSchema = z.object({
+export const stackItemSchema = z.object({
   name: z.string().min(1),
   href: optionalStringSchema,
   slug: z.string().min(1),
