@@ -8,6 +8,7 @@ import { getDefaultLanguageLinks, getLocalizedPath, type Locale } from "@/lib/i1
 import { renderSafeMarkdown } from "@/lib/markdown"
 import { getSelectedProjects } from "@/lib/projects"
 import { getProjectTaxonomyItems, getStackItemsBySlug } from "@/lib/taxonomy"
+import StackList from "./StackList.astro"
 
 interface Props {
   locale: Locale
@@ -137,11 +138,7 @@ const projectsHref = getLocalizedPath(locale, locale === "es" ? "proyectos" : "p
       stackItems.length > 0 && (
         <section>
           <h2>{labels[locale].stack}</h2>
-          <ul>
-            {stackItems.map((item) => (
-              <li>{item.href ? <a href={item.href}>{item.name}</a> : <span>{item.name}</span>}</li>
-            ))}
-          </ul>
+          <StackList stackItems={stackItems} />
         </section>
       )
     }
