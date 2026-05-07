@@ -96,4 +96,7 @@ stack:
   - name: Redis
     slug: redis
     href: https://redis.io?utm_source=rxtsel.dev
+  - name: Vitest
+    slug: vitest
+    href: https://vitest.dev?utm_source=rxtsel.dev
 ---
