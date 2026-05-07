@@ -4,7 +4,7 @@ import BlogPostLink from "@/components/BlogPostLink.astro"
 import MainLayout from "@/layouts/MainLayout.astro"
 import { getSelectedPublishedPosts } from "@/lib/blog"
 import { getDefaultLanguageLinks, type Locale } from "@/lib/i18n"
-import { getStackItemsBySlug } from "@/lib/stack"
+import { getProjectTaxonomyItems, getStackItemsBySlug } from "@/lib/taxonomy"
 
 interface Props {
   locale: Locale
@@ -39,12 +39,26 @@ if (!home) {
 const posts = await getCollection("blog")
 const latestPosts = getSelectedPublishedPosts(posts, home.data.latestPosts, locale)
 const [stack] = await getCollection("stack")
+const [tags] = await getCollection("tags")
 
 if (!stack) {
   throw new Error("Missing stack content")
 }
 
+if (!tags) {
+  throw new Error("Missing tags content")
+}
+
 const stackItems = getStackItemsBySlug(stack, home.data.stack)
+const projects = home.data.projects.map((project) => ({
+  ...project,
+  taxonomyItems: getProjectTaxonomyItems({
+    stackEntry: stack,
+    stackSlugs: project.stack,
+    tagSlugs: project.tags,
+    tagsEntry: tags,
+  }),
+}))
 ---
 
 <MainLayout
@@ -80,16 +94,21 @@ const stackItems = getStackItemsBySlug(stack, home.data.stack)
     }
 
     {
-      home.data.projects.length > 0 && (
+      projects.length > 0 && (
         <section class="mt-12">
           <h2 class="text-2xl font-semibold">{labels[locale].projects}</h2>
           <div class="mt-4 space-y-6">
-            {home.data.projects.map((project) => (
+            {projects.map((project) => (
               <article>
                 <h3 class="font-medium">
                   {project.href ? <a href={project.href}>{project.name}</a> : project.name}
                 </h3>
                 <p>{project.description}</p>
+                <ul class="mt-3 flex list-none flex-wrap gap-2 p-0">
+                  {project.taxonomyItems.map((item) => (
+                    <li class="inline-flex rounded border px-3 py-1 text-sm">{item.name}</li>
+                  ))}
+                </ul>
               </article>
             ))}
           </div>
