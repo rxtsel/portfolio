@@ -24,61 +24,151 @@ const themeOptions = [
 
 <div
   aria-label="Theme selector"
-  class="bg-background ring-border inline-flex items-center overflow-hidden rounded-full ring-1 ring-inset"
+  class="bg-background ring-border relative inline-flex items-center overflow-hidden ring-1 ring-inset"
   data-theme-switcher
   role="radiogroup"
+  style="--theme-indicator-index: 0; --theme-hover-index: 0"
 >
   {
-    themeOptions.map(({ icon: Icon, label, value }) => (
+    themeOptions.map(({ icon: Icon, label, value }, index) => (
       <button
         aria-checked="false"
         aria-label={label}
-        class="text-muted-foreground hover:text-foreground data-active:text-foreground relative flex size-8 items-center justify-center rounded-full transition-colors [&_svg]:relative [&_svg]:z-10 [&_svg]:size-4"
+        class="text-muted-foreground hover:text-foreground data-active:text-foreground relative z-10 flex size-8 items-center justify-center transition-colors [&_svg]:size-4"
+        data-theme-index={index}
         data-theme-value={value}
         role="radio"
+        tabindex={index === 0 ? "0" : "-1"}
         type="button"
       >
         <Icon />
-        <span
-          aria-hidden="true"
-          class="theme-switcher__indicator border-border absolute inset-0 rounded-full border opacity-0"
-        />
       </button>
     ))
   }
+  <span aria-hidden="true" class="theme-switcher__hover-indicator bg-accent absolute top-0 left-0 size-8"
+  ></span>
+  <span
+    aria-hidden="true"
+    class="theme-switcher__indicator border-border absolute top-0 left-0 size-8 border-x"></span>
 </div>
 
-<script lang="ts">
+<style>
+  [data-theme-switcher] {
+    transition: opacity 150ms ease;
+  }
+
+  .theme-switcher__hover-indicator,
+  .theme-switcher__indicator {
+    transform: translateX(calc(var(--theme-indicator-index) * 2rem));
+    transition:
+      opacity 180ms ease,
+      transform 260ms ease;
+  }
+
+  .theme-switcher__hover-indicator {
+    opacity: 0;
+    transform: translateX(calc(var(--theme-hover-index) * 2rem));
+  }
+
+  [data-theme-switcher][data-hovered] .theme-switcher__hover-indicator {
+    opacity: 1;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .theme-switcher__hover-indicator,
+    .theme-switcher__indicator {
+      transition-duration: 1ms;
+    }
+  }
+</style>
+
+<script>
+  const themeSwitcherKeys = ["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown"]
+
+  function getThemeButtons(switcher) {
+    return Array.from(switcher.querySelectorAll("[data-theme-value]"))
+  }
+
+  function setTheme(value) {
+    const themeApi = window.theme
+
+    themeApi?.set(value)
+  }
+
   const updateThemeSwitcher = () => {
     document.querySelectorAll("[data-theme-switcher]").forEach((switcher) => {
       switcher.toggleAttribute("data-mounted", true)
     })
   }
 
+  function updateHoverIndicator(target) {
+    const control = target instanceof HTMLElement ? target.closest("[data-theme-value]") : null
+    const switcher = control?.closest("[data-theme-switcher]")
+    const themeIndex = control?.dataset.themeIndex
+
+    if (!switcher || themeIndex === undefined) {
+      return
+    }
+
+    switcher.style.setProperty("--theme-hover-index", themeIndex)
+    switcher.toggleAttribute("data-hovered", true)
+  }
+
+  function clearHoverIndicator(target, relatedTarget) {
+    const switcher = target instanceof HTMLElement ? target.closest("[data-theme-switcher]") : null
+
+    if (!switcher || (relatedTarget instanceof Node && switcher.contains(relatedTarget))) {
+      return
+    }
+
+    switcher.toggleAttribute("data-hovered", false)
+  }
+
+  document.addEventListener("keydown", (event) => {
+    if (!themeSwitcherKeys.includes(event.key)) {
+      return
+    }
+
+    const target = event.target instanceof HTMLElement ? event.target : null
+    const switcher = target?.closest("[data-theme-switcher]")
+
+    if (!switcher || !target?.matches("[data-theme-value]")) {
+      return
+    }
+
+    const buttons = getThemeButtons(switcher)
+    const currentIndex = buttons.indexOf(target)
+    const direction = event.key === "ArrowLeft" || event.key === "ArrowUp" ? -1 : 1
+    const nextIndex = (currentIndex + direction + buttons.length) % buttons.length
+    const nextButton = buttons[nextIndex]
+    const nextTheme = nextButton?.dataset.themeValue
+
+    if (!(nextButton instanceof HTMLElement) || !nextTheme) {
+      return
+    }
+
+    event.preventDefault()
+    setTheme(nextTheme)
+    nextButton.focus()
+  })
+
+  document.addEventListener("pointerover", (event) => {
+    updateHoverIndicator(event.target)
+  })
+
+  document.addEventListener("pointerout", (event) => {
+    clearHoverIndicator(event.target, event.relatedTarget)
+  })
+
+  document.addEventListener("focusin", (event) => {
+    updateHoverIndicator(event.target)
+  })
+
+  document.addEventListener("focusout", (event) => {
+    clearHoverIndicator(event.target, event.relatedTarget)
+  })
+
   document.addEventListener("DOMContentLoaded", updateThemeSwitcher)
   document.addEventListener("astro:after-swap", updateThemeSwitcher)
   updateThemeSwitcher()
 </script>
-
-<style>
-  [data-theme-switcher] {
-    opacity: 0;
-    transition: opacity 150ms ease;
-  }
-
-  [data-theme-switcher][data-mounted] {
-    opacity: 1;
-  }
-
-  .theme-switcher__indicator {
-    transform: scale(0.72);
-    transition:
-      opacity 180ms ease,
-      transform 180ms ease;
-  }
-
-  [data-theme-value][data-active] .theme-switcher__indicator {
-    opacity: 1;
-    transform: scale(1);
-  }
-</style>

@@ -16,8 +16,14 @@
   function updateThemeControls(theme) {
     document.querySelectorAll("[data-theme-value]").forEach((control) => {
       const isActive = control.dataset.themeValue === theme
+      const switcher = control.closest("[data-theme-switcher]")
 
       control.toggleAttribute("data-active", isActive)
+      control.setAttribute("tabindex", isActive ? "0" : "-1")
+
+      if (isActive && switcher && control.dataset.themeIndex) {
+        switcher.style.setProperty("--theme-indicator-index", control.dataset.themeIndex)
+      }
 
       if (control.getAttribute("role") === "radio") {
         control.setAttribute("aria-checked", String(isActive))
