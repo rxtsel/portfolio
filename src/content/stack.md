@@ -69,4 +69,10 @@ stack:
   - name: PayloadCMS
     slug: payloadcms
     href: https://payloadcms.com?utm_source=rxtsel.dev
+  - name: React
+    slug: react
+    href: https://react.dev?utm_source=rxtsel.dev
+  - name: shadcn/ui
+    slug: shadcn-ui
+    href: https://ui.shadcn.com?utm_source=rxtsel.dev
 ---
