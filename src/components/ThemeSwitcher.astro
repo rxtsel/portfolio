@@ -1,0 +1,84 @@
+---
+import MonitorIcon from "@/assets/desktop-screen.svg"
+import MoonIcon from "@/assets/moon.svg"
+import SunIcon from "@/assets/soon.svg"
+
+const themeOptions = [
+  {
+    icon: MonitorIcon,
+    label: "Use system theme",
+    value: "system",
+  },
+  {
+    icon: SunIcon,
+    label: "Use light theme",
+    value: "light",
+  },
+  {
+    icon: MoonIcon,
+    label: "Use dark theme",
+    value: "dark",
+  },
+]
+---
+
+<div
+  aria-label="Theme selector"
+  class="bg-background ring-border inline-flex items-center overflow-hidden rounded-full ring-1 ring-inset"
+  data-theme-switcher
+  role="radiogroup"
+>
+  {
+    themeOptions.map(({ icon: Icon, label, value }) => (
+      <button
+        aria-checked="false"
+        aria-label={label}
+        class="text-muted-foreground hover:text-foreground data-active:text-foreground relative flex size-8 items-center justify-center rounded-full transition-colors [&_svg]:relative [&_svg]:z-10 [&_svg]:size-4"
+        data-theme-value={value}
+        role="radio"
+        type="button"
+      >
+        <Icon />
+        <span
+          aria-hidden="true"
+          class="theme-switcher__indicator border-border absolute inset-0 rounded-full border opacity-0"
+        />
+      </button>
+    ))
+  }
+</div>
+
+<script lang="ts">
+  const updateThemeSwitcher = () => {
+    document.querySelectorAll("[data-theme-switcher]").forEach((switcher) => {
+      switcher.toggleAttribute("data-mounted", true)
+    })
+  }
+
+  document.addEventListener("DOMContentLoaded", updateThemeSwitcher)
+  document.addEventListener("astro:after-swap", updateThemeSwitcher)
+  updateThemeSwitcher()
+</script>
+
+<style>
+  [data-theme-switcher] {
+    opacity: 0;
+    transition: opacity 150ms ease;
+  }
+
+  [data-theme-switcher][data-mounted] {
+    opacity: 1;
+  }
+
+  .theme-switcher__indicator {
+    transform: scale(0.72);
+    transition:
+      opacity 180ms ease,
+      transform 180ms ease;
+  }
+
+  [data-theme-value][data-active] .theme-switcher__indicator {
+    opacity: 1;
+    transform: scale(1);
+  }
+</style>

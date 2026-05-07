@@ -1,0 +1,63 @@
+<script is:inline>
+  const themeStorageKey = "theme"
+  const themeModes = new Set(["light", "dark", "system"])
+  const darkScheme = window.matchMedia("(prefers-color-scheme: dark)")
+
+  function getStoredTheme() {
+    const theme = localStorage.getItem(themeStorageKey)
+
+    return themeModes.has(theme) ? theme : "system"
+  }
+
+  function shouldUseDarkTheme(theme) {
+    return theme === "dark" || (theme === "system" && darkScheme.matches)
+  }
+
+  function updateThemeControls(theme) {
+    document.querySelectorAll("[data-theme-value]").forEach((control) => {
+      const isActive = control.dataset.themeValue === theme
+
+      control.toggleAttribute("data-active", isActive)
+
+      if (control.getAttribute("role") === "radio") {
+        control.setAttribute("aria-checked", String(isActive))
+      } else {
+        control.setAttribute("aria-pressed", String(isActive))
+      }
+    })
+  }
+
+  function applyTheme(theme = getStoredTheme()) {
+    document.documentElement.classList.toggle("dark", shouldUseDarkTheme(theme))
+    document.documentElement.dataset.theme = theme
+    document.documentElement.style.colorScheme = shouldUseDarkTheme(theme) ? "dark" : "light"
+    updateThemeControls(theme)
+  }
+
+  function setTheme(theme) {
+    localStorage.setItem(themeStorageKey, theme)
+    applyTheme(theme)
+  }
+
+  document.addEventListener("click", (event) => {
+    const target = event.target instanceof Element ? event.target : null
+    const control = target?.closest("[data-theme-value]")
+
+    if (!control) {
+      return
+    }
+
+    setTheme(control.dataset.themeValue)
+  })
+
+  document.addEventListener("DOMContentLoaded", () => updateThemeControls(getStoredTheme()))
+  document.addEventListener("astro:after-swap", () => applyTheme())
+  darkScheme.addEventListener("change", () => {
+    if (getStoredTheme() === "system") {
+      applyTheme("system")
+    }
+  })
+
+  window.theme = { apply: applyTheme, set: setTheme }
+  applyTheme()
+</script>
