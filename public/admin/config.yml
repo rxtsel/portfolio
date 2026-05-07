@@ -40,6 +40,8 @@ singletons:
       - label: Projects
         name: projects
         widget: list
+        collapsed: auto
+        summary: "{{name}}"
         i18n: true
         fields:
           - { label: Name, name: name, widget: string, i18n: true }
@@ -75,6 +77,8 @@ singletons:
       - label: Experience
         name: experience
         widget: list
+        collapsed: auto
+        summary: "{{role}} — {{company}}"
         i18n: true
         fields:
           - { label: Role, name: role, widget: string, i18n: true }
@@ -134,6 +138,8 @@ singletons:
       - label: Stack
         name: stack
         widget: list
+        collapsed: auto
+        summary: "{{name}}"
         fields:
           - { label: Name, name: name, widget: string, i18n: false, required: true }
           - { label: Slug, name: slug, widget: string, i18n: false, required: true }
@@ -147,6 +153,8 @@ singletons:
       - label: Tags
         name: tags
         widget: list
+        collapsed: auto
+        summary: "{{name}}"
         fields:
           - { label: Name, name: name, widget: string, i18n: false, required: true }
           - { label: Slug, name: slug, widget: string, i18n: false, required: true }
