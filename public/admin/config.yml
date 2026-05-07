@@ -9,6 +9,9 @@ i18n:
   locales: [en, es]
   default_locale: en
   omit_default_locale_from_preview_path: true
+  canonical_slug:
+    key: translationKey
+    value: "{{slug}}"
 
 slug:
   encoding: ascii
