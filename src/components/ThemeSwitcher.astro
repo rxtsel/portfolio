@@ -34,9 +34,10 @@ const themeOptions = [
       <button
         aria-checked="false"
         aria-label={label}
-        class="text-muted-foreground hover:text-foreground data-active:text-foreground relative z-10 flex size-8 items-center justify-center transition-colors [&_svg]:size-4"
+        class="text-muted-foreground/80 hover:text-foreground data-active:text-foreground relative z-10 flex size-8 items-center justify-center transition-colors [&_svg]:size-4"
         data-theme-index={index}
         data-theme-value={value}
+        onclick="haptic()"
         role="radio"
         tabindex={index === 0 ? "0" : "-1"}
         type="button"
@@ -45,8 +46,9 @@ const themeOptions = [
       </button>
     ))
   }
-  <span aria-hidden="true" class="theme-switcher__hover-indicator bg-accent absolute top-0 left-0 size-8"
-  ></span>
+  <span
+    aria-hidden="true"
+    class="theme-switcher__hover-indicator bg-accent absolute top-0 left-0 hidden size-8 lg:block"></span>
   <span
     aria-hidden="true"
     class="theme-switcher__indicator border-border absolute top-0 left-0 size-8 border-x"></span>

@@ -35,3 +35,9 @@ const seo = buildLayoutSeoProps({ ...seoProps, lang }, Astro.url)
     <Footer />
   </body>
 </html>
+
+<script>
+  import { haptic } from "@/lib/haptic"
+
+  window.haptic = () => haptic()
+</script>
