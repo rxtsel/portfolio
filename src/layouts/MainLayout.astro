@@ -1,6 +1,7 @@
 ---
 import Seo from "@jdevalk/astro-seo-graph/Seo.astro"
 import { ClientRouter } from "astro:transitions"
+import ThemeScript from "@/components/ThemeScript.astro"
 import { buildLayoutSeoProps, type LayoutSeoProps } from "@/lib/seo"
 import "@/styles/global.css"
 import "@fontsource-variable/geist/wght.css"
@@ -22,6 +23,7 @@ const seo = buildLayoutSeoProps({ ...seoProps, lang }, Astro.url)
     <meta charset="utf-8" />
     <meta content="width=device-width" name="viewport" />
     <meta content={Astro.generator} name="generator" />
+    <ThemeScript />
     <Seo {...seo} />
     <ClientRouter />
   </head>
