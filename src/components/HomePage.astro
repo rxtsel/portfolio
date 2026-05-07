@@ -1,9 +1,10 @@
 ---
-import { getCollection, getEntry, render } from "astro:content"
+import { getCollection, getEntry } from "astro:content"
 import BlogPostLink from "@/components/BlogPostLink.astro"
 import MainLayout from "@/layouts/MainLayout.astro"
 import { getSelectedPublishedPosts } from "@/lib/blog"
 import { getDefaultLanguageLinks, type Locale } from "@/lib/i18n"
+import { getStackItemsBySlug } from "@/lib/stack"
 
 interface Props {
   locale: Locale
@@ -35,21 +36,27 @@ if (!home) {
   throw new Error(labels[locale].missingHome)
 }
 
-const { Content } = await render(home)
 const posts = await getCollection("blog")
 const latestPosts = getSelectedPublishedPosts(posts, home.data.latestPosts, locale)
+const [stack] = await getCollection("stack")
+
+if (!stack) {
+  throw new Error("Missing stack content")
+}
+
+const stackItems = getStackItemsBySlug(stack, home.data.stack)
 ---
 
 <MainLayout
   alternatesPath=""
-  description={home.data.seo?.description ?? home.data.description}
+  description={home.data.seo?.description ?? home.data.intro}
   lang={locale}
   languageLinks={getDefaultLanguageLinks()}
   title={home.data.seo?.title ?? home.data.title}
   titleTemplate="%s"
 >
-  <main class="mx-auto max-w-3xl">
-    <h1 class="text-4xl font-semibold">{home.data.heroTitle}</h1>
+  <main class="mx-auto max-w-prose">
+    <h1 class="text-4xl font-semibold">{home.data.title}</h1>
     <p class="mt-4 text-lg">{home.data.intro}</p>
 
     {
@@ -105,23 +112,19 @@ const latestPosts = getSelectedPublishedPosts(posts, home.data.latestPosts, loca
       )
     }
 
-    <div class="mt-12">
-      <Content />
-    </div>
-
     {
-      home.data.stack.length > 0 && (
+      stackItems.length > 0 && (
         <section class="mt-12">
           <h2 class="text-2xl font-semibold">{labels[locale].stack}</h2>
           <ul class="mt-4 flex list-none flex-wrap gap-2 p-0">
-            {home.data.stack.map((item) => (
+            {stackItems.map((item) => (
               <li>
                 {item.href ? (
                   <a class="inline-flex rounded border px-3 py-1 text-sm" href={item.href}>
-                    {item.tech}
+                    {item.name}
                   </a>
                 ) : (
-                  <span class="inline-flex rounded border px-3 py-1 text-sm">{item.tech}</span>
+                  <span class="inline-flex rounded border px-3 py-1 text-sm">{item.name}</span>
                 )}
               </li>
             ))}

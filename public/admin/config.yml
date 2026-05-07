@@ -42,12 +42,30 @@ singletons:
           - { label: Name, name: name, widget: string, i18n: true }
           - { label: Description, name: description, widget: text, i18n: true }
           - { label: URL, name: href, widget: string, required: false, i18n: duplicate }
+          - label: Stack
+            name: stack
+            widget: relation
+            collection: _singletons
+            file: stack
+            i18n: duplicate
+            multiple: true
+            value_field: "{{stack.*.slug}}"
+            display_fields:
+              - "{{stack.*.name}}"
+            search_fields:
+              - "{{stack.*.name}}"
           - label: Tags
             name: tags
-            widget: list
-            required: false
+            widget: relation
+            collection: _singletons
+            file: tags
             i18n: duplicate
-            field: { label: Tag, name: tag, widget: string }
+            multiple: true
+            value_field: "{{tags.*.slug}}"
+            display_fields:
+              - "{{tags.*.name}}"
+            search_fields:
+              - "{{tags.*.name}}"
 
       - label: Experience
         name: experience
@@ -67,11 +85,17 @@ singletons:
 
       - label: Stack
         name: stack
-        widget: list
-        i18n: true
-        fields:
-          - { label: Tech, name: tech, widget: string, i18n: false }
-          - { label: URL, name: href, widget: string, required: false }
+        description: Technologies and tools I use
+        widget: relation
+        collection: _singletons
+        file: stack
+        i18n: duplicate
+        multiple: true
+        value_field: "{{stack.*.slug}}"
+        display_fields:
+          - "{{stack.*.name}}"
+        search_fields:
+          - "{{stack.*.name}}"
 
       - label: Latest posts
         name: latestPosts
@@ -80,22 +104,47 @@ singletons:
         multiple: true
         max: 5
         required: false
-        i18n: true
-        value_field: "{{locale}}/{{slug}}"
+        i18n: duplicate
+        value_field: "{{translationKey}}"
         display_fields: [title]
         search_fields: [title, description]
         filters:
-          - field: draft
-            values: [false]
+          - field: published
+            values: [true]
 
       - label: SEO
         name: seo
         widget: object
         i18n: true
         fields:
-          - { label: SEO title, name: title, widget: string, required: false, i18n: true }
-          - { label: SEO description, name: description, widget: text, required: false, i18n: true }
+          - { label: SEO title, name: title, widget: string, required: true, i18n: true }
+          - { label: SEO description, name: description, widget: text, required: true, i18n: true }
           - { label: Keywords, name: keywords, widget: string, required: false, i18n: true }
+
+  - name: stack
+    label: Stack
+    file: src/content/stack.md
+    i18n: false
+    fields:
+      - label: Stack
+        name: stack
+        widget: list
+        fields:
+          - { label: Name, name: name, widget: string, i18n: false, required: true }
+          - { label: Slug, name: slug, widget: string, i18n: false, required: true }
+          - { label: URL, name: href, widget: string, required: false }
+
+  - name: tags
+    label: Tags
+    file: src/content/tags.md
+    i18n: false
+    fields:
+      - label: Tags
+        name: tags
+        widget: list
+        fields:
+          - { label: Name, name: name, widget: string, i18n: false, required: true }
+          - { label: Slug, name: slug, widget: string, i18n: false, required: true }
 
 collections:
   - name: blog
@@ -109,6 +158,7 @@ collections:
     summary: "{{title}} — {{locales}}"
     fields:
       - { label: Locale, name: locale, widget: hidden, default: "{{locale}}", i18n: true }
+      - { label: Published, name: published, widget: boolean, default: false, i18n: duplicate }
       - { label: Title, name: title, widget: string, i18n: true }
       - { label: Description, name: description, widget: text, i18n: true }
       - {
@@ -128,13 +178,19 @@ collections:
           required: false,
           i18n: duplicate,
         }
-      - { label: Draft, name: draft, widget: boolean, default: true, i18n: duplicate }
       - label: Tags
         name: tags
-        widget: list
+        widget: relation
+        collection: _singletons
+        file: tags
         required: false
         i18n: true
-        field: { label: Tag, name: tag, widget: string }
+        multiple: true
+        value_field: "{{tags.*.slug}}"
+        display_fields:
+          - "{{tags.*.name}}"
+        search_fields:
+          - "{{tags.*.name}}"
       - { label: Cover image, name: coverImage, widget: image, required: false, i18n: duplicate }
       - { label: Cover image alt, name: coverImageAlt, widget: string, required: false, i18n: true }
       - label: SEO
@@ -143,8 +199,8 @@ collections:
         required: false
         i18n: true
         fields:
-          - { label: SEO title, name: title, widget: string, required: false, i18n: true }
-          - { label: SEO description, name: description, widget: text, required: false, i18n: true }
+          - { label: SEO title, name: title, widget: string, required: true, i18n: true }
+          - { label: SEO description, name: description, widget: text, required: true, i18n: true }
           - { label: Keywords, name: keywords, widget: string, required: false, i18n: true }
 
       - { label: Body, name: body, widget: markdown, i18n: true }

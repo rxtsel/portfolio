@@ -10,7 +10,7 @@ export function getBlogPostTransitionName(post: BlogPost, part: "description" | 
 }
 
 export function getPublishedBlogPosts(posts: BlogPost[], locale: Locale) {
-  return posts.filter((post) => post.data.locale === locale && !post.data.draft)
+  return posts.filter((post) => post.data.locale === locale && post.data.published)
 }
 
 export function getPublishedBlogStaticPaths(posts: BlogPost[], locale: Locale) {
@@ -41,21 +41,15 @@ export function getBlogPostLanguageLinks(posts: BlogPost[], post: BlogPost): Lan
 }
 
 export function getSelectedPublishedPosts(posts: BlogPost[], postIds: string[], locale: Locale) {
-  const postsById = new Map(posts.map((post) => [post.id, post]))
-
   return postIds.map((postId) => {
-    const post = postsById.get(postId)
+    const post = posts.find((p) => p.data.translationKey === postId && p.data.locale === locale)
 
     if (!post) {
       throw new Error(`Missing latest post relation: ${postId}`)
     }
 
-    if (post.data.draft) {
-      throw new Error(`Latest post relation points to draft post: ${postId}`)
-    }
-
-    if (post.data.locale !== locale) {
-      throw new Error(`Latest post relation has wrong locale: ${postId}`)
+    if (!post.data.published) {
+      throw new Error(`Latest post relation points to unpublished post: ${postId}`)
     }
 
     return post

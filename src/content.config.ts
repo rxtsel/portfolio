@@ -11,6 +11,35 @@ const optionalStringSchema = z.preprocess(
   (value) => (value === "" ? undefined : value),
   z.string().optional(),
 )
+const stackReferenceSchema = z.string().min(1)
+const tagReferenceSchema = z.string().min(1)
+
+const stackItemSchema = z.object({
+  name: z.string().min(1),
+  href: optionalStringSchema,
+  slug: z.string().min(1),
+})
+
+const tagItemSchema = z.object({
+  name: z.string().min(1),
+  slug: z.string().min(1),
+})
+
+const stack = defineCollection({
+  loader: glob({ base: "./src/content", pattern: "stack.{md,mdx}" }),
+  schema: () =>
+    z.object({
+      stack: z.array(stackItemSchema).default([]),
+    }),
+})
+
+const tags = defineCollection({
+  loader: glob({ base: "./src/content", pattern: "tags.{md,mdx}" }),
+  schema: () =>
+    z.object({
+      tags: z.array(tagItemSchema).default([]),
+    }),
+})
 
 const home = defineCollection({
   loader: glob({ base: "./src/content/home", pattern: "*.{md,mdx}" }),
@@ -21,7 +50,7 @@ const home = defineCollection({
       intro: z.string().min(1),
       projects: z.array(projectSchema).default([]),
       experience: z.array(experienceSchema).default([]),
-      stack: z.array(stackItemSchema).default([]),
+      stack: z.array(stackReferenceSchema).default([]),
       latestPosts: latestPostsSchema,
       seo: seoSchema.optional(),
     }),
@@ -31,7 +60,8 @@ const projectSchema = z.object({
   name: z.string().min(1),
   description: z.string().min(1),
   href: z.url().min(1).optional(),
-  tags: z.array(z.string()).default([]),
+  stack: z.array(stackReferenceSchema).default([]),
+  tags: z.array(tagReferenceSchema).default([]),
 })
 
 const latestPostsSchema = z
@@ -62,17 +92,13 @@ const experienceSchema = z.object({
   highlights: z.array(z.string()).default([]),
 })
 
-const stackItemSchema = z.object({
-  href: optionalStringSchema,
-  tech: z.string().min(1),
-})
-
 const seoSchema = z.object({
-  description: z.string().min(1).max(200).optional(),
-  title: z.string().min(1).max(120).optional(),
+  description: z.string().min(1).max(200),
+  keywords: optionalStringSchema,
+  ogImage: optionalStringSchema,
+  title: z.string().min(1).max(120),
 })
 
-// TODO: refactor this
 const blog = defineCollection({
   loader: glob({ base: "./src/content/blog", pattern: "**/*.{md,mdx}" }),
   schema: () =>
@@ -80,15 +106,15 @@ const blog = defineCollection({
       coverImage: optionalStringSchema,
       coverImageAlt: optionalStringSchema,
       description: z.string().min(1).max(200),
-      draft: z.boolean().default(false),
       locale: localeSchema,
+      published: z.boolean().default(false),
       publishDate: z.coerce.date(),
       seo: seoSchema.optional(),
-      tags: z.array(z.string()).default([]),
+      tags: z.array(tagReferenceSchema).default([]),
       title: z.string().min(1),
       translationKey: z.string().min(1),
       updatedDate: optionalDateSchema,
     }),
 })
 
-export const collections = { blog, home }
+export const collections = { blog, home, stack, tags }
