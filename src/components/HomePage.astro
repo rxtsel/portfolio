@@ -5,6 +5,7 @@ import MainLayout from "@/layouts/MainLayout.astro"
 import { getSelectedPublishedPosts } from "@/lib/blog"
 import ProjectsGrid from "@/components/ProjectsGrid.astro"
 import { getDefaultLanguageLinks, getLocalizedPath, type Locale } from "@/lib/i18n"
+import { renderSafeMarkdown } from "@/lib/markdown"
 import { getSelectedProjects } from "@/lib/projects"
 import { getProjectTaxonomyItems, getStackItemsBySlug } from "@/lib/taxonomy"
 
@@ -64,6 +65,7 @@ const projects = getSelectedProjects(projectEntries, home.data.featuredProjects,
     tagsEntry: tags,
   }),
 }))
+const introHtml = renderSafeMarkdown(home.data.intro)
 const projectsHref = getLocalizedPath(locale, locale === "es" ? "proyectos" : "projects")
 ---
 
@@ -79,7 +81,8 @@ const projectsHref = getLocalizedPath(locale, locale === "es" ? "proyectos" : "p
     class="prose dark:prose-invert prose-neutral prose-sm lg:prose-base prose-p:text-muted-foreground prose-a:no-underline mx-auto max-w-prose"
   >
     <h1>{home.data.title}</h1>
-    <p class="whitespace-pre-wrap">{home.data.intro}</p>
+    {/* eslint-disable-next-line astro/no-set-html-directive */}
+    <div class="prose-strong:font-medium [&>p:last-child]:mb-0" set:html={introHtml} />
 
     {
       projects.length > 0 && (

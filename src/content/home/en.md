@@ -1,8 +1,9 @@
 ---
 locale: en
-title: Crishian Melo
+title: Cristhian Melo
 intro: |-
-  Software Engineer with 3+ years of experience, recognized for building clean, scalable, and user-focused applications.
+  **Software Engineer** with 3+ years of experience, recognized for building clean, scalable, and user-focused applications.
+
   Passionate about technology, product design, and creating polished solutions through carefully crafted projects.
 featuredProjects:
   - soundadvice-platform
