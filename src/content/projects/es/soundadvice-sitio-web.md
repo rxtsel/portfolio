@@ -13,9 +13,8 @@ stack:
   - postgresql
   - supabase
   - payloadcms
-  - next-js
+  - nextjs
   - tailwindcss
-  - ci-cd
   - github-actions
   - figma
 tags:

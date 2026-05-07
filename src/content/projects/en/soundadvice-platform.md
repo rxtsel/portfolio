@@ -10,11 +10,10 @@ publishDate: 2026-05-07
 stack:
   - typescript
   - azure
-  - ci-cd
   - docker
   - drizzle
   - github-actions
-  - next-js
+  - nextjs
   - playwright
   - postgresql
   - tailwindcss

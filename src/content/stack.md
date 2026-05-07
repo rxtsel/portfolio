@@ -15,9 +15,6 @@ stack:
   - name: Azure
     slug: azure
     href: https://azure.microsoft.com/en-us?utm_source=rxtsel.dev
-  - name: CI/CD
-    slug: ci-cd
-    href: ""
   - name: Docker
     slug: docker
     href: https://www.docker.com?utm_source=rxtsel.dev
@@ -28,7 +25,7 @@ stack:
     slug: github-actions
     href: https://github.com/features/actions?utm_source=rxtsel.dev
   - name: Next.js
-    slug: next-js
+    slug: nextjs
     href: https://nextjs.org?utm_source=rxtsel.dev
   - name: Playwright
     slug: playwright
@@ -48,9 +45,6 @@ stack:
   - name: JavaScript
     slug: javascript
     href: https://developer.mozilla.org/en-US/docs/Web/JavaScript?utm_source=rxtsel.dev
-  - name: PHP
-    slug: php
-    href: https://www.php.net?rxtsel.dev
   - name: WordPress
     slug: wordpress
     href: https://wordpress.org?utm_source=rxtsel.dev
@@ -75,4 +69,31 @@ stack:
   - name: shadcn/ui
     slug: shadcn-ui
     href: https://ui.shadcn.com?utm_source=rxtsel.dev
+  - name: Svelte
+    slug: svelte
+    href: https://svelte.dev?utm_source=rxtsel.dev
+  - name: Linux
+    slug: linux
+    href: https://www.linux.org?utm_source=rxtsel.dev
+  - name: Git
+    slug: git
+    href: https://git-scm.com?utm_source=rxtsel.dev
+  - name: ChatGPT
+    slug: chatgpt
+    href: https://chatgpt.com?utm_source=rxtsel.dev
+  - name: Claude
+    slug: claude
+    href: https://claude.ai?utm_source=rxtsel.dev
+  - name: Node.js
+    slug: nodejs
+    href: https://nodejs.org/en?utm_source=rxtsel.dev
+  - name: PHP
+    slug: php
+    href: https://www.php.net?utm_source=rxtsel.dev
+  - name: Python
+    slug: python
+    href: https://www.python.org?utm_source=rxtsel.dev
+  - name: Redis
+    slug: redis
+    href: https://redis.io?utm_source=rxtsel.dev
 ---

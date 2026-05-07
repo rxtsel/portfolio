@@ -18,18 +18,27 @@ experience:
     highlights: []
 stack:
   - astro
-  - next-js
-  - tailwindcss
   - tanstack
   - typescript
-  - docker
-  - postgresql
   - rust
-  - mysql
+  - docker
   - figma
-  - react
+  - postgresql
+  - mysql
   - playwright
+  - tailwindcss
   - drizzle
+  - shadcn-ui
+  - nextjs
+  - javascript
+  - react
+  - svelte
+  - chatgpt
+  - claude
+  - git
+  - nodejs
+  - linux
+  - redis
 latestPosts: []
 seo:
   title: Cristhian Melo - Software Engineer
