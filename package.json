@@ -18,6 +18,7 @@
     "@jdevalk/seo-graph-core": "0.6.1",
     "@tailwindcss/vite": "4.2.4",
     "astro": "6.2.2",
+    "micromark": "4.0.2",
     "tailwindcss": "4.2.4"
   },
   "engines": {
