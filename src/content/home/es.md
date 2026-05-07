@@ -1,28 +1,36 @@
 ---
 locale: es
-title: Cristhian Melo - Ingeniero de Software
-intro: Software Engineer enfocado en interfaces accesibles, rápidas y sistemas limpios y mantenibles.
+title: Cristhian Melo
+intro: |-
+  Desarrollador de software con más de 3 años de experiencia, enfocado en crear aplicaciones limpias, escalables y centradas en el usuario.
+  Apasionado por la tecnología, el diseño de productos y la creación de soluciones pulidas a través de proyectos cuidadosamente desarrollados.
 projects:
-  - name: Primer proyectos
-    description: Descripción de primer proyecto.
-    href: https://example.com
+  - name: María Alicia Cabrera
+    description: Website para escritora Colombiana, proporcionándole un panel de control para gestionar toda la información del sitio web.
+    href: https://mariaaliciacabrera.com/?utm_source=rxtsel.dev
+    sourceUrl: ""
+    stack:
+      - astro
+      - css
+      - typescript
     tags: []
+  - name: Las Pretas
+    description: Desarrollo personalizado en WordPress a petición del cliente. Implementación completa del diseño entregado en Figma.
+    href: https://laspretas.com?utm_source=rxtsel.dev
+    sourceUrl: ""
+    stack:
+      - css
 experience:
   - role: Ingeniero de Software
     company: SoundAdvice
-    startDate: 24/04/2001
+    startDate: 01/24/2021
     endDate: ""
+    highlights: []
 stack:
-  - tech: JavaScript
-  - tech: TypeScript
-  - tech: Rust
+  - astro
+latestPosts: []
 seo:
   title: Cristhian Melo - Ingeniero de Software
   description: Software Engineer con más de 4 años de experiencia creando experiencias web accesibles, rápidas y mantenibles.
   keywords: ""
-  ogImage: ""
-description: Software Engineer con más de 3 años de experiencia creando experiencias web accesibles, rápidas y mantenibles.
-heroTitle: Cristhian Melo
 ---
-
-Construyo interfaces de producto cuidando rendimiento, accesibilidad y mantenibilidad a largo plazo.
