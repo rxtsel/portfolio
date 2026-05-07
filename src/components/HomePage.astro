@@ -5,6 +5,7 @@ import MainLayout from "@/layouts/MainLayout.astro"
 import { getSelectedPublishedPosts } from "@/lib/blog"
 import { getDefaultLanguageLinks, type Locale } from "@/lib/i18n"
 import { getProjectTaxonomyItems, getStackItemsBySlug } from "@/lib/taxonomy"
+import GitHubIcon from "@/assets/github.svg"
 
 interface Props {
   locale: Locale
@@ -69,18 +70,73 @@ const projects = home.data.projects.map((project) => ({
   title={home.data.seo?.title ?? home.data.title}
   titleTemplate="%s"
 >
-  <main class="mx-auto max-w-prose">
-    <h1 class="text-4xl font-semibold">{home.data.title}</h1>
-    <p class="mt-4 text-lg">{home.data.intro}</p>
+  <main
+    class="prose dark:prose-invert prose-neutral prose-sm lg:prose-base prose-p:text-muted-foreground prose-a:no-underline mx-auto max-w-prose"
+  >
+    <h1>{home.data.title}</h1>
+    <p class="whitespace-pre-wrap">{home.data.intro}</p>
+
+    {
+      projects.length > 0 && (
+        <section>
+          <h2>{labels[locale].projects}</h2>
+          <ul class="not-prose grid grid-cols-1 gap-2 sm:grid-cols-2">
+            {projects.map((project) => (
+              <li class="border">
+                <article class="flex h-full flex-col gap-2 p-4">
+                  <h3 class="flex items-center justify-between text-lg font-medium">
+                    {project.href ? (
+                      <a class="link-underline" href={project.href} rel="noopener noreferrer" target="_blank">
+                        {project.name}
+                      </a>
+                    ) : (
+                      project.name
+                    )}
+
+                    {project.sourceUrl ? (
+                      <a
+                        aria-label={`View ${project.name} on GitHub`}
+                        class="ghost"
+                        href={project.sourceUrl}
+                        rel="noopener noreferrer"
+                        target="_blank"
+                        title={`View source on GitHub`}
+                      >
+                        <GitHubIcon class="text-foreground size-4.5 shrink-0" />
+                      </a>
+                    ) : (
+                      <GitHubIcon
+                        aria-label={`No source code available for ${project.name}`}
+                        class="size-4.5 shrink-0 opacity-40"
+                      />
+                    )}
+                  </h3>
+
+                  <p class="text-muted-foreground flex-1">{project.description}</p>
+
+                  <ul class="flex flex-wrap gap-2">
+                    {project.taxonomyItems.map((item) => (
+                      <li class="text-muted-foreground retina:border-[0.5px] inline-flex items-center rounded-none border bg-zinc-50 px-1.5 py-0.5 font-mono text-xs dark:bg-zinc-900 [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-3.5">
+                        {item.name}
+                      </li>
+                    ))}
+                  </ul>
+                </article>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )
+    }
 
     {
       home.data.experience.length > 0 && (
-        <section class="mt-12">
-          <h2 class="text-2xl font-semibold">{labels[locale].experience}</h2>
-          <div class="mt-4 space-y-6">
+        <section>
+          <h2>{labels[locale].experience}</h2>
+          <div>
             {home.data.experience.map((item) => (
               <article>
-                <h3 class="font-medium">{item.role}</h3>
+                <h3>{item.role}</h3>
                 <p>{item.company}</p>
                 <p>
                   {item.startDate}
@@ -94,33 +150,10 @@ const projects = home.data.projects.map((project) => ({
     }
 
     {
-      projects.length > 0 && (
-        <section class="mt-12">
-          <h2 class="text-2xl font-semibold">{labels[locale].projects}</h2>
-          <div class="mt-4 space-y-6">
-            {projects.map((project) => (
-              <article>
-                <h3 class="font-medium">
-                  {project.href ? <a href={project.href}>{project.name}</a> : project.name}
-                </h3>
-                <p>{project.description}</p>
-                <ul class="mt-3 flex list-none flex-wrap gap-2 p-0">
-                  {project.taxonomyItems.map((item) => (
-                    <li class="inline-flex rounded border px-3 py-1 text-sm">{item.name}</li>
-                  ))}
-                </ul>
-              </article>
-            ))}
-          </div>
-        </section>
-      )
-    }
-
-    {
       latestPosts.length > 0 && (
-        <section class="mt-12">
-          <h2 class="text-2xl font-semibold">{labels[locale].latestPosts}</h2>
-          <ul class="mt-4 list-none space-y-6 p-0">
+        <section>
+          <h2>{labels[locale].latestPosts}</h2>
+          <ul>
             {latestPosts.map((post) => (
               <li>
                 <BlogPostLink headingLevel="h3" post={post} />
@@ -133,19 +166,11 @@ const projects = home.data.projects.map((project) => ({
 
     {
       stackItems.length > 0 && (
-        <section class="mt-12">
-          <h2 class="text-2xl font-semibold">{labels[locale].stack}</h2>
-          <ul class="mt-4 flex list-none flex-wrap gap-2 p-0">
+        <section>
+          <h2>{labels[locale].stack}</h2>
+          <ul>
             {stackItems.map((item) => (
-              <li>
-                {item.href ? (
-                  <a class="inline-flex rounded border px-3 py-1 text-sm" href={item.href}>
-                    {item.name}
-                  </a>
-                ) : (
-                  <span class="inline-flex rounded border px-3 py-1 text-sm">{item.name}</span>
-                )}
-              </li>
+              <li>{item.href ? <a href={item.href}>{item.name}</a> : <span>{item.name}</span>}</li>
             ))}
           </ul>
         </section>
