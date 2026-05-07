@@ -11,6 +11,7 @@ const optionalStringSchema = z.preprocess(
   (value) => (value === "" ? undefined : value),
   z.string().optional(),
 )
+const optionalUrlSchema = z.preprocess((value) => (value === "" ? undefined : value), z.url().optional())
 const stackReferenceSchema = z.string().min(1)
 const tagReferenceSchema = z.string().min(1)
 
@@ -59,7 +60,8 @@ const home = defineCollection({
 const projectSchema = z.object({
   name: z.string().min(1),
   description: z.string().min(1),
-  href: z.url().min(1).optional(),
+  href: optionalUrlSchema,
+  sourceUrl: optionalUrlSchema,
   stack: z.array(stackReferenceSchema).default([]),
   tags: z.array(tagReferenceSchema).optional().default([]),
 })

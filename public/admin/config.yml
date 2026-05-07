@@ -45,6 +45,7 @@ singletons:
           - { label: Name, name: name, widget: string, i18n: true }
           - { label: Description, name: description, widget: text, i18n: true }
           - { label: URL, name: href, widget: string, required: false, i18n: duplicate }
+          - { label: Source URL, name: sourceUrl, widget: string, required: false, i18n: duplicate }
           - label: Stack
             name: stack
             widget: relation
