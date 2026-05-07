@@ -20,7 +20,7 @@ const { projects } = Astro.props
 <ul class="not-prose grid grid-cols-1 gap-0 sm:grid-cols-2 sm:gap-2">
   {
     projects.map((project) => (
-      <li class="border odd:border-0 odd:border-x first-of-type:border-t sm:odd:border">
+      <li class="border odd:border-0 odd:border-x first-of-type:border-t last-of-type:border-b sm:odd:border">
         <ProjectCard
           description={project.data.description}
           descriptionTransitionName={getProjectTransitionName(project, "description")}
