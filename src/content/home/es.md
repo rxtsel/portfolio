@@ -4,22 +4,11 @@ title: Cristhian Melo
 intro: |-
   Desarrollador de software con más de 3 años de experiencia, enfocado en crear aplicaciones limpias, escalables y centradas en el usuario.
   Apasionado por la tecnología, el diseño de productos y la creación de soluciones pulidas a través de proyectos cuidadosamente desarrollados.
-projects:
-  - name: María Alicia Cabrera
-    description: Website para escritora Colombiana, proporcionándole un panel de control para gestionar toda la información del sitio web.
-    href: https://mariaaliciacabrera.com/?utm_source=rxtsel.dev
-    sourceUrl: ""
-    stack:
-      - astro
-      - css
-      - typescript
-    tags: []
-  - name: Las Pretas
-    description: Desarrollo personalizado en WordPress a petición del cliente. Implementación completa del diseño entregado en Figma.
-    href: https://laspretas.com?utm_source=rxtsel.dev
-    sourceUrl: ""
-    stack:
-      - css
+featuredProjects:
+  - soundadvice-platform
+  - soundadvice-website
+  - isart-portfolio
+  - wearetop
 experience:
   - role: Ingeniero de Software
     company: SoundAdvice

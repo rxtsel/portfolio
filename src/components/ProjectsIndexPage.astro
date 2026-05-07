@@ -1,0 +1,80 @@
+---
+import { getCollection } from "astro:content"
+import MainLayout from "@/layouts/MainLayout.astro"
+import ProjectsGrid from "@/components/ProjectsGrid.astro"
+import type { LanguageLink, Locale } from "@/lib/i18n"
+import { getLocalizedProjects } from "@/lib/projects"
+import { getProjectTaxonomyItems } from "@/lib/taxonomy"
+
+interface Props {
+  locale: Locale
+}
+
+const { locale } = Astro.props
+const metadata = {
+  en: {
+    description:
+      "Selected software projects by Cristhian Melo, including web experiences, CMS work, and custom frontend implementations.",
+    title: "Projects",
+  },
+  es: {
+    description:
+      "Proyectos seleccionados de Cristhian Melo, incluyendo experiencias web, CMS e implementaciones frontend a medida.",
+    title: "Proyectos",
+  },
+} satisfies Record<Locale, { description: string; title: string }>
+const languageLinks = [
+  { href: "/projects", locale: "en" },
+  { href: "/es/proyectos", locale: "es" },
+] satisfies LanguageLink[]
+const alternates = {
+  defaultLocale: "en",
+  entries: [
+    {
+      href: "https://rxtsel.dev/projects",
+      hreflang: "en",
+    },
+    {
+      href: "https://rxtsel.dev/es/proyectos",
+      hreflang: "es",
+    },
+  ],
+}
+const [stack] = await getCollection("stack")
+const [tags] = await getCollection("tags")
+
+if (!stack) {
+  throw new Error("Missing stack content")
+}
+
+if (!tags) {
+  throw new Error("Missing tags content")
+}
+
+const projects = getLocalizedProjects(await getCollection("projects"), locale).map((project) => ({
+  ...project,
+  taxonomyItems: getProjectTaxonomyItems({
+    stackEntry: stack,
+    stackSlugs: project.data.stack,
+    tagSlugs: project.data.tags,
+    tagsEntry: tags,
+  }),
+}))
+---
+
+<MainLayout
+  alternates={alternates}
+  description={metadata[locale].description}
+  lang={locale}
+  languageLinks={languageLinks}
+  title={metadata[locale].title}
+>
+  <main class="mx-auto max-w-prose">
+    <h1 class="text-4xl font-semibold">
+      {metadata[locale].title}
+    </h1>
+    <div class="mt-8">
+      <ProjectsGrid projects={projects} />
+    </div>
+  </main>
+</MainLayout>

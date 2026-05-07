@@ -4,23 +4,11 @@ title: Crishian Melo
 intro: |-
   Software Engineer with 3+ years of experience, recognized for building clean, scalable, and user-focused applications.
   Passionate about technology, product design, and creating polished solutions through carefully crafted projects.
-projects:
-  - name: María Alicia Cabrera
-    description: Website for a Colombian writer, providing her with a control panel to manage all the website information.
-    href: https://mariaaliciacabrera.com/?utm_source=rxtsel.dev
-    sourceUrl: ""
-    stack:
-      - astro
-      - css
-      - typescript
-    tags: []
-  - name: Las Pretas
-    description: Custom WordPress development at the client's request. Full implementation of the design delivered in Figma.
-    href: https://laspretas.com?utm_source=rxtsel.dev
-    sourceUrl: ""
-    stack:
-      - css
-    tags: []
+featuredProjects:
+  - soundadvice-platform
+  - soundadvice-website
+  - isart-portfolio
+  - wearetop
 experience:
   - role: Software Engineer
     company: SoundAdvice

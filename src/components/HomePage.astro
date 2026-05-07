@@ -3,9 +3,10 @@ import { getCollection, getEntry } from "astro:content"
 import BlogPostLink from "@/components/BlogPostLink.astro"
 import MainLayout from "@/layouts/MainLayout.astro"
 import { getSelectedPublishedPosts } from "@/lib/blog"
-import { getDefaultLanguageLinks, type Locale } from "@/lib/i18n"
+import ProjectsGrid from "@/components/ProjectsGrid.astro"
+import { getDefaultLanguageLinks, getLocalizedPath, type Locale } from "@/lib/i18n"
+import { getSelectedProjects } from "@/lib/projects"
 import { getProjectTaxonomyItems, getStackItemsBySlug } from "@/lib/taxonomy"
-import GitHubIcon from "@/assets/github.svg"
 
 interface Props {
   locale: Locale
@@ -20,6 +21,7 @@ const labels = {
     present: "Present",
     projects: "Projects",
     stack: "Stack",
+    viewAllProjects: "View all",
   },
   es: {
     experience: "Experiencia",
@@ -28,6 +30,7 @@ const labels = {
     present: "Actualidad",
     projects: "Proyectos",
     stack: "Stack",
+    viewAllProjects: "Ver todos",
   },
 } satisfies Record<Locale, Record<string, string>>
 
@@ -39,6 +42,7 @@ if (!home) {
 
 const posts = await getCollection("blog")
 const latestPosts = getSelectedPublishedPosts(posts, home.data.latestPosts, locale)
+const projectEntries = await getCollection("projects")
 const [stack] = await getCollection("stack")
 const [tags] = await getCollection("tags")
 
@@ -51,15 +55,16 @@ if (!tags) {
 }
 
 const stackItems = getStackItemsBySlug(stack, home.data.stack)
-const projects = home.data.projects.map((project) => ({
+const projects = getSelectedProjects(projectEntries, home.data.featuredProjects, locale).map((project) => ({
   ...project,
   taxonomyItems: getProjectTaxonomyItems({
     stackEntry: stack,
-    stackSlugs: project.stack,
-    tagSlugs: project.tags,
+    stackSlugs: project.data.stack,
+    tagSlugs: project.data.tags,
     tagsEntry: tags,
   }),
 }))
+const projectsHref = getLocalizedPath(locale, locale === "es" ? "proyectos" : "projects")
 ---
 
 <MainLayout
@@ -79,52 +84,13 @@ const projects = home.data.projects.map((project) => ({
     {
       projects.length > 0 && (
         <section>
-          <h2>{labels[locale].projects}</h2>
-          <ul class="not-prose grid grid-cols-1 gap-0 sm:grid-cols-2 sm:gap-2">
-            {projects.map((project) => (
-              <li class="border odd:border-0 odd:border-x first-of-type:border-t sm:odd:border">
-                <article class="flex h-full flex-col gap-2 p-4">
-                  <h3 class="flex items-center justify-between text-lg font-medium">
-                    {project.href ? (
-                      <a class="link-underline" href={project.href} rel="noopener noreferrer" target="_blank">
-                        {project.name}
-                      </a>
-                    ) : (
-                      project.name
-                    )}
-
-                    {project.sourceUrl ? (
-                      <a
-                        aria-label={`View ${project.name} on GitHub`}
-                        class="ghost"
-                        href={project.sourceUrl}
-                        rel="noopener noreferrer"
-                        target="_blank"
-                        title={`View source on GitHub`}
-                      >
-                        <GitHubIcon class="text-foreground size-4.5 shrink-0" />
-                      </a>
-                    ) : (
-                      <GitHubIcon
-                        aria-label={`No source code available for ${project.name}`}
-                        class="size-4.5 shrink-0 opacity-40"
-                      />
-                    )}
-                  </h3>
-
-                  <p class="text-muted-foreground flex-1">{project.description}</p>
-
-                  <ul class="flex flex-wrap gap-2">
-                    {project.taxonomyItems.map((item) => (
-                      <li class="text-muted-foreground retina:border-[0.5px] inline-flex items-center rounded-none border bg-zinc-50 px-1.5 py-0.5 font-mono text-xs dark:bg-zinc-900 [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-3.5">
-                        {item.name}
-                      </li>
-                    ))}
-                  </ul>
-                </article>
-              </li>
-            ))}
-          </ul>
+          <header class="flex items-center justify-between">
+            <h2>{labels[locale].projects}</h2>
+            <a class="link relative top-3 text-sm" href={projectsHref}>
+              {labels[locale].viewAllProjects}
+            </a>
+          </header>
+          <ProjectsGrid projects={projects} />
         </section>
       )
     }
