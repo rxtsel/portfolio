@@ -14,6 +14,7 @@ const optionalStringSchema = z.preprocess(
 const optionalUrlSchema = z.preprocess((value) => (value === "" ? undefined : value), z.url().optional())
 const stackReferenceSchema = z.string().min(1)
 const tagReferenceSchema = z.string().min(1)
+const projectReferenceSchema = z.string().min(1)
 
 const stackItemSchema = z.object({
   name: z.string().min(1),
@@ -49,7 +50,10 @@ const home = defineCollection({
       locale: localeSchema,
       title: z.string().min(1),
       intro: z.string().min(1),
-      projects: z.array(projectSchema).default([]),
+      featuredProjects: z
+        .array(projectReferenceSchema)
+        .max(4, "Home cannot feature more than 4 projects")
+        .default([]),
       experience: z.array(experienceSchema).default([]),
       stack: z.array(stackReferenceSchema).default([]),
       latestPosts: latestPostsSchema,
@@ -58,12 +62,21 @@ const home = defineCollection({
 })
 
 const projectSchema = z.object({
-  name: z.string().min(1),
+  locale: localeSchema,
+  title: z.string().min(1),
   description: z.string().min(1),
   href: optionalUrlSchema,
+  order: z.number().int().optional(),
+  publishDate: z.coerce.date(),
   sourceUrl: optionalUrlSchema,
   stack: z.array(stackReferenceSchema).default([]),
   tags: z.array(tagReferenceSchema).optional().default([]),
+  translationKey: z.string().min(1),
+})
+
+const projects = defineCollection({
+  loader: glob({ base: "./src/content/projects", pattern: "**/*.{md,mdx}" }),
+  schema: () => projectSchema,
 })
 
 const latestPostsSchema = z
@@ -119,4 +132,4 @@ const blog = defineCollection({
     }),
 })
 
-export const collections = { blog, home, stack, tags }
+export const collections = { blog, home, projects, stack, tags }

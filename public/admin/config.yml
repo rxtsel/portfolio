@@ -37,42 +37,17 @@ singletons:
       - { label: Locale, name: locale, widget: hidden, default: "{{locale}}", i18n: true }
       - { label: Title, name: title, widget: string, i18n: true }
       - { label: Intro, name: intro, widget: markdown, i18n: true }
-      - label: Projects
-        name: projects
-        widget: list
-        collapsed: auto
-        summary: "{{name}}"
-        i18n: true
-        fields:
-          - { label: Name, name: name, widget: string, i18n: true }
-          - { label: Description, name: description, widget: text, i18n: true }
-          - { label: URL, name: href, widget: string, required: false, i18n: duplicate }
-          - { label: Source URL, name: sourceUrl, widget: string, required: false, i18n: duplicate }
-          - label: Stack
-            name: stack
-            widget: relation
-            collection: _singletons
-            file: stack
-            i18n: duplicate
-            multiple: true
-            value_field: "{{stack.*.slug}}"
-            display_fields:
-              - "{{stack.*.name}}"
-            search_fields:
-              - "{{stack.*.name}}"
-          - label: Tags
-            name: tags
-            widget: relation
-            collection: _singletons
-            file: tags
-            i18n: duplicate
-            required: false
-            multiple: true
-            value_field: "{{tags.*.slug}}"
-            display_fields:
-              - "{{tags.*.name}}"
-            search_fields:
-              - "{{tags.*.name}}"
+      - label: Featured projects
+        name: featuredProjects
+        widget: relation
+        collection: projects
+        multiple: true
+        max: 4
+        required: false
+        i18n: duplicate
+        value_field: "{{translationKey}}"
+        display_fields: [title]
+        search_fields: [title, description]
 
       - label: Experience
         name: experience
@@ -160,6 +135,64 @@ singletons:
           - { label: Slug, name: slug, widget: string, i18n: false, required: true }
 
 collections:
+  - name: projects
+    label: Projects
+    label_singular: Project
+    folder: src/content/projects
+    create: true
+    i18n: true
+    reorder:
+      key: order
+    slug: "{{title | localize}}"
+    sortable_fields:
+      fields: [order]
+      default:
+        field: order
+        direction: descending
+    preview_path: /{{locale}}/projects
+    summary: "{{title}} — {{locales}}"
+    fields:
+      - { label: Translation key, name: translationKey, widget: hidden, default: "{{slug}}", i18n: duplicate }
+      - { label: Locale, name: locale, widget: hidden, default: "{{locale}}", i18n: true }
+      - { label: Title, name: title, widget: string, i18n: true }
+      - { label: Description, name: description, widget: text, i18n: true }
+      - { label: URL, name: href, widget: string, required: false, i18n: duplicate }
+      - { label: Source URL, name: sourceUrl, widget: string, required: false, i18n: duplicate }
+      - {
+          label: Publish date,
+          name: publishDate,
+          widget: datetime,
+          date_format: YYYY-MM-DD,
+          time_format: false,
+          i18n: duplicate,
+        }
+      - label: Stack
+        name: stack
+        widget: relation
+        collection: _singletons
+        file: stack
+        i18n: duplicate
+        multiple: true
+        value_field: "{{stack.*.slug}}"
+        display_fields:
+          - "{{stack.*.name}}"
+        search_fields:
+          - "{{stack.*.name}}"
+      - label: Tags
+        name: tags
+        widget: relation
+        collection: _singletons
+        file: tags
+        i18n: duplicate
+        required: false
+        multiple: true
+        value_field: "{{tags.*.slug}}"
+        display_fields:
+          - "{{tags.*.name}}"
+        search_fields:
+          - "{{tags.*.name}}"
+      - { label: Body, name: body, widget: markdown, required: false, i18n: true }
+
   - name: blog
     label: Blog
     label_singular: Post
