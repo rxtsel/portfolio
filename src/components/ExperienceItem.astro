@@ -47,7 +47,7 @@ function getLatestEndDate(jobs: ExperienceJob[]) {
 }
 
 function formatDate(value: string) {
-  const [year, month, day] = value.split("-").map(Number)
+  const [year = 9999, month = 1, day] = value.split("-").map(Number)
 
   return new Intl.DateTimeFormat(locale, {
     month: "short",
@@ -70,48 +70,57 @@ const sortedJobs = [...item.jobs].sort((current, next) => {
 })
 ---
 
-<li class="prose dark:prose-invert relative ms-4">
-  <span
-    aria-hidden="true"
-    class:list={[
-      "border-border absolute inset-s-[-1.35rem] mt-1.5 block size-3 border",
-      companyIsCurrent ? "bg-primary" : "bg-accent",
-    ]}></span>
+<li class="prose dark:prose-invert relative ms-[20.5px] grid gap-4">
+  <header>
+    <!-- Indicator -->
+    <span
+      class="border-border bg-primary! absolute inset-s-[-1.35rem] mt-1.5 block size-3 border"
+      role="none"
+    >
+      {
+        companyIsCurrent ? (
+          <span class="bg-primary absolute inline-flex size-2.5 animate-ping border border-transparent opacity-75" />
+        ) : null
+      }
+    </span>
 
-  {
-    item.companyUrl ? (
-      <h3 class="text-lg leading-snug font-semibold">
-        <a class="link" href={item.companyUrl} rel="noopener noreferrer" target="_blank">
-          {item.company}
-        </a>
-      </h3>
-    ) : (
-      <h3 class="text-lg leading-snug font-semibold">{item.company}</h3>
-    )
-  }
+    <!-- Company name -->
+    {
+      item.companyUrl ? (
+        <h3 class="text-lg leading-snug font-semibold">
+          <a class="link-underline" href={item.companyUrl} rel="noopener noreferrer" target="_blank">
+            {item.company}
+          </a>
+        </h3>
+      ) : (
+        <h3 class="text-lg leading-snug font-semibold">{item.company}</h3>
+      )
+    }
 
-  <time
-    class="text-muted-foreground block text-sm"
-    data-current={String(companyIsCurrent)}
-    data-end={companyEndDate}
-    data-experience-range
-    data-start={companyStartDate}
-    datetime={companyEndDate || companyStartDate}
-  >
-    {getDateRange(companyStartDate, companyEndDate)}
-  </time>
+    <time
+      class="text-muted-foreground block text-sm"
+      data-current={String(companyIsCurrent)}
+      data-end={companyEndDate}
+      data-experience-range
+      data-start={companyStartDate}
+      datetime={companyEndDate || companyStartDate}
+    >
+      {getDateRange(companyStartDate, companyEndDate)}
+    </time>
 
-  {
-    (item.location || item.remote) && (
-      <span class="text-muted-foreground block text-sm">
-        {item.location}
-        {item.location && item.remote ? " · " : ""}
-        {item.remote ? labels[locale].remote : ""}
-      </span>
-    )
-  }
+    {
+      (item.location || item.remote) && (
+        <span class="text-muted-foreground block text-sm">
+          {item.location}
+          {item.location && item.remote ? " · " : ""}
+          {item.remote ? labels[locale].remote : ""}
+        </span>
+      )
+    }
+  </header>
 
-  <div class="mt-4 space-y-4">
+  <!-- Jobs at the company -->
+  <footer class="space-y-4">
     {
       sortedJobs.map((job) => {
         const endDate = getJobEndDate(job)
@@ -124,9 +133,12 @@ const sortedJobs = [...item.jobs].sort((current, next) => {
         const descriptionHtml = job.description ? renderSafeMarkdown(job.description) : ""
 
         return (
-          <article class="space-y-2">
+          <article class="relative ml-[21.5px]">
+            {/* Sub indicator */}
+            <span class="bg-border absolute inset-s-[-1.35rem] mt-[5.5px] block size-3 border" role="none" />
+
             <header>
-              <h4 class="flex-1 font-medium text-balance">{job.role}</h4>
+              <h4 class="flex-1 leading-snug font-semibold text-balance">{job.role}</h4>
               <time
                 class="text-muted-foreground block text-sm"
                 data-current={String(job.current)}
@@ -139,15 +151,16 @@ const sortedJobs = [...item.jobs].sort((current, next) => {
               </time>
             </header>
 
-            {descriptionHtml && (
+            {descriptionHtml ? (
               <>
-                {/* eslint-disable-next-line astro/no-set-html-directive */}
+                {/* eslint-disable astro/no-set-html-directive */}
                 <footer
                   class="prose prose-neutral dark:prose-invert prose-sm prose-p:text-muted-foreground prose-a:no-underline max-w-none"
                   set:html={descriptionHtml}
                 />
+                {/* eslint-enable astro/no-set-html-directive */}
               </>
-            )}
+            ) : null}
 
             {taxonomyItems.length > 0 && (
               <ul class="flex flex-wrap gap-2">
@@ -162,5 +175,5 @@ const sortedJobs = [...item.jobs].sort((current, next) => {
         )
       })
     }
-  </div>
+  </footer>
 </li>

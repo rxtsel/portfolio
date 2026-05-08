@@ -10,14 +10,14 @@ items:
         startDate: 2024-03-01
         endDate: 2025-01-01
         current: false
-        description: ''
+        description: ""
         stack: []
         tags: []
       - role: Full Stack Developer
         startDate: 2025-01-02
-        endDate: ''
+        endDate: ""
         current: true
-        description: ''
+        description: ""
         stack: []
         tags: []
   - company: Visual Dealers
@@ -29,19 +29,19 @@ items:
         startDate: 2023-04-01
         endDate: 2024-02-29
         current: false
-        description: ''
+        description: ""
         stack: []
         tags: []
   - company: Vehement
     companyUrl: https://vehement.co?utm_source=rxtsel.dev
-    location: ''
+    location: Bogotá, Colombia
     remote: true
     jobs:
       - role: Frontend Developer
         startDate: 2022-09-01
         endDate: 2024-02-29
         current: false
-        description: ''
+        description: ""
         stack: []
         tags: []
 ---

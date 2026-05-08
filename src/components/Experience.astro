@@ -36,7 +36,7 @@ const sortedItems = [...items].sort((current, next) =>
   items.length > 0 && (
     <section>
       <h2>{label}</h2>
-      <ol class="not-prose relative ml-[5px] space-y-12 border-s">
+      <ol class="not-prose border-border! relative space-y-8 border-s">
         {sortedItems.map((item) => (
           <ExperienceItem item={item} locale={locale} stackEntry={stackEntry} tagsEntry={tagsEntry} />
         ))}
@@ -46,6 +46,7 @@ const sortedItems = [...items].sort((current, next) =>
 }
 
 <script>
+  /* eslint-disable no-unused-vars */
   type TemporalPlainDate = {
     day: number
     month: number
@@ -67,6 +68,7 @@ const sortedItems = [...items].sort((current, next) =>
       from: (value: string) => TemporalPlainDate
     }
   }
+  /* eslint-enable no-unused-vars */
 
   function getPreferredLocale() {
     return navigator.languages?.[0] ?? navigator.language ?? "en"
