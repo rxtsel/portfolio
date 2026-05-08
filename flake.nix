@@ -15,5 +15,10 @@
         pnpm
       ];
     };
+
+    shellHook = ''
+      echo "If you want use pnpm run dev --host, first expose the port:"
+      echo "sudo nixos-firewall-tool open tcp 4321"
+    '';
   };
 }
