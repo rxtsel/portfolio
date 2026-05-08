@@ -70,11 +70,11 @@ const sortedJobs = [...item.jobs].sort((current, next) => {
 })
 ---
 
-<li class="prose dark:prose-invert relative ms-[20.5px] grid gap-4">
+<li class="relative my-0! ms-[20.5px] grid gap-4 ps-0!">
   <header>
     <!-- Indicator -->
     <span
-      class="border-border bg-primary! absolute inset-s-[-1.35rem] mt-1.5 block size-3 border"
+      class="border-border bg-primary absolute inset-s-[-1.35rem] mt-1.5 block size-3 border lg:mt-2.5"
       role="none"
     >
       {
@@ -87,13 +87,13 @@ const sortedJobs = [...item.jobs].sort((current, next) => {
     <!-- Company name -->
     {
       item.companyUrl ? (
-        <h3 class="text-lg leading-snug font-semibold">
+        <h3 class="my-0! text-lg leading-snug font-semibold">
           <a class="link-underline" href={item.companyUrl} rel="noopener noreferrer" target="_blank">
             {item.company}
           </a>
         </h3>
       ) : (
-        <h3 class="text-lg leading-snug font-semibold">{item.company}</h3>
+        <h3 class="my-0! text-lg leading-snug font-semibold">{item.company}</h3>
       )
     }
 
@@ -133,12 +133,15 @@ const sortedJobs = [...item.jobs].sort((current, next) => {
         const descriptionHtml = job.description ? renderSafeMarkdown(job.description) : ""
 
         return (
-          <article class="relative ml-[21.5px]">
+          <article class="relative ml-[21.5px] grid gap-2">
             {/* Sub indicator */}
-            <span class="bg-border absolute inset-s-[-1.35rem] mt-[5.5px] block size-3 border" role="none" />
+            <span
+              class="bg-border absolute inset-s-[-1.35rem] mt-[3px] block size-3 border lg:mt-[5.5px]"
+              role="none"
+            />
 
             <header>
-              <h4 class="flex-1 leading-snug font-semibold text-balance">{job.role}</h4>
+              <h4 class="my-0! flex-1 leading-snug font-semibold text-balance">{job.role}</h4>
               <time
                 class="text-muted-foreground block text-sm"
                 data-current={String(job.current)}
@@ -155,7 +158,7 @@ const sortedJobs = [...item.jobs].sort((current, next) => {
               <>
                 {/* eslint-disable astro/no-set-html-directive */}
                 <footer
-                  class="prose prose-neutral dark:prose-invert prose-sm prose-p:text-muted-foreground prose-a:no-underline max-w-none"
+                  class="prose prose-sm prose-neutral dark:prose-invert lg:prose-sm prose-p:text-muted-foreground prose-li:text-muted-foreground prose-ul:list-disc!"
                   set:html={descriptionHtml}
                 />
                 {/* eslint-enable astro/no-set-html-directive */}
@@ -163,9 +166,9 @@ const sortedJobs = [...item.jobs].sort((current, next) => {
             ) : null}
 
             {taxonomyItems.length > 0 && (
-              <ul class="flex flex-wrap gap-2">
+              <ul class="my-0! flex list-none! flex-wrap gap-2 ps-0!">
                 {taxonomyItems.map((taxonomyItem) => (
-                  <li class="text-muted-foreground retina:border-[0.5px] inline-flex items-center rounded-none border bg-zinc-50 px-1.5 py-0.5 font-mono text-xs dark:bg-zinc-900">
+                  <li class="text-muted-foreground retina:border-[0.5px] my-0! inline-flex items-center rounded-none border bg-zinc-50 px-1.5! py-0.5! font-mono text-xs dark:bg-zinc-900">
                     {taxonomyItem.name}
                   </li>
                 ))}

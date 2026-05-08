@@ -36,7 +36,7 @@ const sortedItems = [...items].sort((current, next) =>
   items.length > 0 && (
     <section>
       <h2>{label}</h2>
-      <ol class="not-prose border-border! relative space-y-8 border-s">
+      <ol class="border-border relative my-0! grid list-none! grid-cols-1 gap-y-8 border-s ps-0!">
         {sortedItems.map((item) => (
           <ExperienceItem item={item} locale={locale} stackEntry={stackEntry} tagsEntry={tagsEntry} />
         ))}
