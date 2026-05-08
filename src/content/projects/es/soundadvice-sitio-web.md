@@ -18,5 +18,6 @@ stack:
   - github-actions
   - figma
 tags:
-  - front-end
+  - ci-cd
+  - wpo
 ---

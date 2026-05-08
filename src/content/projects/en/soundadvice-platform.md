@@ -21,5 +21,5 @@ stack:
   - stripe
   - supabase
 tags:
-  - front-end
+  - ci-cd
 ---
