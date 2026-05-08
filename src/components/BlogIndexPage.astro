@@ -35,11 +35,13 @@ const posts = getPublishedBlogPosts(await getCollection("blog"), locale)
     <h1>Blog</h1>
     <ul class="mt-8 list-none space-y-6 p-0">
       {
-        posts.map((post) => (
-          <li>
-            <BlogPostLink post={post} />
-          </li>
-        ))
+        posts
+          .sort((a, b) => new Date(b.data.publishDate).getTime() - new Date(a.data.publishDate).getTime())
+          .map((post) => (
+            <li>
+              <BlogPostLink post={post} />
+            </li>
+          ))
       }
     </ul>
   </main>

@@ -67,13 +67,12 @@ singletons:
         name: latestPosts
         widget: relation
         collection: blog
-        multiple: true
-        max: 5
-        required: false
         i18n: duplicate
+        multiple: true
+        max: 4
         value_field: "{{translationKey}}"
         display_fields: [title]
-        search_fields: [title, description]
+        search_fields: [title]
         filters:
           - field: published
             values: [true]
@@ -197,6 +196,7 @@ singletons:
         name: categories
         widget: list
         collapsed: auto
+        add_to_top: true
         summary: "{{name}}"
         i18n: true
         fields:
@@ -269,8 +269,23 @@ collections:
     create: true
     i18n: true
     slug: "{{title | localize}}"
+    sortable_fields:
+      fields: [publishDate, updatedDate, title]
+      default:
+        field: publishDate
+        direction: descending
     preview_path: /{{locale}}/blog/{{slug}}
     summary: "{{title}} — {{locales}}"
+    view_groups:
+      groups:
+        - name: published
+          label: Published
+          field: published
+        - name: year
+          label: Year
+          field: publishDate
+          pattern: '\d{4}'
+      default: year
     fields:
       - { label: Locale, name: locale, widget: hidden, default: "{{locale}}", i18n: true }
       - { label: Published, name: published, widget: boolean, default: false, i18n: duplicate }

@@ -35,7 +35,11 @@ stack:
   - chatgpt
   - claude
   - python
-latestPosts: []
+latestPosts:
+  - basic-commands-for-neovim
+  - how-to-sync-bluetooth-in-dual-boot-triple-boot-windows-linux-macos
+  - how-to-install-husky-commitlint-and-lint-staged-in-your-projects-a-step-by-step-guide
+  - how-to-install-arch-linux-using-the-command-line
 seo:
   title: Cristhian Melo - Ingeniero de Software
   description: Software Engineer con más de 4 años de experiencia creando experiencias web accesibles, rápidas y mantenibles.
