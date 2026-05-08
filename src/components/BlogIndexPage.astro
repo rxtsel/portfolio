@@ -14,14 +14,12 @@ const metadata = {
   en: {
     description:
       "Articles by Cristhian Melo about software engineering, web performance, accessibility, and maintainable frontend systems.",
-    title: "Software Engineering Blog",
   },
   es: {
     description:
       "Artículos de Cristhian Melo sobre ingeniería de software, rendimiento web, accesibilidad y sistemas frontend mantenibles.",
-    title: "Blog de Ingeniería de Software",
   },
-} satisfies Record<Locale, { description: string; title: string }>
+} satisfies Record<Locale, { description: string }>
 
 const posts = getPublishedBlogPosts(await getCollection("blog"), locale)
 ---
@@ -31,10 +29,10 @@ const posts = getPublishedBlogPosts(await getCollection("blog"), locale)
   description={metadata[locale].description}
   lang={locale}
   languageLinks={getDefaultLanguageLinks("blog")}
-  title={metadata[locale].title}
+  title="Blog"
 >
-  <main class="mx-auto max-w-prose">
-    <h1 class="text-4xl font-semibold">Blog</h1>
+  <main class="prose dark:prose-invert prose-neutral mx-auto max-w-prose">
+    <h1>Blog</h1>
     <ul class="mt-8 list-none space-y-6 p-0">
       {
         posts.map((post) => (

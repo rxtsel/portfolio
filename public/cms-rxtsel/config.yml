@@ -187,6 +187,22 @@ singletons:
           - { label: Name, name: name, widget: string, i18n: false, required: true }
           - { label: Slug, name: slug, widget: string, i18n: false, required: true }
 
+  - name: blogCategories
+    label: Blog categories
+    file: src/content/blog-categories/{{locale}}.md
+    i18n: true
+    fields:
+      - { label: Locale, name: locale, widget: hidden, default: "{{locale}}", i18n: true }
+      - label: Categories
+        name: categories
+        widget: list
+        collapsed: auto
+        summary: "{{name}}"
+        i18n: true
+        fields:
+          - { label: Translation key, name: translationKey, widget: string, i18n: duplicate, required: true }
+          - { label: Name, name: name, widget: string, i18n: true, required: true }
+
 collections:
   - name: projects
     label: Projects
@@ -259,7 +275,7 @@ collections:
       - { label: Locale, name: locale, widget: hidden, default: "{{locale}}", i18n: true }
       - { label: Published, name: published, widget: boolean, default: false, i18n: duplicate }
       - { label: Title, name: title, widget: string, i18n: true }
-      - { label: Description, name: description, widget: text, i18n: true }
+      - { label: Description, name: description, widget: text, i18n: true, maxlength: 250 }
       - {
           label: Publish date,
           name: publishDate,
@@ -277,19 +293,19 @@ collections:
           required: false,
           i18n: duplicate,
         }
-      - label: Tags
-        name: tags
+      - label: Categories
+        name: categories
         widget: relation
         collection: _singletons
-        file: tags
+        file: blogCategories
         required: false
-        i18n: true
+        i18n: duplicate
         multiple: true
-        value_field: "{{tags.*.slug}}"
+        value_field: "{{categories.*.translationKey}}"
         display_fields:
-          - "{{tags.*.name}}"
+          - "{{categories.*.name}}"
         search_fields:
-          - "{{tags.*.name}}"
+          - "{{categories.*.name}}"
       - { label: Cover image, name: coverImage, widget: image, required: false, i18n: duplicate }
       - { label: Cover image alt, name: coverImageAlt, widget: string, required: false, i18n: true }
       - label: SEO
@@ -298,8 +314,6 @@ collections:
         required: false
         i18n: true
         fields:
-          - { label: SEO title, name: title, widget: string, required: true, i18n: true }
-          - { label: SEO description, name: description, widget: text, required: true, i18n: true }
           - { label: Keywords, name: keywords, widget: string, required: false, i18n: true }
 
       - { label: Body, name: body, widget: markdown, i18n: true }

@@ -14,6 +14,7 @@ const optionalStringSchema = z.preprocess(
 const optionalUrlSchema = z.preprocess((value) => (value === "" ? undefined : value), z.url().optional())
 const stackReferenceSchema = z.string().min(1)
 const tagReferenceSchema = z.string().min(1)
+const blogCategoryReferenceSchema = z.string().min(1)
 const projectReferenceSchema = z.string().min(1)
 const plainDateSchema = z.preprocess(
   (value) => (value instanceof Date ? value.toISOString().slice(0, 10) : value),
@@ -31,6 +32,11 @@ const tagItemSchema = z.object({
   slug: z.string().min(1),
 })
 
+const blogCategoryItemSchema = z.object({
+  name: z.string().min(1),
+  translationKey: z.string().min(1),
+})
+
 const stack = defineCollection({
   loader: glob({ base: "./src/content", pattern: "stack.{md,mdx}" }),
   schema: () =>
@@ -44,6 +50,15 @@ const tags = defineCollection({
   schema: () =>
     z.object({
       tags: z.array(tagItemSchema).default([]),
+    }),
+})
+
+const blogCategories = defineCollection({
+  loader: glob({ base: "./src/content/blog-categories", pattern: "*.{md,mdx}" }),
+  schema: () =>
+    z.object({
+      categories: z.array(blogCategoryItemSchema).default([]),
+      locale: localeSchema,
     }),
 })
 
@@ -136,22 +151,30 @@ const seoSchema = z.object({
   title: z.string().min(1).max(120),
 })
 
+const blogSeoSchema = z.object({
+  keywords: optionalStringSchema,
+})
+const optionalBlogSeoSchema = z.preprocess(
+  (value) => (value === null ? undefined : value),
+  blogSeoSchema.optional(),
+)
+
 const blog = defineCollection({
   loader: glob({ base: "./src/content/blog", pattern: "**/*.{md,mdx}" }),
   schema: () =>
     z.object({
       coverImage: optionalStringSchema,
       coverImageAlt: optionalStringSchema,
-      description: z.string().min(1).max(200),
+      description: z.string().min(1).max(250),
+      categories: z.array(blogCategoryReferenceSchema).optional().default([]),
       locale: localeSchema,
       published: z.boolean().default(false),
       publishDate: z.coerce.date(),
-      seo: seoSchema.optional(),
-      tags: z.array(tagReferenceSchema).optional().default([]),
+      seo: optionalBlogSeoSchema,
       title: z.string().min(1),
       translationKey: z.string().min(1),
       updatedDate: optionalDateSchema,
     }),
 })
 
-export const collections = { blog, experience, home, projects, stack, tags }
+export const collections = { blog, blogCategories, experience, home, projects, stack, tags }

@@ -27,12 +27,13 @@ const alternates = {
 
 <MainLayout
   alternates={alternates}
-  description={post.data.seo?.description ?? post.data.description}
+  description={post.data.description}
   lang={post.data.locale}
   languageLinks={getBlogPostLanguageLinks(posts, post)}
-  title={post.data.seo?.title ?? post.data.title}
+  title={post.data.title}
+  titleTemplate="%s - Blog"
 >
-  <main class="mx-auto max-w-prose">
+  <main class="prose prose-neutral dark:prose-invert mx-auto max-w-prose">
     <article>
       <h1 class="text-4xl font-semibold" transition:name={getBlogPostTransitionName(post, "title")}>
         {post.data.title}
