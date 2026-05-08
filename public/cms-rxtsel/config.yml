@@ -49,24 +49,6 @@ singletons:
         display_fields: [title]
         search_fields: [title, description]
 
-      - label: Experience
-        name: experience
-        widget: list
-        collapsed: auto
-        summary: "{{role}} — {{company}}"
-        i18n: true
-        fields:
-          - { label: Role, name: role, widget: string, i18n: true }
-          - { label: Company, name: company, widget: string, i18n: duplicate }
-          - { label: Start date, name: startDate, widget: string, i18n: duplicate }
-          - { label: End date, name: endDate, widget: string, required: false, i18n: duplicate }
-          - label: Highlights
-            name: highlights
-            widget: list
-            required: false
-            i18n: true
-            field: { label: Highlight, name: highlight, widget: string }
-
       - label: Stack
         name: stack
         description: Technologies and tools I use
@@ -119,6 +101,77 @@ singletons:
           - { label: Name, name: name, widget: string, i18n: false, required: true }
           - { label: Slug, name: slug, widget: string, i18n: false, required: true }
           - { label: URL, name: href, widget: string, required: false }
+
+  - name: experience
+    label: Experience
+    file: src/content/experience/{{locale}}.md
+    i18n: true
+    fields:
+      - { label: Locale, name: locale, widget: hidden, default: "{{locale}}", i18n: true }
+      - label: Items
+        name: items
+        widget: list
+        collapsed: auto
+        summary: "{{company}}"
+        i18n: true
+        fields:
+          - { label: Company, name: company, widget: string, i18n: duplicate, required: true }
+          - { label: Company URL, name: companyUrl, widget: string, required: false, i18n: duplicate }
+          - { label: Location, name: location, widget: string, required: false, i18n: true }
+          - { label: Remote, name: remote, widget: boolean, default: false, i18n: duplicate }
+          - label: Jobs
+            name: jobs
+            widget: list
+            collapsed: auto
+            summary: "{{role}}"
+            i18n: true
+            fields:
+              - { label: Role, name: role, widget: string, i18n: true, required: true }
+              - {
+                  label: Start date,
+                  name: startDate,
+                  widget: datetime,
+                  date_format: YYYY-MM-DD,
+                  time_format: false,
+                  i18n: duplicate,
+                }
+              - {
+                  label: End date,
+                  name: endDate,
+                  widget: datetime,
+                  date_format: YYYY-MM-DD,
+                  time_format: false,
+                  required: false,
+                  i18n: duplicate,
+                }
+              - { label: Current job, name: current, widget: boolean, default: false, i18n: duplicate }
+              - { label: Description, name: description, widget: markdown, required: false, i18n: true }
+              - label: Stack
+                name: stack
+                widget: relation
+                collection: _singletons
+                file: stack
+                i18n: duplicate
+                multiple: true
+                required: false
+                value_field: "{{stack.*.slug}}"
+                display_fields:
+                  - "{{stack.*.name}}"
+                search_fields:
+                  - "{{stack.*.name}}"
+              - label: Tags
+                name: tags
+                widget: relation
+                collection: _singletons
+                file: tags
+                i18n: duplicate
+                required: false
+                multiple: true
+                value_field: "{{tags.*.slug}}"
+                display_fields:
+                  - "{{tags.*.name}}"
+                search_fields:
+                  - "{{tags.*.name}}"
 
   - name: tags
     label: Tags

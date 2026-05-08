@@ -10,12 +10,6 @@ featuredProjects:
   - soundadvice-website
   - isart-portfolio
   - wearetop
-experience:
-  - role: Ingeniero de Software
-    company: SoundAdvice
-    startDate: 01/24/2021
-    endDate: ""
-    highlights: []
 stack:
   - react
   - nextjs

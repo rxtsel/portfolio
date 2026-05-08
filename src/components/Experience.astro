@@ -1,0 +1,150 @@
+---
+import type { CollectionEntry } from "astro:content"
+import ExperienceItem from "@/components/ExperienceItem.astro"
+import type { Locale } from "@/lib/i18n"
+
+type ExperienceEntry = CollectionEntry<"experience">
+type StackEntry = CollectionEntry<"stack">
+type TagsEntry = CollectionEntry<"tags">
+
+interface Props {
+  items: ExperienceEntry["data"]["items"]
+  label: string
+  locale: Locale
+  stackEntry: StackEntry
+  tagsEntry: TagsEntry
+}
+
+const { items, label, locale, stackEntry, tagsEntry } = Astro.props
+
+function getCompanySortDate(item: ExperienceEntry["data"]["items"][number]) {
+  const currentJob = item.jobs.find((job) => job.current)
+
+  if (currentJob) {
+    return "9999-12-31"
+  }
+
+  return [...item.jobs.map((job) => job.endDate || job.startDate)].sort().at(-1) ?? ""
+}
+
+const sortedItems = [...items].sort((current, next) =>
+  getCompanySortDate(next).localeCompare(getCompanySortDate(current)),
+)
+---
+
+{
+  items.length > 0 && (
+    <section>
+      <h2>{label}</h2>
+      <ol class="not-prose relative ml-[5px] space-y-12 border-s">
+        {sortedItems.map((item) => (
+          <ExperienceItem item={item} locale={locale} stackEntry={stackEntry} tagsEntry={tagsEntry} />
+        ))}
+      </ol>
+    </section>
+  )
+}
+
+<script>
+  type TemporalPlainDate = {
+    day: number
+    month: number
+    until: (
+      other: TemporalPlainDate,
+      options: { largestUnit: "years" },
+    ) => {
+      months: number
+      years: number
+    }
+    year: number
+  }
+
+  type TemporalApi = {
+    Now: {
+      plainDateISO: () => TemporalPlainDate
+    }
+    PlainDate: {
+      from: (value: string) => TemporalPlainDate
+    }
+  }
+
+  function getPreferredLocale() {
+    return navigator.languages?.[0] ?? navigator.language ?? "en"
+  }
+
+  function getPresentLabel(locale: string) {
+    return locale.toLowerCase().startsWith("es") ? "Actualidad" : "Present"
+  }
+
+  function getUnitLabel(unit: "month" | "year", value: number, locale: string) {
+    const isSpanish = locale.toLowerCase().startsWith("es")
+    const labels = {
+      en: {
+        month: value === 1 ? "month" : "months",
+        year: value === 1 ? "year" : "years",
+      },
+      es: {
+        month: value === 1 ? "mes" : "meses",
+        year: value === 1 ? "año" : "años",
+      },
+    }
+
+    return labels[isSpanish ? "es" : "en"][unit]
+  }
+
+  function formatDate(plainDate: TemporalPlainDate, locale: string) {
+    return new Intl.DateTimeFormat(locale, {
+      month: "short",
+      year: "numeric",
+    }).format(new Date(plainDate.year, plainDate.month - 1, plainDate.day))
+  }
+
+  function formatDuration(startDate: TemporalPlainDate, endDate: TemporalPlainDate, locale: string) {
+    const duration = startDate.until(endDate, { largestUnit: "years" })
+    const parts = []
+
+    if (duration.years > 0) {
+      parts.push(`${duration.years} ${getUnitLabel("year", duration.years, locale)}`)
+    }
+
+    if (duration.months > 0) {
+      parts.push(`${duration.months} ${getUnitLabel("month", duration.months, locale)}`)
+    }
+
+    return parts.join(", ") || `0 ${getUnitLabel("month", 0, locale)}`
+  }
+
+  function updateExperienceDates() {
+    const temporal = (globalThis as typeof globalThis & { Temporal?: TemporalApi }).Temporal
+
+    if (!temporal?.PlainDate) {
+      return
+    }
+
+    const locale = getPreferredLocale()
+    const today = temporal.Now.plainDateISO()
+
+    document.querySelectorAll("[data-experience-range]").forEach((node) => {
+      const startValue = node.getAttribute("data-start")
+      const endValue = node.getAttribute("data-end")
+      const isCurrent = node.getAttribute("data-current") === "true"
+
+      if (!startValue) {
+        return
+      }
+
+      const startDate = temporal.PlainDate.from(startValue)
+      const endDate = isCurrent || !endValue ? today : temporal.PlainDate.from(endValue)
+      const dateRange = `${formatDate(startDate, locale)} - ${
+        isCurrent ? getPresentLabel(locale) : formatDate(endDate, locale)
+      }`
+      const duration = formatDuration(startDate, endDate, locale)
+
+      node.textContent = `${dateRange} · ${duration}`
+    })
+  }
+
+  document.addEventListener("DOMContentLoaded", updateExperienceDates)
+  document.addEventListener("astro:after-swap", updateExperienceDates)
+  updateExperienceDates()
+</script>

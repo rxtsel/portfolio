@@ -1,0 +1,166 @@
+---
+import type { CollectionEntry } from "astro:content"
+import { renderSafeMarkdown } from "@/lib/markdown"
+import type { Locale } from "@/lib/i18n"
+import { getProjectTaxonomyItems } from "@/lib/taxonomy"
+
+type ExperienceEntry = CollectionEntry<"experience">
+type ExperienceItemData = ExperienceEntry["data"]["items"][number]
+type ExperienceJob = ExperienceItemData["jobs"][number]
+type StackEntry = CollectionEntry<"stack">
+type TagsEntry = CollectionEntry<"tags">
+
+interface Props {
+  item: ExperienceItemData
+  locale: Locale
+  stackEntry: StackEntry
+  tagsEntry: TagsEntry
+}
+
+const { item, locale, stackEntry, tagsEntry } = Astro.props
+
+const labels = {
+  en: {
+    present: "Present",
+    remote: "Remote",
+  },
+  es: {
+    present: "Actualidad",
+    remote: "Remoto",
+  },
+} satisfies Record<Locale, Record<string, string>>
+
+function getJobEndDate(job: ExperienceJob) {
+  return job.current ? "" : (job.endDate ?? "")
+}
+
+function getEarliestStartDate(jobs: ExperienceJob[]) {
+  return [...jobs.map((job) => job.startDate)].sort()[0] ?? ""
+}
+
+function getLatestEndDate(jobs: ExperienceJob[]) {
+  if (jobs.some((job) => job.current || !job.endDate)) {
+    return ""
+  }
+
+  return [...jobs.map((job) => job.endDate).filter(Boolean)].sort().at(-1) ?? ""
+}
+
+function formatDate(value: string) {
+  const [year, month, day] = value.split("-").map(Number)
+
+  return new Intl.DateTimeFormat(locale, {
+    month: "short",
+    year: "numeric",
+  }).format(new Date(year, month - 1, day))
+}
+
+function getDateRange(startDate: string, endDate: string) {
+  return `${formatDate(startDate)} - ${endDate ? formatDate(endDate) : labels[locale].present}`
+}
+
+const companyStartDate = getEarliestStartDate(item.jobs)
+const companyEndDate = getLatestEndDate(item.jobs)
+const companyIsCurrent = !companyEndDate
+const sortedJobs = [...item.jobs].sort((current, next) => {
+  const currentDate = current.current ? "9999-12-31" : current.endDate || current.startDate
+  const nextDate = next.current ? "9999-12-31" : next.endDate || next.startDate
+
+  return nextDate.localeCompare(currentDate)
+})
+---
+
+<li class="prose dark:prose-invert relative ms-4">
+  <span
+    aria-hidden="true"
+    class:list={[
+      "border-border absolute inset-s-[-1.35rem] mt-1.5 block size-3 border",
+      companyIsCurrent ? "bg-primary" : "bg-accent",
+    ]}></span>
+
+  {
+    item.companyUrl ? (
+      <h3 class="text-lg leading-snug font-semibold">
+        <a class="link" href={item.companyUrl} rel="noopener noreferrer" target="_blank">
+          {item.company}
+        </a>
+      </h3>
+    ) : (
+      <h3 class="text-lg leading-snug font-semibold">{item.company}</h3>
+    )
+  }
+
+  <time
+    class="text-muted-foreground block text-sm"
+    data-current={String(companyIsCurrent)}
+    data-end={companyEndDate}
+    data-experience-range
+    data-start={companyStartDate}
+    datetime={companyEndDate || companyStartDate}
+  >
+    {getDateRange(companyStartDate, companyEndDate)}
+  </time>
+
+  {
+    (item.location || item.remote) && (
+      <span class="text-muted-foreground block text-sm">
+        {item.location}
+        {item.location && item.remote ? " · " : ""}
+        {item.remote ? labels[locale].remote : ""}
+      </span>
+    )
+  }
+
+  <div class="mt-4 space-y-4">
+    {
+      sortedJobs.map((job) => {
+        const endDate = getJobEndDate(job)
+        const taxonomyItems = getProjectTaxonomyItems({
+          stackEntry,
+          stackSlugs: job.stack,
+          tagSlugs: job.tags,
+          tagsEntry,
+        })
+        const descriptionHtml = job.description ? renderSafeMarkdown(job.description) : ""
+
+        return (
+          <article class="space-y-2">
+            <header>
+              <h4 class="flex-1 font-medium text-balance">{job.role}</h4>
+              <time
+                class="text-muted-foreground block text-sm"
+                data-current={String(job.current)}
+                data-end={endDate}
+                data-experience-range
+                data-start={job.startDate}
+                datetime={endDate || job.startDate}
+              >
+                {getDateRange(job.startDate, endDate)}
+              </time>
+            </header>
+
+            {descriptionHtml && (
+              <>
+                {/* eslint-disable-next-line astro/no-set-html-directive */}
+                <footer
+                  class="prose prose-neutral dark:prose-invert prose-sm prose-p:text-muted-foreground prose-a:no-underline max-w-none"
+                  set:html={descriptionHtml}
+                />
+              </>
+            )}
+
+            {taxonomyItems.length > 0 && (
+              <ul class="flex flex-wrap gap-2">
+                {taxonomyItems.map((taxonomyItem) => (
+                  <li class="text-muted-foreground retina:border-[0.5px] inline-flex items-center rounded-none border bg-zinc-50 px-1.5 py-0.5 font-mono text-xs dark:bg-zinc-900">
+                    {taxonomyItem.name}
+                  </li>
+                ))}
+              </ul>
+            )}
+          </article>
+        )
+      })
+    }
+  </div>
+</li>

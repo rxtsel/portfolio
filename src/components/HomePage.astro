@@ -1,6 +1,7 @@
 ---
 import { getCollection, getEntry } from "astro:content"
 import BlogPostLink from "@/components/BlogPostLink.astro"
+import Experience from "@/components/Experience.astro"
 import MainLayout from "@/layouts/MainLayout.astro"
 import { getSelectedPublishedPosts } from "@/lib/blog"
 import ProjectsGrid from "@/components/ProjectsGrid.astro"
@@ -20,7 +21,7 @@ const labels = {
     experience: "Experience",
     latestPosts: "Latest posts",
     missingHome: "Missing English home content",
-    present: "Present",
+    missingExperience: "Missing English experience content",
     projects: "Projects",
     stack: "Stack",
     viewAllProjects: "View all",
@@ -29,7 +30,7 @@ const labels = {
     experience: "Experiencia",
     latestPosts: "Últimos posts",
     missingHome: "Missing Spanish home content",
-    present: "Actualidad",
+    missingExperience: "Missing Spanish experience content",
     projects: "Proyectos",
     stack: "Stack",
     viewAllProjects: "Ver todos",
@@ -37,9 +38,14 @@ const labels = {
 } satisfies Record<Locale, Record<string, string>>
 
 const home = await getEntry("home", locale)
+const experience = await getEntry("experience", locale)
 
 if (!home) {
   throw new Error(labels[locale].missingHome)
+}
+
+if (!experience) {
+  throw new Error(labels[locale].missingExperience)
 }
 
 const posts = await getCollection("blog")
@@ -99,25 +105,13 @@ const projectsHref = getLocalizedPath(locale, locale === "es" ? "proyectos" : "p
       )
     }
 
-    {
-      home.data.experience.length > 0 && (
-        <section>
-          <h2>{labels[locale].experience}</h2>
-          <div>
-            {home.data.experience.map((item) => (
-              <article>
-                <h3>{item.role}</h3>
-                <p>{item.company}</p>
-                <p>
-                  {item.startDate}
-                  {item.endDate ? ` - ${item.endDate}` : ` - ${labels[locale].present}`}
-                </p>
-              </article>
-            ))}
-          </div>
-        </section>
-      )
-    }
+    <Experience
+      items={experience.data.items}
+      label={labels[locale].experience}
+      locale={locale}
+      stackEntry={stack}
+      tagsEntry={tags}
+    />
 
     {
       latestPosts.length > 0 && (
