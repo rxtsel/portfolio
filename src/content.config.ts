@@ -165,8 +165,6 @@ const blog = defineCollection({
 })
 
 export const blogSchema = z.object({
-  coverImage: optionalStringSchema,
-  coverImageAlt: optionalStringSchema,
   description: z.string().min(1).max(250),
   categories: z.array(blogCategoryReferenceSchema).optional().default([]),
   locale: localeSchema,

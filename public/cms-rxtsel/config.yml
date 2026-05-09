@@ -321,8 +321,6 @@ collections:
           - "{{categories.*.name}}"
         search_fields:
           - "{{categories.*.name}}"
-      - { label: Cover image, name: coverImage, widget: image, required: false, i18n: duplicate }
-      - { label: Cover image alt, name: coverImageAlt, widget: string, required: false, i18n: true }
       - label: SEO
         name: seo
         widget: object
