@@ -16,6 +16,7 @@
     "@fontsource-variable/geist": "5.2.8",
     "@jdevalk/astro-seo-graph": "1.4.0",
     "@jdevalk/seo-graph-core": "0.6.1",
+    "@js-temporal/polyfill": "0.5.1",
     "@tailwindcss/vite": "4.2.4",
     "astro": "6.3.1",
     "micromark": "4.0.2",
