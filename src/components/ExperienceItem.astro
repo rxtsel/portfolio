@@ -3,6 +3,7 @@ import type { CollectionEntry } from "astro:content"
 import { renderSafeMarkdown } from "@/lib/markdown"
 import type { Locale } from "@/lib/i18n"
 import { getProjectTaxonomyItems } from "@/lib/taxonomy"
+import Tags from "./Tags.astro"
 
 type ExperienceEntry = CollectionEntry<"experience">
 type ExperienceItemData = ExperienceEntry["data"]["items"][number]
@@ -165,15 +166,7 @@ const sortedJobs = [...item.jobs].sort((current, next) => {
               </>
             ) : null}
 
-            {taxonomyItems.length > 0 && (
-              <ul class="my-0! flex list-none! flex-wrap gap-2 ps-0!">
-                {taxonomyItems.map((taxonomyItem) => (
-                  <li class="text-muted-foreground retina:border-[0.5px] my-0! inline-flex items-center rounded-none border bg-zinc-50 px-1.5! py-0.5! font-mono text-xs dark:bg-zinc-900">
-                    {taxonomyItem.name}
-                  </li>
-                ))}
-              </ul>
-            )}
+            {taxonomyItems.length > 0 && <Tags class="prose-li:m-0! p-0!" tags={taxonomyItems} />}
           </article>
         )
       })

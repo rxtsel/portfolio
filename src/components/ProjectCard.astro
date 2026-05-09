@@ -1,37 +1,28 @@
 ---
 import GitHubIcon from "@/assets/github.svg"
+import Tags from "./Tags.astro"
 
 type TaxonomyItem = {
   name: string
 }
 
 interface Props {
-  descriptionTransitionName?: string
   description: string
   href?: string
-  sourceTransitionName?: string
   sourceUrl?: string
-  tagsTransitionName?: string
   taxonomyItems: TaxonomyItem[]
   title: string
   titleTransitionName?: string
 }
 
-const {
-  description,
-  descriptionTransitionName,
-  href,
-  sourceTransitionName,
-  sourceUrl,
-  tagsTransitionName,
-  taxonomyItems,
-  title,
-  titleTransitionName,
-} = Astro.props
+const { description, href, sourceUrl, taxonomyItems, title, titleTransitionName } = Astro.props
 ---
 
 <article class="flex h-full flex-col gap-2 p-4">
-  <h3 class="flex items-center justify-between text-lg font-medium" transition:name={titleTransitionName}>
+  <h3
+    class="flex items-center justify-between text-lg font-medium"
+    transition:name={titleTransitionName as string}
+  >
     {
       href ? (
         <a class="link-underline" href={href} rel="noopener noreferrer" target="_blank">
@@ -51,29 +42,16 @@ const {
           rel="noopener noreferrer"
           target="_blank"
           title="View source on GitHub"
-          transition:name={sourceTransitionName}
         >
           <GitHubIcon class="text-foreground size-4.5 shrink-0" />
         </a>
       ) : (
-        <GitHubIcon
-          aria-label={`No source code available for ${title}`}
-          class="size-4.5 shrink-0 opacity-40"
-          transition:name={sourceTransitionName}
-        />
+        <GitHubIcon class="size-4.5 shrink-0 opacity-40" />
       )
     }
   </h3>
 
-  <p class="text-muted-foreground flex-1" transition:name={descriptionTransitionName}>{description}</p>
+  <p class="text-muted-foreground flex-1">{description}</p>
 
-  <ul class="flex flex-wrap gap-2" transition:name={tagsTransitionName}>
-    {
-      taxonomyItems.map((item) => (
-        <li class="text-muted-foreground retina:border-[0.5px] inline-flex items-center rounded-none border bg-zinc-50 px-1.5 py-0.5 font-mono text-xs dark:bg-zinc-900 [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-3.5">
-          {item.name}
-        </li>
-      ))
-    }
-  </ul>
+  <Tags tags={taxonomyItems} />
 </article>

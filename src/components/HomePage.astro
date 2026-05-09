@@ -74,6 +74,7 @@ const projects = getSelectedProjects(projectEntries, home.data.featuredProjects,
 }))
 const introHtml = renderSafeMarkdown(home.data.intro)
 const projectsHref = getLocalizedPath(locale, locale === "es" ? "proyectos" : "projects")
+const postsHref = getLocalizedPath(locale, "blog")
 ---
 
 <MainLayout
@@ -118,7 +119,7 @@ const projectsHref = getLocalizedPath(locale, locale === "es" ? "proyectos" : "p
         <section>
           <header class="flex items-center justify-between">
             <h2>{labels[locale].latestPosts}</h2>
-            <a class="link relative top-2 text-sm lg:top-3" href={projectsHref}>
+            <a class="link relative top-2 text-sm lg:top-3" href={postsHref}>
               {labels[locale].viewAllProjects}
             </a>
           </header>
