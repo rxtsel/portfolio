@@ -33,7 +33,7 @@ const labels = {
     missingExperience: "Missing Spanish experience content",
     projects: "Proyectos",
     stack: "Stack",
-    viewAllProjects: "Ver todos",
+    viewAllProjects: "Ver todo",
   },
 } satisfies Record<Locale, Record<string, string>>
 
@@ -116,7 +116,12 @@ const projectsHref = getLocalizedPath(locale, locale === "es" ? "proyectos" : "p
     {
       latestPosts.length > 0 && (
         <section>
-          <h2>{labels[locale].latestPosts}</h2>
+          <header class="flex items-center justify-between">
+            <h2>{labels[locale].latestPosts}</h2>
+            <a class="link relative top-2 text-sm lg:top-3" href={projectsHref}>
+              {labels[locale].viewAllProjects}
+            </a>
+          </header>
           <BlogPostList blogPost={latestPosts} />
         </section>
       )
