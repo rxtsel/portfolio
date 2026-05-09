@@ -5,7 +5,7 @@ published: true
 title: Cómo instalar Arch Linux usando la línea de comandos
 description: Explora la guía completa sobre cómo instalar Arch Linux de manera sencilla utilizando la interfaz de línea de comandos.
 publishDate: 2024-02-02
-updatedDate: 2026-05-08
+updatedDate: ""
 categories:
   - linux
   - tutorials

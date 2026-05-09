@@ -1,0 +1,67 @@
+---
+import { getCollection } from "astro:content"
+import type { BlogPost } from "@/lib/blog"
+import { getBlogPostTransitionName } from "@/lib/blog"
+import { getBlogPostPath } from "@/lib/i18n"
+import { getCategoryItemsByTranslationKey } from "@/lib/taxonomy"
+
+interface Props {
+  headingLevel?: "h2" | "h3"
+  post: BlogPost
+}
+
+const { headingLevel = "h2", post } = Astro.props
+const Heading = headingLevel
+
+const blogCategoriesEntries = await getCollection("blogCategories")
+const blogCategoriesEntry = blogCategoriesEntries.find((entry) => entry.data.locale === post.data.locale)
+
+if (!blogCategoriesEntry) {
+  throw new Error(`Missing blogCategories for locale: ${post.data.locale}`)
+}
+
+const taxonomyItems = getCategoryItemsByTranslationKey(blogCategoriesEntry, post.data.categories).map(
+  (category) => category.name,
+)
+
+const publishedDate = new Date(post.data.publishDate)
+const updatedDate = post.data.updatedDate ? new Date(post.data.updatedDate) : null
+const lastModifiedDate = updatedDate || publishedDate
+---
+
+<article class="grid gap-2">
+  <Heading class="text-lg font-medium text-pretty" transition:name={getBlogPostTransitionName(post, "title")}>
+    <a class="link-underline" href={getBlogPostPath(post)}>
+      {post.data.title}
+    </a>
+  </Heading>
+
+  <p class="text-muted-foreground" transition:name={getBlogPostTransitionName(post, "description")}>
+    {post.data.description}
+  </p>
+
+  <footer class="flex items-end justify-between">
+    <ul class="my-0! flex list-none! flex-wrap gap-2 ps-0!">
+      {
+        taxonomyItems.map((category) => (
+          <li class="text-muted-foreground retina:border-[0.5px] my-0! inline-flex items-center rounded-none border bg-zinc-50 px-1.5! py-0.5! font-mono text-xs dark:bg-zinc-900">
+            {category}
+          </li>
+        ))
+      }
+    </ul>
+    <time
+      class="text-muted-foreground flex shrink-0 items-center justify-end gap-1 text-xs"
+      datetime={publishedDate.toISOString()}
+      title="Last modified"
+    >
+      {
+        lastModifiedDate.toLocaleDateString(undefined, {
+          year: "numeric",
+          month: "short",
+          day: "numeric",
+        })
+      }
+    </time>
+  </footer>
+</article>

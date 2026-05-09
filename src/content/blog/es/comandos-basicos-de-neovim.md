@@ -5,7 +5,7 @@ published: true
 title: Comandos básicos de Neovim
 description: Aprende algunos comandos básicos para que uses en neovim.
 publishDate: 2024-01-09
-updatedDate: 2026-05-08
+updatedDate: ""
 categories:
   - tutorials
   - editors

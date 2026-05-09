@@ -1,6 +1,6 @@
 ---
 import { getCollection, getEntry } from "astro:content"
-import BlogPostLink from "@/components/BlogPostLink.astro"
+import BlogPostList from "@/components/BlogPostList.astro"
 import Experience from "@/components/Experience.astro"
 import MainLayout from "@/layouts/MainLayout.astro"
 import { getSelectedPublishedPosts } from "@/lib/blog"
@@ -117,13 +117,7 @@ const projectsHref = getLocalizedPath(locale, locale === "es" ? "proyectos" : "p
       latestPosts.length > 0 && (
         <section>
           <h2>{labels[locale].latestPosts}</h2>
-          <ul>
-            {latestPosts.map((post) => (
-              <li>
-                <BlogPostLink headingLevel="h3" post={post} />
-              </li>
-            ))}
-          </ul>
+          <BlogPostList blogPost={latestPosts} />
         </section>
       )
     }

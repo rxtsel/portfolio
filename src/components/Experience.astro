@@ -46,29 +46,7 @@ const sortedItems = [...items].sort((current, next) =>
 }
 
 <script>
-  /* eslint-disable no-unused-vars */
-  type TemporalPlainDate = {
-    day: number
-    month: number
-    until: (
-      other: TemporalPlainDate,
-      options: { largestUnit: "years" },
-    ) => {
-      months: number
-      years: number
-    }
-    year: number
-  }
-
-  type TemporalApi = {
-    Now: {
-      plainDateISO: () => TemporalPlainDate
-    }
-    PlainDate: {
-      from: (value: string) => TemporalPlainDate
-    }
-  }
-  /* eslint-enable no-unused-vars */
+  import { Temporal } from "@js-temporal/polyfill"
 
   function getPreferredLocale() {
     return navigator.languages?.[0] ?? navigator.language ?? "en"
@@ -94,14 +72,14 @@ const sortedItems = [...items].sort((current, next) =>
     return labels[isSpanish ? "es" : "en"][unit]
   }
 
-  function formatDate(plainDate: TemporalPlainDate, locale: string) {
+  function formatDate(plainDate: Temporal.PlainDate, locale: string) {
     return new Intl.DateTimeFormat(locale, {
       month: "short",
       year: "numeric",
     }).format(new Date(plainDate.year, plainDate.month - 1, plainDate.day))
   }
 
-  function formatDuration(startDate: TemporalPlainDate, endDate: TemporalPlainDate, locale: string) {
+  function formatDuration(startDate: Temporal.PlainDate, endDate: Temporal.PlainDate, locale: string) {
     const duration = startDate.until(endDate, { largestUnit: "years" })
     const parts = []
 
@@ -117,14 +95,8 @@ const sortedItems = [...items].sort((current, next) =>
   }
 
   function updateExperienceDates() {
-    const temporal = (globalThis as typeof globalThis & { Temporal?: TemporalApi }).Temporal
-
-    if (!temporal?.PlainDate) {
-      return
-    }
-
     const locale = getPreferredLocale()
-    const today = temporal.Now.plainDateISO()
+    const today = Temporal.Now.plainDateISO()
 
     document.querySelectorAll("[data-experience-range]").forEach((node) => {
       const startValue = node.getAttribute("data-start")
@@ -135,8 +107,8 @@ const sortedItems = [...items].sort((current, next) =>
         return
       }
 
-      const startDate = temporal.PlainDate.from(startValue)
-      const endDate = isCurrent || !endValue ? today : temporal.PlainDate.from(endValue)
+      const startDate = Temporal.PlainDate.from(startValue)
+      const endDate = isCurrent || !endValue ? today : Temporal.PlainDate.from(endValue)
       const dateRange = `${formatDate(startDate, locale)} - ${
         isCurrent ? getPresentLabel(locale) : formatDate(endDate, locale)
       }`

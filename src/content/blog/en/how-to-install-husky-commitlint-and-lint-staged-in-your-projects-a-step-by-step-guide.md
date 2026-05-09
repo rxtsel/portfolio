@@ -5,7 +5,7 @@ published: true
 title: "How to Install Husky, Commitlint, and lint-staged in Your Projects: A Step-by-Step Guide"
 description: Improve the quality of your commits with Husky, Commitlint, and lint-staged. Learn how to automate validations, standardize messages, and keep your Git history clean, consistent, and easy to collaborate on.
 publishDate: 2024-02-07
-updatedDate: 2024-02-07
+updatedDate: ""
 categories:
   - git
   - tools
@@ -74,7 +74,7 @@ This will create a `.husky` folder at the root of your project, containing Husky
 Now, you need to add the scripts you want to run before committing. For example, you can run the `lint` script from your `package.json` to execute the linter before each commit and automatically fix any errors. In this case, we'll use `eslint` as the linter.
 
 ```json
- "scripts": {
+"scripts": {
     "lint": "eslint \"*/**/*.{js,ts,jsx,tsx}\" --fix",
     "prepare": "husky install"
   }

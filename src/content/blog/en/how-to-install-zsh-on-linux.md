@@ -5,7 +5,7 @@ published: true
 title: How to Install Zsh on Linux
 description: Install and configure Zsh on your system with these simple steps. Optimize your terminal with oh-my-zsh for an enhanced command-line experience.
 publishDate: 2024-01-29
-updatedDate: 2026-05-08
+updatedDate: ""
 categories:
   - linux
   - terminals

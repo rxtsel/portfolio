@@ -1,9 +1,9 @@
 ---
 import { getCollection } from "astro:content"
-import BlogPostLink from "@/components/BlogPostLink.astro"
 import MainLayout from "@/layouts/MainLayout.astro"
 import { getPublishedBlogPosts } from "@/lib/blog"
 import { getDefaultLanguageLinks, type Locale } from "@/lib/i18n"
+import BlogPostList from "./BlogPostList.astro"
 
 interface Props {
   locale: Locale
@@ -31,18 +31,10 @@ const posts = getPublishedBlogPosts(await getCollection("blog"), locale)
   languageLinks={getDefaultLanguageLinks("blog")}
   title="Blog"
 >
-  <main class="prose dark:prose-invert prose-neutral mx-auto max-w-prose">
+  <main
+    class="prose dark:prose-invert prose-neutral prose-sm lg:prose-base prose-p:text-muted-foreground prose-a:no-underline mx-auto max-w-prose"
+  >
     <h1>Blog</h1>
-    <ul class="mt-8 list-none space-y-6 p-0">
-      {
-        posts
-          .sort((a, b) => new Date(b.data.publishDate).getTime() - new Date(a.data.publishDate).getTime())
-          .map((post) => (
-            <li>
-              <BlogPostLink post={post} />
-            </li>
-          ))
-      }
-    </ul>
+    <BlogPostList blogPost={posts} />
   </main>
 </MainLayout>

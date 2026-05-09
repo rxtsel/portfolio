@@ -5,7 +5,7 @@ published: true
 title: How to Sync Bluetooth in Dual Boot, Triple Boot (Windows, Linux, macOS)
 description: Guide to syncing Bluetooth devices in multi-boot environments, preventing connection issues when switching operating systems.
 publishDate: 2025-03-17
-updatedDate: 2025-03-17
+updatedDate: ""
 categories:
   - tutorials
   - windows
@@ -66,7 +66,7 @@ It’s as simple as having the same synchronization keys on all your operating s
 2. **Enable pairing mode**:
 
 ```sh
-  pairable on
+ pairable on
    discoverable on
 ```
 
@@ -130,7 +130,7 @@ _This will open the Registry Editor with administrator privileges._
 
 _Enter your admin password._
 
-        2. **Navigate to the Bluetooth folder:**
+                2. **Navigate to the Bluetooth folder:**
 
 ```sh
    cd /var/lib/bluetooth/<MAC_ADDRESS>/<DEVICE_MAC>
@@ -183,8 +183,7 @@ Reboot Linux, and the device should connect automatically.
      2. Find your device’s MAC address and double-click it.
      3. A new window will open with your device’s key.
      4. Select the values one by one (separated by spaces) and replace them with the values copied from macOS. They are the same length, so replace them in pairs.
-
-   - **For Linux**
+     - **For Linux**
      1. Follow the same Linux file editing steps.
 
 - **Note:** You no longer need to reverse the key. If macOS gives `98-54-2f-...`, write `98 54 2f...` in the Windows registry.

@@ -5,7 +5,7 @@ published: true
 title: "Cómo Instalar Husky, Commitlint y lint-staged en tus Proyectos: Una Guía Paso a Paso"
 description: Mejora la calidad de tus commits con Husky, Commitlint y lint-staged. Aprende a automatizar validaciones, estandarizar mensajes y mantener un historial limpio, consistente y fácil de colaborar.
 publishDate: 2024-02-07
-updatedDate: 2024-02-07
+updatedDate: ""
 categories:
   - git
   - tools

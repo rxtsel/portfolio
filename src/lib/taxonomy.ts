@@ -1,5 +1,7 @@
 import type { CollectionEntry } from "astro:content"
 
+type BlogCategoriesEntry = CollectionEntry<"blogCategories">
+type BlogCategoryItem = BlogCategoriesEntry["data"]["categories"][number]
 type StackEntry = CollectionEntry<"stack">
 type StackItem = StackEntry["data"]["stack"][number]
 type TagsEntry = CollectionEntry<"tags">
@@ -45,4 +47,23 @@ export function getProjectTaxonomyItems({
   tagsEntry: TagsEntry
 }) {
   return [...getStackItemsBySlug(stackEntry, stackSlugs), ...getTagItemsBySlug(tagsEntry, tagSlugs)]
+}
+
+export function getCategoryItemsByTranslationKey(
+  blogCategoriesEntry: BlogCategoriesEntry,
+  translationKeys: string[],
+) {
+  const categoriesByKey = new Map(
+    blogCategoriesEntry.data.categories.map((item) => [item.translationKey, item]),
+  )
+
+  return translationKeys.map((key): BlogCategoryItem => {
+    const item = categoriesByKey.get(key)
+
+    if (!item) {
+      throw new Error(`Missing blog category relation: ${key}`)
+    }
+
+    return item
+  })
 }

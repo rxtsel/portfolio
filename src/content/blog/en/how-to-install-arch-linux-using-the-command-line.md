@@ -5,7 +5,7 @@ published: true
 title: How to Install Arch Linux Using the Command Line
 description: Explore the comprehensive guide on installing Arch Linux effortlessly using the command line interface.
 publishDate: 2024-02-02
-updatedDate: 2026-05-08
+updatedDate: ""
 categories:
   - linux
   - tutorials

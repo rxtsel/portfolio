@@ -161,20 +161,21 @@ const optionalBlogSeoSchema = z.preprocess(
 
 const blog = defineCollection({
   loader: glob({ base: "./src/content/blog", pattern: "**/*.{md,mdx}" }),
-  schema: () =>
-    z.object({
-      coverImage: optionalStringSchema,
-      coverImageAlt: optionalStringSchema,
-      description: z.string().min(1).max(250),
-      categories: z.array(blogCategoryReferenceSchema).optional().default([]),
-      locale: localeSchema,
-      published: z.boolean().default(false),
-      publishDate: z.coerce.date(),
-      seo: optionalBlogSeoSchema,
-      title: z.string().min(1),
-      translationKey: z.string().min(1),
-      updatedDate: optionalDateSchema,
-    }),
+  schema: () => blogSchema,
+})
+
+export const blogSchema = z.object({
+  coverImage: optionalStringSchema,
+  coverImageAlt: optionalStringSchema,
+  description: z.string().min(1).max(250),
+  categories: z.array(blogCategoryReferenceSchema).optional().default([]),
+  locale: localeSchema,
+  published: z.boolean().default(false),
+  publishDate: z.coerce.date(),
+  seo: optionalBlogSeoSchema,
+  title: z.string().min(1),
+  translationKey: z.string().min(1),
+  updatedDate: optionalDateSchema,
 })
 
 export const collections = { blog, blogCategories, experience, home, projects, stack, tags }

@@ -33,15 +33,15 @@ const alternates = {
   title={post.data.title}
   titleTemplate="%s - Blog"
 >
-  <main class="prose prose-neutral dark:prose-invert mx-auto max-w-prose">
+  <main class="prose prose-neutral prose-sm lg:prose-base dark:prose-invert mx-auto max-w-prose">
     <article>
-      <h1 class="text-4xl font-semibold" transition:name={getBlogPostTransitionName(post, "title")}>
+      <h1 transition:name={getBlogPostTransitionName(post, "title")}>
         {post.data.title}
       </h1>
-      <p class="mt-3" transition:name={getBlogPostTransitionName(post, "description")}>
+      <p transition:name={getBlogPostTransitionName(post, "description")}>
         {post.data.description}
       </p>
-      <div class="mt-10">
+      <div>
         <Content />
       </div>
     </article>
