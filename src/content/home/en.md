@@ -41,7 +41,7 @@ latestPosts:
   - how-to-install-husky-commitlint-and-lint-staged-in-your-projects-a-step-by-step-guide
   - how-to-install-arch-linux-using-the-command-line
 seo:
-  title: Cristhian Melo - Software Engineer
+  title: Cristhian Melo - Software Developer
   description: Software Engineer with 4+ years of experience building accessible, high-performance web experiences with clean, maintainable code.
   keywords: ""
 ---
