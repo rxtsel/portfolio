@@ -1,0 +1,101 @@
+---
+import type { Locale } from "@/lib/i18n"
+import Arrow from "@/assets/arrow.svg"
+
+interface Props {
+  locale: Locale
+}
+
+const { locale } = Astro.props
+const label = locale === "es" ? "Volver arriba" : "Scroll to top"
+---
+
+<button
+  aria-label={label}
+  class="bg-background text-muted-foreground hover:text-foreground focus-visible:border-ring focus-visible:ring-ring/50 pointer-events-none fixed right-4 bottom-4 z-50 flex size-8 translate-y-2 items-center justify-center border opacity-0 backdrop-blur transition-[opacity,transform,color] duration-200 outline-none focus-visible:ring-3 data-visible:pointer-events-auto data-visible:translate-y-0 data-visible:opacity-100 md:right-6 md:bottom-6"
+  data-scroll-to-top
+  onclick="haptic()"
+  tabindex="-1"
+  type="button"
+>
+  <Arrow aria-hidden="true" class="pointer-events-none size-4" />
+</button>
+
+<script>
+  type ScrollToTopState = {
+    isTicking: boolean
+    isVisible: boolean
+    mounted: boolean
+  }
+
+  const scrollWindow = window as Window & { scrollToTopControl?: ScrollToTopState }
+  const threshold = 1000
+  const throttleDelay = 100
+  const state = (scrollWindow.scrollToTopControl ??= {
+    isTicking: false,
+    isVisible: false,
+    mounted: false,
+  })
+
+  function getScrollButton() {
+    return document.querySelector<HTMLButtonElement>("[data-scroll-to-top]")
+  }
+
+  function setButtonVisibility(button: HTMLButtonElement, visible: boolean) {
+    if (visible === state.isVisible) {
+      return
+    }
+
+    state.isVisible = visible
+    button.toggleAttribute("data-visible", visible)
+    button.tabIndex = visible ? 0 : -1
+  }
+
+  function updateScrollButton() {
+    const button = getScrollButton()
+
+    if (!button) {
+      return
+    }
+
+    setButtonVisibility(button, window.scrollY >= threshold)
+  }
+
+  function handleScroll() {
+    if (state.isTicking) {
+      return
+    }
+
+    state.isTicking = true
+    window.setTimeout(() => {
+      updateScrollButton()
+      state.isTicking = false
+    }, throttleDelay)
+  }
+
+  function scrollToTop() {
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
+
+    window.scrollTo({
+      top: 0,
+      behavior: prefersReducedMotion ? "auto" : "smooth",
+    })
+  }
+
+  if (!state.mounted) {
+    state.mounted = true
+    document.addEventListener("scroll", handleScroll, { passive: true })
+    document.addEventListener("click", (event) => {
+      const button = event.target instanceof HTMLElement ? event.target.closest("[data-scroll-to-top]") : null
+
+      if (!button) {
+        return
+      }
+
+      scrollToTop()
+    })
+    document.addEventListener("astro:page-load", updateScrollButton)
+  }
+
+  updateScrollButton()
+</script>

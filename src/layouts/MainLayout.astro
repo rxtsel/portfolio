@@ -8,6 +8,7 @@ import "@fontsource-variable/geist/wght.css"
 
 import Header from "@/components/Header.astro"
 import Footer from "@/components/Footer.astro"
+import ScrollToTop from "@/components/ScrollToTop.astro"
 import { getLocaleLanguageTag, type LanguageLink } from "@/lib/i18n"
 
 interface Props extends LayoutSeoProps {
@@ -33,6 +34,7 @@ const seo = buildLayoutSeoProps({ ...seoProps, lang }, Astro.url)
     <Header languageLinks={languageLinks} locale={lang} pathname={Astro.url.pathname} />
     <slot />
     <Footer />
+    <ScrollToTop locale={lang} />
   </body>
 </html>
 
