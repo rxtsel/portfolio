@@ -28,7 +28,7 @@ const seo = buildLayoutSeoProps({ ...seoProps, lang }, Astro.url)
     <ClientRouter />
   </head>
   <body
-    class="mx-auto grid min-h-screen max-w-prose grid-rows-[auto_1fr_auto] gap-y-12 overflow-x-hidden px-4 py-4 font-sans md:px-0"
+    class="mx-auto grid min-h-screen w-full max-w-prose grid-rows-[auto_1fr_auto] gap-y-12 overflow-x-hidden px-4 py-4 font-sans md:px-0"
   >
     <Header languageLinks={languageLinks} locale={lang} pathname={Astro.url.pathname} />
     <slot />

@@ -86,7 +86,7 @@ const graph = buildBlogPostGraph({
   titleTemplate="%s - Blog"
 >
   <main
-    class="prose prose-neutral prose-sm lg:prose-base dark:prose-invert prose-code:bg-transparent mx-auto max-w-prose"
+    class="prose prose-neutral prose-sm lg:prose-base dark:prose-invert prose-a:wrap-break-word prose-code:wrap-break-word prose-pre:max-w-full prose-pre:overflow-x-auto prose-table:block prose-table:max-w-full prose-table:overflow-x-auto prose-headings:text-pretty w-full max-w-full min-w-0 [&_.expressive-code]:max-w-full [&_.expressive-code]:overflow-x-auto [&_figure]:max-w-full"
   >
     <article>
       <header>
@@ -133,3 +133,16 @@ const graph = buildBlogPostGraph({
     </article>
   </main>
 </MainLayout>
+
+<style is:global>
+  .expressive-code .copy button {
+    border-radius: 0 !important;
+  }
+
+  @media (width <= 768px) {
+    .expressive-code .copy button {
+      width: 1.7rem !important;
+      height: 1.7rem !important;
+    }
+  }
+</style>
