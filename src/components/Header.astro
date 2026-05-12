@@ -26,6 +26,8 @@ const normalizedPathname = pathname.replace(/\/$/, "") || "/"
 const isBlogActive = normalizedPathname === blogHref
 const navLinkClass =
   "text-muted-foreground hover:text-foreground data-active:text-foreground inline-flex h-8 items-center px-2 text-sm font-medium transition-colors"
+const languageLinkClass =
+  "text-muted-foreground hover:text-foreground data-active:text-foreground inline-flex h-8 items-center text-sm font-medium transition-colors"
 const labels = {
   en: {
     language: "Language selector",
@@ -66,33 +68,38 @@ const labels = {
 
     <Separator />
 
-    <nav aria-label={labels[locale].language} class="flex">
+    <nav aria-label={labels[locale].language} class="flex items-center gap-x-1 px-2">
       {
-        links.map((link) =>
-          link.locale === locale ? (
-            <span
-              aria-current="true"
-              aria-label={getLocaleLabel(link.locale)}
-              class:list={navLinkClass}
-              data-active
-              data-hover-ghost-item
-              lang={getLocaleLanguageTag(link.locale)}
-            >
-              {link.locale.toUpperCase()}
-            </span>
-          ) : (
-            <a
-              aria-label={getLocaleLabel(link.locale)}
-              class:list={navLinkClass}
-              data-hover-ghost-item
-              href={link.href}
-              hreflang={getLocaleLanguageTag(link.locale)}
-              lang={getLocaleLanguageTag(link.locale)}
-            >
-              {link.locale.toUpperCase()}
-            </a>
-          ),
-        )
+        links.map((link, index) => (
+          <>
+            {index > 0 && (
+              <span aria-hidden="true" class="text-muted-foreground/40 text-sm">
+                /
+              </span>
+            )}
+            {link.locale === locale ? (
+              <span
+                aria-current="true"
+                aria-label={getLocaleLabel(link.locale)}
+                class:list={languageLinkClass}
+                data-active
+                lang={getLocaleLanguageTag(link.locale)}
+              >
+                {link.locale.toUpperCase()}
+              </span>
+            ) : (
+              <a
+                aria-label={getLocaleLabel(link.locale)}
+                class:list={languageLinkClass}
+                href={link.href}
+                hreflang={getLocaleLanguageTag(link.locale)}
+                lang={getLocaleLanguageTag(link.locale)}
+              >
+                {link.locale.toUpperCase()}
+              </a>
+            )}
+          </>
+        ))
       }
     </nav>
 
