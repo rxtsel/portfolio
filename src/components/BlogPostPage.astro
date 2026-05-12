@@ -1,6 +1,6 @@
 ---
 import { Code } from "astro:components"
-import { render } from "astro:content"
+import { getCollection, render } from "astro:content"
 import MainLayout from "@/layouts/MainLayout.astro"
 import {
   getBlogPostAlternateHref,
@@ -8,7 +8,9 @@ import {
   getBlogPostTransitionName,
   type BlogPost,
 } from "@/lib/blog"
-import { getAlternateBlogPosts } from "@/lib/i18n"
+import { getAlternateBlogPosts, getLocaleLanguageTag } from "@/lib/i18n"
+import { buildBlogPostGraph } from "@/lib/seo"
+import { getCategoryItemsByTranslationKey } from "@/lib/taxonomy"
 
 interface Props {
   post: BlogPost
@@ -17,21 +19,69 @@ interface Props {
 
 const { post, posts } = Astro.props
 const { Content } = await render(post)
+const canonical = new URL(getBlogPostAlternateHref(post), Astro.site).toString()
+const ogImage = new URL(`${getBlogPostAlternateHref(post)}/og.png`, Astro.site).toString()
+const alternatePosts = getAlternateBlogPosts(posts, post)
+const defaultAlternatePost = alternatePosts.find((entry) => entry.data.locale === "en") ?? post
 const alternates = {
   defaultLocale: "en",
-  entries: getAlternateBlogPosts(posts, post).map((entry) => ({
-    href: new URL(getBlogPostAlternateHref(entry), Astro.site).toString(),
-    hreflang: entry.data.locale,
-  })),
+  entries: [
+    ...alternatePosts.map((entry) => ({
+      href: new URL(getBlogPostAlternateHref(entry), Astro.site).toString(),
+      hreflang: getLocaleLanguageTag(entry.data.locale),
+    })),
+    {
+      href: new URL(getBlogPostAlternateHref(defaultAlternatePost), Astro.site).toString(),
+      hreflang: "x-default",
+    },
+  ],
 }
+const labels = {
+  en: {
+    categories: "Post categories",
+    content: "Article content",
+    published: "Published",
+    updated: "Updated",
+  },
+  es: {
+    categories: "Categorías del artículo",
+    content: "Contenido del artículo",
+    published: "Publicado",
+    updated: "Actualizado",
+  },
+}
+const blogCategoriesEntries = await getCollection("blogCategories")
+const blogCategoriesEntry = blogCategoriesEntries.find((entry) => entry.data.locale === post.data.locale)
+
+if (!blogCategoriesEntry) {
+  throw new Error(`Missing blogCategories for locale: ${post.data.locale}`)
+}
+
+const taxonomyItems = getCategoryItemsByTranslationKey(blogCategoriesEntry, post.data.categories).map(
+  (category) => category.name,
+)
+const publishedDate = new Date(post.data.publishDate)
+const updatedDate = post.data.updatedDate ? new Date(post.data.updatedDate) : undefined
+const lastModifiedDate = updatedDate ?? publishedDate
+const graph = buildBlogPostGraph({
+  description: post.data.description,
+  image: ogImage,
+  lang: post.data.locale,
+  publishedDate,
+  title: post.data.title,
+  ...(updatedDate ? { updatedDate } : {}),
+  url: canonical,
+})
 ---
 
 <MainLayout
   alternates={alternates}
+  canonical={canonical}
   description={post.data.description}
+  graph={graph}
   lang={post.data.locale}
   languageLinks={getBlogPostLanguageLinks(posts, post)}
-  ogImage={new URL(`${getBlogPostAlternateHref(post)}/og.png`, Astro.site).toString()}
+  ogImage={ogImage}
   title={post.data.title}
   titleTemplate="%s - Blog"
 >
@@ -39,17 +89,47 @@ const alternates = {
     class="prose prose-neutral prose-sm lg:prose-base dark:prose-invert prose-code:bg-transparent mx-auto max-w-prose"
   >
     <article>
-      <h1 transition:name={getBlogPostTransitionName(post, "title")}>
-        {post.data.title}
-      </h1>
+      <header>
+        <h1 transition:name={getBlogPostTransitionName(post, "title")}>
+          {post.data.title}
+        </h1>
 
-      <p transition:name={getBlogPostTransitionName(post, "description")}>
-        {post.data.description}
-      </p>
+        <p transition:name={getBlogPostTransitionName(post, "description")}>
+          {post.data.description}
+        </p>
 
-      <div>
+        <div class="not-prose text-muted-foreground flex flex-wrap items-center gap-x-3 gap-y-2 text-sm">
+          <time datetime={publishedDate.toISOString()}>
+            {labels[post.data.locale].published}
+            {" "}
+            {publishedDate.toLocaleDateString(getLocaleLanguageTag(post.data.locale))}
+          </time>
+          <time datetime={lastModifiedDate.toISOString()}>
+            {labels[post.data.locale].updated}
+            {" "}
+            {lastModifiedDate.toLocaleDateString(getLocaleLanguageTag(post.data.locale))}
+          </time>
+        </div>
+
+        {
+          taxonomyItems.length > 0 && (
+            <ul
+              aria-label={labels[post.data.locale].categories}
+              class="not-prose my-6 flex list-none flex-wrap gap-2 ps-0"
+            >
+              {taxonomyItems.map((category) => (
+                <li class="text-muted-foreground retina:border-[0.5px] inline-flex items-center rounded-none border bg-zinc-50 px-1.5 py-0.5 font-mono text-xs dark:bg-zinc-900">
+                  {category}
+                </li>
+              ))}
+            </ul>
+          )
+        }
+      </header>
+
+      <section aria-label={labels[post.data.locale].content}>
         <Content components={{ pre: Code }} />
-      </div>
+      </section>
     </article>
   </main>
 </MainLayout>

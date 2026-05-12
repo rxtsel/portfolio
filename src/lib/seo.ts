@@ -1,7 +1,7 @@
 import type { SeoProps } from "@jdevalk/astro-seo-graph"
 import type { GraphEntity } from "@jdevalk/seo-graph-core"
 import { assembleGraph, buildPiece, buildWebPage, buildWebSite, makeIds } from "@jdevalk/seo-graph-core"
-import { getLocalizedPath, type Locale } from "@/lib/i18n"
+import { getLocaleLanguageTag, getLocaleOpenGraphTag, getLocalizedPath, type Locale } from "@/lib/i18n"
 
 const SITE_URL = "https://rxtsel.dev"
 const SITE_NAME = "Cristhian Melo"
@@ -26,8 +26,15 @@ export type LayoutSeoProps = Omit<SeoProps, "title"> & {
 
 type GraphInput = {
   description: string
+  lang: Locale
   title: string
   url: string
+}
+
+type BlogPostGraphInput = GraphInput & {
+  image: string
+  publishedDate: Date
+  updatedDate?: Date
 }
 
 const defaultExtraLinks = [
@@ -46,8 +53,9 @@ const defaultExtraMeta = [
   { content: "/browserconfig.xml", name: "msapplication-config" },
 ] satisfies NonNullable<SeoProps["extraMeta"]>
 
-function buildDefaultGraph({ description, title, url }: GraphInput) {
+function buildGraphBase({ description, lang, title, url }: GraphInput) {
   const ids = makeIds({ siteUrl: SITE_URL })
+  const inLanguage = getLocaleLanguageTag(lang)
 
   const pieces = [
     buildPiece({
@@ -59,7 +67,7 @@ function buildDefaultGraph({ description, title, url }: GraphInput) {
     buildWebSite(
       {
         description: DEFAULT_DESCRIPTION,
-        inLanguage: "en-US",
+        inLanguage: getLocaleLanguageTag("en"),
         name: SITE_NAME,
         publisher: { "@id": ids.person },
         url: SITE_URL,
@@ -69,7 +77,7 @@ function buildDefaultGraph({ description, title, url }: GraphInput) {
     buildWebPage(
       {
         description,
-        inLanguage: "en-US",
+        inLanguage,
         isPartOf: { "@id": ids.website },
         name: title,
         url,
@@ -78,7 +86,35 @@ function buildDefaultGraph({ description, title, url }: GraphInput) {
     ) as GraphEntity,
   ]
 
-  return assembleGraph(pieces)
+  return { ids, inLanguage, pieces }
+}
+
+function buildDefaultGraph(input: GraphInput) {
+  return assembleGraph(buildGraphBase(input).pieces)
+}
+
+export function buildBlogPostGraph(input: BlogPostGraphInput) {
+  const { ids, inLanguage, pieces } = buildGraphBase(input)
+  const articleId = `${input.url}#article`
+
+  return assembleGraph([
+    ...pieces,
+    buildPiece({
+      "@id": articleId,
+      "@type": "BlogPosting",
+      author: { "@id": ids.person },
+      dateModified: (input.updatedDate ?? input.publishedDate).toISOString(),
+      datePublished: input.publishedDate.toISOString(),
+      description: input.description,
+      headline: input.title,
+      image: input.image,
+      inLanguage,
+      isPartOf: { "@id": ids.website },
+      mainEntityOfPage: { "@id": input.url },
+      publisher: { "@id": ids.person },
+      url: input.url,
+    }) as GraphEntity,
+  ])
 }
 
 export function buildLayoutSeoProps(props: LayoutSeoProps, pageUrl: URL): SeoProps {
@@ -87,17 +123,21 @@ export function buildLayoutSeoProps(props: LayoutSeoProps, pageUrl: URL): SeoPro
   const canonical = seoProps.canonical?.toString() ?? new URL(pageUrl.pathname, SITE_URL).toString()
   const alternates =
     seoProps.alternates ??
-    (alternatesPath
+    (alternatesPath !== undefined
       ? {
           defaultLocale: "en",
           entries: [
             {
               href: new URL(getLocalizedPath("en", alternatesPath), SITE_URL).toString(),
-              hreflang: "en",
+              hreflang: getLocaleLanguageTag("en"),
             },
             {
               href: new URL(getLocalizedPath("es", alternatesPath), SITE_URL).toString(),
-              hreflang: "es",
+              hreflang: getLocaleLanguageTag("es"),
+            },
+            {
+              href: new URL(getLocalizedPath("en", alternatesPath), SITE_URL).toString(),
+              hreflang: "x-default",
             },
           ],
         }
@@ -106,6 +146,7 @@ export function buildLayoutSeoProps(props: LayoutSeoProps, pageUrl: URL): SeoPro
     seoProps.graph === undefined
       ? buildDefaultGraph({
           description,
+          lang,
           title: seoProps.title,
           url: canonical,
         })
@@ -118,7 +159,7 @@ export function buildLayoutSeoProps(props: LayoutSeoProps, pageUrl: URL): SeoPro
     extraLinks: [...defaultExtraLinks, ...(seoProps.extraLinks ?? [])],
     extraMeta: [...defaultExtraMeta, ...(seoProps.extraMeta ?? [])],
     graph,
-    locale: seoProps.locale ?? (lang === "es" ? "es_CO" : siteMetadata.locale),
+    locale: seoProps.locale ?? getLocaleOpenGraphTag(lang),
     ogImage: seoProps.ogImage ?? siteMetadata.ogImage,
     ogImageAlt: seoProps.ogImageAlt ?? `${siteMetadata.name} portfolio preview`,
     ogImageHeight: seoProps.ogImageHeight ?? 630,

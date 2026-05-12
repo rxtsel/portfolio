@@ -8,6 +8,7 @@ type TaxonomyItem = {
 
 interface Props {
   description: string
+  headingLevel?: "h2" | "h3"
   href?: string
   sourceUrl?: string
   taxonomyItems: TaxonomyItem[]
@@ -15,11 +16,20 @@ interface Props {
   titleTransitionName?: string
 }
 
-const { description, href, sourceUrl, taxonomyItems, title, titleTransitionName } = Astro.props
+const {
+  description,
+  headingLevel = "h3",
+  href,
+  sourceUrl,
+  taxonomyItems,
+  title,
+  titleTransitionName,
+} = Astro.props
+const Heading = headingLevel
 ---
 
 <article class="flex h-full flex-col gap-2 p-4">
-  <h3
+  <Heading
     class="flex items-center justify-between text-lg font-medium"
     transition:name={titleTransitionName as string}
   >
@@ -49,7 +59,7 @@ const { description, href, sourceUrl, taxonomyItems, title, titleTransitionName 
         <GitHubIcon class="size-4.5 shrink-0 opacity-40" />
       )
     }
-  </h3>
+  </Heading>
 
   <p class="text-muted-foreground flex-1">{description}</p>
 

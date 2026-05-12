@@ -8,7 +8,7 @@ import "@fontsource-variable/geist/wght.css"
 
 import Header from "@/components/Header.astro"
 import Footer from "@/components/Footer.astro"
-import type { LanguageLink } from "@/lib/i18n"
+import { getLocaleLanguageTag, type LanguageLink } from "@/lib/i18n"
 
 interface Props extends LayoutSeoProps {
   languageLinks?: LanguageLink[]
@@ -18,7 +18,7 @@ const { lang = "en", languageLinks, ...seoProps } = Astro.props
 const seo = buildLayoutSeoProps({ ...seoProps, lang }, Astro.url)
 ---
 
-<html lang={lang}>
+<html lang={getLocaleLanguageTag(lang)}>
   <head>
     <meta charset="utf-8" />
     <meta content="width=device-width" name="viewport" />

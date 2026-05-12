@@ -73,7 +73,6 @@ const sortedJobs = [...item.jobs].sort((current, next) => {
 
 <li class="relative my-0! ms-[20.5px] grid gap-4 ps-0!">
   <header>
-    <!-- Indicator -->
     <span
       class="border-border bg-primary absolute inset-s-[-1.35rem] mt-1.5 block size-3 border lg:mt-2.5"
       role="none"
@@ -85,7 +84,6 @@ const sortedJobs = [...item.jobs].sort((current, next) => {
       }
     </span>
 
-    <!-- Company name -->
     {
       item.companyUrl ? (
         <h3 class="my-0! text-lg leading-snug font-semibold">
@@ -120,8 +118,7 @@ const sortedJobs = [...item.jobs].sort((current, next) => {
     }
   </header>
 
-  <!-- Jobs at the company -->
-  <footer class="space-y-4">
+  <div class="space-y-4">
     {
       sortedJobs.map((job) => {
         const endDate = getJobEndDate(job)
@@ -135,7 +132,6 @@ const sortedJobs = [...item.jobs].sort((current, next) => {
 
         return (
           <article class="relative ml-[21.5px] grid gap-2">
-            {/* Sub indicator */}
             <span
               class="bg-border absolute inset-s-[-1.35rem] mt-[3px] block size-3 border lg:mt-[5.5px]"
               role="none"
@@ -158,7 +154,7 @@ const sortedJobs = [...item.jobs].sort((current, next) => {
             {descriptionHtml ? (
               <>
                 {/* eslint-disable astro/no-set-html-directive */}
-                <footer
+                <div
                   class="prose prose-sm prose-neutral dark:prose-invert lg:prose-sm prose-p:text-muted-foreground prose-li:text-muted-foreground prose-ul:list-disc!"
                   set:html={descriptionHtml}
                 />
@@ -171,5 +167,5 @@ const sortedJobs = [...item.jobs].sort((current, next) => {
         )
       })
     }
-  </footer>
+  </div>
 </li>

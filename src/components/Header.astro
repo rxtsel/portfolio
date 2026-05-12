@@ -2,6 +2,7 @@
 import Logo from "@/assets/logo.svg"
 import {
   getDefaultLanguageLinks,
+  getLocaleLanguageTag,
   getLocaleLabel,
   getLocalizedPath,
   type LanguageLink,
@@ -24,13 +25,23 @@ const blogHref = getLocalizedPath(locale, "blog")
 const normalizedPathname = pathname.replace(/\/$/, "") || "/"
 const isBlogActive = normalizedPathname === blogHref
 const navLinkClass =
-  "text-muted-foreground hover:text-foreground cursor-pointer data-active:text-foreground inline-flex h-8 items-center px-2 text-sm font-medium transition-colors"
+  "text-muted-foreground hover:text-foreground data-active:text-foreground inline-flex h-8 items-center px-2 text-sm font-medium transition-colors"
+const labels = {
+  en: {
+    language: "Language selector",
+    primary: "Primary",
+  },
+  es: {
+    language: "Selector de idioma",
+    primary: "Principal",
+  },
+} satisfies Record<Locale, Record<string, string>>
 ---
 
 <header class="flex items-center justify-between">
   {
     pathname === "/" || pathname === "/es" ? (
-      <Logo aria-label="Rxtsel logo" class="cursor-pointer" height={30} width={29} />
+      <Logo aria-label="Rxtsel logo" height={30} width={29} />
     ) : (
       <a class="logo" href={logoHref}>
         <Logo aria-label="Rxtsel logo" height={30} width={29} />
@@ -38,22 +49,24 @@ const navLinkClass =
     )
   }
 
-  <nav class="flex items-center">
-    {
-      isBlogActive ? (
-        <span aria-current="page" class:list={navLinkClass} data-active data-hover-ghost-item>
-          Blog
-        </span>
-      ) : (
-        <a class:list={navLinkClass} data-hover-ghost-item href={blogHref}>
-          Blog
-        </a>
-      )
-    }
+  <div class="flex items-center">
+    <nav aria-label={labels[locale].primary} class="flex items-center">
+      {
+        isBlogActive ? (
+          <span aria-current="page" class:list={navLinkClass} data-active data-hover-ghost-item>
+            Blog
+          </span>
+        ) : (
+          <a class:list={navLinkClass} data-hover-ghost-item href={blogHref}>
+            Blog
+          </a>
+        )
+      }
+    </nav>
 
     <Separator />
 
-    <div aria-label="Language selector" class="flex">
+    <nav aria-label={labels[locale].language} class="flex">
       {
         links.map((link) =>
           link.locale === locale ? (
@@ -63,7 +76,7 @@ const navLinkClass =
               class:list={navLinkClass}
               data-active
               data-hover-ghost-item
-              lang={link.locale}
+              lang={getLocaleLanguageTag(link.locale)}
             >
               {link.locale.toUpperCase()}
             </span>
@@ -73,17 +86,18 @@ const navLinkClass =
               class:list={navLinkClass}
               data-hover-ghost-item
               href={link.href}
-              lang={link.locale}
+              hreflang={getLocaleLanguageTag(link.locale)}
+              lang={getLocaleLanguageTag(link.locale)}
             >
               {link.locale.toUpperCase()}
             </a>
           ),
         )
       }
-    </div>
+    </nav>
 
     <Separator class="mr-3.5" />
 
     <ThemeSwitcher />
-  </nav>
+  </div>
 </header>

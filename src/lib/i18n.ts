@@ -15,12 +15,30 @@ const localeLabels = {
   es: "Español",
 } satisfies Record<Locale, string>
 
+const localeLanguageTags = {
+  en: "en-US",
+  es: "es-CO",
+} satisfies Record<Locale, string>
+
+const localeOpenGraphTags = {
+  en: "en_US",
+  es: "es_CO",
+} satisfies Record<Locale, string>
+
 export function isLocale(value: string | undefined): value is Locale {
   return locales.includes(value as Locale)
 }
 
 export function getLocaleLabel(locale: Locale) {
   return localeLabels[locale]
+}
+
+export function getLocaleLanguageTag(locale: Locale) {
+  return localeLanguageTags[locale]
+}
+
+export function getLocaleOpenGraphTag(locale: Locale) {
+  return localeOpenGraphTags[locale]
 }
 
 export function getContentLocale(id: string): Locale {

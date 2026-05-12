@@ -2,7 +2,7 @@
 import { getCollection } from "astro:content"
 import type { BlogPost } from "@/lib/blog"
 import { getBlogPostTransitionName } from "@/lib/blog"
-import { getBlogPostPath } from "@/lib/i18n"
+import { getBlogPostPath, getLocaleLanguageTag } from "@/lib/i18n"
 import { getCategoryItemsByTranslationKey } from "@/lib/taxonomy"
 
 interface Props {
@@ -27,6 +27,7 @@ const taxonomyItems = getCategoryItemsByTranslationKey(blogCategoriesEntry, post
 const publishedDate = new Date(post.data.publishDate)
 const updatedDate = post.data.updatedDate ? new Date(post.data.updatedDate) : null
 const lastModifiedDate = updatedDate || publishedDate
+const dateTitle = post.data.locale === "es" ? "Última modificación" : "Last modified"
 ---
 
 <article class="grid gap-2">
@@ -41,7 +42,10 @@ const lastModifiedDate = updatedDate || publishedDate
   </p>
 
   <footer class="flex items-end justify-between">
-    <ul class="my-0! flex list-none! flex-wrap gap-2 ps-0!">
+    <ul
+      aria-label={post.data.locale === "es" ? "Categorías" : "Categories"}
+      class="my-0! flex list-none! flex-wrap gap-2 ps-0!"
+    >
       {
         taxonomyItems.map((category) => (
           <li class="text-muted-foreground retina:border-[0.5px] my-0! inline-flex items-center rounded-none border bg-zinc-50 px-1.5! py-0.5! font-mono text-xs dark:bg-zinc-900">
@@ -52,11 +56,11 @@ const lastModifiedDate = updatedDate || publishedDate
     </ul>
     <time
       class="text-muted-foreground flex shrink-0 items-center justify-end gap-1 text-xs"
-      datetime={publishedDate.toISOString()}
-      title="Last modified"
+      datetime={lastModifiedDate.toISOString()}
+      title={dateTitle}
     >
       {
-        lastModifiedDate.toLocaleDateString(undefined, {
+        lastModifiedDate.toLocaleDateString(getLocaleLanguageTag(post.data.locale), {
           year: "numeric",
           month: "short",
           day: "numeric",

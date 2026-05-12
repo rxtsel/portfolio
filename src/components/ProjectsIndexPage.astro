@@ -2,7 +2,7 @@
 import { getCollection } from "astro:content"
 import MainLayout from "@/layouts/MainLayout.astro"
 import ProjectsGrid from "@/components/ProjectsGrid.astro"
-import type { LanguageLink, Locale } from "@/lib/i18n"
+import { getLocaleLanguageTag, type LanguageLink, type Locale } from "@/lib/i18n"
 import { getLocalizedProjects } from "@/lib/projects"
 import { getProjectTaxonomyItems } from "@/lib/taxonomy"
 
@@ -32,11 +32,15 @@ const alternates = {
   entries: [
     {
       href: "https://rxtsel.dev/projects",
-      hreflang: "en",
+      hreflang: getLocaleLanguageTag("en"),
     },
     {
       href: "https://rxtsel.dev/es/proyectos",
-      hreflang: "es",
+      hreflang: getLocaleLanguageTag("es"),
+    },
+    {
+      href: "https://rxtsel.dev/projects",
+      hreflang: "x-default",
     },
   ],
 }
@@ -74,7 +78,7 @@ const projects = getLocalizedProjects(await getCollection("projects"), locale).m
       {metadata[locale].title}
     </h1>
     <div class="mt-8">
-      <ProjectsGrid projects={projects} />
+      <ProjectsGrid headingLevel="h2" projects={projects} />
     </div>
   </main>
 </MainLayout>

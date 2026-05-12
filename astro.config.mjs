@@ -18,7 +18,7 @@ const seoGraphIntegration = /** @type {import("astro").AstroIntegration} */ (
     llmsTxt: {
       siteUrl: "https://rxtsel.dev",
       summary:
-        "Software Engineer with 4+ years of experience, known for pixel-perfect execution and strong attention to detail.",
+        "Software Engineer with 3+ years of experience, known for pixel-perfect execution and strong attention to detail.",
       title: "Cristhian Melo",
     },
     validateH1: true,

@@ -44,6 +44,6 @@ latestPosts:
   - how-to-install-arch-linux-using-the-command-line
 seo:
   title: Cristhian Melo - Desarrollador de Software
-  description: Software Engineer con más de 4 años de experiencia creando experiencias web accesibles, rápidas y mantenibles.
+  description: Software Engineer con más de 3 años de experiencia creando experiencias web accesibles, rápidas y mantenibles.
   keywords: ""
 ---
