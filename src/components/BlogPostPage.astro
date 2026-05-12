@@ -31,6 +31,7 @@ const alternates = {
   description={post.data.description}
   lang={post.data.locale}
   languageLinks={getBlogPostLanguageLinks(posts, post)}
+  ogImage={new URL(`${getBlogPostAlternateHref(post)}/og.png`, Astro.site).toString()}
   title={post.data.title}
   titleTemplate="%s - Blog"
 >
