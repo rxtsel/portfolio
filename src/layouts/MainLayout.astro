@@ -33,7 +33,7 @@ const seo = buildLayoutSeoProps({ ...seoProps, lang }, Astro.url)
   >
     <Header languageLinks={languageLinks} locale={lang} pathname={Astro.url.pathname} />
     <slot />
-    <Footer />
+    <Footer locale={lang} />
     <ScrollToTop locale={lang} />
   </body>
 </html>

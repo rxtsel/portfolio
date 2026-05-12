@@ -156,7 +156,16 @@ export function buildLayoutSeoProps(props: LayoutSeoProps, pageUrl: URL): SeoPro
     ...seoProps,
     canonical,
     description,
-    extraLinks: [...defaultExtraLinks, ...(seoProps.extraLinks ?? [])],
+    extraLinks: [
+      ...defaultExtraLinks,
+      {
+        href: getLocalizedPath(lang, "rss.xml"),
+        rel: "alternate",
+        title: lang === "es" ? "Feed RSS de Cristhian Melo" : "Cristhian Melo RSS Feed",
+        type: "application/rss+xml",
+      },
+      ...(seoProps.extraLinks ?? []),
+    ],
     extraMeta: [...defaultExtraMeta, ...(seoProps.extraMeta ?? [])],
     graph,
     locale: seoProps.locale ?? getLocaleOpenGraphTag(lang),
