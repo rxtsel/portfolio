@@ -1,1 +1,8 @@
-declare function haptic(pattern: number | number[] = 50): void
+declare function haptic(pattern?: number | number[]): void
+
+interface Window {
+  theme?: {
+    apply(theme?: ThemeMode): void
+    set(theme: ThemeMode): void
+  }
+}

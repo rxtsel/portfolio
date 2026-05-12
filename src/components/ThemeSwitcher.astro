@@ -85,27 +85,27 @@ const themeOptions = [
 </style>
 
 <script>
-  const themeSwitcherKeys = ["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown"]
+  type ThemeMode = "light" | "dark" | "system"
 
-  function getThemeButtons(switcher) {
-    return Array.from(switcher.querySelectorAll("[data-theme-value]"))
+  const themeSwitcherKeys: readonly string[] = ["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown"]
+
+  function getThemeButtons(switcher: HTMLElement): HTMLElement[] {
+    return Array.from(switcher.querySelectorAll<HTMLElement>("[data-theme-value]"))
   }
 
-  function setTheme(value) {
-    const themeApi = window.theme
-
-    themeApi?.set(value)
+  function setTheme(value: ThemeMode) {
+    window.theme?.set(value)
   }
 
   const updateThemeSwitcher = () => {
-    document.querySelectorAll("[data-theme-switcher]").forEach((switcher) => {
+    document.querySelectorAll<HTMLElement>("[data-theme-switcher]").forEach((switcher) => {
       switcher.toggleAttribute("data-mounted", true)
     })
   }
 
-  function updateHoverIndicator(target) {
-    const control = target instanceof HTMLElement ? target.closest("[data-theme-value]") : null
-    const switcher = control?.closest("[data-theme-switcher]")
+  function updateHoverIndicator(target: EventTarget | null) {
+    const control = target instanceof HTMLElement ? target.closest<HTMLElement>("[data-theme-value]") : null
+    const switcher = control?.closest<HTMLElement>("[data-theme-switcher]")
     const themeIndex = control?.dataset.themeIndex
 
     if (!switcher || themeIndex === undefined) {
@@ -116,8 +116,9 @@ const themeOptions = [
     switcher.toggleAttribute("data-hovered", true)
   }
 
-  function clearHoverIndicator(target, relatedTarget) {
-    const switcher = target instanceof HTMLElement ? target.closest("[data-theme-switcher]") : null
+  function clearHoverIndicator(target: EventTarget | null, relatedTarget: EventTarget | null) {
+    const switcher =
+      target instanceof HTMLElement ? target.closest<HTMLElement>("[data-theme-switcher]") : null
 
     if (!switcher || (relatedTarget instanceof Node && switcher.contains(relatedTarget))) {
       return
@@ -132,7 +133,7 @@ const themeOptions = [
     }
 
     const target = event.target instanceof HTMLElement ? event.target : null
-    const switcher = target?.closest("[data-theme-switcher]")
+    const switcher = target?.closest<HTMLElement>("[data-theme-switcher]")
 
     if (!switcher || !target?.matches("[data-theme-value]")) {
       return
@@ -143,7 +144,7 @@ const themeOptions = [
     const direction = event.key === "ArrowLeft" || event.key === "ArrowUp" ? -1 : 1
     const nextIndex = (currentIndex + direction + buttons.length) % buttons.length
     const nextButton = buttons[nextIndex]
-    const nextTheme = nextButton?.dataset.themeValue
+    const nextTheme = nextButton?.dataset.themeValue as ThemeMode | undefined
 
     if (!(nextButton instanceof HTMLElement) || !nextTheme) {
       return
