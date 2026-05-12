@@ -82,7 +82,7 @@
     cursor: pointer;
   }
   html {
-    @apply font-sans;
+    @apply scroll-pt-20 font-sans;
   }
 }
 

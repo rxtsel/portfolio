@@ -38,7 +38,7 @@ const labels = {
 } satisfies Record<Locale, Record<string, string>>
 ---
 
-<header class="flex items-center justify-between">
+<header class="bg-background sticky top-0 z-50 flex items-center justify-between py-2" id="header">
   {
     pathname === "/" || pathname === "/es" ? (
       <Logo aria-label="Rxtsel logo" height={30} width={29} />
@@ -101,3 +101,20 @@ const labels = {
     <ThemeSwitcher />
   </div>
 </header>
+
+<style>
+  #header {
+    animation: blur linear both;
+    animation-timeline: scroll();
+    animation-range: 0 100px;
+  }
+
+  @keyframes blur {
+    to {
+      --tw-shadow: 0 1px var(--tw-shadow-color, rgb(0 0 0 / 0.05));
+      box-shadow:
+        var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow),
+        var(--tw-ring-shadow), var(--tw-shadow);
+    }
+  }
+</style>
