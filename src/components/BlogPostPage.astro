@@ -1,4 +1,5 @@
 ---
+import { Code } from "astro:components"
 import { render } from "astro:content"
 import MainLayout from "@/layouts/MainLayout.astro"
 import {
@@ -33,16 +34,20 @@ const alternates = {
   title={post.data.title}
   titleTemplate="%s - Blog"
 >
-  <main class="prose prose-neutral prose-sm lg:prose-base dark:prose-invert mx-auto max-w-prose">
+  <main
+    class="prose prose-neutral prose-sm lg:prose-base dark:prose-invert prose-code:bg-transparent mx-auto max-w-prose"
+  >
     <article>
       <h1 transition:name={getBlogPostTransitionName(post, "title")}>
         {post.data.title}
       </h1>
+
       <p transition:name={getBlogPostTransitionName(post, "description")}>
         {post.data.description}
       </p>
+
       <div>
-        <Content />
+        <Content components={{ pre: Code }} />
       </div>
     </article>
   </main>

@@ -4,6 +4,14 @@ import tailwindcss from "@tailwindcss/vite"
 import { defineConfig } from "astro/config"
 import sitemap from "@astrojs/sitemap"
 import seoGraph from "@jdevalk/astro-seo-graph/integration"
+import expressiveCode from "astro-expressive-code"
+import rehypeExternalLinks from "rehype-external-links"
+
+/** @type {import('rehype-external-links').Options} */
+const externalLinksOptions = {
+  target: "_blank",
+  rel: ["noopener", "noreferrer"],
+}
 
 const seoGraphIntegration = /** @type {import("astro").AstroIntegration} */ (
   seoGraph({
@@ -45,5 +53,9 @@ export default defineConfig({
       },
     }),
     seoGraphIntegration,
+    expressiveCode(),
   ],
+  markdown: {
+    rehypePlugins: [[rehypeExternalLinks, externalLinksOptions]],
+  },
 })
