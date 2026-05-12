@@ -1,7 +1,22 @@
 <script is:inline>
   const themeStorageKey = "theme"
-  const themeModes = new Set(["light", "dark", "system"])
+  const themeOrder = ["system", "light", "dark"]
+  const themeModes = new Set(themeOrder)
   const darkScheme = window.matchMedia("(prefers-color-scheme: dark)")
+  const themeLabels = {
+    system: {
+      current: "System theme",
+      next: "light theme",
+    },
+    light: {
+      current: "Light theme",
+      next: "dark theme",
+    },
+    dark: {
+      current: "Dark theme",
+      next: "system theme",
+    },
+  }
 
   function getStoredTheme() {
     const theme = localStorage.getItem(themeStorageKey)
@@ -14,28 +29,28 @@
   }
 
   function updateThemeControls(theme) {
-    document.querySelectorAll("[data-theme-value]").forEach((control) => {
-      const isActive = control.dataset.themeValue === theme
-      const switcher = control.closest("[data-theme-switcher]")
+    document.querySelectorAll("[data-theme-toggle]").forEach((control) => {
+      const labels = themeLabels[theme]
 
-      control.toggleAttribute("data-active", isActive)
-      control.setAttribute("tabindex", isActive ? "0" : "-1")
+      control.toggleAttribute("data-active", true)
+      control.setAttribute("aria-label", `${labels.current}. Switch to ${labels.next}`)
 
-      if (isActive && switcher && control.dataset.themeIndex) {
-        switcher.style.setProperty("--theme-indicator-index", control.dataset.themeIndex)
-      }
-
-      if (control.getAttribute("role") === "radio") {
-        control.setAttribute("aria-checked", String(isActive))
-      } else {
-        control.setAttribute("aria-pressed", String(isActive))
-      }
+      control.querySelectorAll("[data-theme-icon]").forEach((icon) => {
+        icon.toggleAttribute("hidden", icon.dataset.themeIcon !== theme)
+      })
     })
+  }
+
+  function getNextTheme(theme) {
+    const currentIndex = themeOrder.indexOf(theme)
+    const nextIndex = (currentIndex + 1) % themeOrder.length
+
+    return themeOrder[nextIndex]
   }
 
   function applyTheme(theme = getStoredTheme()) {
     document.documentElement.classList.toggle("dark", shouldUseDarkTheme(theme))
-    document.documentElement.dataset.theme = theme
+    document.documentElement.dataset.themeMode = theme
     document.documentElement.style.colorScheme = shouldUseDarkTheme(theme) ? "dark" : "light"
     document.documentElement.dataset.theme = `github-${theme}-default`
     updateThemeControls(theme)
@@ -48,13 +63,13 @@
 
   document.addEventListener("click", (event) => {
     const target = event.target instanceof Element ? event.target : null
-    const control = target?.closest("[data-theme-value]")
+    const control = target?.closest("[data-theme-toggle]")
 
     if (!control) {
       return
     }
 
-    setTheme(control.dataset.themeValue)
+    setTheme(getNextTheme(getStoredTheme()))
   })
 
   document.addEventListener("DOMContentLoaded", () => updateThemeControls(getStoredTheme()))
