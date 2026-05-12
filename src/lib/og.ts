@@ -1,16 +1,13 @@
 import { readFile } from "node:fs/promises"
+import path from "node:path"
 import { ImageResponse } from "@vercel/og"
 import type { BlogPost } from "@/lib/blog"
 
-const geistSemibold = readFile(
-  new URL("../../public/fonts/geist/ttf/geist-latin-600-normal.ttf", import.meta.url),
-)
+const geistSemibold = readFile(path.resolve("public/fonts/geist/ttf/geist-latin-600-normal.ttf"))
 
-const geistRegular = readFile(
-  new URL("../../public/fonts/geist/ttf/geist-latin-400-normal.ttf", import.meta.url),
-)
+const geistRegular = readFile(path.resolve("public/fonts/geist/ttf/geist-latin-400-normal.ttf"))
 
-const backgroundImage = readFile(new URL("../../public/og_template.jpg", import.meta.url)).then((buffer) =>
+const backgroundImage = readFile(path.resolve("public/og_template.jpg")).then((buffer) =>
   buffer.toString("base64"),
 )
 
