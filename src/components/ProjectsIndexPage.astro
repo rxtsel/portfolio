@@ -15,31 +15,33 @@ const metadata = {
   en: {
     description:
       "Selected software projects by Cristhian Melo, including web experiences, CMS work, and custom frontend implementations.",
-    title: "Projects",
+    keywords: "software projects, frontend portfolio, web development work, Astro projects, React projects",
+    title: "Selected Software Projects",
   },
   es: {
     description:
       "Proyectos seleccionados de Cristhian Melo, incluyendo experiencias web, CMS e implementaciones frontend a medida.",
-    title: "Proyectos",
+    keywords: "proyectos de software, portfolio frontend, desarrollo web, proyectos Astro, proyectos React",
+    title: "Proyectos de Software Seleccionados",
   },
-} satisfies Record<Locale, { description: string; title: string }>
+} satisfies Record<Locale, { description: string; keywords: string; title: string }>
 const languageLinks = [
-  { href: "/projects", locale: "en" },
-  { href: "/es/proyectos", locale: "es" },
+  { href: "/projects/", locale: "en" },
+  { href: "/es/proyectos/", locale: "es" },
 ] satisfies LanguageLink[]
 const alternates = {
   defaultLocale: "en",
   entries: [
     {
-      href: "https://rxtsel.dev/projects",
+      href: "https://rxtsel.dev/projects/",
       hreflang: getLocaleLanguageTag("en"),
     },
     {
-      href: "https://rxtsel.dev/es/proyectos",
+      href: "https://rxtsel.dev/es/proyectos/",
       hreflang: getLocaleLanguageTag("es"),
     },
     {
-      href: "https://rxtsel.dev/projects",
+      href: "https://rxtsel.dev/projects/",
       hreflang: "x-default",
     },
   ],
@@ -69,6 +71,7 @@ const projects = getLocalizedProjects(await getCollection("projects"), locale).m
 <MainLayout
   alternates={alternates}
   description={metadata[locale].description}
+  keywords={metadata[locale].keywords}
   lang={locale}
   languageLinks={languageLinks}
   title={metadata[locale].title}

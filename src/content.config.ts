@@ -42,19 +42,15 @@ const latestPostsSchema = z
 
 const seoSchema = z.object({
   description: z.string().min(1).max(200),
-  keywords: z.string().optional(),
+  keywords: z.string().min(1),
   ogImage: z.string().optional(),
   title: z.string().min(1).max(120),
 })
 
-const blogSeoSchema = z.preprocess(
-  (value) => (value === null ? undefined : value),
-  z
-    .object({
-      keywords: z.string().optional(),
-    })
-    .optional(),
-)
+const blogSeoSchema = z.object({
+  description: z.string().min(70).max(200),
+  keywords: z.string().min(1),
+})
 
 const stackSchema = z.object({
   stack: z.array(stackItemSchema).default([]),

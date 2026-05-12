@@ -82,6 +82,7 @@ const postsHref = getLocalizedPath(locale, "blog")
 <MainLayout
   alternatesPath=""
   description={home.data.seo?.description ?? home.data.intro}
+  keywords={home.data.seo?.keywords ?? ""}
   lang={locale}
   languageLinks={getDefaultLanguageLinks()}
   title={home.data.seo?.title ?? home.data.title}

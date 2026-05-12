@@ -16,7 +16,9 @@ categories:
   - hackintosh
 coverImage: ""
 coverImageAlt: ""
-seo: null
+seo:
+  description: Sync Bluetooth pairing keys across Windows, Linux, and macOS multi-boot setups to stop reconnecting devices after switching systems.
+  keywords: sync bluetooth dual boot, bluetooth linux windows, bluetooth triple boot, hackintosh bluetooth, multiboot bluetooth
 ---
 
 ## Table of Contents
@@ -59,34 +61,34 @@ It’s as simple as having the same synchronization keys on all your operating s
 
 1. **Open the terminal and run `bluetoothctl`**:
 
-```sh
+   ```sh
    bluetoothctl
-```
+   ```
 
 2. **Enable pairing mode**:
 
-```sh
- pairable on
+   ```sh
+   pairable on
    discoverable on
-```
+   ```
 
 3. **Scan and pair the device**:
 
-```sh
+   ```sh
    scan on
-```
+   ```
 
-Copy the device's MAC address and use:
+   Copy the device's MAC address and use:
 
-```sh
+   ```sh
    connect XX:XX:XX:XX:XX:XX
-```
+   ```
 
 4. **Verify the connection and exit `bluetoothctl`**:
 
-```sh
+   ```sh
    exit
-```
+   ```
 
 ### Connecting Devices in Windows
 
@@ -97,56 +99,58 @@ Copy the device's MAC address and use:
 
 1. **Download** [**PsTools**](https://learn.microsoft.com/en-us/sysinternals/downloads/pstools) **and extract `PsExec` into an easy-to-access folder, such as `C:\Windows`.**
 2. **Find your MAC address.**
+
    Open `cmd` and run:
 
-```sh
+   ```sh
    getmac /V /FO LIST
-```
+   ```
 
-Find your Bluetooth device’s MAC address and note it down.
+   Find your Bluetooth device’s MAC address and note it down.
 
 3. **Run `cmd` as administrator**, navigate to the folder where you saved `PsExec`, and run:
 
-```sh
+   ```sh
    psexec -s -i regedit
-```
+   ```
 
-_This will open the Registry Editor with administrator privileges._
+   _This will open the Registry Editor with administrator privileges._
 
 4. **In the Registry Editor, navigate to:**
 
-```plain
+   ```plain
    HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\BTHPORT\Parameters\Keys\<MAC_ADDRESS>
-```
+   ```
 
 5. **Find your device key, double-click on its name (a new window will open).**
 6. **In the new window, copy the key value from the `Value Data` field.**
 7. **Reboot into Linux.**
-8. **In Linux** 5. **Open the terminal and run:**
+8. **In Linux**
 
-```sh
+   **8.1. Open the terminal and run:**
+
+   ```sh
    sudo su
-```
+   ```
 
-_Enter your admin password._
+   _Enter your admin password._
 
-                2. **Navigate to the Bluetooth folder:**
+   **8.2. Navigate to the Bluetooth folder:**
 
-```sh
+   ```sh
    cd /var/lib/bluetooth/<MAC_ADDRESS>/<DEVICE_MAC>
-```
+   ```
 
-_Replace `<MAC_ADDRESS>` with your internal Bluetooth adapter’s MAC address and `<DEVICE_MAC>` with your external device’s MAC address._
+   _Replace `<MAC_ADDRESS>` with your internal Bluetooth adapter’s MAC address and `<DEVICE_MAC>` with your external device’s MAC address._
 
 9. **Edit the `info` file**
 
    Locate the `[LinkKey]` section and replace the `Key` value with the one copied from Windows:
 
-```sh
-title="info" {2}
+   ```sh title="info" {2}
    [LinkKey]
    Key=B3798087E81E306CDAB046...
-```
+   ```
 
 Reboot Linux, and the device should connect automatically.
 
@@ -183,10 +187,11 @@ Reboot Linux, and the device should connect automatically.
      2. Find your device’s MAC address and double-click it.
      3. A new window will open with your device’s key.
      4. Select the values one by one (separated by spaces) and replace them with the values copied from macOS. They are the same length, so replace them in pairs.
-     - **For Linux**
+
+   - **For Linux**
      1. Follow the same Linux file editing steps.
 
-- **Note:** You no longer need to reverse the key. If macOS gives `98-54-2f-...`, write `98 54 2f...` in the Windows registry.
+   **Note:** You no longer need to reverse the key. If macOS gives `98-54-2f-...`, write `98 54 2f...` in the Windows registry.
 
 Once the keys are added, the device should automatically connect across all systems.
 

@@ -13,6 +13,9 @@ categories:
   - shells
 coverImage: ""
 coverImageAlt: ""
+seo:
+  description: Instala Zsh en Linux, cambia tu shell por defecto, añade oh-my-zsh y configura plugins y alias útiles para mejorar tu terminal.
+  keywords: instalar zsh linux, configurar zsh, oh my zsh, terminal linux, tutorial zsh
 ---
 
 ## Instalación
@@ -43,8 +46,7 @@ sudo nvim /etc/passwd
 
 5. Dentro del archivo, encuentra la línea que corresponde a tu nombre de usuario y reemplaza `/bin/bash` por `/bin/zsh`. En mi caso mi username es `rxtsel`:
 
-```diff
-title="/etc/passwd"
+```diff title="/etc/passwd"
 - rxtsel:x:1000:1000::/home/rxtsel:/bin/bash
 
 + rxtsel:x:1000:1000::/home/rxtsel:/bin/zsh
@@ -75,8 +77,7 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/too
 - [fnm](https://github.com/Schniz/fnm)
 - [bun](https://bun.sh/)
 
-```zsh
-title=".zshrc"
+```zsh title=".zshrc"
 export ZSH="$HOME/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will

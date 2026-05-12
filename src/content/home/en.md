@@ -45,5 +45,5 @@ latestPosts:
 seo:
   title: Cristhian Melo - Software Developer
   description: Software Engineer with 3+ years of experience building accessible, high-performance web experiences with clean, maintainable code.
-  keywords: ""
+  keywords: software developer, frontend engineer, web developer portfolio, React developer, Astro developer
 ---

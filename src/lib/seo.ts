@@ -20,6 +20,7 @@ export const siteMetadata = {
 
 export type LayoutSeoProps = Omit<SeoProps, "title"> & {
   alternatesPath?: string
+  keywords?: string
   lang?: Locale
   title: string
 }
@@ -118,8 +119,9 @@ export function buildBlogPostGraph(input: BlogPostGraphInput) {
 }
 
 export function buildLayoutSeoProps(props: LayoutSeoProps, pageUrl: URL): SeoProps {
-  const { alternatesPath, lang = "en", ...seoProps } = props
+  const { alternatesPath, keywords, lang = "en", ...seoProps } = props
   const description = seoProps.description ?? DEFAULT_DESCRIPTION
+  const keywordMeta = keywords?.trim() ? [{ content: keywords, name: "keywords" }] : []
   const canonical = seoProps.canonical?.toString() ?? new URL(pageUrl.pathname, SITE_URL).toString()
   const alternates =
     seoProps.alternates ??
@@ -166,7 +168,7 @@ export function buildLayoutSeoProps(props: LayoutSeoProps, pageUrl: URL): SeoPro
       },
       ...(seoProps.extraLinks ?? []),
     ],
-    extraMeta: [...defaultExtraMeta, ...(seoProps.extraMeta ?? [])],
+    extraMeta: [...defaultExtraMeta, ...keywordMeta, ...(seoProps.extraMeta ?? [])],
     graph,
     locale: seoProps.locale ?? getLocaleOpenGraphTag(lang),
     ogImage: seoProps.ogImage ?? siteMetadata.ogImage,

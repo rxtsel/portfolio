@@ -16,7 +16,9 @@ categories:
   - hackintosh
 coverImage: ""
 coverImageAlt: ""
-seo: null
+seo:
+  description: Sincroniza claves Bluetooth entre Windows, Linux y macOS en sistemas multiarranque para evitar reconectar dispositivos al cambiar de sistema.
+  keywords: sincronizar bluetooth dual boot, bluetooth linux windows, bluetooth triple boot, hackintosh bluetooth, bluetooth multiarranque
 ---
 
 ## Tabla de contenido
@@ -59,34 +61,34 @@ Es tan simple como tener las mismas claves de sincronización en todos tus siste
 
 1. **Abre la terminal y ejecuta `bluetoothctl`**:
 
-```sh
+   ```sh
    bluetoothctl
-```
+   ```
 
 2. **Activa el modo emparejamiento**:
 
-```sh
-  pairable on
+   ```sh
+   pairable on
    discoverable on
-```
+   ```
 
 3. **Escanea y empareja el dispositivo**:
 
-```sh
+   ```sh
    scan on
-```
+   ```
 
-Copia la dirección MAC del dispositivo y usa:
+   Copia la dirección MAC del dispositivo y usa:
 
-```sh
+   ```sh
    connect XX:XX:XX:XX:XX:XX
-```
+   ```
 
 4. **Verifica la conexión y cierra `bluetoothctl`**:
 
-```sh
+   ```sh
    exit
-```
+   ```
 
 ### Conectar dispositivos en Windows
 
@@ -97,57 +99,58 @@ Copia la dirección MAC del dispositivo y usa:
 
 1. **Descarga** [**PsTools**](https://learn.microsoft.com/en-us/sysinternals/downloads/pstools) **y extrae `PsExec` en una carpeta de acceso rápido, por ejemplo: `C:\Windows`.**
 2. **Encuentra tu dirección MAC**.
+
    Abre `cmd` y ejecuta:
 
-```sh
+   ```sh
    getmac /V /FO LIST
-```
+   ```
 
-Busca la dirección MAC de tu dispositivo Bluetooth y toma nota de ella.
+   Busca la dirección MAC de tu dispositivo Bluetooth y toma nota de ella.
 
 3. **Ejecuta `cmd` como administrador** y navega hasta la carpeta donde guardaste `PsExec` y ejecuta:
 
-```sh
+   ```sh
    psexec -s -i regedit
-```
+   ```
 
-_Esto abrirá el Editor del Registro con permisos de administrador._
+   _Esto abrirá el Editor del Registro con permisos de administrador._
 
 4. **En el editor de registros, navega a:**
 
-```plain
-"
+   ```plain
    HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\BTHPORT\Parameters\Keys\<MAC_ADDRESS>
-```
+   ```
 
 5. **Encuentra la clave de tu dispositivo y dale doble click en el nombre (Te abrirá una nueva ventana).**
 6. **En la nueva ventana, copia el valor de la clave que esta en `Informacion de valor`**.
 7. **Reinicia a Linux.**
-8. **En Linux** 5. **Abre la terminal y ejecuta:**
+8. **En Linux**
 
-```sh
+   **8.1. Abre la terminal y ejecuta:**
+
+   ```sh
    sudo su
-```
+   ```
 
-_Ingresa tu contraseña de administrador._
+   _Ingresa tu contraseña de administrador._
 
-        2. **Navega a la carpeta de Bluetooth:**
+   **8.2. Navega a la carpeta de Bluetooth:**
 
-```sh
+   ```sh
    cd /var/lib/bluetooth/<MAC_ADDRESS>/<DISPOSITIVO_MAC>
-```
+   ```
 
-_Reemplaza `<MAC_ADDRESS>` con la dirección MAC de tu dispositivo Bluetooth interno y `<DISPOSITIVO_MAC>` con la dirección MAC de tu dispositivo externo._
+   _Reemplaza `<MAC_ADDRESS>` con la dirección MAC de tu dispositivo Bluetooth interno y `<DISPOSITIVO_MAC>` con la dirección MAC de tu dispositivo externo._
 
 9. **Edita el archivo `info`**
 
    Ubica la línea `[LinkKey]` y reemplaza el valor de la propiedad `Key` por la clave copiada de Windows:
 
-```sh
-title="info" {2}
+   ```sh title="info" {2}
    [LinkKey]
    Key=B3798087E81E306CDAB046...
-```
+   ```
 
 Reinicia Linux y el dispositivo debería conectarse automáticamente.
 
@@ -189,7 +192,7 @@ Reinicia Linux y el dispositivo debería conectarse automáticamente.
    - **Para linux**
      1. Sigue los mismos pasos de edición de archivos en Linux.
 
-- **Nota:** Ya no es necesario revertir la clave. Si obtiene `98-54-2f-...` en macOS, escriba `98 54 2f...` en el registro de Windows.
+   **Nota:** Ya no es necesario revertir la clave. Si obtiene `98-54-2f-...` en macOS, escriba `98 54 2f...` en el registro de Windows.
 
 Una vez agregadas las claves, el dispositivo debería conectarse automáticamente en todos los sistemas.
 

@@ -11,7 +11,9 @@ categories:
   - tutorials
 coverImage: ""
 coverImageAlt: ""
-seo: null
+seo:
+  description: Sigue una guía práctica para instalar Arch Linux desde la terminal, desde particiones hasta GRUB, usuarios, red y entorno gráfico.
+  keywords: instalar arch linux, arch linux terminal, guía arch linux, instalación linux, tutorial arch linux
 ---
 
 ## Introducción
@@ -172,17 +174,15 @@ hwclock –-systohc
 
 ### 12. Editar localización:
 
-Apartir de aquí, usaré **nvim** como editor de texto, sino sabes cómo usarlo, puedes seguir esta guía de [Commandos Básicos de Neovim](/es/blog/basic-commands-for-neovim). Al menos para que sepas cómo guardar y salir de neovim.
+Apartir de aquí, usaré **nvim** como editor de texto, sino sabes cómo usarlo, puedes seguir esta guía de [Comandos básicos de Neovim](/es/blog/comandos-basicos-de-neovim/). Al menos para que sepas cómo guardar y salir de neovim.
 
 ```bash
-"
 nvim /etc/locale.gen
 ```
 
 - Ubica la linea que contenga: **es_CO.UTF-8** para localización de Colombia y descoméntala. Remueve el **#** de la linea y guarda el archivo.
 
-```diff
-title="/etc/locale.gen"
+```diff title="/etc/locale.gen"
 - #es_CO.UTF-8 UTF-8
 + es_CO.UTF-8 UTF-8
 ```
@@ -193,8 +193,7 @@ title="/etc/locale.gen"
 nvim /etc/locale.conf
 ```
 
-```diff
-title="/etc/locale.conf"
+```diff title="/etc/locale.conf"
 + LANG=es_CO.UTF-8
 ```
 
@@ -204,8 +203,7 @@ title="/etc/locale.conf"
 nvim /etc/vconsole.conf
 ```
 
-```diff
-title="/etc/vconsole.conf"
+```diff title="/etc/vconsole.conf"
 + KEYMAP=la-latin1
 ```
 
@@ -217,8 +215,7 @@ nvim /etc/hostname
 
 - Escribe un nombre para tu **pc**, en mi caso pondré **rxtsel**
 
-```diff
-title="/etc/hostname"
+```diff title="/etc/hostname"
 rxtsel
 ```
 
@@ -290,8 +287,7 @@ EDITOR=nvim visudo
 
 - **_Descomentar: %wheel ALL=(ALL) ALL y guardar._**
 
-```diff
-title="visudo"
+```diff title="visudo"
 - # %wheel ALL=(ALL) ALL
 + %wheel ALL=(ALL) ALL
 ```
@@ -379,7 +375,7 @@ ping 8.8.8.8
 
 Ya tienes conexión a internet.
 
-# Instalando nuestro Entorno de escritorio o gestor de ventana
+## Instalando nuestro Entorno de escritorio o gestor de ventana
 
 ### Apartir de aquí ya queda a tu elección, puedes instalar el entorno de escritorio que quieras, o un gestor de ventanas, o simplemente quedarte con la terminal. Algunos más populares son:
 

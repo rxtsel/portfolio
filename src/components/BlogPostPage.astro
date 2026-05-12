@@ -63,8 +63,9 @@ const taxonomyItems = getCategoryItemsByTranslationKey(blogCategoriesEntry, post
 const publishedDate = new Date(post.data.publishDate)
 const updatedDate = post.data.updatedDate ? new Date(post.data.updatedDate) : undefined
 const lastModifiedDate = updatedDate ?? publishedDate
+const seoDescription = post.data.seo.description
 const graph = buildBlogPostGraph({
-  description: post.data.description,
+  description: seoDescription,
   image: ogImage,
   lang: post.data.locale,
   publishedDate,
@@ -77,8 +78,9 @@ const graph = buildBlogPostGraph({
 <MainLayout
   alternates={alternates}
   canonical={canonical}
-  description={post.data.description}
+  description={seoDescription}
   graph={graph}
+  keywords={post.data.seo.keywords}
   lang={post.data.locale}
   languageLinks={getBlogPostLanguageLinks(posts, post)}
   ogImage={ogImage}

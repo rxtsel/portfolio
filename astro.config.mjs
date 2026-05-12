@@ -18,7 +18,10 @@ const seoGraphIntegration = /** @type {import("astro").AstroIntegration} */ (
     validateH1: true,
     validateImageAlt: true,
     validateInternalLinks: true,
-    validateMetadataLength: true,
+    validateMetadataLength: {
+      title: { min: 30, max: 100 },
+      description: { min: 70, max: 200 },
+    },
     validateUniqueMetadata: true,
   })
 )

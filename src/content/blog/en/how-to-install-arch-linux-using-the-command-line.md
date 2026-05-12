@@ -11,7 +11,9 @@ categories:
   - tutorials
 coverImage: ""
 coverImageAlt: "2"
-seo: null
+seo:
+  description: Follow a practical Arch Linux installation guide using the command line, from disk partitioning to GRUB, users, network, and desktop setup.
+  keywords: install arch linux, arch linux command line, arch linux guide, linux installation, arch linux tutorial
 ---
 
 ## Introduction
@@ -172,17 +174,15 @@ hwclock –-systohc
 
 ### 12. Edit Locale:
 
-From here on, I'll use **nvim** as the text editor. If you're not familiar with it, you can follow this guide on [Basic Commands for Neovim](/en/blog/basic-commands-for-neovim). At least, so you know how to save and exit Neovim.
+From here on, I'll use **nvim** as the text editor. If you're not familiar with it, you can follow this guide on [Basic Commands for Neovim](/blog/basic-commands-for-neovim/). At least, so you know how to save and exit Neovim.
 
 ```bash
-"
 nvim /etc/locale.gen
 ```
 
 - Locate the line containing: **es_CO.UTF-8** for Colombia locale and uncomment it. Remove the **#** from the line and save the file.
 
-```diff
-title="/etc/locale.gen"
+```diff title="/etc/locale.gen"
 - #es_CO.UTF-8 UTF-8
 + es_CO.UTF-8 UTF-8
 ```
@@ -193,8 +193,7 @@ title="/etc/locale.gen"
 nvim /etc/locale.conf
 ```
 
-```diff
-title="/etc/locale.conf"
+```diff title="/etc/locale.conf"
 + LANG=es_CO.UTF-8
 ```
 
@@ -204,8 +203,7 @@ title="/etc/locale.conf"
 nvim /etc/vconsole.conf
 ```
 
-```diff
-title="/etc/vconsole.conf"
+```diff title="/etc/vconsole.conf"
 + KEYMAP=la-latin1
 ```
 
@@ -217,8 +215,7 @@ nvim /etc/hostname
 
 - Enter a name for your **PC**; in my case, I'll put **rxtsel**
 
-```diff
-title="/etc/hostname"
+```diff title="/etc/hostname"
 rxtsel
 ```
 
@@ -290,8 +287,7 @@ EDITOR=nvim visudo
 
 - **_Uncomment: %wheel ALL=(ALL) ALL and save._**
 
-```diff
-title="visudo"
+```diff title="visudo"
 - # %wheel ALL=(ALL) ALL
 + %wheel ALL=(ALL) ALL
 ```
@@ -379,7 +375,7 @@ ping 8.8.8.8
 
 You now have an internet connection.
 
-# Installing Your Desktop Environment or Window Manager
+## Installing Your Desktop Environment or Window Manager
 
 ### From here, it's your choice. You can install the desktop environment you prefer, or a window manager, or simply stick with the terminal. Some popular choices include:
 

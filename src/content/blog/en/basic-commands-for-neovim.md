@@ -12,6 +12,9 @@ categories:
   - neovim
 coverImage: ""
 coverImageAlt: ""
+seo:
+  description: Learn essential Neovim commands, modes, navigation shortcuts, and editing basics to start using this terminal editor with confidence.
+  keywords: neovim commands, vim basics, neovim tutorial, terminal editor, learn neovim
 ---
 
 ## What is Neovim?

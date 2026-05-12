@@ -23,7 +23,7 @@ const links = languageLinks ?? getDefaultLanguageLinks()
 const logoHref = getLocalizedPath(locale)
 const blogHref = getLocalizedPath(locale, "blog")
 const normalizedPathname = pathname.replace(/\/$/, "") || "/"
-const isBlogActive = normalizedPathname === blogHref
+const isBlogActive = normalizedPathname === blogHref.replace(/\/$/, "")
 const navLinkClass =
   "text-muted-foreground hover:text-foreground data-active:text-foreground inline-flex h-8 items-center px-2 text-sm font-medium transition-colors"
 const languageLinkClass =
@@ -42,7 +42,7 @@ const labels = {
 
 <header class="bg-background sticky top-0 z-50 flex items-center justify-between py-2" id="header">
   {
-    pathname === "/" || pathname === "/es" ? (
+    pathname === "/" || pathname === "/es/" ? (
       <Logo aria-label="Rxtsel logo" height={30} width={29} />
     ) : (
       <a class="logo" href={logoHref}>

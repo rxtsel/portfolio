@@ -12,7 +12,9 @@ categories:
   - tutorials
 coverImage: ""
 coverImageAlt: ""
-seo: null
+seo:
+  description: Configure Husky, Commitlint, and lint-staged to enforce clean commits, run checks before commit, and keep your Git history consistent.
+  keywords: husky commitlint lint-staged, git hooks, conventional commits, pre commit hook, lint staged setup
 ---
 
 ## Introduction
@@ -82,8 +84,7 @@ Now, you need to add the scripts you want to run before committing. For example,
 
 Then, modify the `pre-commit` script in the `.husky/pre-commit` file to run the `lint` script before each commit.
 
-```diff
-title=".husky/pre-commit"
+```diff title=".husky/pre-commit"
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
@@ -141,8 +142,7 @@ If you want to run the linter only on modified files before each commit, you can
 
 3. Add the script to `.husky/pre-commit` to run `lint-staged` before each commit:
 
-```diff
-title=".husky/pre-commit"
+```diff title=".husky/pre-commit"
    #!/usr/bin/env sh
    . "$(dirname -- "$0")/_/husky.sh"
 

@@ -45,5 +45,5 @@ latestPosts:
 seo:
   title: Cristhian Melo - Desarrollador de Software
   description: Software Engineer con más de 3 años de experiencia creando experiencias web accesibles, rápidas y mantenibles.
-  keywords: ""
+  keywords: desarrollador de software, frontend engineer, portfolio desarrollador web, desarrollador React, desarrollador Astro
 ---

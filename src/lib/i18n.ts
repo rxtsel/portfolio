@@ -53,12 +53,13 @@ export function getContentLocale(id: string): Locale {
 
 export function getLocalizedPath(locale: Locale, path = "") {
   const cleanPath = path.replace(/^\/|\/$/g, "")
+  const localizedPath = locale === defaultLocale ? cleanPath : [locale, cleanPath].filter(Boolean).join("/")
 
-  if (locale === defaultLocale) {
-    return cleanPath ? `/${cleanPath}` : "/"
-  }
+  if (!localizedPath) return "/"
 
-  return cleanPath ? `/${locale}/${cleanPath}` : `/${locale}`
+  const hasFileExtension = /\.[^/]+$/.test(localizedPath)
+
+  return `/${localizedPath}${hasFileExtension ? "" : "/"}`
 }
 
 export function getBlogPostSlug(post: LocalizedBlogPost) {
