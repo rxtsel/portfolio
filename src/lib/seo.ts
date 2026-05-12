@@ -7,7 +7,7 @@ const SITE_URL = "https://rxtsel.dev"
 const SITE_NAME = "Cristhian Melo"
 const DEFAULT_OG_IMAGE = `${SITE_URL}/og.jpg`
 const DEFAULT_DESCRIPTION =
-  "Software Engineer with 4+ years of experience, known for pixel-perfect execution and strong attention to detail. Passionate about seamless user experiences and clean, maintainable code."
+  "Software Engineer with 3+ years of experience, known for pixel-perfect execution and strong attention to detail. Passionate about seamless user experiences and clean, maintainable code."
 
 export const siteMetadata = {
   description: DEFAULT_DESCRIPTION,
@@ -31,19 +31,18 @@ type GraphInput = {
 }
 
 const defaultExtraLinks = [
-  { href: "/favicon.svg", rel: "icon", type: "image/svg+xml" },
+  { href: "/favicon-light.svg", rel: "icon", type: "image/svg+xml", media: "(prefers-color-scheme: light)" },
+  { href: "/favicon-dark.svg", rel: "icon", type: "image/svg+xml", media: "(prefers-color-scheme: dark)" },
   { href: "/favicon.ico", rel: "icon" },
-  { href: "/favicon-16x16.png", rel: "icon", sizes: "16x16", type: "image/png" },
-  { href: "/favicon-32x32.png", rel: "icon", sizes: "32x32", type: "image/png" },
-  { color: "#1a1a1a", href: "/safari-pinned-tab.svg", rel: "mask-icon" },
+  { href: "/favicon-96x96.png", rel: "icon", sizes: "96x96", type: "image/png" },
   { href: "/apple-touch-icon.png", rel: "apple-touch-icon", sizes: "180x180" },
   { href: "/site.webmanifest", rel: "manifest" },
   { href: "/sitemap-index.xml", rel: "sitemap" },
 ] satisfies NonNullable<SeoProps["extraLinks"]>
 
 const defaultExtraMeta = [
-  { content: "#1a1a1a", name: "theme-color" },
-  { content: "#1a1a1a", name: "msapplication-TileColor" },
+  { content: "#0a0a0a", name: "theme-color" },
+  { content: "#0a0a0a", name: "msapplication-TileColor" },
   { content: "/browserconfig.xml", name: "msapplication-config" },
 ] satisfies NonNullable<SeoProps["extraMeta"]>
 
