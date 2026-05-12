@@ -36,7 +36,10 @@
       control.setAttribute("aria-label", `${labels.current}. Switch to ${labels.next}`)
 
       control.querySelectorAll("[data-theme-icon]").forEach((icon) => {
-        icon.toggleAttribute("hidden", icon.dataset.themeIcon !== theme)
+        const isActive = icon.dataset.themeIcon === theme
+
+        icon.classList.toggle("block", isActive)
+        icon.classList.toggle("hidden", !isActive)
       })
     })
   }
