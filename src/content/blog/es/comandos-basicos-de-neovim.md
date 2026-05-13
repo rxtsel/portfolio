@@ -17,7 +17,7 @@ seo:
   keywords: comandos neovim, tutorial neovim, vim básico, editor de terminal, aprender neovim
 ---
 
-## ¿Qué es neovim
+## ¿Qué es neovim?
 
 Neovim es un editor de texto que se ejecuta en la terminal, es una versión mejorada de vim, con el fin de mejorar la experiencia de usuario y la facilidad de mantenimiento. Muy, pero muy **rápido**. Hay muchas personas y me incluyo, que dicen **_"Una vez pruebas neovim, no hay vuelta atrás"_**.
 
