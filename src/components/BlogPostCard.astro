@@ -2,7 +2,8 @@
 import { getCollection } from "astro:content"
 import type { BlogPost } from "@/lib/blog"
 import { getBlogPostTransitionName } from "@/lib/blog"
-import { getBlogPostPath, getLocaleLanguageTag } from "@/lib/i18n"
+import { getBlogPostPath } from "@/lib/i18n"
+import { formatBlogDate, toIsoDateTime } from "@/lib/date-time"
 import { getCategoryItemsByTranslationKey } from "@/lib/taxonomy"
 
 interface Props {
@@ -24,8 +25,8 @@ const taxonomyItems = getCategoryItemsByTranslationKey(blogCategoriesEntry, post
   (category) => category.name,
 )
 
-const publishedDate = new Date(post.data.publishDate)
-const updatedDate = post.data.updatedDate ? new Date(post.data.updatedDate) : null
+const publishedDate = post.data.publishDate
+const updatedDate = post.data.updatedDate
 const lastModifiedDate = updatedDate || publishedDate
 const dateTitle = post.data.locale === "es" ? "Última modificación" : "Last modified"
 ---
@@ -56,16 +57,10 @@ const dateTitle = post.data.locale === "es" ? "Última modificación" : "Last mo
     </ul>
     <time
       class="text-muted-foreground flex shrink-0 items-center justify-end gap-1 text-xs"
-      datetime={lastModifiedDate.toISOString()}
+      datetime={toIsoDateTime(lastModifiedDate)}
       title={dateTitle}
     >
-      {
-        lastModifiedDate.toLocaleDateString(getLocaleLanguageTag(post.data.locale), {
-          year: "numeric",
-          month: "short",
-          day: "numeric",
-        })
-      }
+      {formatBlogDate(lastModifiedDate, post.data.locale)}
     </time>
   </footer>
 </article>

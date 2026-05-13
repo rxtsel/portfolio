@@ -2,6 +2,7 @@ import type { APIRoute } from "astro"
 import { getCollection, getEntry } from "astro:content"
 import { getBlogPostPath, getLocalizedPath, type Locale } from "@/lib/i18n"
 import { getPublishedBlogPosts, type BlogPost } from "@/lib/blog"
+import { compareDatesDescending } from "@/lib/date-time"
 
 const siteUrl = "https://rxtsel.dev"
 const siteSummary =
@@ -47,7 +48,7 @@ async function getPageEntries(locale: Locale) {
 
 function getPostEntries(posts: BlogPost[], locale: Locale) {
   return getPublishedBlogPosts(posts, locale)
-    .sort((a, b) => b.data.publishDate.getTime() - a.data.publishDate.getTime())
+    .sort((a, b) => compareDatesDescending(a.data.publishDate, b.data.publishDate))
     .map((post) => formatEntry(`${post.data.title} - Blog`, getBlogPostPath(post), post.data.description))
 }
 

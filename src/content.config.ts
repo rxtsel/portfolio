@@ -1,6 +1,7 @@
 import { defineCollection } from "astro:content"
 import { glob } from "astro/loaders"
 import { z } from "astro/zod"
+import { toIsoDate } from "@/lib/date-time"
 
 const emptyStringToUndefined = (value: unknown) => (value === "" ? undefined : value)
 
@@ -93,7 +94,7 @@ const experienceJobSchema = z.object({
   description: z.string().optional(),
   endDate: z
     .preprocess(
-      (value) => (value instanceof Date ? value.toISOString().slice(0, 10) : value),
+      (value) => (value instanceof Date ? toIsoDate(value) : value),
       z.string().regex(/^\d{4}-\d{2}-\d{2}$/, "Date must use YYYY-MM-DD format"),
     )
     .optional()
@@ -102,7 +103,7 @@ const experienceJobSchema = z.object({
   role: z.string().min(1),
   stack: z.array(z.string().min(1)).optional().default([]),
   startDate: z.preprocess(
-    (value) => (value instanceof Date ? value.toISOString().slice(0, 10) : value),
+    (value) => (value instanceof Date ? toIsoDate(value) : value),
     z.string().regex(/^\d{4}-\d{2}-\d{2}$/, "Date must use YYYY-MM-DD format"),
   ),
   tags: z.array(z.string().min(1)).optional().default([]),

@@ -1,6 +1,7 @@
 import type { SeoProps } from "@jdevalk/astro-seo-graph"
 import type { GraphEntity } from "@jdevalk/seo-graph-core"
 import { assembleGraph, buildPiece, buildWebPage, buildWebSite, makeIds } from "@jdevalk/seo-graph-core"
+import { toIsoDateTime } from "@/lib/date-time"
 import { getLocaleLanguageTag, getLocaleOpenGraphTag, getLocalizedPath, type Locale } from "@/lib/i18n"
 
 const SITE_URL = "https://rxtsel.dev"
@@ -104,8 +105,8 @@ export function buildBlogPostGraph(input: BlogPostGraphInput) {
       "@id": articleId,
       "@type": "BlogPosting",
       author: { "@id": ids.person },
-      dateModified: (input.updatedDate ?? input.publishedDate).toISOString(),
-      datePublished: input.publishedDate.toISOString(),
+      dateModified: toIsoDateTime(input.updatedDate ?? input.publishedDate),
+      datePublished: toIsoDateTime(input.publishedDate),
       description: input.description,
       headline: input.title,
       image: input.image,

@@ -9,6 +9,7 @@ import {
   type BlogPost,
 } from "@/lib/blog"
 import { getAlternateBlogPosts, getLocaleLanguageTag } from "@/lib/i18n"
+import { formatBlogDate, toIsoDateTime } from "@/lib/date-time"
 import { buildBlogPostGraph } from "@/lib/seo"
 import { getCategoryItemsByTranslationKey } from "@/lib/taxonomy"
 
@@ -60,8 +61,8 @@ if (!blogCategoriesEntry) {
 const taxonomyItems = getCategoryItemsByTranslationKey(blogCategoriesEntry, post.data.categories).map(
   (category) => category.name,
 )
-const publishedDate = new Date(post.data.publishDate)
-const updatedDate = post.data.updatedDate ? new Date(post.data.updatedDate) : undefined
+const publishedDate = post.data.publishDate
+const updatedDate = post.data.updatedDate
 const lastModifiedDate = updatedDate ?? publishedDate
 const seoDescription = post.data.seo.description
 const graph = buildBlogPostGraph({
@@ -101,16 +102,23 @@ const graph = buildBlogPostGraph({
         </p>
 
         <div class="not-prose text-muted-foreground flex flex-wrap items-center gap-x-3 gap-y-2 text-sm">
-          <time datetime={publishedDate.toISOString()}>
+          <time datetime={toIsoDateTime(publishedDate)}>
             {labels[post.data.locale].published}
             {" "}
-            {publishedDate.toLocaleDateString(getLocaleLanguageTag(post.data.locale))}
+            {formatBlogDate(publishedDate, post.data.locale)}
           </time>
-          <time datetime={lastModifiedDate.toISOString()}>
-            {labels[post.data.locale].updated}
-            {" "}
-            {lastModifiedDate.toLocaleDateString(getLocaleLanguageTag(post.data.locale))}
-          </time>
+          {
+            updatedDate && (
+              <>
+                <span aria-hidden="true" class="text-muted-foreground text-xs">
+                  /
+                </span>
+                <time datetime={toIsoDateTime(lastModifiedDate)}>
+                  {labels[post.data.locale].updated} {formatBlogDate(lastModifiedDate, post.data.locale)}
+                </time>
+              </>
+            )
+          }
         </div>
 
         {

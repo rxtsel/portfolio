@@ -2,6 +2,7 @@ import rss from "@astrojs/rss"
 import { getCollection } from "astro:content"
 import { getBlogPostPath } from "@/lib/i18n"
 import { getPublishedBlogPosts } from "@/lib/blog"
+import { compareDatesDescending } from "@/lib/date-time"
 
 export async function GET(context: { site: URL }) {
   const posts = getPublishedBlogPosts(await getCollection("blog"), "es")
@@ -11,7 +12,7 @@ export async function GET(context: { site: URL }) {
     description: "Artículos de ingeniería de software por Cristhian Melo.",
     site: context.site,
     items: posts
-      .sort((a, b) => b.data.publishDate.getTime() - a.data.publishDate.getTime())
+      .sort((a, b) => compareDatesDescending(a.data.publishDate, b.data.publishDate))
       .map((post) => ({
         title: post.data.title,
         description: post.data.description,
