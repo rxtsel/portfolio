@@ -23,9 +23,11 @@ const links = languageLinks ?? getDefaultLanguageLinks()
 const logoHref = getLocalizedPath(locale)
 const blogHref = getLocalizedPath(locale, "blog")
 const normalizedPathname = pathname.replace(/\/$/, "") || "/"
-const isBlogActive = normalizedPathname === blogHref.replace(/\/$/, "")
+const normalizedBlogHref = blogHref.replace(/\/$/, "")
+const isBlogIndexActive = normalizedPathname === normalizedBlogHref
+const isBlogActive = isBlogIndexActive || normalizedPathname.startsWith(`${normalizedBlogHref}/`)
 const navLinkClass =
-  "text-muted-foreground hover:text-foreground data-active:text-foreground inline-flex h-8 items-center px-1 text-sm font-medium transition-colors"
+  "text-muted-foreground cursor-pointer hover:text-foreground data-active:text-foreground inline-flex h-8 items-center px-1 text-sm font-medium transition-colors"
 const languageLinkClass =
   "text-muted-foreground hover:text-foreground data-active:text-foreground inline-flex h-8 items-center text-sm font-medium transition-colors"
 const labels = {
@@ -54,12 +56,17 @@ const labels = {
   <div class="flex items-center">
     <nav aria-label={labels[locale].primary} class="flex items-center">
       {
-        isBlogActive ? (
-          <span aria-current="page" class:list={navLinkClass} data-active data-hover-ghost-item>
+        isBlogIndexActive ? (
+          <span aria-current="page" class:list={navLinkClass} data-active>
             Blog
           </span>
         ) : (
-          <a class:list={navLinkClass} data-hover-ghost-item href={blogHref}>
+          <a
+            aria-current={isBlogActive ? "page" : undefined}
+            class:list={navLinkClass}
+            data-active={isBlogActive}
+            href={blogHref}
+          >
             Blog
           </a>
         )
