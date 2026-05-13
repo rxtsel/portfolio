@@ -23,7 +23,7 @@ seo:
 
 En esta guía paso a paso, aprenderás cómo instalar y configurar Husky y Commitlint en tus proyectos.
 
-### ¿Por qué Husky, Commitlint y lint-staged?
+### ¿Por qué Husky, Commitlint y lint-staged
 
 ¿Te ha pasado que has subido cambios a tu repositorio y el CI hace un deploy automático, pero algo falla? Cuando ves los logs, te das cuenta de que a veces es algo tan simple como un error de identación. Pues con Husky, puedes evitar estos problemas haciendo que corra el linter antes de cada commit. Así, evitas, por un lado, que se suban cambios con errores y, además, que ese commit quede registrado en el historial.
 
@@ -37,7 +37,7 @@ En esta guía paso a paso, aprenderás cómo instalar y configurar Husky y Commi
 
 ![Captura de pantalla de commit conventional correcto](/uploads/conventional-commit.webp)
 
-## ¿Qué es un Git Hook?
+## ¿Qué es un Git Hook
 
 Un “Git Hook” (gancho o hook en español) es un script personalizado que puedes activar en respuesta a eventos específicos durante el proceso de Git. Estos eventos podrían ser acciones como realizar un commit, hacer push, fusionar ramas, entre otros. Los ganchos permiten ejecutar scripts o llevar a cabo acciones automáticamente antes o después de que estos eventos ocurran en Git.
 

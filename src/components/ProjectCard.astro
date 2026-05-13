@@ -35,7 +35,12 @@ const Heading = headingLevel
   >
     {
       href ? (
-        <a class="link-underline" href={href} rel="noopener noreferrer" target="_blank">
+        <a
+          class="link-underline"
+          href={`${href}?utm_source=rxtsel.dev&utm_medium=referral`}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
           {title}
         </a>
       ) : (
@@ -48,7 +53,7 @@ const Heading = headingLevel
         <a
           aria-label={`View ${title} on GitHub`}
           class="ghost"
-          href={sourceUrl}
+          href={`${sourceUrl}?utm_source=rxtsel.dev`}
           rel="noopener noreferrer"
           target="_blank"
           title="View source on GitHub"

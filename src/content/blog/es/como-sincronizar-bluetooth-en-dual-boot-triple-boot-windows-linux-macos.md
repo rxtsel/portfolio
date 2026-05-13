@@ -45,11 +45,11 @@ Si utilizas **dual boot o triple boot**, habrás notado que al cambiar de sistem
 
 Esto es algo realmente fastidioso, especialmente si tienes un teclado y un ratón Bluetooth y tienes que conectarlos manualmente cada vez que cambias de sistema operativo.
 
-### ¿Por qué ocurre esto?
+### ¿Por qué ocurre esto
 
 Cuando emparejas un dispositivo Bluetooth en un sistema operativo, se genera una clave de sincronización (`LinkKey`). Como esta clave no se comparte entre sistemas, al cambiar de sistema operativo, el dispositivo no puede autenticarse correctamente.
 
-### ¿Cuál es la solución?
+### ¿Cuál es la solución
 
 Es tan simple como tener las mismas claves de sincronización en todos tus sistemas operativos. Para hacer esto, necesitas copiar las claves de sincronización de Bluetooth de un sistema operativo a otro.
 

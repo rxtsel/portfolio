@@ -2,7 +2,7 @@
 locale: en
 items:
   - company: SoundAdvice
-    companyUrl: https://soundadvice.club?utm_source=rxtsel.dev
+    companyUrl: https://soundadvice.club
     location: Toronto, Canada
     remote: true
     jobs:
@@ -61,7 +61,7 @@ items:
           - devops
           - infrastructure-management
   - company: Visual Dealers
-    companyUrl: https://visualdealers.com?utm_source=rxtsel.dev
+    companyUrl: https://visualdealers.com
     location: Los Angeles, California
     remote: true
     jobs:
@@ -83,7 +83,7 @@ items:
           - Kanban
           - infrastructure-management
   - company: Vehement
-    companyUrl: https://vehement.co?utm_source=rxtsel.dev
+    companyUrl: https://vehement.co
     location: Bogotá, Colombia
     remote: true
     jobs:

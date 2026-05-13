@@ -4,7 +4,7 @@ order: 6
 locale: en
 title: SoundAdvice Platform
 description: Development of a web platform connecting music professionals with expert mentors for career growth.
-href: https://app.soundadvice.club?utm_source=rxtsel.dev
+href: https://app.soundadvice.club
 sourceUrl: ""
 publishDate: 2026-05-07
 stack:

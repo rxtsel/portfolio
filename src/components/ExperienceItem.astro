@@ -87,7 +87,12 @@ const sortedJobs = [...item.jobs].sort((current, next) => {
     {
       item.companyUrl ? (
         <h3 class="my-0! text-lg leading-snug font-semibold">
-          <a class="link-underline" href={item.companyUrl} rel="noopener noreferrer" target="_blank">
+          <a
+            class="link-underline"
+            href={`${item.companyUrl}?utm_source=rxtsel.dev&utm_medium=referral`}
+            rel="noopener noreferrer"
+            target="_blank"
+          >
             {item.company}
           </a>
         </h3>

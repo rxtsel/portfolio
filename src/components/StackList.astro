@@ -24,7 +24,12 @@ const stackItemsWithLogos = stackItems.map((item) => ({
     stackItemsWithLogos.map(({ Logo, ...item }) => (
       <li class="text-muted-foreground retina:border-[0.5px] rounded-none border bg-zinc-50 px-1.5 py-0.5 font-mono text-xs dark:bg-zinc-900 [&_svg]:size-3.5">
         {item.href ? (
-          <a class="flex items-center gap-x-1" href={item.href} rel="noopener noreferrer" target="_blank">
+          <a
+            class="flex items-center gap-x-1"
+            href={`${item.href}?utm_source=rxtsel.dev&utm_medium=referral`}
+            rel="noopener noreferrer"
+            target="_blank"
+          >
             {Logo && <Logo aria-label={`${item.name} logo`} class="text-foreground" />}
             {item.name}
           </a>

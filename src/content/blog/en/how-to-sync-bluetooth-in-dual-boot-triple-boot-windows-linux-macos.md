@@ -45,11 +45,11 @@ If you use **dual boot or triple boot**, you may have noticed that when switchin
 
 This can be really annoying, especially if you have a Bluetooth keyboard and mouse and have to manually connect them every time you switch OS.
 
-### Why does this happen?
+### Why does this happen
 
 When you pair a Bluetooth device on an operating system, a synchronization key (`LinkKey`) is generated. Since this key is not shared between systems, when switching OS, the device cannot authenticate properly.
 
-### What’s the solution?
+### What’s the solution
 
 It’s as simple as having the same synchronization keys on all your operating systems. To do this, you need to copy the Bluetooth sync keys from one OS to another.
 
