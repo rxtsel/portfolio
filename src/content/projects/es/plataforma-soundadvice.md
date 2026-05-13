@@ -9,17 +9,15 @@ sourceUrl: ""
 publishDate: 2026-05-07
 stack:
   - typescript
-  - azure
   - docker
   - drizzle
-  - github-actions
   - nextjs
   - playwright
-  - postgresql
   - tailwindcss
   - figma
   - stripe
   - supabase
+  - vitest
 tags:
   - ci-cd
 ---

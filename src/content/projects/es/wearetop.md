@@ -9,7 +9,6 @@ sourceUrl: ""
 publishDate: 2024-01-04
 stack:
   - astro
-  - css
   - typescript
   - figma
   - tailwindcss

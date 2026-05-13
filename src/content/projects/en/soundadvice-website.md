@@ -9,13 +9,10 @@ sourceUrl: ""
 publishDate: 2026-05-07
 stack:
   - typescript
-  - css
-  - postgresql
   - supabase
   - payloadcms
   - nextjs
   - tailwindcss
-  - github-actions
   - figma
 tags:
   - ci-cd
