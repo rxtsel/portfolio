@@ -51,6 +51,7 @@ function getLatestEndDate(jobs: ExperienceJob[]) {
 const companyStartDate = getEarliestStartDate(item.jobs)
 const companyEndDate = getLatestEndDate(item.jobs)
 const companyIsCurrent = !companyEndDate
+const shouldShowJobDates = item.jobs.length > 1
 const sortedJobs = [...item.jobs].sort((current, next) => {
   const currentDate = current.current ? "9999-12-31" : current.endDate || current.startDate
   const nextDate = next.current ? "9999-12-31" : next.endDate || next.startDate
@@ -132,16 +133,18 @@ const sortedJobs = [...item.jobs].sort((current, next) => {
 
             <header>
               <h4 class="my-0! flex-1 leading-snug font-semibold text-balance">{job.role}</h4>
-              <time
-                class="text-muted-foreground block text-sm"
-                data-current={String(job.current)}
-                data-end={endDate}
-                data-experience-range
-                data-start={job.startDate}
-                datetime={endDate || job.startDate}
-              >
-                {formatExperienceRange(job.startDate, endDate, locale)}
-              </time>
+              {shouldShowJobDates ? (
+                <time
+                  class="text-muted-foreground block text-sm"
+                  data-current={String(job.current)}
+                  data-end={endDate}
+                  data-experience-range
+                  data-start={job.startDate}
+                  datetime={endDate || job.startDate}
+                >
+                  {formatExperienceRange(job.startDate, endDate, locale)}
+                </time>
+              ) : null}
             </header>
 
             {descriptionHtml ? (
