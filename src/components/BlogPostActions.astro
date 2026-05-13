@@ -69,6 +69,8 @@ const menuItemClass =
     <CopyButton
       class="border-e-0"
       copiedLabel={labels[locale].copied}
+      errorLabel={labels[locale].markdown}
+      fallbackHref={markdownUrl}
       label={labels[locale].copyPage}
       sourceId={markdownSourceId}
     />
@@ -237,7 +239,6 @@ const menuItemClass =
       const target = event.target instanceof HTMLElement ? event.target : null
       const dropdownTrigger = target?.closest<HTMLElement>("[data-dropdown-toggle]")
       const actionControl = target?.closest<HTMLElement>("[data-blog-action]")
-      const copyControl = target?.closest<HTMLElement>("[data-copy-button]")
       const actionRoot = actionControl?.closest<HTMLElement>("[data-blog-actions]")
 
       if (dropdownTrigger) {
@@ -251,14 +252,13 @@ const menuItemClass =
         return
       }
 
-      if (copyControl) {
-        closeDropdowns()
-        return
-      }
-
       if (!target?.closest("[data-blog-actions]")) {
         closeDropdowns()
       }
+    })
+
+    document.addEventListener("copy:complete", () => {
+      closeDropdowns()
     })
 
     document.addEventListener("keydown", (event) => {

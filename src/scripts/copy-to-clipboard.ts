@@ -6,12 +6,6 @@ const resetDelay = 1500
 const copyWindow = window as Window & { copyToClipboardMounted?: boolean }
 const resetTimers = new WeakMap<HTMLElement, number>()
 
-function copySelectedText() {
-  const legacyDocument = document as Document & { execCommand(command: "copy"): boolean }
-
-  legacyDocument.execCommand("copy")
-}
-
 function setCopyState(button: HTMLElement, state: CopyState) {
   const existingTimer = resetTimers.get(button)
 
@@ -58,20 +52,19 @@ function getCopyText(button: HTMLElement) {
 }
 
 async function writeClipboard(text: string) {
-  if (navigator.clipboard) {
-    await navigator.clipboard.writeText(text)
-    return
+  if (!navigator.clipboard) {
+    throw new Error("Clipboard API is unavailable")
   }
 
-  const textarea = document.createElement("textarea")
+  await navigator.clipboard.writeText(text)
+}
 
-  textarea.value = text
-  textarea.style.position = "fixed"
-  textarea.style.opacity = "0"
-  document.body.append(textarea)
-  textarea.select()
-  copySelectedText()
-  textarea.remove()
+function openFallback(button: HTMLElement) {
+  const fallbackHref = button.getAttribute("data-copy-fallback-href")
+
+  if (fallbackHref) {
+    window.open(fallbackHref, "_blank", "noopener,noreferrer")
+  }
 }
 
 async function copy(button: HTMLElement) {
@@ -82,6 +75,9 @@ async function copy(button: HTMLElement) {
   } catch {
     setCopyState(button, "error")
     feedback.error()
+    openFallback(button)
+  } finally {
+    button.dispatchEvent(new CustomEvent("copy:complete", { bubbles: true }))
   }
 }
 
@@ -95,6 +91,8 @@ if (!copyWindow.copyToClipboardMounted) {
       return
     }
 
+    event.preventDefault()
+    event.stopPropagation()
     void copy(button)
   })
 }

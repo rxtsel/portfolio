@@ -7,6 +7,7 @@ interface Props {
   class?: string | undefined
   copiedLabel?: string | undefined
   errorLabel?: string | undefined
+  fallbackHref?: string | undefined
   iconOnly?: boolean | undefined
   label?: string | undefined
   role?: "menuitem" | undefined
@@ -19,6 +20,7 @@ const {
   class: className,
   copiedLabel = "Copied",
   errorLabel = "Copy failed",
+  fallbackHref,
   iconOnly = false,
   label = "Copy",
   role,
@@ -37,6 +39,7 @@ const {
     className,
   ]}
   data-copy-button
+  data-copy-fallback-href={fallbackHref}
   data-copy-source={sourceId}
   data-copy-state="idle"
   data-copy-text={text}
