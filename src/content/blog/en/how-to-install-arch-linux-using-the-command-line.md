@@ -9,8 +9,6 @@ updatedDate: ""
 categories:
   - linux
   - tutorials
-coverImage: ""
-coverImageAlt: "2"
 seo:
   description: Follow a practical Arch Linux installation guide using the command line, from disk partitioning to GRUB, users, network, and desktop setup.
   keywords: install arch linux, arch linux command line, arch linux guide, linux installation, arch linux tutorial
@@ -42,13 +40,15 @@ There are people who feel a bit "dirty" if they don't install Arch Linux from th
 ## Installation
 
 1. Verify UEFI Boot
+   - Press <kbd>Win</kbd> + <kbd>R</kbd>, type msinfo32, and press Enter.
 
-- Press <kbd>Win</kbd> + <kbd>R</kbd>, type msinfo32, and press Enter.
-- Look for the BIOS Mode entry.
-- If the value is Legacy, the boot environment is BIOS (Installation would be different). If it is another value like **GPT**, the corresponding boot environment will be displayed.
+   - Look for the BIOS Mode entry.
+
+   - If the value is Legacy, the boot environment is BIOS (Installation would be different). If it is another value like **GPT**, the corresponding boot environment will be displayed.
 
 2. **Download Arch Linux:**
    First, you need to download the latest version of Arch Linux from the [official website](https://archlinux.org/download/).
+
 3. **Boot Arch on a USB:**
    To create a bootable USB, you can use **Rufus** on Windows.
 
@@ -56,25 +56,25 @@ Once Arch is booted, you can run the following commands:
 
 ### 1. Change Keyboard Layout
 
-```bash
+```sh
 loadkeys la-latin1
 ```
 
 `la-latin1` is the keyboard layout for Latin America, but you can choose the one you need. You can view more layouts with the following command:
 
-```bash
+```sh
 localectl list-keymaps
 ```
 
 ### 2. Connect to Wi-Fi:
 
-```bash
+```sh
 lwctl --passphrase "contraseñaWifi" station wlan0 connect "nombreWifi"
 ```
 
 ### 3. Verify Internet Connection
 
-```bash
+```sh
 ping 8.8.8.8
 ```
 
@@ -82,7 +82,7 @@ You should receive a response; if not, go back to step 2.
 
 ### 4. Update the system clock
 
-```bash
+```sh
 timedatectl set-ntp true
 ```
 
@@ -98,7 +98,7 @@ We need at least 3 partitions: one for **boot**, another for **swap**, and anoth
 
 With the following command, we can see the disks we have:
 
-```bash
+```sh
 cfdisk
 ```
 
@@ -106,19 +106,19 @@ Make sure to select the correct disk; in my case, it's `/dev/sda`. If you have a
 
 If your disk or partition doesn't appear with the previous command, run this command to view all partitions and take note of your partition:
 
-```bash
+```sh
 lsblk
 ```
 
 So, you run this command:
 
-```bash
+```sh
 cfdisk /dev/tu_partición_aqui
 ```
 
 ### 6. Format the Disks:
 
-```bash
+```sh
 mkfs.fat -F32 /dev/aqui_EFI_partition   # <- For EFI
 mkfs.ext4 /dev/aqui_ROOT_partition      # <- For ROOT
 mkswap /dev/aqui_SWAP_partition         # <- For SWAP
@@ -128,13 +128,13 @@ mkswap /dev/aqui_SWAP_partition         # <- For SWAP
 
 First, create a mount point for EFI:
 
-```bash
+```sh
 mkdir /mnt/efi
 ```
 
 Then mount the partitions:
 
-```bash
+```sh
 mount /dev/aqui_EFI_partition /mnt/efi   # <- For EFI
 mount /dev/aqui_ROOT_partition /mnt      # <- For ROOT
 swapon /dev/aqui_SWAP_partition          # <- For SWAP
@@ -142,19 +142,19 @@ swapon /dev/aqui_SWAP_partition          # <- For SWAP
 
 ### 8. Install Essential Packages:
 
-```bash
+```sh
 pacstrap /mnt base linux linux-firmware neovim iwd
 ```
 
 ### 9. Execute fstab:
 
-```bash
+```sh
 genfstab -U /mnt >> /mnt/etc/fstab
 ```
 
 ### 10. Execute chroot:
 
-```bash
+```sh
 arch-chroot /mnt
 ```
 
@@ -162,21 +162,21 @@ arch-chroot /mnt
 
 In my case, I will use the Bogota time zone, but you can choose the one you need.
 
-```bash
+```sh
 ln -sf /usr/share/zoneinfo/America/Bogota /etc/localtime
 ```
 
 Run hwclock to synchronize the system clock:
 
-```bash
+```sh
 hwclock –-systohc
 ```
 
 ### 12. Edit Locale:
 
-From here on, I'll use **nvim** as the text editor. If you're not familiar with it, you can follow this guide on [Basic Commands for Neovim](/blog/basic-commands-for-neovim/). At least, so you know how to save and exit Neovim.
+From here on, I'll use **nvim** as the text editor. If you're not familiar with it, you can follow this guide on [Basic Commands for Neovim](/en/blog/basic-commands-for-neovim). At least, so you know how to save and exit Neovim.
 
-```bash
+```sh"
 nvim /etc/locale.gen
 ```
 
@@ -189,7 +189,7 @@ nvim /etc/locale.gen
 
 ### 13. Configure locale.conf:
 
-```bash
+```sh
 nvim /etc/locale.conf
 ```
 
@@ -199,7 +199,7 @@ nvim /etc/locale.conf
 
 ### 14. Configure Keyboard:
 
-```bash
+```sh
 nvim /etc/vconsole.conf
 ```
 
@@ -209,7 +209,7 @@ nvim /etc/vconsole.conf
 
 ### 15. Configure Hostname:
 
-```bash
+```sh
 nvim /etc/hostname
 ```
 
@@ -221,35 +221,35 @@ rxtsel
 
 ### 16. Configure host:
 
-```bash
+```sh
 nvim /etc/hosts
 ```
 
-![Linux host file configuration screenshot](https://user-images.githubusercontent.com/85462420/152463120-22b7cd94-42d2-40a1-8dda-d3320d9fc1a0.png)
+![image](https://user-images.githubusercontent.com/85462420/152463120-22b7cd94-42d2-40a1-8dda-d3320d9fc1a0.png)
 
 - _Write exactly as shown in the image. Just replace `myhostname` with the name you set in your `hostname`_
 
 ### 17. Execute initramfs:
 
-```bash
+```sh
 mkinitcpio -P
 ```
 
 ### 18. Install Grub and Other Packages:
 
-```bash
+```sh
 pacman -S grub base-devel efibootmgr os-prober mtools dosfstools linux-headers networkmanager nm-connection-editor pulseaudio pavucontrol dialog gvfs xdg-user-dirs dhcp
 ```
 
 ### 19. Create EFI Directory:
 
-```bash
+```sh
 mkdir /boot/EFI
 ```
 
 ### 20. Mount the EFI Partition:
 
-```bash
+```sh
 mount /dev/partition_efi /boot/EFI
 ```
 
@@ -257,31 +257,31 @@ mount /dev/partition_efi /boot/EFI
 
 We will install Grub, but you can choose to install another bootloader like [systemd-boot](https://wiki.archlinux.org/title/systemd-boot):
 
-```bash
+```sh
 grub-install --target=x86_64-efi –-bootloader-id=grub_uefi –-recheck
 ```
 
 ### 22. Configure grub:
 
-```bash
+```sh
 grub-mkconfig -o /boot/grub/grub.cfg
 ```
 
 ### 23. Enable Network Manager:
 
-```bash
+```sh
 systemctl enable NetworkManager
 ```
 
 ### 24. Add new user:
 
-```bash
+```sh
 useradd -m -G wheel rxtsel
 ```
 
 ### 25. Add Sudo Permissions:
 
-```bash
+```sh
 EDITOR=nvim visudo
 ```
 
@@ -294,7 +294,7 @@ EDITOR=nvim visudo
 
 ### 26. Password for the New User:
 
-```bash
+```sh
 passwd rxtsel
 ```
 
@@ -302,7 +302,7 @@ passwd rxtsel
 
 ### 27. Configure Root Password:
 
-```bash
+```sh
 passwd root
 ```
 
@@ -314,7 +314,7 @@ passwd root
 
 If you have an **INTEL** GPU, run the following command:
 
-```bash
+```sh
 pacman -S xf86-video-intel
 ```
 
@@ -322,7 +322,7 @@ pacman -S xf86-video-intel
 
 If you have an **AMD** GPU, run the following command:
 
-```bash
+```sh
 pacman -S vulkan-radeon vulkan-icd-loader mesa
 ```
 
@@ -330,7 +330,7 @@ pacman -S vulkan-radeon vulkan-icd-loader mesa
 
 ### 29. Install Display Server:
 
-```bash
+```sh
 pacman -S xorg xorg-server xorg-xinit
 ```
 
@@ -340,19 +340,19 @@ pacman -S xorg xorg-server xorg-xinit
 
 #### Exit to arch-chroot:
 
-```bash
+```sh
 exit
 ```
 
 #### Unmount all partitions:
 
-```bash
+```sh
 umount -a
 ```
 
 #### Reboot system:
 
-```bash
+```sh
 reboot
 ```
 
@@ -360,7 +360,7 @@ _And remove the USB..._
 
 Once restarted, you'll see that it asks for a username and password in the console, but you still **DON'T** have any desktop environment or window manager. Therefore, we'll need to download one. If you are connected by cable, you don't need to follow these steps as you already have an internet connection. In case of using WIFI, run the following commands:
 
-```bash
+```sh
 # List available networks
 nmcli device wifi list
 # Connect to your WIFI
@@ -369,13 +369,13 @@ nmcli device wifi connect NAME_WIFI password TU_PASSWORD
 
 Alright, now test the connection with:
 
-```bash
+```sh
 ping 8.8.8.8
 ```
 
 You now have an internet connection.
 
-## Installing Your Desktop Environment or Window Manager
+# Installing Your Desktop Environment or Window Manager
 
 ### From here, it's your choice. You can install the desktop environment you prefer, or a window manager, or simply stick with the terminal. Some popular choices include:
 
@@ -398,8 +398,8 @@ You can explore and choose the one you like the most. In my case, I prefer **TWM
 <details>
   <summary>TWM Gallery</summary>
 
-![TWM screenshot](https://user-images.githubusercontent.com/85462420/158041264-df60aa28-7a8f-4941-a195-c557fd5188c1.png)
+![image](https://user-images.githubusercontent.com/85462420/158041264-df60aa28-7a8f-4941-a195-c557fd5188c1.png)
 
-![TWM Screenshot](https://user-images.githubusercontent.com/85462420/153124501-184c5032-5d63-4e65-8555-d28113140f6c.png)
+![2022-02-08_23-54](https://user-images.githubusercontent.com/85462420/153124501-184c5032-5d63-4e65-8555-d28113140f6c.png)
 
 </details>
