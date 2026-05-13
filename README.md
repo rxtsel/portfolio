@@ -46,10 +46,16 @@ Main content lives in `src/content`:
 - `projects/` - localized projects
 - `experience/` - localized experience
 - `blog/` - localized blog posts
+- `integrations.md` - Google Tag Manager and AdSense settings
 - `stack.md` - stack items
 - `tags.md` - taxonomy tags
 
 CMS config lives in `public/cms-rxtsel/config.yml`.
+
+## Runbooks
+
+- [Google integrations](docs/runbooks/0001-google-integrations.md) - GTM, GA4, AdSense, ads.txt, and Search Console notes.
+- [Cloudflare Access for Sveltia CMS](docs/runbooks/0002-cloudflare-access-sveltia-cms.md) - Protect the static CMS admin route with Cloudflare Zero Trust.
 
 ## License
 
