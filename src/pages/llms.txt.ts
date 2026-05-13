@@ -6,7 +6,7 @@ import { compareDatesDescending } from "@/lib/date-time"
 
 const siteUrl = "https://rxtsel.dev"
 const siteSummary =
-  "Software Engineer with 3+ years of experience, known for pixel-perfect execution and strong attention to detail."
+  "Software Developer with 3+ years of experience, known for pixel-perfect execution and strong attention to detail."
 const blogDescriptions = {
   en: "Articles by Cristhian Melo about software engineering, web performance, accessibility, and maintainable frontend systems.",
   es: "Artículos de Cristhian Melo sobre ingeniería de software, rendimiento web, accesibilidad y sistemas frontend mantenibles.",

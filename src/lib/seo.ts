@@ -8,7 +8,7 @@ const SITE_URL = "https://rxtsel.dev"
 const SITE_NAME = "Cristhian Melo"
 const DEFAULT_OG_IMAGE = `${SITE_URL}/og.jpg`
 const DEFAULT_DESCRIPTION =
-  "Software Engineer with 3+ years of experience, known for pixel-perfect execution and strong attention to detail. Passionate about seamless user experiences and clean, maintainable code."
+  "Software Developer with 3+ years of experience, known for pixel-perfect execution and strong attention to detail. Passionate about seamless user experiences and clean, maintainable code."
 
 export const siteMetadata = {
   description: DEFAULT_DESCRIPTION,
