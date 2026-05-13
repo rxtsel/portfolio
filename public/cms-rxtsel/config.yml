@@ -3,6 +3,13 @@
 backend:
   name: github
   repo: rxtsel/portfolio
+  commit_messages:
+    create: 'docs: create {{collection}} "{{slug}}"'
+    update: 'docs: update {{collection}} "{{slug}}"'
+    delete: 'docs: delete {{collection}} "{{slug}}"'
+    uploadMedia: 'chore: upload "{{path}}"'
+    deleteMedia: 'chore: delete "{{path}}"'
+    openAuthoring: "{{message}}"
 
 i18n:
   structure: multiple_folders
