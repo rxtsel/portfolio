@@ -2,9 +2,9 @@
 locale: en
 title: Cristhian Melo
 intro: |-
-  **Software Developer** with 3+ years of experience, recognized for building clean, scalable, and user-focused applications.
+  **Software Engineer** and frontend-heavy full stack developer with 3+ years of experience building fast, polished, and scalable web products.
 
-  Passionate about technology, product design, and creating polished solutions through carefully crafted projects.
+  I combine strong product sense, detailed visual execution, performance, architecture, and full stack ownership to turn ambiguous ideas into production-ready software.
 
   _- **rxtsel**_ _is pronounced "ratsel"._
 featuredProjects:
@@ -43,7 +43,7 @@ latestPosts:
   - how-to-install-husky-commitlint-and-lint-staged-in-your-projects-a-step-by-step-guide
   - how-to-install-arch-linux-using-the-command-line
 seo:
-  title: Cristhian Melo - Software Developer
-  description: Software Engineer with 3+ years of experience building accessible, high-performance web experiences with clean, maintainable code.
+  title: Cristhian Melo - Software Engineer
+  description: Frontend-heavy Software Engineer with 3+ years of experience building fast, polished, and scalable web products.
   keywords: software developer, frontend engineer, web developer portfolio, React developer, Astro developer
 ---

@@ -2,9 +2,9 @@
 locale: es
 title: Cristhian Melo
 intro: |-
-  **Desarrollador de Software** con más de 3 años de experiencia, enfocado en crear aplicaciones limpias, escalables y centradas en el usuario.
+  **Software Engineer** frontend-heavy con más de 3 años de experiencia construyendo productos web rápidos, pulidos y escalables.
 
-  Apasionado por la tecnología, el diseño de productos y la creación de soluciones pulidas a través de proyectos cuidadosamente desarrollados.
+  Combino criterio de producto, diseño visual detallado, performance, arquitectura y ownership full stack para llevar ideas ambiguas a software listo para producción.
 
   _- **rxtsel**_ _se pronuncia "ratsel"._
 featuredProjects:
@@ -44,6 +44,6 @@ latestPosts:
   - how-to-install-arch-linux-using-the-command-line
 seo:
   title: Cristhian Melo - Desarrollador de Software
-  description: Software Engineer con más de 3 años de experiencia creando experiencias web accesibles, rápidas y mantenibles.
+  description: Software Engineer frontend-heavy con más de 3 años de experiencia construyendo productos web rápidos, pulidos y escalables.
   keywords: desarrollador de software, frontend engineer, portfolio desarrollador web, desarrollador React, desarrollador Astro
 ---

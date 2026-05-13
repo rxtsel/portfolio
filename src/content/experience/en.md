@@ -10,7 +10,7 @@ items:
         startDate: 2024-03-01
         endDate: 2025-01-01
         current: false
-        description: ""
+        description: Turned Figma designs into a pixel-perfect landing page and improved core product flows across mentors, booking, emails, notifications, contests, and progressive legacy migration.
         stack:
           - nextjs
           - tailwindcss
@@ -18,6 +18,7 @@ items:
           - typescript
           - shadcn-ui
           - git
+          - figma
         tags:
           - extreme-programming
           - wpo
@@ -25,7 +26,13 @@ items:
         startDate: 2025-01-02
         endDate: ""
         current: true
-        description: ""
+        description: |-
+          Lead full stack development for a music mentorship platform with online and in-person events, mentor booking, payments, streaming, courses, community, and internal administration.
+
+          - Designed modular architecture with DDD, SOLID, testing, ports/adapters, and CI/CD to support product growth.
+          - Built public Stripe checkouts with webhooks, idempotency, rate limits, and full purchase traceability.
+          - Integrated private streaming with Cloudflare Stream/R2, signed URLs, and recorded event conversion into masterclass-style content.
+          - Implemented a Rust-powered community engine with SSO, identity mapping, and private room access based on purchases, events, and permissions.
         stack:
           - azure
           - docker
@@ -44,22 +51,15 @@ items:
           - supabase
           - git
         tags:
-          - extreme-programming
           - ci-cd
           - solid
-          - rest
-          - screaming-architecture
-          - vertical-slicing
           - clean-architecture
-          - clean-code
           - runbooks
-          - architecture-decision-record
+          - rest
           - openai
-          - cloudflare
           - cloudflare-stream
           - cloudflare-r2
           - devops
-          - infrastructure-management
   - company: Visual Dealers
     companyUrl: https://visualdealers.com
     location: Los Angeles, California
@@ -69,7 +69,7 @@ items:
         startDate: 2023-04-01
         endDate: 2024-02-29
         current: false
-        description: ""
+        description: Built landing pages, e-commerce sites, WordPress websites, and digital campaigns with focus on UI, performance, and conversion, raising Lighthouse scores from ~40 to 96-100 on key projects.
         stack:
           - css
           - figma
@@ -80,8 +80,6 @@ items:
         tags:
           - wpo
           - email-marketing
-          - Kanban
-          - infrastructure-management
   - company: Vehement
     companyUrl: https://vehement.co
     location: Bogotá, Colombia
@@ -91,7 +89,7 @@ items:
         startDate: 2022-09-01
         endDate: 2024-02-29
         current: false
-        description: ""
+        description: Built corporate sites, landing pages, dashboards, CMS workflows, bots, and SEO-first web experiences, improving Core Web Vitals, indexation, and migration from ZIP/Drive handoffs to GitHub and CI/CD.
         stack:
           - astro
           - nextjs
@@ -108,6 +106,4 @@ items:
           - wpo
           - seo
           - bots
-          - Kanban
-          - infrastructure-management
 ---
