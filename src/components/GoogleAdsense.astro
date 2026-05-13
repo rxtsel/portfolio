@@ -1,0 +1,13 @@
+---
+import { getIntegrations, matchesAllowedPath } from "@/lib/integrations"
+
+const integrations = await getIntegrations()
+const adsense = integrations?.googleAdsense
+const clientId = adsense?.clientId.trim() ?? ""
+const shouldRender =
+  Boolean(adsense?.enabled && clientId) &&
+  matchesAllowedPath(Astro.url.pathname, adsense?.allowedPathPattern ?? "")
+const src = `https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${encodeURIComponent(clientId)}`
+---
+
+{shouldRender && <script async crossorigin="anonymous" is:inline src={src} />}

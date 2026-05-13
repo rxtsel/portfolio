@@ -1,0 +1,87 @@
+---
+import { getCollection } from "astro:content"
+import MainLayout from "@/layouts/MainLayout.astro"
+import ProjectsGrid from "@/components/ProjectsGrid.astro"
+import { getLocaleLanguageTag, type LanguageLink, type Locale } from "@/lib/i18n"
+import { getLocalizedProjects } from "@/lib/projects"
+import { getProjectTaxonomyItems } from "@/lib/taxonomy"
+
+interface Props {
+  locale: Locale
+}
+
+const { locale } = Astro.props
+const metadata = {
+  en: {
+    description:
+      "A showcase of my software projects, including frontend portfolio pieces, web development work, Astro projects, and React projects. Desktop, mobile, and web apps.",
+    keywords: "software projects, frontend portfolio, web development work, Astro projects, React projects",
+    title: "Projects",
+  },
+  es: {
+    description:
+      "Una muestra de mis proyectos de software, incluyendo piezas de portfolio frontend, trabajos de desarrollo web, proyectos Astro y proyectos React. Apps de escritorio, móviles y web.",
+    keywords: "proyectos de software, portfolio frontend, desarrollo web, proyectos Astro, proyectos React",
+    title: "Proyectos",
+  },
+} satisfies Record<Locale, { description: string; keywords: string; title: string }>
+const languageLinks = [
+  { href: "/projects/", locale: "en" },
+  { href: "/es/proyectos/", locale: "es" },
+] satisfies LanguageLink[]
+const alternates = {
+  defaultLocale: "en",
+  entries: [
+    {
+      href: "https://rxtsel.dev/projects/",
+      hreflang: getLocaleLanguageTag("en"),
+    },
+    {
+      href: "https://rxtsel.dev/es/proyectos/",
+      hreflang: getLocaleLanguageTag("es"),
+    },
+    {
+      href: "https://rxtsel.dev/projects/",
+      hreflang: "x-default",
+    },
+  ],
+}
+const [stack] = await getCollection("stack")
+const [tags] = await getCollection("tags")
+
+if (!stack) {
+  throw new Error("Missing stack content")
+}
+
+if (!tags) {
+  throw new Error("Missing tags content")
+}
+
+const projects = getLocalizedProjects(await getCollection("projects"), locale).map((project) => ({
+  ...project,
+  taxonomyItems: getProjectTaxonomyItems({
+    stackEntry: stack,
+    stackSlugs: project.data.stack,
+    tagSlugs: project.data.tags,
+    tagsEntry: tags,
+  }),
+}))
+---
+
+<MainLayout
+  alternates={alternates}
+  description={metadata[locale].description}
+  keywords={metadata[locale].keywords}
+  lang={locale}
+  languageLinks={languageLinks}
+  title={metadata[locale].title}
+>
+  <main class="mx-auto max-w-prose">
+    <h1 class="text-4xl font-semibold">
+      {metadata[locale].title}
+    </h1>
+    <div class="mt-8">
+      <ProjectsGrid headingLevel="h2" projects={projects} />
+    </div>
+  </main>
+</MainLayout>

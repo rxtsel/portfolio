@@ -1,32 +1,62 @@
-# My Portfolio ❤️
+# rxtsel.dev
 
-> [!IMPORTANT]
-> If you are going to use this portfolio make sure to change or remove the Google Analytics tag from `src/components/Analitycs.astro`.
+Personal portfolio and blog, built with Astro.
 
-### Results on Google Lighthouse
+## Features
 
-![image](https://github.com/rxtsel/portfolio/assets/85462420/a2cba98c-d2de-464b-ac35-0dd21183df82)
-
-> [!NOTE]
-> Features and improvements are still being added to the project.
-
-- Intuitive CLI for generating new blog posts
-- Full support for internationalization (i18n), even within posts
-- Achieve a 100% score in Google Lighthouse results
-- SEO friendly
-- Dinamic Open Graph for posts
-- Light/Dark mode support
-- Responsive Design
+- Bilingual content with English and Spanish routes
+- Blog with localized posts
+- Projects and experience powered by Astro Content Collections
+- Content editing through Sveltia CMS
+- Dynamic Open Graph images for blog posts
+- RSS feeds per locale
+- Sitemap and robots.txt
+- SEO metadata validation with `astro-seo-graph`
+- Light and dark theme support
+- Responsive, content-first design
 
 ## Stack
 
-- [**Astro** + Typescript](https://astro.build/) - Build the web
-  you want.
-- [**Tailwind CSS**](https://tailwindcss.com/) - A utility-first CSS framework for rapidly building custom designs.
-- [**Iconoir**](https://iconoir.com/) with [**React-Symbols**](https://react-symbols.vercel.app/) - Beautifully crafted SVG icons & logos.
+- [Astro](https://astro.build/) + TypeScript
+- [Tailwind CSS](https://tailwindcss.com/)
+- [Astro Content Collections](https://docs.astro.build/en/guides/content-collections/)
+- [Sveltia CMS](https://github.com/sveltia/sveltia-cms)
+- [@astrojs/rss](https://docs.astro.build/en/guides/rss/)
+- [@astrojs/sitemap](https://docs.astro.build/en/guides/integrations-guide/sitemap/)
+- [astro-expressive-code](https://expressive-code.com/)
+- [@vercel/og](https://vercel.com/docs/og-image-generation)
+
+## Commands
+
+| Command        | Action                                     |
+| :------------- | :----------------------------------------- |
+| `pnpm install` | Install dependencies                       |
+| `pnpm dev`     | Start local dev server at `localhost:4321` |
+| `pnpm check`   | Run Astro checks                           |
+| `pnpm build`   | Check and build production site to `dist/` |
+| `pnpm preview` | Preview production build locally           |
+| `pnpm lint`    | Run ESLint with fixes                      |
+| `pnpm format`  | Format files with Prettier                 |
+
+## Content
+
+Main content lives in `src/content`:
+
+- `home/` - localized homepage copy
+- `projects/` - localized projects
+- `experience/` - localized experience
+- `blog/` - localized blog posts
+- `integrations.md` - Google Tag Manager and AdSense settings
+- `stack.md` - stack items
+- `tags.md` - taxonomy tags
+
+CMS config lives in `public/cms-rxtsel/config.yml`.
+
+## Runbooks
+
+- [Google integrations](docs/runbooks/0001-google-integrations.md) - GTM, GA4, AdSense, ads.txt, and Search Console notes.
+- [Cloudflare Access for Sveltia CMS](docs/runbooks/0002-cloudflare-access-sveltia-cms.md) - Protect the static CMS admin route with Cloudflare Zero Trust.
 
 ## License
 
-- [Apache-2.0 license](https://github.com/rxtsel/portfolio/blob/main/LICENSE)
-
-View old design [here](https://old-rxtsel-dev.netlify.app/).
+[Apache-2.0](LICENSE)

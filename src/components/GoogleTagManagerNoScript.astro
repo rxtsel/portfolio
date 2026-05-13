@@ -1,0 +1,22 @@
+---
+import { getIntegrations } from "@/lib/integrations"
+
+const integrations = await getIntegrations()
+const containerId = integrations?.googleTagManager.containerId.trim() ?? ""
+const shouldRender = integrations?.googleTagManager.enabled && containerId
+const src = `https://www.googletagmanager.com/ns.html?id=${encodeURIComponent(containerId)}`
+---
+
+{
+  shouldRender && (
+    <noscript>
+      <iframe
+        height="0"
+        src={src}
+        style="display:none;visibility:hidden"
+        title="Google Tag Manager"
+        width="0"
+      />
+    </noscript>
+  )
+}

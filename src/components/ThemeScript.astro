@@ -1,58 +1,88 @@
-<script>
-  'use strict'
-  ;(() => {
-    type Theme = 'light' | 'dark'
+<script is:inline>
+  const themeStorageKey = "theme"
+  const themeOrder = ["system", "light", "dark"]
+  const themeModes = new Set(themeOrder)
+  const darkScheme = window.matchMedia("(prefers-color-scheme: dark)")
+  const themeLabels = {
+    system: {
+      current: "System theme",
+      next: "light theme",
+    },
+    light: {
+      current: "Light theme",
+      next: "dark theme",
+    },
+    dark: {
+      current: "Dark theme",
+      next: "system theme",
+    },
+  }
 
-    const storageKey = 'theme-toggle'
+  function getStoredTheme() {
+    const theme = localStorage.getItem(themeStorageKey)
 
-    let currentTheme: Theme | undefined
+    return themeModes.has(theme) ? theme : "system"
+  }
 
-    function getSystemTheme(): Theme {
-      return window.matchMedia('(prefers-color-scheme: dark)').matches
-        ? 'dark'
-        : 'light'
+  function shouldUseDarkTheme(theme) {
+    return theme === "dark" || (theme === "system" && darkScheme.matches)
+  }
+
+  function updateThemeControls(theme) {
+    document.querySelectorAll("[data-theme-toggle]").forEach((control) => {
+      const labels = themeLabels[theme]
+
+      control.toggleAttribute("data-active", true)
+      control.setAttribute("aria-label", `${labels.current}. Switch to ${labels.next}`)
+
+      control.querySelectorAll("[data-theme-icon]").forEach((icon) => {
+        const isActive = icon.dataset.themeIcon === theme
+
+        icon.classList.toggle("block", isActive)
+        icon.classList.toggle("hidden", !isActive)
+      })
+    })
+  }
+
+  function getNextTheme(theme) {
+    const currentIndex = themeOrder.indexOf(theme)
+    const nextIndex = (currentIndex + 1) % themeOrder.length
+
+    return themeOrder[nextIndex]
+  }
+
+  function applyTheme(theme = getStoredTheme()) {
+    document.documentElement.classList.toggle("dark", shouldUseDarkTheme(theme))
+    document.documentElement.dataset.themeMode = theme
+    document.documentElement.style.colorScheme = shouldUseDarkTheme(theme) ? "dark" : "light"
+    document.documentElement.dataset.theme = `github-${theme}-default`
+    updateThemeControls(theme)
+  }
+
+  function setTheme(theme) {
+    localStorage.setItem(themeStorageKey, theme)
+    applyTheme(theme)
+  }
+
+  document.addEventListener("click", (event) => {
+    const target = event.target instanceof Element ? event.target : null
+    const control = target?.closest("[data-theme-toggle]")
+
+    if (!control) {
+      return
     }
 
-    function getStoredTheme(): Theme | null {
-      const theme = localStorage.getItem(storageKey)
-      return theme === 'dark' || theme === 'light' ? theme : null
+    setTheme(getNextTheme(getStoredTheme()))
+  })
+
+  document.addEventListener("DOMContentLoaded", () => updateThemeControls(getStoredTheme()))
+  document.addEventListener("astro:after-swap", () => applyTheme())
+  darkScheme.addEventListener("change", () => {
+    if (getStoredTheme() === "system") {
+      applyTheme("system")
     }
+  })
 
-    function getTheme(): Theme {
-      return currentTheme || getStoredTheme() || getSystemTheme()
-    }
-
-    function setStoredTheme(theme: Theme) {
-      if (theme === getSystemTheme()) {
-        localStorage.removeItem(storageKey)
-      } else {
-        localStorage.setItem(storageKey, theme)
-      }
-    }
-
-    function setStyle(theme: Theme) {
-      const root = document.documentElement
-      root.classList.toggle('dark', theme === 'dark')
-      root.dataset.theme = `github-${theme}`
-      root.style.colorScheme = theme
-    }
-
-    function setTheme(theme: Theme) {
-      currentTheme = theme
-      setStoredTheme(theme)
-      setStyle(theme)
-    }
-
-    function setupTheme() {
-      setTheme(getTheme())
-    }
-
-    // Set the theme on load
-    setupTheme()
-
-    // Set the theme after a page swap
-    document.addEventListener('astro:after-swap', setupTheme)
-
-    window.astroThemeToggle = { setTheme, getTheme }
-  })()
+  window.theme = { apply: applyTheme, set: setTheme }
+  applyTheme()
 </script>

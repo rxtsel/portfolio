@@ -1,0 +1,100 @@
+---
+translationKey: how-to-install-zsh-on-linux
+locale: es
+published: true
+title: Cómo instalar zsh en linux
+description: Instala y configura Zsh en tu sistema con estos simples pasos. Optimiza tu terminal con oh-my-zsh para una experiencia de línea de comandos mejorada.
+publishDate: 2024-01-29
+updatedDate: 2026-05-13
+categories:
+  - linux
+  - terminals
+  - tutorials
+  - shells
+seo:
+  description: Instala Zsh en Linux, cambia tu shell por defecto, añade oh-my-zsh y configura plugins y alias útiles para mejorar tu terminal.
+  keywords: instalar zsh linux, configurar zsh, oh my zsh, terminal linux, tutorial zsh
+---
+
+## Instalación
+
+1. Para comenzar, instala **zsh** utilizando tu gestor de paquetes. En este caso, lo haré con pacman con el siguiente comando:
+
+```sh
+sudo pacman -S zsh
+```
+
+2. A continuación, verifica la versión de zsh recién instalada:
+
+```sh
+zsh --version
+```
+
+3. Para confirmar que estás utilizando la nueva shell, verifica la shell actual con:
+
+```sh
+echo $SHELL
+```
+
+4. Ahora, abre el archivo /etc/passwd con tu editor de texto preferido. Por ejemplo, puedes usar nvim:
+
+```sh
+sudo nvim /etc/passwd
+```
+
+5. Dentro del archivo, encuentra la línea que corresponde a tu nombre de usuario y reemplaza `/bin/bash` por `/bin/zsh`. En mi caso mi username es `rxtsel`:
+
+```diff title="/etc/passwd"
+- rxtsel:x:1000:1000::/home/rxtsel:/bin/bash
+
++ rxtsel:x:1000:1000::/home/rxtsel:/bin/zsh
+```
+
+- _Guarda los cambios y cierra el archivo._
+
+6. Cambia la shell predeterminada ejecutando el siguiente comando:
+
+```sh
+sudo chsh -s /bin/zsh
+```
+
+7. Continúa instalando oh-my-zsh y git:
+
+```sh
+sudo pacman -S git &&
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+```
+
+8. Reinicia tu terminal para aplicar los cambios.
+9. Luego, edita el archivo `.zshrc` con tu editor de texto favorito que debe estar en la raíz de la carpeta de usuario `/home/rxtsel/.zshrc`.
+
+Para esta configuración necesitarás instalar los siguientes plugins y programas:
+
+- [zsh-syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/INSTALL.md)
+- [nvim](https://github.com/neovim/neovim)
+
+```zsh title=".zshrc"
+export ZSH="$HOME/.oh-my-zsh"
+
+# Set name of the theme to load --- if set to "random", it will
+ZSH_THEME="robbyrussell"
+
+plugins=(
+  sudo
+  zsh-syntax-highlighting
+)
+
+source $ZSH/oh-my-zsh.sh
+
+# CUSTOM ALIAS
+alias zz="cd ~/.config"
+alias vim=nvim
+alias v=nvim
+alias vcfg="cd ~/.config/nvim/ && nvim init.lua"
+alias zr="source ~/.zshrc"
+alias -s {html,js,css,py,go,lua}="nvim"
+```
+
+- Reinicia tu terminal para aplicar los cambios.
+
+¡Listo! Ahora tienes zsh instalado, configurado con oh-my-zsh, y tu terminal está lista para ser utilizada de manera eficiente.

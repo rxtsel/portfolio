@@ -1,2 +1,8 @@
-/// <reference path="../.astro/types.d.ts" />
-/// <reference types="astro/client" />
+declare function haptic(pattern?: number | number[]): void
+
+interface Window {
+  theme?: {
+    apply(theme?: ThemeMode): void
+    set(theme: ThemeMode): void
+  }
+}

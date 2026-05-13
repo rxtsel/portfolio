@@ -1,114 +1,167 @@
 ---
-import { calculateDuration } from '@/utils'
-import { getLangFromUrl, useTranslations } from '@/i18n/utils'
-import type { TWorkEntry } from '@/types'
-import ArrowIcon from '@/icons/simple/arrow-tr.svg'
+import type { CollectionEntry } from "astro:content"
+import { renderSafeMarkdown } from "@/lib/markdown"
+import type { Locale } from "@/lib/i18n"
+import { formatExperienceRange } from "@/lib/date-time"
+import { getProjectTaxonomyItems } from "@/lib/taxonomy"
+import Tags from "./Tags.astro"
 
-const lang = getLangFromUrl(Astro.url)
-const t = useTranslations(lang)
+type ExperienceEntry = CollectionEntry<"experience">
+type ExperienceItemData = ExperienceEntry["data"]["items"][number]
+type ExperienceJob = ExperienceItemData["jobs"][number]
+type StackEntry = CollectionEntry<"stack">
+type TagsEntry = CollectionEntry<"tags">
 
-export interface Props {
-  data: TWorkEntry
+interface Props {
+  item: ExperienceItemData
+  locale: Locale
+  stackEntry: StackEntry
+  tagsEntry: TagsEntry
 }
 
-const { data } = Astro.props
-const { company, location, remote } = data
+const { item, locale, stackEntry, tagsEntry } = Astro.props
 
-let startDate: Date
-let endDate: Date | undefined = undefined
+const labels = {
+  en: {
+    present: "Present",
+    remote: "Remote",
+  },
+  es: {
+    present: "Actualidad",
+    remote: "Remoto",
+  },
+} satisfies Record<Locale, Record<string, string>>
 
-const jobs = data.jobs
-if (jobs.length > 0) {
-  startDate = new Date(Math.min(...jobs.map((job) => job.startDate.getTime())))
-  const hasEndDate = jobs.every((job) => job.endDate !== undefined)
-  if (hasEndDate) {
-    const endDates = jobs.map((job) => job.endDate!)
-    endDate = new Date(Math.max(...endDates.map((d) => d.getTime())))
-  } else {
-    endDate = undefined
+function getJobEndDate(job: ExperienceJob) {
+  return job.current ? "" : (job.endDate ?? "")
+}
+
+function getEarliestStartDate(jobs: ExperienceJob[]) {
+  return [...jobs.map((job) => job.startDate)].sort()[0] ?? ""
+}
+
+function getLatestEndDate(jobs: ExperienceJob[]) {
+  if (jobs.some((job) => job.current || !job.endDate)) {
+    return ""
   }
+
+  return [...jobs.map((job) => job.endDate).filter(Boolean)].sort().at(-1) ?? ""
 }
-const initialDuration = calculateDuration({
-  startDate: startDate!,
-  endDate,
-  locale: lang
+
+const companyStartDate = getEarliestStartDate(item.jobs)
+const companyEndDate = getLatestEndDate(item.jobs)
+const companyIsCurrent = !companyEndDate
+const shouldShowJobDates = item.jobs.length > 1
+const sortedJobs = [...item.jobs].sort((current, next) => {
+  const currentDate = current.current ? "9999-12-31" : current.endDate || current.startDate
+  const nextDate = next.current ? "9999-12-31" : next.endDate || next.startDate
+
+  return nextDate.localeCompare(currentDate)
 })
 ---
 
-<li class='mb-10 ms-4'>
-  <span
-    class='absolute block w-3 h-3 rounded-full mt-1.5 -start-1.5 border border-cBlue bg-cBlue'
-    aria-hidden='true'></span>
+<li class="relative my-0! ms-[20.5px] grid gap-4 ps-0!">
+  <header>
+    <span
+      class="border-border bg-primary absolute inset-s-[-1.35rem] mt-1.5 block size-3 border lg:mt-2.5"
+      role="none"
+    >
+      {
+        companyIsCurrent ? (
+          <span class="bg-primary absolute inline-flex size-2.5 animate-ping border border-transparent opacity-75" />
+        ) : null
+      }
+    </span>
 
-  <time
-    class='text-sm font-normal leading-none dark:text-cAccent text-neutral-600 capitalize ts-duration'
-    data-start={startDate!.toISOString()}
-    data-end={endDate ? endDate.toISOString() : ''}
-    data-locale={lang}
-    datetime={(endDate ?? new Date()).toISOString()}
-  >
-    {initialDuration}
-  </time>
-
-  <span
-    class='text-sm mt-1 block font-normal leading-none dark:text-cAccent text-neutral-600 capitalize'
-  >
-    {location}
-    {remote && `· ${t('single.remote')}`}
-  </span>
-
-  {
-    data.companyUrl ? (
-      <a
-        href={data.companyUrl}
-        target='_blank'
-        rel='noopener noreferrer'
-        aria-label={company}
-        class='text-xl w-fit font-semibold hover:text-cBlue transition-all duration-150 ease-in dark:text-white mt-2 capitalize group flex items-center gap-[6px]'
-      >
-        {company}
-        <span class='size-3 inline-block dark:text-cAccent text-neutral-600 transition-all duration-150 ease-in group-hover:-translate-y-[1px] group-hover:translate-x-[1px] group-hover:text-cBlue'>
-          <ArrowIcon />
-        </span>
-      </a>
-    ) : (
-      <h3 class='text-xl font-semibold dark:text-white mt-2 capitalize'>
-        {company}
-      </h3>
-    )
-  }
-
-  {
-    data.jobs.map((job) => {
-      const initialJobDuration = calculateDuration({
-        startDate: job.startDate,
-        endDate: job.endDate,
-        locale: lang
-      })
-      return (
-        <div class='first-of-type:mt-0 mt-5'>
-          <h3 class='dark:text-cAccent text-neutral-600 font-bold mt-2 capitalize'>
-            {job.role}
-          </h3>
-          {data.jobs.length > 1 && (
-            <time
-              class='text-sm font-normal leading-none dark:text-cAccent text-neutral-600 capitalize js-duration'
-              data-start={job.startDate.toISOString()}
-              data-end={job.endDate ? job.endDate.toISOString() : ''}
-              data-locale={lang}
-            >
-              {initialJobDuration}
-            </time>
-          )}
-          {job.description && (
-            <p class='my-3 text-base font-normal dark:text-cAccent text-neutral-600 text-pretty'>
-              {job.description}
-            </p>
-          )}
-        </div>
+    {
+      item.companyUrl ? (
+        <h3 class="my-0! text-lg leading-snug font-semibold">
+          <a
+            class="link-underline"
+            href={`${item.companyUrl}?utm_source=rxtsel.dev&utm_medium=referral`}
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            {item.company}
+          </a>
+        </h3>
+      ) : (
+        <h3 class="my-0! text-lg leading-snug font-semibold">{item.company}</h3>
       )
-    })
-  }
-</li>
+    }
 
-<script src='../utils/update-durations.ts'></script>
+    <time
+      class="text-muted-foreground block text-sm"
+      data-current={String(companyIsCurrent)}
+      data-end={companyEndDate}
+      data-experience-range
+      data-start={companyStartDate}
+      datetime={companyEndDate || companyStartDate}
+    >
+      {formatExperienceRange(companyStartDate, companyEndDate, locale)}
+    </time>
+
+    {
+      (item.location || item.remote) && (
+        <span class="text-muted-foreground block text-sm">
+          {item.location}
+          {item.location && item.remote ? " · " : ""}
+          {item.remote ? labels[locale].remote : ""}
+        </span>
+      )
+    }
+  </header>
+
+  <div class="space-y-4">
+    {
+      sortedJobs.map((job) => {
+        const endDate = getJobEndDate(job)
+        const taxonomyItems = getProjectTaxonomyItems({
+          stackEntry,
+          stackSlugs: job.stack,
+          tagSlugs: job.tags,
+          tagsEntry,
+        })
+        const descriptionHtml = job.description ? renderSafeMarkdown(job.description) : ""
+
+        return (
+          <article class="relative ml-[21.5px] grid gap-2">
+            <span
+              class="bg-border absolute inset-s-[-1.35rem] mt-[3px] block size-3 border lg:mt-[5.5px]"
+              role="none"
+            />
+
+            <header>
+              <h4 class="my-0! flex-1 leading-snug font-semibold text-balance">{job.role}</h4>
+              {shouldShowJobDates ? (
+                <time
+                  class="text-muted-foreground block text-sm"
+                  data-current={String(job.current)}
+                  data-end={endDate}
+                  data-experience-range
+                  data-start={job.startDate}
+                  datetime={endDate || job.startDate}
+                >
+                  {formatExperienceRange(job.startDate, endDate, locale)}
+                </time>
+              ) : null}
+            </header>
+
+            {descriptionHtml ? (
+              <>
+                {/* eslint-disable astro/no-set-html-directive */}
+                <div
+                  class="prose prose-sm prose-neutral dark:prose-invert lg:prose-sm prose-p:text-muted-foreground prose-li:text-muted-foreground prose-ul:list-disc!"
+                  set:html={descriptionHtml}
+                />
+                {/* eslint-enable astro/no-set-html-directive */}
+              </>
+            ) : null}
+
+            {taxonomyItems.length > 0 && <Tags class="prose-li:m-0! p-0!" tags={taxonomyItems} />}
+          </article>
+        )
+      })
+    }
+  </div>
+</li>

@@ -1,0 +1,37 @@
+---
+import ProjectCard from "@/components/ProjectCard.astro"
+import { getProjectTransitionName, type Project } from "@/lib/projects"
+
+type TaxonomyItem = {
+  name: string
+}
+
+interface ProjectItem extends Project {
+  taxonomyItems: TaxonomyItem[]
+}
+
+interface Props {
+  headingLevel?: "h2" | "h3"
+  projects: ProjectItem[]
+}
+
+const { headingLevel = "h3", projects } = Astro.props
+---
+
+<ul class="not-prose grid grid-cols-1 gap-0 sm:gap-2">
+  {
+    projects.map((project) => (
+      <li class="border odd:border-0 odd:border-x first-of-type:border-t last-of-type:border-b sm:odd:border">
+        <ProjectCard
+          description={project.data.description}
+          headingLevel={headingLevel}
+          href={project.data.href as string}
+          sourceUrl={project.data.sourceUrl as string}
+          taxonomyItems={project.taxonomyItems}
+          title={project.data.title}
+          titleTransitionName={getProjectTransitionName(project, "title")}
+        />
+      </li>
+    ))
+  }
+</ul>

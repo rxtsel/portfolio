@@ -1,0 +1,15 @@
+---
+import type { HTMLAttributes } from "astro/types"
+
+type Props = HTMLAttributes<"div">
+
+const { ...attrs } = Astro.props
+---
+
+<div
+  class:list={["bg-border mx-1 h-4 w-px shrink-0 self-center", attrs.class, attrs["class:list"]]}
+  data-slot="separator"
+  role="none"
+  {...attrs}
+>
+</div>

@@ -1,0 +1,51 @@
+---
+import Seo from "@jdevalk/astro-seo-graph/Seo.astro"
+import { ClientRouter } from "astro:transitions"
+import GoogleAdsense from "@/components/GoogleAdsense.astro"
+import GoogleTagManagerHead from "@/components/GoogleTagManagerHead.astro"
+import GoogleTagManagerNoScript from "@/components/GoogleTagManagerNoScript.astro"
+import ThemeScript from "@/components/ThemeScript.astro"
+import { buildLayoutSeoProps, type LayoutSeoProps } from "@/lib/seo"
+import "@/styles/global.css"
+import "@fontsource-variable/geist/wght.css"
+
+import Header from "@/components/Header.astro"
+import Footer from "@/components/Footer.astro"
+import ScrollToTop from "@/components/ScrollToTop.astro"
+import { getLocaleLanguageTag, type LanguageLink } from "@/lib/i18n"
+
+interface Props extends LayoutSeoProps {
+  languageLinks?: LanguageLink[]
+}
+
+const { lang = "en", languageLinks, ...seoProps } = Astro.props
+const seo = buildLayoutSeoProps({ ...seoProps, lang }, Astro.url)
+---
+
+<html lang={getLocaleLanguageTag(lang)}>
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width" name="viewport" />
+    <meta content={Astro.generator} name="generator" />
+    <ThemeScript />
+    <Seo {...seo} />
+    <GoogleTagManagerHead />
+    <GoogleAdsense />
+    <ClientRouter />
+  </head>
+  <body
+    class="mx-auto grid min-h-screen w-full max-w-prose grid-rows-[auto_1fr_auto] gap-y-6 overflow-x-hidden px-4 font-sans md:px-0"
+  >
+    <GoogleTagManagerNoScript />
+    <Header languageLinks={languageLinks} locale={lang} pathname={Astro.url.pathname} />
+    <slot />
+    <Footer locale={lang} />
+    <ScrollToTop locale={lang} />
+  </body>
+</html>
+
+<script>
+  import { haptic } from "@/lib/haptic"
+
+  window.haptic = () => haptic()
+</script>

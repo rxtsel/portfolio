@@ -1,0 +1,13 @@
+---
+import { getCollection } from "astro:content"
+import BlogPostPage from "@/components/BlogPostPage.astro"
+import { getPublishedBlogStaticPaths } from "@/lib/blog"
+
+export async function getStaticPaths() {
+  return getPublishedBlogStaticPaths(await getCollection("blog"), "es")
+}
+
+const { post, posts } = Astro.props
+---
+
+<BlogPostPage post={post} posts={posts} />

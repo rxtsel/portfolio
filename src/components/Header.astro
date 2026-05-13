@@ -1,54 +1,121 @@
 ---
-import NavDesktop from '@/components/NavDesktop.astro'
-import NavMobile from '@/components/NavMobile.astro'
-import { getLangFromUrl, useTranslations } from '@/i18n/utils'
+import Logo from "@/assets/logo.svg"
+import {
+  getDefaultLanguageLinks,
+  getLocaleLanguageTag,
+  getLocaleLabel,
+  getLocalizedPath,
+  type LanguageLink,
+  type Locale,
+} from "@/lib/i18n"
 
-const lang = getLangFromUrl(Astro.url)
-const t = useTranslations(lang)
+import Separator from "@/components/Separator.astro"
+import ThemeSwitcher from "@/components/ThemeSwitcher.astro"
 
-const path = lang === 'en' ? `/${lang}` : ''
-
-const ROUTES = {
-  home: {
-    path: `${path}/#top`,
-    name: t('nav.home')
-  },
-  portfolio: {
-    path: `${path}/#portfolio`,
-    name: t('nav.portfolio')
-  },
-  blog: {
-    path: `/${lang || ''}/blog`,
-    name: 'Blog'
-  }
+interface Props {
+  languageLinks?: LanguageLink[] | undefined
+  locale: Locale
+  pathname: string
 }
 
-export type RouteNames = keyof typeof ROUTES
+const { languageLinks, locale, pathname } = Astro.props
+const links = languageLinks ?? getDefaultLanguageLinks()
+const logoHref = getLocalizedPath(locale)
+const blogHref = getLocalizedPath(locale, "blog")
+const normalizePath = (path: string) => path.replace(/\/+$/, "") || "/"
+const normalizedPathname = normalizePath(pathname)
+const normalizedBlogHref = normalizePath(blogHref)
+const isBlogIndexActive = normalizedPathname === normalizedBlogHref
+const isBlogActive = isBlogIndexActive || normalizedPathname.startsWith(`${normalizedBlogHref}/`)
+const navLinkClass =
+  "text-muted-foreground cursor-pointer hover:text-foreground data-active:text-foreground inline-flex h-8 items-center px-1 text-sm font-medium transition-colors"
+const languageLinkClass =
+  "text-muted-foreground hover:text-foreground data-active:text-foreground inline-flex h-8 items-center text-sm font-medium transition-colors"
+const labels = {
+  en: {
+    language: "Language selector",
+    primary: "Primary",
+  },
+  es: {
+    language: "Selector de idioma",
+    primary: "Principal",
+  },
+} satisfies Record<Locale, Record<string, string>>
 ---
 
-<header
-  id='header'
-  class='hidden lg:block full p-2 fixed top-0 left-0 right-0 z-10'
->
-  <NavDesktop routes={ROUTES} />
-</header>
+<header class="bg-background sticky top-0 z-50 flex items-center justify-between py-4" id="header">
+  <a class="logo" href={logoHref}>
+    <Logo aria-label="Rxtsel logo" height={30} width={29} />
+  </a>
 
-<header
-  class='block lg:hidden full px-4 py-3 fixed bottom-5 sm:bottom-10 left-0 right-0 z-50 bg-neutral-100/10 dark:bg-cPaper/10 backdrop-blur-xl shadow-md max-w-xs sm:max-w-sm mx-auto w-full rounded-2xl'
->
-  <NavMobile routes={ROUTES} />
+  <div class="flex items-center">
+    <nav aria-label={labels[locale].primary} class="flex items-center">
+      <a
+        aria-current={isBlogActive ? "page" : undefined}
+        class:list={navLinkClass}
+        data-active={isBlogActive ? true : undefined}
+        href={blogHref}
+      >
+        Blog
+      </a>
+    </nav>
+
+    <Separator />
+
+    <nav aria-label={labels[locale].language} class="flex items-center gap-x-1 px-1">
+      {
+        links.map((link, index) => (
+          <>
+            {index > 0 && (
+              <span aria-hidden="true" class="text-muted-foreground/40 text-sm">
+                /
+              </span>
+            )}
+            {link.locale === locale ? (
+              <span
+                aria-current="true"
+                aria-label={getLocaleLabel(link.locale)}
+                class:list={languageLinkClass}
+                data-active
+                lang={getLocaleLanguageTag(link.locale)}
+              >
+                {link.locale.toUpperCase()}
+              </span>
+            ) : (
+              <a
+                aria-label={getLocaleLabel(link.locale)}
+                class:list={languageLinkClass}
+                href={link.href}
+                hreflang={getLocaleLanguageTag(link.locale)}
+                lang={getLocaleLanguageTag(link.locale)}
+              >
+                {link.locale.toUpperCase()}
+              </a>
+            )}
+          </>
+        ))
+      }
+    </nav>
+
+    <Separator class="mr-2" />
+
+    <ThemeSwitcher />
+  </div>
 </header>
 
 <style>
   #header {
     animation: blur linear both;
     animation-timeline: scroll();
-    animation-range: 0 500px;
+    animation-range: 0 100px;
   }
 
   @keyframes blur {
     to {
-      @apply dark:bg-cBlack/20 backdrop-blur dark:shadow shadow-sm;
+      --tw-shadow: 0 1px var(--tw-shadow-color, rgb(0 0 0 / 0.05));
+      box-shadow:
+        var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow),
+        var(--tw-ring-shadow), var(--tw-shadow);
     }
   }
 </style>

@@ -1,22 +1,124 @@
 ---
-import { getLangFromUrl, useTranslations } from '@/i18n/utils'
+import GitHubIcon from "@/assets/logos/github.svg"
+import LinkedInIcon from "@/assets/logos/linkedin.svg"
+import RssIcon from "@/assets/rss.svg"
+import XIcon from "@/assets/logos/x.svg"
+import { getLocalizedPath, type Locale } from "@/lib/i18n"
+import type { SvgComponent } from "astro/types"
 
-const lang = getLangFromUrl(Astro.url)
-const t = useTranslations(lang)
+interface Props {
+  locale: Locale
+}
+
+type FooterLink =
+  | {
+      href: string
+      label: string
+      text: string
+    }
+  | {
+      href: string
+      Icon: SvgComponent
+      label: string
+    }
+
+const { locale } = Astro.props
+const rssHref = getLocalizedPath(locale, "rss.xml")
+const labels = {
+  en: {
+    built: "Built with ♥ and coffee by",
+    github: "GitHub profile",
+    linkedin: "LinkedIn profile",
+    llms: "LLMs text file",
+    rss: "RSS feed",
+    x: "X profile",
+  },
+  es: {
+    built: "Creado con ♥ y café por",
+    github: "Perfil de GitHub",
+    linkedin: "Perfil de LinkedIn",
+    llms: "Archivo de texto para LLMs",
+    rss: "Feed RSS",
+    x: "Perfil de X",
+  },
+} satisfies Record<Locale, Record<string, string>>
+const footerLinks: FooterLink[] = [
+  {
+    href: "/llms.txt",
+    label: labels[locale].llms,
+    text: "llms.txt",
+  },
+  {
+    href: "https://x.com/rxtsel",
+    Icon: XIcon,
+    label: labels[locale].x,
+  },
+  {
+    href: "https://github.com/rxtsel",
+    Icon: GitHubIcon,
+    label: labels[locale].github,
+  },
+  {
+    href: "https://www.linkedin.com/in/rxtsel",
+    Icon: LinkedInIcon,
+    label: labels[locale].linkedin,
+  },
+  {
+    href: rssHref,
+    Icon: RssIcon,
+    label: labels[locale].rss,
+  },
+]
 ---
 
-<footer
-  class='pb-32 mt-14 lg:my-4 lg:py-4 w-full text-center dark:text-cAccent text-neutral-600'
->
-  <p>
-    &copy; 2022 - {new Date().getFullYear()}. {t('footer.p1')} &hearts;
-    {t('single.by')}
+<footer class="mt-6 grid justify-items-center gap-4 pb-4">
+  <nav
+    aria-label="Footer links"
+    class="border-border text-muted-foreground retina:border-[0.5px] flex divide-x overflow-hidden border text-sm"
+  >
+    {
+      footerLinks.map((link) => {
+        if ("Icon" in link) {
+          const Icon = link.Icon
+
+          return (
+            <a
+              aria-label={link.label}
+              class="hover:bg-muted hover:text-foreground flex size-8 items-center justify-center px-1.5 transition-colors [&_svg]:size-4"
+              href={link.href}
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              <Icon aria-hidden="true" class="pointer-events-none" />
+            </a>
+          )
+        }
+
+        return (
+          <a
+            aria-label={link.label}
+            class="hover:bg-muted hover:text-foreground flex min-h-8 min-w-8 items-center justify-center px-2 transition-colors [&_svg]:size-4"
+            href={link.href}
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            {link.text}
+          </a>
+        )
+      })
+    }
+  </nav>
+
+  <p class="text-muted-foreground text-center text-sm">
+    {labels[locale].built}
+    {" "}
     <a
-      class='hover:text-cBlue transition-colors duration-150 ease-in decoration-neutral-500 decoration-dotted underline-offset-[5px] underline'
-      href='https://twitter.com/rxtsel'
-      target='_blank'
+      class="link-underline text-foreground font-medium"
+      href="https://x.com/rxtsel"
+      rel="noopener noreferrer"
+      target="_blank"
     >
-      @rxtsel</a
-    >.
+      rxtsel
+    </a>.
   </p>
 </footer>

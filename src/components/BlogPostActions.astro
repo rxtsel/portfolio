@@ -1,0 +1,270 @@
+---
+import ChevronIcon from "@/assets/chevron.svg"
+import ChatGptIcon from "@/assets/logos/chatgpt.svg"
+import ClaudeIcon from "@/assets/logos/claude.svg"
+import LinkedInIcon from "@/assets/logos/linkedin.svg"
+import MarkdownIcon from "@/assets/logos/markdown.svg"
+import ShareIcon from "@/assets/share.svg"
+import XIcon from "@/assets/logos/x.svg"
+import CopyButton from "@/components/CopyButton.astro"
+import type { Locale } from "@/lib/i18n"
+
+interface Props {
+  locale: Locale
+  markdown: string
+  title: string
+  url: string
+}
+
+const { locale, markdown, title, url } = Astro.props
+const labels = {
+  en: {
+    ai: "AI actions",
+    chatgpt: "Open in ChatGPT",
+    claude: "Open in Claude",
+    copied: "Copied",
+    copyLink: "Copy link",
+    copyPage: "Copy Page",
+    markdown: "View as Markdown",
+    openActions: "Open page actions",
+    share: "Share actions",
+    shareLinkedIn: "Share on LinkedIn",
+    shareX: "Share on X",
+  },
+  es: {
+    ai: "Acciones de IA",
+    chatgpt: "Abrir en ChatGPT",
+    claude: "Abrir en Claude",
+    copied: "Copiado",
+    copyLink: "Copiar enlace",
+    copyPage: "Copiar página",
+    markdown: "Ver como Markdown",
+    openActions: "Abrir acciones de página",
+    share: "Acciones de compartir",
+    shareLinkedIn: "Compartir en LinkedIn",
+    shareX: "Compartir en X",
+  },
+} satisfies Record<Locale, Record<string, string>>
+const markdownUrl = `${url.replace(/\/$/, "")}.md`
+const markdownSourceId = "blog-post-markdown-source"
+const buttonClass =
+  "bg-background text-muted-foreground hover:text-foreground hover:bg-accent focus-visible:border-ring focus-visible:ring-ring/50 inline-flex h-8 items-center gap-1.5 border px-2 text-sm transition-colors outline-none focus-visible:ring-3 [&_svg]:size-4"
+const iconButtonClass = `${buttonClass} size-8 justify-center px-0`
+const menuClass =
+  "bg-popover text-popover-foreground border-border absolute top-full z-50 mt-1 hidden w-48 border p-1 shadow-lg"
+const menuItemClass =
+  "text-muted-foreground hover:bg-accent hover:text-foreground focus-visible:bg-accent focus-visible:text-foreground flex h-8 w-full items-center gap-2 px-2 text-sm text-left outline-none [&_svg]:size-4"
+---
+
+<div
+  class="not-prose relative flex flex-wrap items-center justify-end gap-2"
+  data-blog-actions
+  data-markdown-url={markdownUrl}
+  data-title={title}
+  data-url={url}
+>
+  <template id={markdownSourceId}>{markdown}</template>
+
+  <div class="relative inline-flex items-center">
+    <CopyButton
+      class="border-e-0"
+      copiedLabel={labels[locale].copied}
+      errorLabel={labels[locale].markdown}
+      fallbackHref={markdownUrl}
+      label={labels[locale].copyPage}
+      sourceId={markdownSourceId}
+    />
+    <button
+      aria-controls="blog-ai-menu"
+      aria-expanded="false"
+      aria-haspopup="menu"
+      aria-label={labels[locale].openActions}
+      class:list={iconButtonClass}
+      data-dropdown-toggle="blog-ai-menu"
+      id="blog-ai-trigger"
+      onclick="haptic()"
+      type="button"
+    >
+      <ChevronIcon aria-hidden="true" class="pointer-events-none" />
+    </button>
+
+    <div aria-labelledby="blog-ai-trigger" class:list={menuClass} id="blog-ai-menu" role="menu">
+      <ul class="grid gap-1">
+        <li>
+          <button class:list={menuItemClass} data-blog-action="markdown" role="menuitem" type="button">
+            <MarkdownIcon aria-hidden="true" class="pointer-events-none" />
+            <span>{labels[locale].markdown}</span>
+          </button>
+        </li>
+        <li>
+          <button class:list={menuItemClass} data-blog-action="chatgpt" role="menuitem" type="button">
+            <ChatGptIcon aria-hidden="true" class="pointer-events-none" />
+            <span>{labels[locale].chatgpt}</span>
+          </button>
+        </li>
+        <li>
+          <button class:list={menuItemClass} data-blog-action="claude" role="menuitem" type="button">
+            <ClaudeIcon aria-hidden="true" class="pointer-events-none" />
+            <span>{labels[locale].claude}</span>
+          </button>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="relative inline-flex items-center">
+    <button
+      aria-controls="blog-share-menu"
+      aria-expanded="false"
+      aria-haspopup="menu"
+      aria-label={labels[locale].share}
+      class:list={iconButtonClass}
+      data-dropdown-toggle="blog-share-menu"
+      id="blog-share-trigger"
+      onclick="haptic()"
+      type="button"
+    >
+      <ShareIcon aria-hidden="true" class="pointer-events-none" />
+    </button>
+
+    <div
+      aria-labelledby="blog-share-trigger"
+      class:list={[menuClass, "right-0"]}
+      id="blog-share-menu"
+      role="menu"
+    >
+      <ul class="grid gap-1">
+        <li>
+          <CopyButton
+            class:list={menuItemClass}
+            copiedLabel={labels[locale].copied}
+            label={labels[locale].copyLink}
+            role="menuitem"
+            text={url}
+            unstyled
+          />
+        </li>
+        <li>
+          <button class:list={menuItemClass} data-blog-action="share-x" role="menuitem" type="button">
+            <XIcon aria-hidden="true" class="pointer-events-none" />
+            <span>{labels[locale].shareX}</span>
+          </button>
+        </li>
+        <li>
+          <button class:list={menuItemClass} data-blog-action="share-linkedin" role="menuitem" type="button">
+            <LinkedInIcon aria-hidden="true" class="pointer-events-none" />
+            <span>{labels[locale].shareLinkedIn}</span>
+          </button>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<script>
+  const actionsWindow = window as Window & { blogPostActionsMounted?: boolean }
+
+  function getActionUrl(action: string, root: HTMLElement) {
+    const title = root.dataset.title ?? ""
+    const url = root.dataset.url ?? ""
+    const prompt = `Read this post: ${title} ${url}`
+    const encodedPrompt = encodeURIComponent(prompt)
+
+    if (action === "chatgpt") {
+      return `https://chatgpt.com/?q=${encodedPrompt}`
+    }
+
+    if (action === "claude") {
+      return `https://claude.ai/new?q=${encodedPrompt}`
+    }
+
+    if (action === "share-x") {
+      return `https://x.com/intent/tweet?text=${encodeURIComponent(title)}&url=${encodeURIComponent(url)}`
+    }
+
+    if (action === "share-linkedin") {
+      return `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`
+    }
+
+    return null
+  }
+
+  function closeDropdown(trigger: HTMLElement) {
+    const menuId = trigger.getAttribute("data-dropdown-toggle")
+    const menu = menuId ? document.getElementById(menuId) : null
+
+    trigger.setAttribute("aria-expanded", "false")
+    menu?.classList.add("hidden")
+  }
+
+  function closeDropdowns(except?: HTMLElement) {
+    document.querySelectorAll<HTMLElement>("[data-dropdown-toggle]").forEach((trigger) => {
+      if (trigger !== except) {
+        closeDropdown(trigger)
+      }
+    })
+  }
+
+  function toggleDropdown(trigger: HTMLElement) {
+    const menuId = trigger.getAttribute("data-dropdown-toggle")
+    const menu = menuId ? document.getElementById(menuId) : null
+
+    if (!menu) {
+      return
+    }
+
+    const willOpen = menu.classList.contains("hidden")
+
+    closeDropdowns(trigger)
+    trigger.setAttribute("aria-expanded", String(willOpen))
+    menu.classList.toggle("hidden", !willOpen)
+  }
+
+  async function runAction(action: string, root: HTMLElement) {
+    if (action === "markdown") {
+      window.open(root.dataset.markdownUrl, "_blank", "noopener,noreferrer")
+      return
+    }
+
+    const actionUrl = getActionUrl(action, root)
+
+    if (actionUrl) {
+      window.open(actionUrl, "_blank", "noopener,noreferrer")
+    }
+  }
+
+  if (!actionsWindow.blogPostActionsMounted) {
+    actionsWindow.blogPostActionsMounted = true
+    document.addEventListener("click", (event) => {
+      const target = event.target instanceof HTMLElement ? event.target : null
+      const dropdownTrigger = target?.closest<HTMLElement>("[data-dropdown-toggle]")
+      const actionControl = target?.closest<HTMLElement>("[data-blog-action]")
+      const actionRoot = actionControl?.closest<HTMLElement>("[data-blog-actions]")
+
+      if (dropdownTrigger) {
+        toggleDropdown(dropdownTrigger)
+        return
+      }
+
+      if (actionControl && actionRoot) {
+        void runAction(actionControl.getAttribute("data-blog-action") ?? "", actionRoot)
+        closeDropdowns()
+        return
+      }
+
+      if (!target?.closest("[data-blog-actions]")) {
+        closeDropdowns()
+      }
+    })
+
+    document.addEventListener("copy:complete", () => {
+      closeDropdowns()
+    })
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") {
+        closeDropdowns()
+      }
+    })
+  }
+</script>

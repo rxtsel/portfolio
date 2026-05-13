@@ -1,0 +1,143 @@
+---
+import { getCollection, getEntry } from "astro:content"
+import BlogPostList from "@/components/BlogPostList.astro"
+import Experience from "@/components/Experience.astro"
+import MainLayout from "@/layouts/MainLayout.astro"
+import { getSelectedPublishedPosts } from "@/lib/blog"
+import ProjectsGrid from "@/components/ProjectsGrid.astro"
+import { getDefaultLanguageLinks, getLocalizedPath, type Locale } from "@/lib/i18n"
+import { renderSafeMarkdown } from "@/lib/markdown"
+import { getSelectedProjects } from "@/lib/projects"
+import { getProjectTaxonomyItems, getStackItemsBySlug } from "@/lib/taxonomy"
+import StackList from "./StackList.astro"
+
+interface Props {
+  locale: Locale
+}
+
+const { locale } = Astro.props
+const labels = {
+  en: {
+    experience: "Experience",
+    latestPosts: "Latest posts",
+    missingHome: "Missing English home content",
+    missingExperience: "Missing English experience content",
+    projects: "Projects",
+    stack: "Stack",
+    viewAllPosts: "View all posts",
+    viewAllProjects: "View all projects",
+  },
+  es: {
+    experience: "Experiencia",
+    latestPosts: "Últimos posts",
+    missingHome: "Missing Spanish home content",
+    missingExperience: "Missing Spanish experience content",
+    projects: "Proyectos",
+    stack: "Stack",
+    viewAllPosts: "Ver todos los posts",
+    viewAllProjects: "Ver todos los proyectos",
+  },
+} satisfies Record<Locale, Record<string, string>>
+
+const home = await getEntry("home", locale)
+const experience = await getEntry("experience", locale)
+
+if (!home) {
+  throw new Error(labels[locale].missingHome)
+}
+
+if (!experience) {
+  throw new Error(labels[locale].missingExperience)
+}
+
+const posts = await getCollection("blog")
+const latestPosts = getSelectedPublishedPosts(posts, home.data.latestPosts, locale)
+const projectEntries = await getCollection("projects")
+const [stack] = await getCollection("stack")
+const [tags] = await getCollection("tags")
+
+if (!stack) {
+  throw new Error("Missing stack content")
+}
+
+if (!tags) {
+  throw new Error("Missing tags content")
+}
+
+const stackItems = getStackItemsBySlug(stack, home.data.stack)
+const projects = getSelectedProjects(projectEntries, home.data.featuredProjects, locale).map((project) => ({
+  ...project,
+  taxonomyItems: getProjectTaxonomyItems({
+    stackEntry: stack,
+    stackSlugs: project.data.stack,
+    tagSlugs: project.data.tags,
+    tagsEntry: tags,
+  }),
+}))
+const introHtml = renderSafeMarkdown(home.data.intro)
+const projectsHref = getLocalizedPath(locale, locale === "es" ? "proyectos" : "projects")
+const postsHref = getLocalizedPath(locale, "blog")
+---
+
+<MainLayout
+  alternatesPath=""
+  description={home.data.seo?.description ?? home.data.intro}
+  keywords={home.data.seo?.keywords ?? ""}
+  lang={locale}
+  languageLinks={getDefaultLanguageLinks()}
+  title={home.data.seo?.title ?? home.data.title}
+  titleTemplate="%s"
+>
+  <main
+    class="prose dark:prose-invert prose-neutral prose-sm lg:prose-base prose-p:text-muted-foreground prose-a:no-underline mx-auto max-w-prose"
+  >
+    <h1>{home.data.title}</h1>
+    {/* eslint-disable-next-line astro/no-set-html-directive */}
+    <div class="prose-strong:font-medium [&>p:last-child]:mb-0" set:html={introHtml} />
+
+    {
+      projects.length > 0 && (
+        <section>
+          <header class="flex items-center justify-between">
+            <h2>{labels[locale].projects}</h2>
+            <a class="link relative top-2 text-sm lg:top-3" href={projectsHref}>
+              {labels[locale].viewAllProjects}
+            </a>
+          </header>
+          <ProjectsGrid projects={projects} />
+        </section>
+      )
+    }
+
+    <Experience
+      items={experience.data.items}
+      label={labels[locale].experience}
+      locale={locale}
+      stackEntry={stack}
+      tagsEntry={tags}
+    />
+
+    {
+      latestPosts.length > 0 && (
+        <section>
+          <header class="flex items-center justify-between">
+            <h2>{labels[locale].latestPosts}</h2>
+            <a class="link relative top-2 text-sm lg:top-3" href={postsHref}>
+              {labels[locale].viewAllPosts}
+            </a>
+          </header>
+          <BlogPostList blogPost={latestPosts} headingLevel="h3" />
+        </section>
+      )
+    }
+
+    {
+      stackItems.length > 0 && (
+        <section>
+          <h2>{labels[locale].stack}</h2>
+          <StackList stackItems={stackItems} />
+        </section>
+      )
+    }
+  </main>
+</MainLayout>

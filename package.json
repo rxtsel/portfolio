@@ -1,39 +1,48 @@
 {
-  "name": "portfolio",
+  "name": "",
   "version": "0.0.1",
-  "private": true,
   "type": "module",
   "scripts": {
     "dev": "astro dev",
-    "start": "astro dev",
-    "build": "astro build",
+    "build": "pnpm check && astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "newpost": "node ./src/scripts/newpost/index.js",
-    "phoenix": "rm ./node_modules/ -rf && rm ./bun.lockb && ni"
+    "check": "astro check",
+    "format": "prettier . --write",
+    "lint": "eslint . --fix"
   },
   "dependencies": {
-    "@astrojs/mdx": "4.3.7",
-    "@astrojs/rss": "4.0.12",
-    "@astrojs/tailwind": "6.0.2",
-    "@github/relative-time-element": "^4.4.8",
-    "@playform/compress": "^0.2.0",
-    "@vercel/og": "^0.6.2",
-    "astro": "5.14.7",
-    "astro-expressive-code": "^0.32.2",
-    "astro-robots-txt": "^1.0.0",
-    "date-fns": "^3.2.0",
-    "rehype-external-links": "^3.0.0",
-    "slug": "^10.0.0",
-    "tailwindcss": "^3.4.0"
+    "@astrojs/rss": "4.0.18",
+    "@astrojs/sitemap": "3.7.2",
+    "@fontsource-variable/geist": "5.2.8",
+    "@jdevalk/astro-seo-graph": "1.4.0",
+    "@jdevalk/seo-graph-core": "0.6.1",
+    "@js-temporal/polyfill": "0.5.1",
+    "@tailwindcss/vite": "4.2.4",
+    "@vercel/og": "0.11.1",
+    "astro": "6.3.1",
+    "astro-expressive-code": "0.42.0",
+    "micromark": "4.0.2",
+    "rehype-external-links": "3.0.0",
+    "tailwindcss": "4.2.4"
+  },
+  "engines": {
+    "node": ">=22.12.0"
   },
   "devDependencies": {
-    "@astrojs/sitemap": "3.6.0",
-    "@inquirer/confirm": "2.0.17",
-    "@inquirer/input": "1.2.16",
-    "@tailwindcss/typography": "^0.5.10",
-    "@types/slug": "5.0.9",
-    "prettier": "^3.1.1",
-    "prettier-plugin-astro": "^0.12.3"
+    "@astrojs/check": "0.9.9",
+    "@commitlint/cli": "20.5.3",
+    "@commitlint/config-conventional": "20.5.3",
+    "@eslint/js": "9.39.4",
+    "@tailwindcss/typography": "0.5.19",
+    "@typescript-eslint/parser": "8.59.2",
+    "eslint": "9.39.4",
+    "eslint-plugin-astro": "1.7.0",
+    "eslint-plugin-jsx-a11y": "6.10.2",
+    "lefthook": "2.1.6",
+    "prettier": "3.8.3",
+    "prettier-plugin-astro": "0.14.1",
+    "prettier-plugin-tailwindcss": "0.8.0",
+    "typescript": "6.0.3"
   }
 }

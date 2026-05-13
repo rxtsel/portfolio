@@ -1,28 +1,18 @@
-import { defineEcConfig, lighten } from 'astro-expressive-code'
+import { defineEcConfig } from "astro-expressive-code"
 
 // https://expressive-code.com/reference/configuration/
 export default defineEcConfig({
-  themes: ['github-dark', 'github-light'],
-  themeCssRoot: 'html',
+  themes: ["github-dark-default", "github-light-default"],
+  themeCssRoot: "html",
   useDarkModeMediaQuery: true,
   themeCssSelector: (theme) => {
     return `.${theme.name}, [data-theme="${theme.name}"]`
   },
   styleOverrides: {
     frames: {
-      shadowColor: 'transparent',
-      editorBackground: 'transparent',
-      terminalBackground: 'inherit',
-      terminalTitlebarBackground: 'inherit',
-      tooltipSuccessBackground: '#4895EF',
-      editorTabBarBackground: 'transparent',
-      terminalBorder: 'transparent'
+      shadowColor: "transparent",
+      tooltipSuccessBackground: "#4895EF",
     },
-    borderColor: ({ theme }) =>
-      lighten(
-        theme.colors['editor.background'],
-        theme.type === 'dark' ? 0.1 : -0.15
-      ),
-    borderRadius: '0.375rem'
-  }
+    borderRadius: "0",
+  },
 })

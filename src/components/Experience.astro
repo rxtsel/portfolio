@@ -1,68 +1,48 @@
 ---
-import Section from '@/components/Section.astro'
-import ExperienceItem from './ExperienceItem.astro'
-import { getLangFromUrl, useTranslations } from '@/i18n/utils'
-import type { TWorkEntry } from '@/types'
+import type { CollectionEntry } from "astro:content"
+import ExperienceItem from "@/components/ExperienceItem.astro"
+import type { Locale } from "@/lib/i18n"
 
-const lang = getLangFromUrl(Astro.url)
-const t = useTranslations(lang)
+type ExperienceEntry = CollectionEntry<"experience">
+type StackEntry = CollectionEntry<"stack">
+type TagsEntry = CollectionEntry<"tags">
 
-export type TWorks = {
-  company: string
-  role: string
+interface Props {
+  items: ExperienceEntry["data"]["items"]
+  label: string
+  locale: Locale
+  stackEntry: StackEntry
+  tagsEntry: TagsEntry
 }
 
-const works: TWorkEntry[] = [
-  {
-    company: 'SoundAdvice',
-    companyUrl: 'https://soundadvice.club',
-    location: 'Toronto, Canadá',
-    remote: true,
-    jobs: [
-      {
-        role: 'Software Developer',
-        startDate: new Date('2024-03-01'),
-        description: t('experiense.SoundAdvice')
-      }
-    ]
-  },
-  {
-    company: 'Visual Dealers',
-    companyUrl: 'https://visualdealers.com',
-    location: 'Los Angeles, CA',
-    remote: true,
-    jobs: [
-      {
-        role: 'Front-end Developer',
-        startDate: new Date('2023-04-01'),
-        endDate: new Date('2024-02-01'),
-        description: t('experiense.vsdlrs')
-      }
-    ]
-  },
-  {
-    company: 'Vehement',
-    companyUrl: 'https://vehement.co',
-    location: 'Bogotá, Colombia',
-    remote: true,
-    jobs: [
-      {
-        role: 'Front-end Developer',
-        startDate: new Date('2022-09-01'),
-        endDate: new Date('2024-02-07'),
-        description: t('experiense.vehement')
-      }
-    ]
+const { items, label, locale, stackEntry, tagsEntry } = Astro.props
+
+function getCompanySortDate(item: ExperienceEntry["data"]["items"][number]) {
+  const currentJob = item.jobs.find((job) => job.current)
+
+  if (currentJob) {
+    return "9999-12-31"
   }
-]
+
+  return [...item.jobs.map((job) => job.endDate || job.startDate)].sort().at(-1) ?? ""
+}
+
+const sortedItems = [...items].sort((current, next) =>
+  getCompanySortDate(next).localeCompare(getCompanySortDate(current)),
+)
 ---
 
-<Section title={t('single.experience')}>
-  <article class='section w-full lg:w-full max-w-3xl'>
-    <ol
-      class='relative border-s border-neutral-800 md:border-cAccent ml-2 md:ml-3'
-    >
-      {works.map((work) => <ExperienceItem data={work} />)}
-    </ol>
-  </article>
-</Section>
+{
+  items.length > 0 && (
+    <section>
+      <h2>{label}</h2>
+      <ol class="border-border relative my-0! grid list-none! grid-cols-1 gap-y-8 border-s ps-0!">
+        {sortedItems.map((item) => (
+          <ExperienceItem item={item} locale={locale} stackEntry={stackEntry} tagsEntry={tagsEntry} />
+        ))}
+      </ol>
+    </section>
+  )
+}
+
+<script src="../scripts/experience-dates.ts"></script>

@@ -1,0 +1,19 @@
+---
+interface Props {
+  tags: { name: string }[] | string[]
+  class?: string
+  ["class:list"]?: string
+}
+
+const { tags, ...rest } = Astro.props
+---
+
+<ul class:list={["flex flex-wrap gap-2", rest.class, rest["class:list"]].filter(Boolean)}>
+  {
+    tags.map((tag) => (
+      <li class="text-muted-foreground retina:border-[0.5px] inline-flex items-center rounded-none border bg-zinc-50 px-1.5 py-0.5 font-mono text-xs dark:bg-zinc-900 [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-3.5">
+        {typeof tag === "string" ? tag : tag.name}
+      </li>
+    ))
+  }
+</ul>

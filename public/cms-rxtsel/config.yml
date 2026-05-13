@@ -1,0 +1,381 @@
+# yaml-language-server: $schema=https://unpkg.com/@sveltia/cms/schema/sveltia-cms.json
+
+backend:
+  name: github
+  repo: rxtsel/portfolio
+  commit_messages:
+    create: 'docs: create {{collection}} "{{slug}}"'
+    update: 'docs: update {{collection}} "{{slug}}"'
+    delete: 'docs: delete {{collection}} "{{slug}}"'
+    uploadMedia: 'chore: upload "{{path}}"'
+    deleteMedia: 'chore: delete "{{path}}"'
+    openAuthoring: "{{message}}"
+
+i18n:
+  structure: multiple_folders
+  locales: [en, es]
+  default_locale: en
+  omit_default_locale_from_preview_path: true
+  canonical_slug:
+    key: translationKey
+    value: "{{slug}}"
+
+slug:
+  encoding: ascii
+  clean_accents: true
+  trim: true
+
+media_folder: /public/uploads
+public_folder: /uploads
+
+# Media provider features
+media_libraries:
+  default:
+    config:
+      max_file_size: 1024000
+      slugify_filename: true
+
+singletons:
+  - name: home
+    label: Home
+    file: src/content/home/{{locale}}.md
+    i18n: true
+    fields:
+      - { label: Locale, name: locale, widget: hidden, default: "{{locale}}", i18n: true }
+      - { label: Title, name: title, widget: string, i18n: true }
+      - { label: Intro, name: intro, widget: markdown, i18n: true }
+      - label: Featured projects
+        name: featuredProjects
+        widget: relation
+        collection: projects
+        multiple: true
+        max: 4
+        required: false
+        i18n: duplicate
+        value_field: "{{translationKey}}"
+        display_fields: [title]
+        search_fields: [title, description]
+
+      - label: Stack
+        name: stack
+        description: Technologies and tools I use
+        widget: relation
+        collection: _singletons
+        file: stack
+        i18n: duplicate
+        multiple: true
+        value_field: "{{stack.*.slug}}"
+        display_fields:
+          - "{{stack.*.name}}"
+        search_fields:
+          - "{{stack.*.name}}"
+
+      - label: Latest posts
+        name: latestPosts
+        widget: relation
+        collection: blog
+        i18n: duplicate
+        multiple: true
+        max: 4
+        value_field: "{{translationKey}}"
+        display_fields: [title]
+        search_fields: [title]
+        filters:
+          - field: published
+            values: [true]
+
+      - label: SEO
+        name: seo
+        widget: object
+        i18n: true
+        fields:
+          - { label: SEO title, name: title, widget: string, required: true, i18n: true }
+          - {
+              label: SEO description,
+              name: description,
+              widget: text,
+              required: true,
+              minlength: 70,
+              maxlength: 200,
+              i18n: true,
+            }
+          - { label: Keywords, name: keywords, widget: string, required: true, i18n: true }
+
+  - name: stack
+    label: Stack
+    file: src/content/stack.md
+    i18n: false
+    fields:
+      - label: Stack
+        name: stack
+        widget: list
+        collapsed: auto
+        summary: "{{name}}"
+        fields:
+          - { label: Name, name: name, widget: string, i18n: false, required: true }
+          - { label: Slug, name: slug, widget: string, i18n: false, required: true }
+          - { label: URL, name: href, widget: string, required: false }
+
+  - name: integrations
+    label: Integrations
+    file: src/content/integrations.md
+    i18n: false
+    fields:
+      - label: Google Tag Manager
+        name: googleTagManager
+        widget: object
+        fields:
+          - { label: Enabled, name: enabled, widget: boolean, default: false }
+          - { label: Container ID, name: containerId, widget: string, required: false }
+      - label: Google AdSense
+        name: googleAdsense
+        widget: object
+        fields:
+          - { label: Enabled, name: enabled, widget: boolean, default: false }
+          - { label: Client ID, name: clientId, widget: string, required: false }
+          - {
+              label: Allowed path pattern,
+              name: allowedPathPattern,
+              widget: string,
+              default: "^(/blog(/|$)|/es/blog(/|$))",
+            }
+          - { label: ads.txt seller line, name: sellerLine, widget: string, required: false }
+
+  - name: experience
+    label: Experience
+    file: src/content/experience/{{locale}}.md
+    i18n: true
+    fields:
+      - { label: Locale, name: locale, widget: hidden, default: "{{locale}}", i18n: true }
+      - label: Items
+        name: items
+        widget: list
+        collapsed: auto
+        summary: "{{company}}"
+        i18n: true
+        fields:
+          - { label: Company, name: company, widget: string, i18n: duplicate, required: true }
+          - { label: Company URL, name: companyUrl, widget: string, required: false, i18n: duplicate }
+          - { label: Location, name: location, widget: string, required: false, i18n: true }
+          - { label: Remote, name: remote, widget: boolean, default: false, i18n: duplicate }
+          - label: Jobs
+            name: jobs
+            widget: list
+            collapsed: auto
+            summary: "{{role}}"
+            i18n: true
+            fields:
+              - { label: Role, name: role, widget: string, i18n: true, required: true }
+              - {
+                  label: Start date,
+                  name: startDate,
+                  widget: datetime,
+                  date_format: YYYY-MM-DD,
+                  time_format: false,
+                  i18n: duplicate,
+                }
+              - {
+                  label: End date,
+                  name: endDate,
+                  widget: datetime,
+                  date_format: YYYY-MM-DD,
+                  time_format: false,
+                  required: false,
+                  i18n: duplicate,
+                }
+              - { label: Current job, name: current, widget: boolean, default: false, i18n: duplicate }
+              - { label: Description, name: description, widget: markdown, required: false, i18n: true }
+              - label: Stack
+                name: stack
+                widget: relation
+                collection: _singletons
+                file: stack
+                i18n: duplicate
+                multiple: true
+                required: false
+                value_field: "{{stack.*.slug}}"
+                display_fields:
+                  - "{{stack.*.name}}"
+                search_fields:
+                  - "{{stack.*.name}}"
+              - label: Tags
+                name: tags
+                widget: relation
+                collection: _singletons
+                file: tags
+                i18n: duplicate
+                required: false
+                multiple: true
+                value_field: "{{tags.*.slug}}"
+                display_fields:
+                  - "{{tags.*.name}}"
+                search_fields:
+                  - "{{tags.*.name}}"
+
+  - name: tags
+    label: Tags
+    file: src/content/tags.md
+    i18n: false
+    fields:
+      - label: Tags
+        name: tags
+        widget: list
+        collapsed: auto
+        summary: "{{name}}"
+        fields:
+          - { label: Name, name: name, widget: string, i18n: false, required: true }
+          - { label: Slug, name: slug, widget: string, i18n: false, required: true }
+
+  - name: blogCategories
+    label: Blog categories
+    file: src/content/blog-categories/{{locale}}.md
+    i18n: true
+    fields:
+      - { label: Locale, name: locale, widget: hidden, default: "{{locale}}", i18n: true }
+      - label: Categories
+        name: categories
+        widget: list
+        collapsed: auto
+        add_to_top: true
+        summary: "{{name}}"
+        i18n: true
+        fields:
+          - { label: Translation key, name: translationKey, widget: string, i18n: duplicate, required: true }
+          - { label: Name, name: name, widget: string, i18n: true, required: true }
+
+collections:
+  - name: projects
+    label: Projects
+    label_singular: Project
+    folder: src/content/projects
+    create: true
+    i18n: true
+    reorder:
+      key: order
+    slug: "{{title | localize}}"
+    sortable_fields:
+      fields: [order]
+      default:
+        field: order
+        direction: descending
+    preview_path: /{{locale}}/projects
+    summary: "{{title}} — {{locales}}"
+    fields:
+      - { label: Translation key, name: translationKey, widget: hidden, default: "{{slug}}", i18n: duplicate }
+      - { label: Locale, name: locale, widget: hidden, default: "{{locale}}", i18n: true }
+      - { label: Title, name: title, widget: string, i18n: true }
+      - { label: Description, name: description, widget: text, i18n: true, maxlength: 140 }
+      - { label: URL, name: href, widget: string, required: false, i18n: duplicate }
+      - { label: Source URL, name: sourceUrl, widget: string, required: false, i18n: duplicate }
+      - {
+          label: Publish date,
+          name: publishDate,
+          widget: datetime,
+          date_format: YYYY-MM-DD,
+          time_format: false,
+          i18n: duplicate,
+        }
+      - label: Stack
+        name: stack
+        widget: relation
+        collection: _singletons
+        file: stack
+        i18n: duplicate
+        multiple: true
+        value_field: "{{stack.*.slug}}"
+        display_fields:
+          - "{{stack.*.name}}"
+        search_fields:
+          - "{{stack.*.name}}"
+      - label: Tags
+        name: tags
+        widget: relation
+        collection: _singletons
+        file: tags
+        i18n: duplicate
+        required: false
+        multiple: true
+        value_field: "{{tags.*.slug}}"
+        display_fields:
+          - "{{tags.*.name}}"
+        search_fields:
+          - "{{tags.*.name}}"
+      - { label: Body, name: body, widget: markdown, required: false, i18n: true }
+
+  - name: blog
+    label: Blog
+    label_singular: Post
+    folder: src/content/blog
+    create: true
+    i18n: true
+    slug: "{{title | localize}}"
+    sortable_fields:
+      fields: [publishDate, updatedDate, title]
+      default:
+        field: publishDate
+        direction: descending
+    preview_path: /{{locale}}/blog/{{slug}}
+    summary: "{{title}} — {{locales}}"
+    view_groups:
+      groups:
+        - name: published
+          label: Published
+          field: published
+        - name: year
+          label: Year
+          field: publishDate
+          pattern: '\d{4}'
+      default: year
+    fields:
+      - { label: Locale, name: locale, widget: hidden, default: "{{locale}}", i18n: true }
+      - { label: Published, name: published, widget: boolean, default: false, i18n: duplicate }
+      - { label: Title, name: title, widget: string, i18n: true }
+      - { label: Description, name: description, widget: text, i18n: true, maxlength: 250 }
+      - {
+          label: Publish date,
+          name: publishDate,
+          widget: datetime,
+          date_format: YYYY-MM-DD,
+          time_format: false,
+          i18n: duplicate,
+        }
+      - {
+          label: Updated date,
+          name: updatedDate,
+          widget: datetime,
+          date_format: YYYY-MM-DD,
+          time_format: false,
+          required: false,
+          i18n: duplicate,
+        }
+      - label: Categories
+        name: categories
+        widget: relation
+        collection: _singletons
+        file: blogCategories
+        required: false
+        i18n: duplicate
+        multiple: true
+        value_field: "{{categories.*.translationKey}}"
+        display_fields:
+          - "{{categories.*.name}}"
+        search_fields:
+          - "{{categories.*.name}}"
+      - label: SEO
+        name: seo
+        widget: object
+        required: true
+        i18n: true
+        fields:
+          - {
+              label: SEO description,
+              name: description,
+              widget: text,
+              required: true,
+              minlength: 70,
+              maxlength: 200,
+              i18n: true,
+            }
+          - { label: Keywords, name: keywords, widget: string, required: true, i18n: true }
+
+      - { label: Body, name: body, widget: markdown, i18n: true }

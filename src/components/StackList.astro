@@ -1,0 +1,42 @@
+---
+import { z } from "astro/zod"
+import { stackItemSchema } from "@/content.config"
+import type { AstroComponentFactory } from "astro/runtime/server/index.js"
+
+interface Props {
+  stackItems: z.infer<typeof stackItemSchema>[]
+}
+
+const { stackItems } = Astro.props
+
+const logos = import.meta.glob<{ default: AstroComponentFactory }>("/src/assets/logos/*.svg", {
+  eager: true,
+})
+
+const stackItemsWithLogos = stackItems.map((item) => ({
+  ...item,
+  Logo: logos[`/src/assets/logos/${item.slug}.svg`]?.default,
+}))
+---
+
+<ul class="not-prose flex flex-wrap gap-2">
+  {
+    stackItemsWithLogos.map(({ Logo, ...item }) => (
+      <li class="text-muted-foreground retina:border-[0.5px] rounded-none border bg-zinc-50 px-1.5 py-0.5 font-mono text-xs dark:bg-zinc-900 [&_svg]:size-3.5">
+        {item.href ? (
+          <a
+            class="flex items-center gap-x-1"
+            href={`${item.href}?utm_source=rxtsel.dev&utm_medium=referral`}
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            {Logo && <Logo aria-label={`${item.name} logo`} class="text-foreground" />}
+            {item.name}
+          </a>
+        ) : (
+          <span>{item.name}</span>
+        )}
+      </li>
+    ))
+  }
+</ul>

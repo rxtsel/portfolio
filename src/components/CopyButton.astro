@@ -1,0 +1,89 @@
+---
+import CheckIcon from "@/assets/check.svg"
+import CircleXIcon from "@/assets/circle-x.svg"
+import CopyIcon from "@/assets/copy.svg"
+
+interface Props {
+  class?: string | undefined
+  copiedLabel?: string | undefined
+  errorLabel?: string | undefined
+  fallbackHref?: string | undefined
+  iconOnly?: boolean | undefined
+  label?: string | undefined
+  role?: "menuitem" | undefined
+  sourceId?: string | undefined
+  text?: string | undefined
+  unstyled?: boolean | undefined
+}
+
+const {
+  class: className,
+  copiedLabel = "Copied",
+  errorLabel = "Copy failed",
+  fallbackHref,
+  iconOnly = false,
+  label = "Copy",
+  role,
+  sourceId,
+  text,
+  unstyled = false,
+} = Astro.props
+---
+
+<button
+  aria-label={iconOnly ? label : undefined}
+  class:list={[
+    !unstyled &&
+      "bg-background text-muted-foreground hover:text-foreground hover:bg-accent focus-visible:border-ring focus-visible:ring-ring/50 inline-flex h-8 items-center gap-1.5 border px-2 text-sm transition-colors will-change-transform outline-none focus-visible:ring-3 [&_svg]:size-4",
+    !unstyled && iconOnly && "size-8 justify-center px-0",
+    className,
+  ]}
+  data-copy-button
+  data-copy-fallback-href={fallbackHref}
+  data-copy-source={sourceId}
+  data-copy-state="idle"
+  data-copy-text={text}
+  data-error-label={errorLabel}
+  role={role}
+  type="button"
+>
+  <span aria-hidden="true" class="grid size-4 place-items-center">
+    <CopyIcon
+      class="pointer-events-none col-start-1 row-start-1 transition-[opacity,scale,filter] duration-150"
+      data-copy-icon="idle"
+    />
+    <CheckIcon
+      class="pointer-events-none col-start-1 row-start-1 opacity-0 transition-[opacity,scale,filter] duration-150"
+      data-copy-icon="done"
+    />
+    <CircleXIcon
+      class="pointer-events-none col-start-1 row-start-1 opacity-0 transition-[opacity,scale,filter] duration-150"
+      data-copy-icon="error"
+    />
+  </span>
+  {!iconOnly && <span>{label}</span>}
+  <span
+    aria-live="polite"
+    class="sr-only"
+    data-copied-label={copiedLabel}
+    data-copy-status
+    data-error-label={errorLabel}></span>
+</button>
+
+<script src="../scripts/copy-to-clipboard.ts"></script>
+
+<style is:global>
+  [data-copy-state="done"] [data-copy-icon="idle"],
+  [data-copy-state="error"] [data-copy-icon="idle"] {
+    filter: blur(2px);
+    opacity: 0;
+    scale: 0.8;
+  }
+
+  [data-copy-state="done"] [data-copy-icon="done"],
+  [data-copy-state="error"] [data-copy-icon="error"] {
+    filter: blur(0);
+    opacity: 1;
+    scale: 1;
+  }
+</style>
