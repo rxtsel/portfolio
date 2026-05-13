@@ -1,14 +1,17 @@
 ---
 import { Code } from "astro:components"
 import { getCollection, render } from "astro:content"
+import ArrowIcon from "@/assets/arrow.svg"
+import BlogPostActions from "@/components/BlogPostActions.astro"
 import MainLayout from "@/layouts/MainLayout.astro"
+import { readBlogMarkdownContent } from "@/lib/blog-markdown"
 import {
   getBlogPostAlternateHref,
   getBlogPostLanguageLinks,
   getBlogPostTransitionName,
   type BlogPost,
 } from "@/lib/blog"
-import { getAlternateBlogPosts, getLocaleLanguageTag } from "@/lib/i18n"
+import { getAlternateBlogPosts, getLocaleLanguageTag, getLocalizedPath } from "@/lib/i18n"
 import { formatBlogDate, toIsoDateTime } from "@/lib/date-time"
 import { buildBlogPostGraph } from "@/lib/seo"
 import { getCategoryItemsByTranslationKey } from "@/lib/taxonomy"
@@ -40,12 +43,14 @@ const alternates = {
 const labels = {
   en: {
     categories: "Post categories",
+    backToBlog: "Blog",
     content: "Article content",
     published: "Published",
     updated: "Updated",
   },
   es: {
     categories: "Categorías del artículo",
+    backToBlog: "Blog",
     content: "Contenido del artículo",
     published: "Publicado",
     updated: "Actualizado",
@@ -61,6 +66,8 @@ if (!blogCategoriesEntry) {
 const taxonomyItems = getCategoryItemsByTranslationKey(blogCategoriesEntry, post.data.categories).map(
   (category) => category.name,
 )
+const blogHref = getLocalizedPath(post.data.locale, "blog")
+const markdown = await readBlogMarkdownContent(post.id)
 const publishedDate = post.data.publishDate
 const updatedDate = post.data.updatedDate
 const lastModifiedDate = updatedDate ?? publishedDate
@@ -74,6 +81,7 @@ const graph = buildBlogPostGraph({
   ...(updatedDate ? { updatedDate } : {}),
   url: canonical,
 })
+
 ---
 
 <MainLayout
@@ -93,6 +101,23 @@ const graph = buildBlogPostGraph({
   >
     <article>
       <header>
+        <div class="not-prose mb-6 flex flex-wrap items-center justify-between gap-3">
+          <a
+            class="text-muted-foreground hover:text-foreground focus-visible:border-ring focus-visible:ring-ring/50 inline-flex h-8 w-fit items-center gap-1.5 text-sm transition-colors outline-none focus-visible:ring-3 [&_svg]:size-4"
+            href={blogHref}
+          >
+            <ArrowIcon aria-hidden="true" class="-rotate-90" />
+            <span>{labels[post.data.locale].backToBlog}</span>
+          </a>
+
+          <BlogPostActions
+            locale={post.data.locale}
+            markdown={markdown}
+            title={post.data.title}
+            url={canonical}
+          />
+        </div>
+
         <h1 transition:name={getBlogPostTransitionName(post, "title")}>
           {post.data.title}
         </h1>
