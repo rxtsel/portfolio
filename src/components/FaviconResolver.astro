@@ -1,0 +1,16 @@
+---
+interface Props {
+  href: string
+}
+
+const { href } = Astro.props
+---
+
+<img
+  alt={`Favicon for ${new URL(href).hostname}`}
+  class="m-auto aspect-square shrink-0 object-contain"
+  height="18"
+  loading="lazy"
+  src={`https://favicon.vemetric.com/${new URL(href).hostname}?format=webp`}
+  width="18"
+/>

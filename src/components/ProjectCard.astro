@@ -1,6 +1,7 @@
 ---
 import GitHubIcon from "@/assets/github.svg"
 import Tags from "./Tags.astro"
+import FaviconResolver from "./FaviconResolver.astro"
 
 type TaxonomyItem = {
   name: string
@@ -36,15 +37,19 @@ const Heading = headingLevel
     {
       href ? (
         <a
-          class="link-underline"
+          class="link-underline item-center flex gap-2"
           href={`${href}?utm_source=rxtsel.dev&utm_medium=referral`}
           rel="noopener noreferrer"
           target="_blank"
         >
+          <FaviconResolver href={href} />
           {title}
         </a>
       ) : (
-        title
+        <span class="item-center flex gap-2">
+          <FaviconResolver href={href} />
+          {title}
+        </span>
       )
     }
 
