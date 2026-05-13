@@ -2,10 +2,10 @@
 translationKey: how-to-sync-bluetooth-in-dual-boot-triple-boot-windows-linux-macos
 locale: es
 published: true
-title: Cómo sincronizar Bluetooth en dual boot, triple boot (Windows, Linux, macOS)
+title: Cómo sincronizar Bluetooth en dual boot, multi boot (Windows, Linux, macOS)
 description: Guía para sincronizar dispositivos Bluetooth en entornos de arranque múltiple, evitando problemas de conexión al cambiar de sistema operativo.
 publishDate: 2025-03-17
-updatedDate: ""
+updatedDate: 2026-05-13
 categories:
   - tutorials
   - windows
@@ -14,42 +14,22 @@ categories:
   - dual-boot
   - multiboot
   - hackintosh
-coverImage: ""
-coverImageAlt: ""
 seo:
   description: Sincroniza claves Bluetooth entre Windows, Linux y macOS en sistemas multiarranque para evitar reconectar dispositivos al cambiar de sistema.
   keywords: sincronizar bluetooth dual boot, bluetooth linux windows, bluetooth triple boot, hackintosh bluetooth, bluetooth multiarranque
 ---
 
-## Tabla de contenido
-
-<!--toc:start-->
-
-- [Introducción](#introducción)
-  - [¿Por qué ocurre esto?](#por-qué-ocurre-esto)
-  - [¿Cuál es la solución?](#cuál-es-la-solución)
-- [Sincronizar Bluetooth en dual boot (Windows y Linux)](#sincronizar-bluetooth-en-dual-boot-windows-y-linux)
-  - [Conectar dispositivos en Linux](#conectar-dispositivos-en-linux)
-  - [Conectar dispositivos en Windows](#conectar-dispositivos-en-windows)
-  - [Copiar claves de Bluetooth de Windows a Linux](#copiar-claves-de-bluetooth-de-windows-a-linux)
-- [Sincronizar Bluetooth en triple boot (macOS, Windows y Linux)](#sincronizar-bluetooth-en-triple-boot-macos-windows-y-linux)
-  - [Emparejar dispositivos bluetooth en cada sistema](#emparejar-dispositivos-bluetooth-en-cada-sistema)
-  - [Extraer y transferir la LinkKey](#extraer-y-transferir-la-linkkey)
-- [Notas Adicionales](#notas-adicionales)
-- [Referencias](#referencias)
-<!--toc:end-->
-
 ## Introducción
 
-Si utilizas **dual boot o triple boot**, habrás notado que al cambiar de sistema operativo, tus dispositivos Bluetooth no se conectan automáticamente.
+Si utilizas **dual boot o multi boot**, habrás notado que al cambiar de sistema operativo, tus dispositivos Bluetooth no se conectan automáticamente.
 
 Esto es algo realmente fastidioso, especialmente si tienes un teclado y un ratón Bluetooth y tienes que conectarlos manualmente cada vez que cambias de sistema operativo.
 
-### ¿Por qué ocurre esto
+### ¿Por qué ocurre esto?
 
 Cuando emparejas un dispositivo Bluetooth en un sistema operativo, se genera una clave de sincronización (`LinkKey`). Como esta clave no se comparte entre sistemas, al cambiar de sistema operativo, el dispositivo no puede autenticarse correctamente.
 
-### ¿Cuál es la solución
+### ¿Cuál es la solución?
 
 Es tan simple como tener las mismas claves de sincronización en todos tus sistemas operativos. Para hacer esto, necesitas copiar las claves de sincronización de Bluetooth de un sistema operativo a otro.
 
@@ -61,34 +41,34 @@ Es tan simple como tener las mismas claves de sincronización en todos tus siste
 
 1. **Abre la terminal y ejecuta `bluetoothctl`**:
 
-   ```sh
+```sh
    bluetoothctl
-   ```
+```
 
 2. **Activa el modo emparejamiento**:
 
-   ```sh
-   pairable on
+```sh
+  pairable on
    discoverable on
-   ```
+```
 
 3. **Escanea y empareja el dispositivo**:
 
-   ```sh
+```sh
    scan on
-   ```
+```
 
-   Copia la dirección MAC del dispositivo y usa:
+Copia la dirección MAC del dispositivo y usa:
 
-   ```sh
+```sh
    connect XX:XX:XX:XX:XX:XX
-   ```
+```
 
 4. **Verifica la conexión y cierra `bluetoothctl`**:
 
-   ```sh
+```sh
    exit
-   ```
+```
 
 ### Conectar dispositivos en Windows
 
@@ -99,70 +79,70 @@ Es tan simple como tener las mismas claves de sincronización en todos tus siste
 
 1. **Descarga** [**PsTools**](https://learn.microsoft.com/en-us/sysinternals/downloads/pstools) **y extrae `PsExec` en una carpeta de acceso rápido, por ejemplo: `C:\Windows`.**
 2. **Encuentra tu dirección MAC**.
-
    Abre `cmd` y ejecuta:
 
-   ```sh
+```sh
    getmac /V /FO LIST
-   ```
+```
 
-   Busca la dirección MAC de tu dispositivo Bluetooth y toma nota de ella.
+Busca la dirección MAC de tu dispositivo Bluetooth y toma nota de ella.
 
 3. **Ejecuta `cmd` como administrador** y navega hasta la carpeta donde guardaste `PsExec` y ejecuta:
 
-   ```sh
+```sh
    psexec -s -i regedit
-   ```
+```
 
-   _Esto abrirá el Editor del Registro con permisos de administrador._
+_Esto abrirá el Editor del Registro con permisos de administrador._
 
 4. **En el editor de registros, navega a:**
 
-   ```plain
+```plain
+"
    HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\BTHPORT\Parameters\Keys\<MAC_ADDRESS>
-   ```
+```
 
 5. **Encuentra la clave de tu dispositivo y dale doble click en el nombre (Te abrirá una nueva ventana).**
 6. **En la nueva ventana, copia el valor de la clave que esta en `Informacion de valor`**.
 7. **Reinicia a Linux.**
 8. **En Linux**
+9. **Abre la terminal y ejecuta:**
 
-   **8.1. Abre la terminal y ejecuta:**
-
-   ```sh
+```sh
    sudo su
-   ```
+```
 
-   _Ingresa tu contraseña de administrador._
+_Ingresa tu contraseña de administrador._
 
-   **8.2. Navega a la carpeta de Bluetooth:**
+2. **Navega a la carpeta de Bluetooth:**
 
-   ```sh
+```sh
    cd /var/lib/bluetooth/<MAC_ADDRESS>/<DISPOSITIVO_MAC>
-   ```
+```
 
-   _Reemplaza `<MAC_ADDRESS>` con la dirección MAC de tu dispositivo Bluetooth interno y `<DISPOSITIVO_MAC>` con la dirección MAC de tu dispositivo externo._
+_Reemplaza `<MAC_ADDRESS>` con la dirección MAC de tu dispositivo Bluetooth interno y `<DISPOSITIVO_MAC>` con la dirección MAC de tu dispositivo externo._
 
 9. **Edita el archivo `info`**
 
    Ubica la línea `[LinkKey]` y reemplaza el valor de la propiedad `Key` por la clave copiada de Windows:
 
-   ```sh title="info" {2}
+```sh
+title="info" {2}
    [LinkKey]
    Key=B3798087E81E306CDAB046...
-   ```
+```
 
 Reinicia Linux y el dispositivo debería conectarse automáticamente.
 
 ---
 
-## Sincronizar Bluetooth en triple boot (macOS, Windows y Linux)
+## Sincronizar Bluetooth en multi boot (macOS, Windows y Linux)
 
 > **NOTA:** Los pasos son los mismos si solo tienes dual boot con macOS.
 
 ### Emparejar dispositivos bluetooth en cada sistema
 
-1. **Empareja primero en Linux.** (Puedes ver del punto 1 al 4 de la sección anterior).
+1. **Empareja primero en Linux.** (Puedes ver del punto 1 al 4 de la [primera sección](#sincronizar-bluetooth-en-dual-boot-windows-y-linux))
 2. **Empareja en Windows.**
 3. **Finalmente, empareja en MacOS.**
 
@@ -183,16 +163,15 @@ Reinicia Linux y el dispositivo debería conectarse automáticamente.
 
 7. **Reinicia a Windows.**
 8. **Transfiere la `LinkKey` a Windows y Linux (ó a todos tus sistemas operativos diferentes a MacOS):**
-   - **Para Windows**
-     1. Sigue los pasos hasta el punto 4 de la sección anterior.
-     2. Identifica la dirección MAC de tu dispositivo y dale doble clic.
-     3. Se te abrirá una nueva ventana con la clave de tu dispositivo.
-     4. Ve seleccionando uno por uno los valores que estan separados por espacios y reemplazandolos por los valores que copiaste de MacOS. Tienen la misma longitud. Así que ve de a pares.
 
-   - **Para linux**
-     1. Sigue los mismos pasos de edición de archivos en Linux.
+- **Para Windows**
+  1. Sigue los pasos del punto 3 hasta el punto 4 de [la sección anterior](#copiar-claves-de-bluetooth-de-windows-a-linux).
+  2. Identifica la dirección MAC de tu dispositivo y dale doble clic.
+  3. Se te abrirá una nueva ventana con la clave de tu dispositivo.
+  4. Ve seleccionando uno por uno los valores que estan separados por espacios y reemplazandolos por los valores que copiaste de MacOS. Tienen la misma longitud. Así que ve de a pares.
 
-   **Nota:** Ya no es necesario revertir la clave. Si obtiene `98-54-2f-...` en macOS, escriba `98 54 2f...` en el registro de Windows.
+- **Para linux**
+  1. Sigue los mismos pasos de edición de archivos en Linux.
 
 Una vez agregadas las claves, el dispositivo debería conectarse automáticamente en todos los sistemas.
 
