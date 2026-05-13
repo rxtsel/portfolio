@@ -10,8 +10,6 @@ categories:
   - git
   - tools
   - tutorials
-coverImage: ""
-coverImageAlt: ""
 seo:
   description: Configure Husky, Commitlint, and lint-staged to enforce clean commits, run checks before commit, and keep your Git history consistent.
   keywords: husky commitlint lint-staged, git hooks, conventional commits, pre commit hook, lint staged setup
@@ -23,7 +21,7 @@ seo:
 
 In this step-by-step guide, you'll learn how to install and configure Husky, Commitlint and lint-staged in your projects.
 
-### Why Husky, Commitlint and lint-staged
+### Why Husky, Commitlint and lint-staged?
 
 Have you ever pushed changes to your repository and the CI automatically deploys, but something goes wrong? When you check the logs, you realize it's something as simple as an indentation error. With Husky, you can prevent these issues by running the linter before each commit. This way, you avoid committing changes with errors, and also prevent that commit from being recorded in the history.
 
@@ -37,15 +35,18 @@ Have you ever pushed changes to your repository and the CI automatically deploys
 
 ![Screenshot of conventional commit success](/uploads/conventional-commit.webp)
 
-## What is a Git Hook
+## What is a Git Hook?
 
 A "Git Hook" is a custom script that can be triggered in response to specific events during the Git process. These events can include actions such as committing, pushing, merging branches, among others. Hooks allow you to run scripts or perform actions automatically before or after these events occur in Git.
 
 Git provides a set of predefined hooks, which you can adapt to your workflow needs. Some common hooks are:
 
 - **pre-commit**: Runs before committing changes. You can use it to run tasks such as automated tests or code quality checks.
+
 - **pre-push**: Runs before pushing changes to the remote repository. It can be used to perform additional checks before sending changes to the server.
+
 - **post-commit**: Runs after a change has been committed. It can be used to perform additional tasks after a commit has been made.
+
 - **post-receive**: Runs on the remote repository after receiving new changes. It can be useful for performing actions on the server after changes have been pushed to the remote repository.
 
 ## Installing and Configuring Husky, Commitlint and lint-staged
@@ -54,7 +55,7 @@ Git provides a set of predefined hooks, which you can adapt to your workflow nee
 
 If you don't have a Git repository set up for your project yet, initialize it by running the following command in your terminal:
 
-```bash
+```sh
 git init
 ```
 
@@ -65,7 +66,7 @@ git init
 
 Husky can be easily installed using any package manager. In your terminal, run the following command to install Husky as a development dependency in your project:
 
-```shell
+```sh
 pnpx husky-init && pnpm i
 ```
 
@@ -76,7 +77,7 @@ This will create a `.husky` folder at the root of your project, containing Husky
 Now, you need to add the scripts you want to run before committing. For example, you can run the `lint` script from your `package.json` to execute the linter before each commit and automatically fix any errors. In this case, we'll use `eslint` as the linter.
 
 ```json
-"scripts": {
+  "scripts": {
     "lint": "eslint \"*/**/*.{js,ts,jsx,tsx}\" --fix",
     "prepare": "husky install"
   }
@@ -100,7 +101,7 @@ Then, modify the `pre-commit` script in the `.husky/pre-commit` file to run the 
 
 Now that Husky is set up to run Commitlint before each commit, you need to install Commitlint in your project. You can do this by running the following command in your terminal:
 
-```shell
+```sh
 pnpm i @commitlint/cli @commitlint/config-conventional -DE
 ```
 
@@ -110,13 +111,13 @@ After installing Commitlint, you need to configure it to use a set of rules.
 
 Create a file called `commitlint.config.js` in the root of your project with the following command:
 
-```shell
+```sh
 echo "module.exports = { extends: ['@commitlint/config-conventional'] }" > commitlint.config.js
 ```
 
 Create the script to run commitlint with the following command:
 
-```shell
+```sh
 node node_modules/husky/lib/bin add .husky/commit-msg 'npx --no -- commitlint --edit "$1"'
 ```
 
@@ -128,27 +129,27 @@ If you want to run the linter only on modified files before each commit, you can
 
 1. Install `lint-staged`:
 
-```shell
+   ```sh
    pnpm i lint-staged -DE
-```
+   ```
 
 2. Create a `.lintstagedrc` file in the root of your project and add the desired configuration. For example, to run `eslint` on modified `{js,jsx,ts,tsx}` files:
 
-```json
-{
-  "*.{js,jsx,ts,tsx}": ["eslint --fix", "git add"]
-}
-```
+   ```json
+   {
+     "*.{js,jsx,ts,tsx}": ["eslint --fix", "git add"]
+   }
+   ```
 
 3. Add the script to `.husky/pre-commit` to run `lint-staged` before each commit:
 
-```diff title=".husky/pre-commit"
+   ```diff title=".husky/pre-commit"
    #!/usr/bin/env sh
-   . "$(dirname -- "$0")/_/husky.sh"
+   . "$(dirname -- "$0")/\_/husky.sh"
 
    pnpm run lint
    + pnpx lint-staged
-```
+   ```
 
 Now, `lint-staged` will run the linter only on modified files before each commit.
 
