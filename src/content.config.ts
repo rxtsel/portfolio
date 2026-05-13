@@ -57,6 +57,31 @@ const stackSchema = z.object({
   stack: z.array(stackItemSchema).default([]),
 })
 
+const integrationsSchema = z.object({
+  googleAdsense: z
+    .object({
+      allowedPathPattern: z.string().min(1).default("^(/blog(/|$)|/es/blog(/|$))"),
+      clientId: z.string().default(""),
+      enabled: z.boolean().default(false),
+      sellerLine: z.string().default(""),
+    })
+    .default({
+      allowedPathPattern: "^(/blog(/|$)|/es/blog(/|$))",
+      clientId: "",
+      enabled: false,
+      sellerLine: "",
+    }),
+  googleTagManager: z
+    .object({
+      containerId: z.string().default(""),
+      enabled: z.boolean().default(false),
+    })
+    .default({
+      containerId: "",
+      enabled: false,
+    }),
+})
+
 const tagsSchema = z.object({
   tags: z.array(tagItemSchema).default([]),
 })
@@ -139,6 +164,11 @@ const stack = defineCollection({
   schema: () => stackSchema,
 })
 
+const integrations = defineCollection({
+  loader: glob({ base: "./src/content", pattern: "integrations.{md,mdx}" }),
+  schema: () => integrationsSchema,
+})
+
 const tags = defineCollection({
   loader: glob({ base: "./src/content", pattern: "tags.{md,mdx}" }),
   schema: () => tagsSchema,
@@ -169,4 +199,4 @@ const blog = defineCollection({
   schema: () => blogSchema,
 })
 
-export const collections = { blog, blogCategories, experience, home, projects, stack, tags }
+export const collections = { blog, blogCategories, experience, home, integrations, projects, stack, tags }

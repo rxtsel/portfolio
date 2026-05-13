@@ -116,6 +116,31 @@ singletons:
           - { label: Slug, name: slug, widget: string, i18n: false, required: true }
           - { label: URL, name: href, widget: string, required: false }
 
+  - name: integrations
+    label: Integrations
+    file: src/content/integrations.md
+    i18n: false
+    fields:
+      - label: Google Tag Manager
+        name: googleTagManager
+        widget: object
+        fields:
+          - { label: Enabled, name: enabled, widget: boolean, default: false }
+          - { label: Container ID, name: containerId, widget: string, required: false }
+      - label: Google AdSense
+        name: googleAdsense
+        widget: object
+        fields:
+          - { label: Enabled, name: enabled, widget: boolean, default: false }
+          - { label: Client ID, name: clientId, widget: string, required: false }
+          - {
+              label: Allowed path pattern,
+              name: allowedPathPattern,
+              widget: string,
+              default: "^(/blog(/|$)|/es/blog(/|$))",
+            }
+          - { label: ads.txt seller line, name: sellerLine, widget: string, required: false }
+
   - name: experience
     label: Experience
     file: src/content/experience/{{locale}}.md
