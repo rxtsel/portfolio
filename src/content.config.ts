@@ -79,7 +79,7 @@ const homeSchema = z.object({
 const projectSchema = z.object({
   locale: z.enum(["en", "es"]),
   title: z.string().min(1),
-  description: z.string().min(1),
+  description: z.string().min(1).max(140),
   href: z.preprocess(emptyStringToUndefined, z.url().optional()),
   order: z.number().int().optional(),
   publishDate: z.coerce.date(),
