@@ -3,7 +3,7 @@ translationKey: las-pretas
 order: 2
 locale: es
 title: Las Pretas
-description: Desarrollo personalizado en WordPress a petición del cliente. Implementación completa del diseño entregado en Figma.
+description: WordPress a medida desde Figma, con implementación pixel-perfect y experiencia visual fiel a la marca.
 href: https://laspretas.com
 sourceUrl: ""
 publishDate: 2024-01-02

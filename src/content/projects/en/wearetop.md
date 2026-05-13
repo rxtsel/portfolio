@@ -3,7 +3,7 @@ translationKey: wearetop
 order: 4
 locale: en
 title: WeAreTop
-description: Custom design and development of a CMS-powered website for an international education consultancy and academic experiences.
+description: CMS-powered site for an international education consultancy, built with Astro for speed, clarity, and easy editing.
 href: https://wearetop.co
 sourceUrl: ""
 publishDate: 2024-01-04

@@ -3,7 +3,7 @@ translationKey: maria-alicia-cabrera
 order: 1
 locale: en
 title: María Alicia Cabrera
-description: Website for a Colombian writer, providing her with a control panel to manage all the website information.
+description: Editable website for a Colombian writer, with a custom CMS to manage work, content, and public information.
 href: https://mariaaliciacabrera.com/
 sourceUrl: https://github.com/abouthernan/maria-alicia-cabrera
 publishDate: 2024-01-01

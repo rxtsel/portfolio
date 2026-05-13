@@ -3,7 +3,7 @@ translationKey: soundadvice-platform
 order: 6
 locale: es
 title: Plataforma SoundAdvice
-description: Desarrollo de una plataforma web que conecta a profesionales de la música con mentores expertos para el crecimiento profesional.
+description: Plataforma full stack para mentorías, pagos, streaming, cursos y comunidad, diseñada para crecer con arquitectura modular.
 href: https://app.soundadvice.club
 sourceUrl: ""
 publishDate: 2026-05-07
@@ -20,4 +20,6 @@ stack:
   - vitest
 tags:
   - ci-cd
+  - cloudflare-r2
+  - cloudflare-stream
 ---

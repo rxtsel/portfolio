@@ -3,7 +3,7 @@ translationKey: jptradingbots
 order: 3
 locale: es
 title: JPTradingBots
-description: Diseño y desarrollo personalizado en WordPress a petición del cliente. Rediseño completo con tema personalizado, plugins y sistema de e-learning.
+description: Rediseño WordPress con tema personalizado, plugins y e-learning para mejorar presentación y experiencia de aprendizaje.
 href: https://jptradingbots.com
 sourceUrl: ""
 publishDate: 2024-01-03

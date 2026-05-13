@@ -3,7 +3,7 @@ translationKey: soundadvice-website
 order: 7
 locale: es
 title: SoundAdvice Sitio Web
-description: Sitio web de SoundAdvice, que conecta a músicos con mentores de la industria musical y ofrece acceso a eventos como talleres y retiros.
+description: Website público con eventos, checkout, concursos y perfiles de mentores, optimizado con CMS, caché e invalidación automática.
 href: https://soundadvice.club
 sourceUrl: ""
 publishDate: 2026-05-07
