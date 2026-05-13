@@ -25,7 +25,7 @@ const blogHref = getLocalizedPath(locale, "blog")
 const normalizedPathname = pathname.replace(/\/$/, "") || "/"
 const isBlogActive = normalizedPathname === blogHref.replace(/\/$/, "")
 const navLinkClass =
-  "text-muted-foreground hover:text-foreground data-active:text-foreground inline-flex h-8 items-center px-2 text-sm font-medium transition-colors"
+  "text-muted-foreground hover:text-foreground data-active:text-foreground inline-flex h-8 items-center px-1 text-sm font-medium transition-colors"
 const languageLinkClass =
   "text-muted-foreground hover:text-foreground data-active:text-foreground inline-flex h-8 items-center text-sm font-medium transition-colors"
 const labels = {
@@ -68,7 +68,7 @@ const labels = {
 
     <Separator />
 
-    <nav aria-label={labels[locale].language} class="flex items-center gap-x-1 px-2">
+    <nav aria-label={labels[locale].language} class="flex items-center gap-x-1 px-1">
       {
         links.map((link, index) => (
           <>
@@ -103,7 +103,7 @@ const labels = {
       }
     </nav>
 
-    <Separator class="mr-3.5" />
+    <Separator class="mr-2" />
 
     <ThemeSwitcher />
   </div>
