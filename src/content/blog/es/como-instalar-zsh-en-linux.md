@@ -5,14 +5,12 @@ published: true
 title: Cómo instalar zsh en linux
 description: Instala y configura Zsh en tu sistema con estos simples pasos. Optimiza tu terminal con oh-my-zsh para una experiencia de línea de comandos mejorada.
 publishDate: 2024-01-29
-updatedDate: ""
+updatedDate: 2026-05-13
 categories:
   - linux
   - terminals
   - tutorials
   - shells
-coverImage: ""
-coverImageAlt: ""
 seo:
   description: Instala Zsh en Linux, cambia tu shell por defecto, añade oh-my-zsh y configura plugins y alias útiles para mejorar tu terminal.
   keywords: instalar zsh linux, configurar zsh, oh my zsh, terminal linux, tutorial zsh
@@ -46,7 +44,8 @@ sudo nvim /etc/passwd
 
 5. Dentro del archivo, encuentra la línea que corresponde a tu nombre de usuario y reemplaza `/bin/bash` por `/bin/zsh`. En mi caso mi username es `rxtsel`:
 
-```diff title="/etc/passwd"
+```diff
+title="/etc/passwd"
 - rxtsel:x:1000:1000::/home/rxtsel:/bin/bash
 
 + rxtsel:x:1000:1000::/home/rxtsel:/bin/zsh
@@ -68,16 +67,15 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/too
 ```
 
 8. Reinicia tu terminal para aplicar los cambios.
-9. Luego, edita el archivo `.zshrc` con tu editor de texto favorito que debe estar en la raíz de la carpeta de usuario `/home/rxtsel/.zshrc`. En mi caso ya tengo mi configuración personalizada para **WSL**, pero puedes usar la que más te guste:
+9. Luego, edita el archivo `.zshrc` con tu editor de texto favorito que debe estar en la raíz de la carpeta de usuario `/home/rxtsel/.zshrc`.
 
-- Para esta configuración necesitarás instalar los siguientes plugins y programas:
+Para esta configuración necesitarás instalar los siguientes plugins y programas:
+
 - [zsh-syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/INSTALL.md)
 - [nvim](https://github.com/neovim/neovim)
-- [tmux](https://github.com/tmux/tmux)
-- [fnm](https://github.com/Schniz/fnm)
-- [bun](https://bun.sh/)
 
-```zsh title=".zshrc"
+```zsh
+title=".zshrc"
 export ZSH="$HOME/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
@@ -85,9 +83,8 @@ ZSH_THEME="robbyrussell"
 
 plugins=(
   sudo
-  git
-	zsh-syntax-highlighting
-	)
+  zsh-syntax-highlighting
+)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -98,20 +95,6 @@ alias v=nvim
 alias vcfg="cd ~/.config/nvim/ && nvim init.lua"
 alias zr="source ~/.zshrc"
 alias -s {html,js,css,py,go,lua}="nvim"
-alias pro="cd ~/Projects"
-alias t="tmux"
-alias thunar="/mnt/c/Windows/explorer.exe ."
-
-# fnm
-export PATH="/home/rxtsel/.local/share/fnm:$PATH"
-eval "`fnm env`"
-
-# bun completions
-[ -s "/home/rxtsel/.bun/_bun" ] && source "/home/rxtsel/.bun/_bun"
-
-# bun
-export BUN_INSTALL="$HOME/.bun"
-export PATH="$BUN_INSTALL/bin:$PATH"
 ```
 
 - Reinicia tu terminal para aplicar los cambios.
