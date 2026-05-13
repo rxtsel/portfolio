@@ -20,32 +20,31 @@ seo:
 
 1. To begin, install **zsh** using your package manager. In this case, I'll use pacman with the following command:
 
-```bash
+```sh
 sudo pacman -S zsh
 ```
 
 2. Next, verify the newly installed zsh version:
 
-```bash
+```sh
 zsh --version
 ```
 
 3. To confirm that you are using the new shell, check the current shell with:
 
-```bash
+```sh
 echo $SHELL
 ```
 
 4. Now, open the /etc/passwd file with your preferred text editor. For example, you can use nvim:
 
-```bash
+```sh
 sudo nvim /etc/passwd
 ```
 
 5. Within the file, find the line corresponding to your username and replace `/bin/bash` with `/bin/zsh`. In my case, my username is rxtsel:
 
-```diff
-title="/etc/passwd"
+```diff title="/etc/passwd"
 - rxtsel:x:1000:1000::/home/rxtsel:/bin/bash
 
 + rxtsel:x:1000:1000::/home/rxtsel:/bin/zsh
@@ -55,13 +54,13 @@ title="/etc/passwd"
 
 6. Change the default shell by running the following command:
 
-```bash
+```sh
 sudo chsh -s /bin/zsh
 ```
 
 7. Continue by installing oh-my-zsh and git:
 
-```bash
+```sh
 sudo pacman -S git &&
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 ```
@@ -74,8 +73,7 @@ For this configuration, you will need to install the following plugins and progr
 - [zsh-syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/INSTALL.md)
 - [nvim](https://github.com/neovim/neovim)
 
-```zsh
-title=".zshrc"
+```zsh title=".zshrc"
 export ZSH="$HOME/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
