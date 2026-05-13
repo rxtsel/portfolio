@@ -1,8 +1,8 @@
 ---
-import GitHubIcon from "@/assets/github.svg"
-import LinkedInIcon from "@/assets/linkedin.svg"
+import GitHubIcon from "@/assets/logos/github.svg"
+import LinkedInIcon from "@/assets/logos/linkedin.svg"
 import RssIcon from "@/assets/rss.svg"
-import XIcon from "@/assets/x.svg"
+import XIcon from "@/assets/logos/x.svg"
 import { getLocalizedPath, type Locale } from "@/lib/i18n"
 import type { SvgComponent } from "astro/types"
 
@@ -89,7 +89,7 @@ const footerLinks: FooterLink[] = [
               rel="noopener noreferrer"
               target="_blank"
             >
-              <Icon aria-hidden="true" />
+              <Icon aria-hidden="true" class="pointer-events-none" />
             </a>
           )
         }
