@@ -1,43 +1,56 @@
-# Astro Starter Kit: Minimal
+# rxtsel.dev
 
-```sh
-pnpm create astro@latest -- --template minimal
-```
+Personal portfolio and blog, built with Astro.
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## Features
 
-## 🚀 Project Structure
+- Bilingual content with English and Spanish routes
+- Blog with localized posts
+- Projects and experience powered by Astro Content Collections
+- Content editing through Sveltia CMS
+- Dynamic Open Graph images for blog posts
+- RSS feeds per locale
+- Sitemap and robots.txt
+- SEO metadata validation with `astro-seo-graph`
+- Light and dark theme support
+- Responsive, content-first design
 
-Inside of your Astro project, you'll see the following folders and files:
+## Stack
 
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
+- [Astro](https://astro.build/) + TypeScript
+- [Tailwind CSS](https://tailwindcss.com/)
+- [Astro Content Collections](https://docs.astro.build/en/guides/content-collections/)
+- [Sveltia CMS](https://github.com/sveltia/sveltia-cms)
+- [@astrojs/rss](https://docs.astro.build/en/guides/rss/)
+- [@astrojs/sitemap](https://docs.astro.build/en/guides/integrations-guide/sitemap/)
+- [astro-expressive-code](https://expressive-code.com/)
+- [@vercel/og](https://vercel.com/docs/og-image-generation)
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+## Commands
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+| Command        | Action                                     |
+| :------------- | :----------------------------------------- |
+| `pnpm install` | Install dependencies                       |
+| `pnpm dev`     | Start local dev server at `localhost:4321` |
+| `pnpm check`   | Run Astro checks                           |
+| `pnpm build`   | Check and build production site to `dist/` |
+| `pnpm preview` | Preview production build locally           |
+| `pnpm lint`    | Run ESLint with fixes                      |
+| `pnpm format`  | Format files with Prettier                 |
 
-Any static assets, like images, can be placed in the `public/` directory.
+## Content
 
-## 🧞 Commands
+Main content lives in `src/content`:
 
-All commands are run from the root of the project, from a terminal:
+- `home/` - localized homepage copy
+- `projects/` - localized projects
+- `experience/` - localized experience
+- `blog/` - localized blog posts
+- `stack.md` - stack items
+- `tags.md` - taxonomy tags
 
-| Command                | Action                                           |
-| :--------------------- | :----------------------------------------------- |
-| `pnpm install`         | Installs dependencies                            |
-| `pnpm dev`             | Starts local dev server at `localhost:4321`      |
-| `pnpm build`           | Build your production site to `./dist/`          |
-| `pnpm preview`         | Preview your build locally, before deploying     |
-| `pnpm astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `pnpm astro -- --help` | Get help using the Astro CLI                     |
+CMS config lives in `public/cms-rxtsel/config.yml`.
 
-## 👀 Want to learn more?
+## License
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+[Apache-2.0](LICENSE)
