@@ -6,6 +6,7 @@ import sitemap from "@astrojs/sitemap"
 import seoGraph from "@jdevalk/astro-seo-graph/integration"
 import expressiveCode from "astro-expressive-code"
 import rehypeExternalLinks from "rehype-external-links"
+import { redirects } from "./src/lib/redirects.ts"
 
 /** @type {import('rehype-external-links').Options} */
 const externalLinksOptions = {
@@ -55,4 +56,5 @@ export default defineConfig({
   markdown: {
     rehypePlugins: [[rehypeExternalLinks, externalLinksOptions]],
   },
+  redirects,
 })
