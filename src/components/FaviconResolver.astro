@@ -1,16 +1,19 @@
 ---
+import { Image } from "astro:assets"
+
 interface Props {
   href: string
+  loading?: "lazy" | "eager"
 }
 
-const { href } = Astro.props
+const { href, loading = "lazy" } = Astro.props
 ---
 
-<img
+<Image
   alt={`Favicon for ${new URL(href).hostname}`}
   class="m-auto aspect-square shrink-0 object-contain"
   height="18"
-  loading="lazy"
+  loading={loading}
   src={`https://favicon.vemetric.com/${new URL(href).hostname}?format=webp`}
   width="18"
 />
