@@ -1,0 +1,22 @@
+---
+import MainLayout from "@/layouts/MainLayout.astro"
+
+const title = "Page not found"
+const description = "The page you are looking for does not exist or was moved."
+---
+
+<MainLayout
+  description={description}
+  extraMeta={[{ content: "noindex, nofollow", name: "robots" }]}
+  lang="en"
+  title={title}
+>
+  <main
+    class="max-h-vh @container mx-auto flex h-full w-full max-w-prose grid-cols-1 flex-col place-content-center"
+  >
+    <p class="text-muted-foreground mb-0! text-[53cqw] leading-none font-bold tabular-nums">404</p>
+    <h1 class="text-foreground mb-2 text-3xl font-bold">{title}</h1>
+    <p class="text-muted-foreground mb-4 lg:text-lg">{description}</p>
+    <a class="link-underline w-fit" href="/">Back home</a>
+  </main>
+</MainLayout>

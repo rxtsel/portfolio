@@ -40,16 +40,29 @@ type BlogPostGraphInput = GraphInput & {
 }
 
 const defaultExtraLinks = [
-  { href: "/favicon-light.svg", rel: "icon", type: "image/svg+xml", media: "(prefers-color-scheme: light)" },
-  { href: "/favicon-dark.svg", rel: "icon", type: "image/svg+xml", media: "(prefers-color-scheme: dark)" },
-  { href: "/favicon.ico", rel: "icon" },
-  { href: "/favicon-96x96.png", rel: "icon", sizes: "96x96", type: "image/png" },
+  { href: "/favicon.ico", rel: "icon", sizes: "32x32" },
+  { href: "/favicon-96x96.png", rel: "icon", type: "image/png", sizes: "96x96" },
+  {
+    href: "/favicon.svg",
+    rel: "icon",
+    type: "image/svg+xml",
+    sizes: "any",
+    media: "(prefers-color-scheme: light)",
+  },
+  {
+    href: "/favicon-dark.svg",
+    rel: "icon",
+    type: "image/svg+xml",
+    sizes: "any",
+    media: "(prefers-color-scheme: dark)",
+  },
   { href: "/apple-touch-icon.png", rel: "apple-touch-icon", sizes: "180x180" },
   { href: "/site.webmanifest", rel: "manifest" },
   { href: "/sitemap-index.xml", rel: "sitemap" },
 ] satisfies NonNullable<SeoProps["extraLinks"]>
 
 const defaultExtraMeta = [
+  { content: "light dark", name: "color-scheme" },
   { content: "#0a0a0a", name: "theme-color" },
   { content: "#0a0a0a", name: "msapplication-TileColor" },
   { content: "/browserconfig.xml", name: "msapplication-config" },
