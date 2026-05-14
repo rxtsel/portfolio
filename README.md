@@ -14,6 +14,7 @@ Personal portfolio and blog, built with Astro.
 - SEO metadata validation with `astro-seo-graph`
 - Light and dark theme support
 - Responsive, content-first design
+- Consent management with c15t and a self-hosted Cloudflare Worker backend
 
 ## Stack
 
@@ -56,6 +57,7 @@ CMS config lives in `public/cms-rxtsel/config.yml`.
 
 - [Google integrations](docs/runbooks/0001-google-integrations.md) - GTM, GA4, AdSense, ads.txt, and Search Console notes.
 - [Cloudflare Access for Sveltia CMS](docs/runbooks/0002-cloudflare-access-sveltia-cms.md) - Protect the static CMS admin route with Cloudflare Zero Trust.
+- [c15t consent](docs/runbooks/0003-c15t-consent.md) - Consent runtime, Cloudflare Worker backend, policy packs, and Google consent integrations.
 
 ## License
 
