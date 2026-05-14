@@ -386,7 +386,7 @@ function injectConsentStyles(): void {
       font-size: 0.875rem;
       font-weight: 550;
       outline: none;
-      transition: transform 160ms ease, background-color 160ms ease, border-color 160ms ease;
+      transition: transform 150ms ease, background-color 150ms ease, border-color 160ms ease;
     }
 
     .c15t-button:hover {
@@ -406,11 +406,19 @@ function injectConsentStyles(): void {
       border-color: var(--primary);
       background: var(--primary);
       color: var(--primary-foreground);
+
+      &:hover {
+        background:  color-mix(in oklab, var(--primary) 80%, transparent);
+      }
     }
 
     .c15t-button-secondary {
       background: var(--secondary);
       color: var(--secondary-foreground);
+
+      &:hover {
+        background: color-mix(in oklab, var(--secondary) 80%, transparent);
+      }
     }
 
     .c15t-trigger {
@@ -486,7 +494,7 @@ function injectConsentStyles(): void {
       }
 
       .c15t-category-list {
-        gap: 0.75rem;
+        gap: 0.5rem;
       }
 
       .c15t-category + .c15t-category {
