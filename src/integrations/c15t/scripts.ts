@@ -1,15 +1,15 @@
 import type { Script } from "c15t"
 import { createGoogleAdsenseScript } from "@/integrations/google/adsense"
-import { createGoogleTagManagerScript } from "@/integrations/google/tag-manager"
+import { createGoogleAnalyticsScript } from "@/integrations/google/analytics"
 
 export interface ConsentScriptConfig {
   googleAdsenseClientId: string | undefined
-  googleTagManagerContainerId: string | undefined
+  googleAnalyticsMeasurementId: string | undefined
 }
 
 export function createConsentScripts(config: ConsentScriptConfig): Script[] {
   return [
-    createGoogleTagManagerScript(config.googleTagManagerContainerId ?? ""),
+    createGoogleAnalyticsScript(config.googleAnalyticsMeasurementId ?? ""),
     createGoogleAdsenseScript(config.googleAdsenseClientId ?? ""),
   ].filter((script): script is Script => Boolean(script))
 }

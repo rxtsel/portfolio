@@ -10,9 +10,9 @@
 ## Runtime Behavior
 
 - Frontend uses c15t hosted mode through `PUBLIC_C15T_URL`.
-- Google Tag Manager uses c15t's built-in GTM integration with `alwaysLoad` and Consent Mode v2.
+- Google Analytics uses c15t's built-in Google Tag integration with Consent Mode v2.
 - Google AdSense is gated behind the `marketing` category.
-- GTM `noscript` is not rendered because it cannot respect JavaScript-managed consent.
+- Google Tag Manager is not used.
 
 ## Environment
 
@@ -30,5 +30,5 @@ For production builds, set `PUBLIC_C15T_URL` in Cloudflare Workers Builds variab
 - EU visitors should see banner and require opt-in for AdSense.
 - California visitors should resolve opt-out behavior.
 - Other regions should not see a banner.
-- GTM should load immediately and receive consent updates through Google Consent Mode.
+- GA4 should receive consent updates through Google Consent Mode.
 - AdSense should only load after `marketing` consent.

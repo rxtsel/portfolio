@@ -9,10 +9,8 @@ This project keeps Google integration settings in content instead of hardcoding 
 - `src/content/integrations.md` stores integration settings.
 - `src/content.config.ts` validates the integrations collection.
 - `public/cms-rxtsel/config.yml` exposes settings in Sveltia CMS.
-- `src/components/GoogleTagManagerHead.astro` injects the GTM loader.
-- `src/components/GoogleTagManagerNoScript.astro` injects the GTM noscript fallback.
-- `public/scripts/google-tag-manager.js` loads Google Tag Manager from the configured container ID.
-- `src/components/GoogleAdsense.astro` injects AdSense only on allowed routes.
+- `src/integrations/google/analytics.ts` configures GA4 through c15t's Google Tag helper.
+- `src/integrations/google/adsense.ts` configures AdSense behind marketing consent.
 - `src/pages/ads.txt.ts` generates `/ads.txt`.
 
 ## Settings
@@ -21,9 +19,9 @@ Use `src/content/integrations.md`:
 
 ```yaml
 ---
-googleTagManager:
+googleAnalytics:
   enabled: true
-  containerId: <CONTAINER_ID>
+  measurementId: <GA4_MEASUREMENT_ID>
 googleAdsense:
   enabled: true
   clientId: <ADSENSE_CLIENT_ID>
@@ -32,22 +30,13 @@ googleAdsense:
 ---
 ```
 
-## Google Tag Manager
-
-Set `googleTagManager.enabled` to `true` and replace `<CONTAINER_ID>` with your GTM container ID.
-
-Do not add separate GTM snippets manually in layouts. The project already renders:
-
-- GTM loader in `<head>`.
-- GTM `noscript` fallback at the start of `<body>`.
-
 ## GA4 / Google Analytics
 
-Google Analytics should be connected through Google Tag Manager.
+Google Analytics is loaded directly through the c15t Google Tag integration, not through Google Tag Manager.
 
-Do not add a separate `gtag.js` script to the codebase if GA4 is already configured in GTM. Adding both can duplicate page views.
+Set `googleAnalytics.enabled` to `true` and replace `<GA4_MEASUREMENT_ID>` with your GA4 measurement ID, such as `G-XXXXXXXXXX`.
 
-If other Google products are linked through GA4 or GTM, configure them in Google product dashboards or GTM instead of adding extra scripts to this project.
+Do not add Google Tag Manager snippets or a separate `gtag.js` snippet manually. Running multiple loaders for the same GA4 destination can duplicate page views.
 
 ## Google AdSense
 
@@ -95,8 +84,7 @@ Only IDs and safe config values should be stored there. Do not store arbitrary s
 
 ## Deployment Checklist
 
-- GTM container ID is set.
-- GA4 is configured inside GTM.
+- GA4 measurement ID is set if analytics are enabled.
 - AdSense client ID is set if ads are enabled.
 - `allowedPathPattern` matches only routes where ads should load.
 - `/ads.txt` returns the expected seller line.

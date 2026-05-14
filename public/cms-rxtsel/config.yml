@@ -121,12 +121,12 @@ singletons:
     file: src/content/integrations.md
     i18n: false
     fields:
-      - label: Google Tag Manager
-        name: googleTagManager
+      - label: Google Analytics
+        name: googleAnalytics
         widget: object
         fields:
           - { label: Enabled, name: enabled, widget: boolean, default: false }
-          - { label: Container ID, name: containerId, widget: string, required: false }
+          - { label: Measurement ID, name: measurementId, widget: string, required: false }
       - label: Google AdSense
         name: googleAdsense
         widget: object

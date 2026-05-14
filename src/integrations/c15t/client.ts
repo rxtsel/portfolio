@@ -5,7 +5,7 @@ import { mountConsentUI } from "@/integrations/c15t/ui"
 export interface ConsentManagerConfig {
   backendURL: string
   googleAdsenseClientId: string | undefined
-  googleTagManagerContainerId: string | undefined
+  googleAnalyticsMeasurementId: string | undefined
   locale: string
 }
 

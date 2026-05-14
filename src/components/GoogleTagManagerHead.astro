@@ -1,9 +1,0 @@
----
-import { getIntegrations } from "@/lib/integrations"
-
-const integrations = await getIntegrations()
-const containerId = integrations?.googleTagManager.containerId.trim() ?? ""
-const shouldRender = integrations?.googleTagManager.enabled && containerId
----
-
-{shouldRender && <script data-container-id={containerId} is:inline src="/scripts/google-tag-manager.js" />}

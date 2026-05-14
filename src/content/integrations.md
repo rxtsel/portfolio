@@ -1,7 +1,7 @@
 ---
-googleTagManager:
+googleAnalytics:
   enabled: true
-  containerId: GTM-PVFK9CVK
+  measurementId: G-DCPSPRJWRR
 googleAdsense:
   enabled: true
   clientId: ca-pub-6984927047139306

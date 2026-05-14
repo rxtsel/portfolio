@@ -55,7 +55,7 @@ CMS config lives in `public/cms-rxtsel/config.yml`.
 
 ## Runbooks
 
-- [Google integrations](docs/runbooks/0001-google-integrations.md) - GTM, GA4, AdSense, ads.txt, and Search Console notes.
+- [Google integrations](docs/runbooks/0001-google-integrations.md) - GA4, AdSense, ads.txt, and Search Console notes.
 - [Cloudflare Access for Sveltia CMS](docs/runbooks/0002-cloudflare-access-sveltia-cms.md) - Protect the static CMS admin route with Cloudflare Zero Trust.
 - [c15t consent](docs/runbooks/0003-c15t-consent.md) - Frontend consent runtime and shared consent service integration.
 - [Cloudflare Workers deployment](docs/runbooks/0004-cloudflare-workers-deployment.md) - Workers Builds, static assets, cache headers, and CI/CD setup.

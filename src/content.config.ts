@@ -71,14 +71,14 @@ const integrationsSchema = z.object({
       enabled: false,
       sellerLine: "",
     }),
-  googleTagManager: z
+  googleAnalytics: z
     .object({
-      containerId: z.string().default(""),
       enabled: z.boolean().default(false),
+      measurementId: z.string().default(""),
     })
     .default({
-      containerId: "",
       enabled: false,
+      measurementId: "",
     }),
 })
 
