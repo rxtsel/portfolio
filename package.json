@@ -8,20 +8,31 @@
     "preview": "astro preview",
     "astro": "astro",
     "check": "astro check",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "drizzle-kit migrate",
+    "db:push": "drizzle-kit push",
+    "worker:dev": "wrangler dev",
+    "worker:dev:remote": "wrangler dev --remote",
+    "worker:deploy": "wrangler deploy",
     "format": "prettier . --write",
     "lint": "eslint . --fix"
   },
   "dependencies": {
     "@astrojs/rss": "4.0.18",
     "@astrojs/sitemap": "3.7.2",
+    "@c15t/backend": "2.1.0",
+    "@c15t/scripts": "2.1.0",
     "@fontsource-variable/geist": "5.2.8",
     "@jdevalk/astro-seo-graph": "1.4.0",
     "@jdevalk/seo-graph-core": "0.6.1",
     "@js-temporal/polyfill": "0.5.1",
+    "@libsql/client": "0.17.3",
     "@tailwindcss/vite": "4.2.4",
     "@vercel/og": "0.11.1",
     "astro": "6.3.1",
     "astro-expressive-code": "0.42.0",
+    "c15t": "2.1.0",
+    "drizzle-orm": "0.44.7",
     "micromark": "4.0.2",
     "rehype-external-links": "3.0.0",
     "tailwindcss": "4.2.4"
@@ -36,6 +47,8 @@
     "@eslint/js": "9.39.4",
     "@tailwindcss/typography": "0.5.19",
     "@typescript-eslint/parser": "8.59.2",
+    "dotenv": "17.4.2",
+    "drizzle-kit": "0.31.8",
     "eslint": "9.39.4",
     "eslint-plugin-astro": "1.7.0",
     "eslint-plugin-jsx-a11y": "6.10.2",
@@ -43,6 +56,7 @@
     "prettier": "3.8.3",
     "prettier-plugin-astro": "0.14.1",
     "prettier-plugin-tailwindcss": "0.8.0",
-    "typescript": "6.0.3"
+    "typescript": "6.0.3",
+    "wrangler": "4.90.1"
   }
 }
