@@ -1,7 +1,0 @@
-name = "consent"
-main = "worker/index.ts"
-compatibility_date = "2026-05-14"
-compatibility_flags = ["nodejs_compat"]
-
-[vars]
-C15T_TRUSTED_ORIGINS = "https://rxtsel.dev,http://localhost:4321"

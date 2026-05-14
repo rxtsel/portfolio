@@ -28,10 +28,3 @@ pnpm-debug.log*
 
 # Nix
 .direnv/
-
-# DBs
-*.sqlite
-*.db
-
-# clouflare worker
-.wrangler/
