@@ -32,13 +32,19 @@ const dateTitle = post.data.locale === "es" ? "Última modificación" : "Last mo
 ---
 
 <article class="grid gap-2">
-  <Heading class="text-lg font-medium text-pretty" transition:name={getBlogPostTransitionName(post, "title")}>
+  <Heading
+    class="text-lg font-medium text-pretty"
+    style={`view-transition-name: ${getBlogPostTransitionName(post, "title")}`}
+  >
     <a class="link-underline" href={getBlogPostPath(post)}>
       {post.data.title}
     </a>
   </Heading>
 
-  <p class="text-muted-foreground" transition:name={getBlogPostTransitionName(post, "description")}>
+  <p
+    class="text-muted-foreground"
+    style={`view-transition-name: ${getBlogPostTransitionName(post, "description")}`}
+  >
     {post.data.description}
   </p>
 

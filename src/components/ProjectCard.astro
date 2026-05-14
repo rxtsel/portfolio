@@ -27,13 +27,11 @@ const {
   titleTransitionName,
 } = Astro.props
 const Heading = headingLevel
+const titleStyle = titleTransitionName ? `view-transition-name: ${titleTransitionName}` : undefined
 ---
 
 <article class="flex h-full flex-col gap-2 p-4">
-  <Heading
-    class="flex items-center justify-between text-lg font-medium"
-    transition:name={titleTransitionName as string}
-  >
+  <Heading class="flex items-center justify-between text-lg font-medium" style={titleStyle}>
     {
       href ? (
         <a

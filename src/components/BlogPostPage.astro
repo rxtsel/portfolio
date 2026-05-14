@@ -117,11 +117,11 @@ const graph = buildBlogPostGraph({
           />
         </div>
 
-        <h1 transition:name={getBlogPostTransitionName(post, "title")}>
+        <h1 style={`view-transition-name: ${getBlogPostTransitionName(post, "title")}`}>
           {post.data.title}
         </h1>
 
-        <p transition:name={getBlogPostTransitionName(post, "description")}>
+        <p style={`view-transition-name: ${getBlogPostTransitionName(post, "description")}`}>
           {post.data.description}
         </p>
 
