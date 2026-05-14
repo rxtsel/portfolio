@@ -24,16 +24,34 @@ const FALLBACK_COPY = {
 }
 
 export function mountConsentUI(consentStore: ConsentStore): void {
+  let root = getConsentRoot()
+
+  const render = () => renderConsentUI(root, consentStore)
+  const handlePageSwap = () => {
+    root = getConsentRoot()
+    injectConsentStyles()
+    render()
+  }
+
+  injectConsentStyles()
+  document.addEventListener("astro:after-swap", handlePageSwap)
+
+  render()
+  consentStore.subscribe(render)
+}
+
+function getConsentRoot(): HTMLElement {
+  const existingRoot = document.getElementById("c15t-consent-ui")
+
+  if (existingRoot) {
+    return existingRoot
+  }
+
   const root = document.createElement("div")
   root.id = "c15t-consent-ui"
   document.body.append(root)
 
-  injectConsentStyles()
-
-  const render = () => renderConsentUI(root, consentStore)
-
-  render()
-  consentStore.subscribe(render)
+  return root
 }
 
 function renderConsentUI(root: HTMLElement, consentStore: ConsentStore): void {

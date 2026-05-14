@@ -16,14 +16,17 @@ const locale = Astro.currentLocale ?? "en"
 
 {
   backendURL && (
-    <div
-      data-backend-url={backendURL}
-      data-google-adsense-client-id={googleAdsenseClientId}
-      data-google-tag-manager-container-id={googleTagManagerContainerId}
-      data-locale={locale}
-      hidden
-      id="consent-manager-config"
-    />
+    <>
+      <div id="c15t-consent-ui" transition:persist />
+      <div
+        data-backend-url={backendURL}
+        data-google-adsense-client-id={googleAdsenseClientId}
+        data-google-tag-manager-container-id={googleTagManagerContainerId}
+        data-locale={locale}
+        hidden
+        id="consent-manager-config"
+      />
+    </>
   )
 }
 
