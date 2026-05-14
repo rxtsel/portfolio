@@ -1,0 +1,11 @@
+<svg viewBox="0 0 120 121" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    path { fill: #0A0A0A; }
+
+    @media (prefers-color-scheme: dark) {
+      path { fill: #FAFAFA; }
+    }
+  </style>
+  <title>Rxtsel logo</title>
+  <path d="M120 121H0L60 0L78.9333 38.1822L73.3333 49.3411L60 22.3824L16 111.051H104L86.6667 76.23L73.3333 103.119L60 76.2363L46.6667 103.119L41.1333 91.96L60 53.9122L73.3333 80.8011L86.6667 53.9122L120 121Z"/>
+</svg>
