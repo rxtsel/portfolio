@@ -1,0 +1,46 @@
+---
+import { getIntegrations, matchesAllowedPath } from "@/lib/integrations"
+
+const backendURL = import.meta.env.PUBLIC_C15T_URL?.trim() ?? ""
+const integrations = await getIntegrations()
+const googleTagManagerContainerId = integrations?.googleTagManager.enabled
+  ? integrations.googleTagManager.containerId.trim()
+  : ""
+const googleAdsense = integrations?.googleAdsense
+const googleAdsenseClientId =
+  googleAdsense?.enabled && matchesAllowedPath(Astro.url.pathname, googleAdsense.allowedPathPattern)
+    ? googleAdsense.clientId.trim()
+    : ""
+const locale = Astro.currentLocale ?? "en"
+---
+
+{
+  backendURL && (
+    <>
+      <div id="c15t-consent-ui" transition:persist />
+      <div
+        data-backend-url={backendURL}
+        data-google-adsense-client-id={googleAdsenseClientId}
+        data-google-tag-manager-container-id={googleTagManagerContainerId}
+        data-locale={locale}
+        hidden
+        id="consent-manager-config"
+      />
+    </>
+  )
+}
+
+<script>
+  import { startConsentManager } from "@/integrations/c15t/client"
+
+  const config = document.getElementById("consent-manager-config")
+
+  if (config instanceof HTMLElement) {
+    startConsentManager({
+      backendURL: config.dataset.backendUrl ?? "",
+      googleAdsenseClientId: config.dataset.googleAdsenseClientId,
+      googleTagManagerContainerId: config.dataset.googleTagManagerContainerId,
+      locale: config.dataset.locale ?? "en",
+    })
+  }
+</script>

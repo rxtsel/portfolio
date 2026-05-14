@@ -1,9 +1,7 @@
 ---
 import Seo from "@jdevalk/astro-seo-graph/Seo.astro"
 import { ClientRouter } from "astro:transitions"
-import GoogleAdsense from "@/components/GoogleAdsense.astro"
-import GoogleTagManagerHead from "@/components/GoogleTagManagerHead.astro"
-import GoogleTagManagerNoScript from "@/components/GoogleTagManagerNoScript.astro"
+import ConsentManager from "@/components/ConsentManager.astro"
 import ThemeScript from "@/components/ThemeScript.astro"
 import { buildLayoutSeoProps, type LayoutSeoProps } from "@/lib/seo"
 import "@/styles/global.css"
@@ -28,14 +26,12 @@ const seo = buildLayoutSeoProps({ ...seoProps, lang }, Astro.url)
     <meta content={Astro.generator} name="generator" />
     <ThemeScript />
     <Seo {...seo} />
-    <GoogleTagManagerHead />
-    <GoogleAdsense />
     <ClientRouter />
   </head>
   <body
     class="mx-auto grid min-h-screen w-full max-w-prose grid-rows-[auto_1fr_auto] gap-y-6 overflow-x-hidden px-4 font-sans md:px-0"
   >
-    <GoogleTagManagerNoScript />
+    <ConsentManager />
     <Header languageLinks={languageLinks} locale={lang} pathname={Astro.url.pathname} />
     <slot />
     <Footer locale={lang} />
