@@ -18,9 +18,8 @@ const locale = Astro.currentLocale ?? "en"
 {
   backendURL && (
     <>
-      <div class="absolute inset-0" id="c15t-consent-ui" transition:persist />
+      <div id="c15t-consent-ui" transition:persist />
       <div
-        class="h-0"
         data-backend-url={backendURL}
         data-google-adsense-client-id={googleAdsenseClientId}
         data-google-tag-manager-container-id={googleTagManagerContainerId}
