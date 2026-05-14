@@ -115,6 +115,7 @@
   }
   html {
     @apply bg-background scroll-pt-20 font-sans;
+    scrollbar-gutter: stable both-edges;
   }
 }
 
