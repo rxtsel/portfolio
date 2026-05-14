@@ -67,5 +67,4 @@ function updateExperienceDates() {
 }
 
 document.addEventListener("DOMContentLoaded", updateExperienceDates)
-document.addEventListener("astro:after-swap", updateExperienceDates)
 updateExperienceDates()

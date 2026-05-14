@@ -32,7 +32,6 @@
     document.querySelectorAll("[data-theme-toggle]").forEach((control) => {
       const labels = themeLabels[theme]
 
-      control.toggleAttribute("data-active", true)
       control.setAttribute("aria-label", `${labels.current}. Switch to ${labels.next}`)
 
       control.querySelectorAll("[data-theme-icon]").forEach((icon) => {
@@ -76,7 +75,6 @@
   })
 
   document.addEventListener("DOMContentLoaded", () => updateThemeControls(getStoredTheme()))
-  document.addEventListener("astro:after-swap", () => applyTheme())
   darkScheme.addEventListener("change", () => {
     if (getStoredTheme() === "system") {
       applyTheme("system")

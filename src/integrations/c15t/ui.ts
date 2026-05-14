@@ -24,18 +24,10 @@ const FALLBACK_COPY = {
 }
 
 export function mountConsentUI(consentStore: ConsentStore): void {
-  let root = getConsentRoot()
-
+  const root = getConsentRoot()
   const render = () => renderConsentUI(root, consentStore)
-  const handlePageSwap = () => {
-    root = getConsentRoot()
-    injectConsentStyles()
-    render()
-  }
 
   injectConsentStyles()
-  document.addEventListener("astro:after-swap", handlePageSwap)
-
   render()
   consentStore.subscribe(render)
 }

@@ -1,9 +1,10 @@
 ---
 import Seo from "@jdevalk/astro-seo-graph/Seo.astro"
-import { ClientRouter } from "astro:transitions"
+import { buildPrefetchScript } from "c15t"
 import ConsentManager from "@/components/ConsentManager.astro"
 import ThemeScript from "@/components/ThemeScript.astro"
 import { buildLayoutSeoProps, type LayoutSeoProps } from "@/lib/seo"
+import { PUBLIC_C15T_URL } from "astro:env/client"
 import "@/styles/global.css"
 
 import Header from "@/components/Header.astro"
@@ -17,6 +18,11 @@ interface Props extends LayoutSeoProps {
 
 const { lang = "en", languageLinks, ...seoProps } = Astro.props
 const seo = buildLayoutSeoProps({ ...seoProps, lang }, Astro.url)
+const consentBackendURL = PUBLIC_C15T_URL?.trim()
+const consentBackendOrigin = consentBackendURL ? new URL(consentBackendURL).origin : undefined
+const consentPrefetchScript = consentBackendURL
+  ? buildPrefetchScript({ backendURL: consentBackendURL })
+  : undefined
 ---
 
 <html lang={getLocaleLanguageTag(lang)}>
@@ -24,9 +30,11 @@ const seo = buildLayoutSeoProps({ ...seoProps, lang }, Astro.url)
     <meta charset="utf-8" />
     <meta content="width=device-width" name="viewport" />
     <meta content={Astro.generator} name="generator" />
+    {consentBackendOrigin && <link crossorigin="anonymous" href={consentBackendOrigin} rel="preconnect" />}
+    {/* eslint-disable-next-line astro/no-set-html-directive */}
+    {consentPrefetchScript && <script is:inline set:html={consentPrefetchScript} />}
     <ThemeScript />
     <Seo {...seo} />
-    <ClientRouter />
   </head>
   <body
     class="mx-auto grid min-h-screen w-full max-w-prose grid-rows-[auto_1fr_auto] gap-y-6 overflow-x-hidden px-4 font-sans md:px-0"
@@ -39,8 +47,35 @@ const seo = buildLayoutSeoProps({ ...seoProps, lang }, Astro.url)
   </body>
 </html>
 
-<script>
-  import { haptic } from "@/lib/haptic"
+<script is:inline>
+  window.haptic = (pattern = 50) => {
+    try {
+      if (!window.matchMedia("(pointer: coarse)").matches) {
+        return
+      }
 
-  window.haptic = () => haptic()
+      if ("vibrate" in navigator) {
+        navigator.vibrate(pattern)
+        return
+      }
+
+      const label = document.createElement("label")
+      label.ariaHidden = "true"
+      label.style.display = "none"
+
+      const input = document.createElement("input")
+      input.type = "checkbox"
+      input.setAttribute("switch", "")
+      label.appendChild(input)
+
+      try {
+        document.head.appendChild(label)
+        label.click()
+      } finally {
+        document.head.removeChild(label)
+      }
+    } catch {
+      // Haptic feedback is optional and must not block UI interactions.
+    }
+  }
 </script>
