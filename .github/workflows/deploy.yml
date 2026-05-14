@@ -13,6 +13,8 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      PUBLIC_C15T_URL: ${{ vars.PUBLIC_C15T_URL }}
     steps:
       - name: Checkout your repository using git
         uses: actions/checkout@v6
