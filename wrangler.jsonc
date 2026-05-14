@@ -1,5 +1,7 @@
 {
   "name": "portfolio",
+  "workers_dev": false,
+  "preview_urls": false,
   "compatibility_date": "2026-05-14",
   "assets": {
     "directory": "./dist",
