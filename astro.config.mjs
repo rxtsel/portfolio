@@ -1,7 +1,7 @@
 // @ts-check
 
 import tailwindcss from "@tailwindcss/vite"
-import { defineConfig } from "astro/config"
+import { defineConfig, envField } from "astro/config"
 import sitemap from "@astrojs/sitemap"
 import seoGraph from "@jdevalk/astro-seo-graph/integration"
 import expressiveCode from "astro-expressive-code"
@@ -30,6 +30,14 @@ const seoGraphIntegration = /** @type {import("astro").AstroIntegration} */ (
 // https://astro.build/config
 export default defineConfig({
   site: "https://rxtsel.dev",
+  env: {
+    schema: {
+      PUBLIC_C15T_URL: envField.string({
+        context: "client",
+        access: "public",
+      }),
+    },
+  },
   i18n: {
     defaultLocale: "en",
     locales: ["en", "es"],
