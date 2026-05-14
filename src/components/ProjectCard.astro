@@ -1,5 +1,6 @@
 ---
 import GitHubIcon from "@/assets/logos/github.svg"
+import type { ProjectTransitionPart } from "@/lib/projects"
 import Tags from "./Tags.astro"
 import FaviconResolver from "./FaviconResolver.astro"
 
@@ -14,7 +15,7 @@ interface Props {
   sourceUrl?: string
   taxonomyItems: TaxonomyItem[]
   title: string
-  titleTransitionName?: string
+  transitionNames?: Partial<Record<ProjectTransitionPart, string>>
 }
 
 const {
@@ -24,14 +25,15 @@ const {
   sourceUrl,
   taxonomyItems,
   title,
-  titleTransitionName,
+  transitionNames = {},
 } = Astro.props
 const Heading = headingLevel
-const titleStyle = titleTransitionName ? `view-transition-name: ${titleTransitionName}` : undefined
+const getTransitionStyle = (part: ProjectTransitionPart) =>
+  transitionNames[part] ? `view-transition-name: ${transitionNames[part]}` : undefined
 ---
 
-<article class="flex h-full flex-col gap-2 p-4">
-  <Heading class="flex items-center justify-between text-lg font-medium" style={titleStyle}>
+<article class="flex h-full flex-col gap-2 p-4" style={getTransitionStyle("card")}>
+  <Heading class="flex items-center justify-between text-lg font-medium" style={getTransitionStyle("title")}>
     {
       href ? (
         <a
@@ -54,18 +56,21 @@ const titleStyle = titleTransitionName ? `view-transition-name: ${titleTransitio
           aria-label={`View ${title} on GitHub`}
           href={`${sourceUrl}?utm_source=rxtsel.dev`}
           rel="noopener noreferrer"
+          style={getTransitionStyle("source")}
           target="_blank"
           title="View source on GitHub"
         >
           <GitHubIcon class="text-foreground size-4.5 shrink-0" />
         </a>
       ) : (
-        <GitHubIcon class="size-4.5 shrink-0 opacity-40" />
+        <span style={getTransitionStyle("source")}>
+          <GitHubIcon class="size-4.5 shrink-0 opacity-40" />
+        </span>
       )
     }
   </Heading>
 
-  <p class="text-muted-foreground flex-1">{description}</p>
+  <p class="text-muted-foreground flex-1" style={getTransitionStyle("description")}>{description}</p>
 
-  <Tags tags={taxonomyItems} />
+  <Tags style={getTransitionStyle("tags")} tags={taxonomyItems} />
 </article>

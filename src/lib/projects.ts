@@ -2,11 +2,9 @@ import type { CollectionEntry } from "astro:content"
 import type { Locale } from "@/lib/i18n"
 
 export type Project = CollectionEntry<"projects">
+export type ProjectTransitionPart = "card" | "description" | "source" | "tags" | "title"
 
-export function getProjectTransitionName(
-  project: Project,
-  part: "description" | "source" | "tags" | "title",
-) {
+export function getProjectTransitionName(project: Project, part: ProjectTransitionPart) {
   const transitionId = project.id.replace(/[^a-zA-Z0-9_-]/g, "-")
 
   return `project-${transitionId}-${part}`

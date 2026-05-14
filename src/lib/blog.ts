@@ -2,8 +2,9 @@ import type { CollectionEntry } from "astro:content"
 import { getBlogPostSlug, getLocalizedPath, locales, type LanguageLink, type Locale } from "@/lib/i18n"
 
 export type BlogPost = CollectionEntry<"blog">
+export type BlogPostTransitionPart = "card" | "categories" | "date" | "description" | "title"
 
-export function getBlogPostTransitionName(post: BlogPost, part: "description" | "title") {
+export function getBlogPostTransitionName(post: BlogPost, part: BlogPostTransitionPart) {
   const transitionId = post.id.replace(/[^a-zA-Z0-9_-]/g, "-")
 
   return `blog-${transitionId}-${part}`

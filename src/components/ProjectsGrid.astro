@@ -29,7 +29,13 @@ const { headingLevel = "h3", projects } = Astro.props
           sourceUrl={project.data.sourceUrl as string}
           taxonomyItems={project.taxonomyItems}
           title={project.data.title}
-          titleTransitionName={getProjectTransitionName(project, "title")}
+          transitionNames={{
+            card: getProjectTransitionName(project, "card"),
+            description: getProjectTransitionName(project, "description"),
+            source: getProjectTransitionName(project, "source"),
+            tags: getProjectTransitionName(project, "tags"),
+            title: getProjectTransitionName(project, "title"),
+          }}
         />
       </li>
     ))

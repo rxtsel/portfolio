@@ -125,7 +125,10 @@ const graph = buildBlogPostGraph({
           {post.data.description}
         </p>
 
-        <div class="not-prose text-muted-foreground flex flex-wrap items-center gap-x-1 gap-y-2 text-sm">
+        <div
+          class="not-prose text-muted-foreground flex flex-wrap items-center gap-x-1 gap-y-2 text-sm"
+          style={`view-transition-name: ${getBlogPostTransitionName(post, "date")}`}
+        >
           <time datetime={toIsoDateTime(publishedDate)}>
             {labels[post.data.locale].published}
             {" "}
@@ -150,6 +153,7 @@ const graph = buildBlogPostGraph({
             <ul
               aria-label={labels[post.data.locale].categories}
               class="not-prose my-6 flex list-none flex-wrap gap-2 ps-0"
+              style={`view-transition-name: ${getBlogPostTransitionName(post, "categories")}`}
             >
               {taxonomyItems.map((category) => (
                 <li class="text-muted-foreground retina:border-[0.5px] inline-flex items-center rounded-none border bg-zinc-50 px-1.5 py-0.5 font-mono text-xs dark:bg-zinc-900">

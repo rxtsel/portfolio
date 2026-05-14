@@ -1,0 +1,15 @@
+<script is:inline>
+  {
+    const themeStorageKey = "theme"
+    const themeModes = new Set(["system", "light", "dark"])
+    const storedTheme = localStorage.getItem(themeStorageKey)
+    const theme = themeModes.has(storedTheme) ? storedTheme : "system"
+    const shouldUseDarkTheme =
+      theme === "dark" || (theme === "system" && window.matchMedia("(prefers-color-scheme: dark)").matches)
+
+    document.documentElement.classList.toggle("dark", shouldUseDarkTheme)
+    document.documentElement.dataset.themeMode = theme
+    document.documentElement.style.colorScheme = shouldUseDarkTheme ? "dark" : "light"
+    document.documentElement.dataset.theme = `github-${theme}-default`
+  }
+</script>

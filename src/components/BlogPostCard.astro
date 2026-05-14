@@ -52,6 +52,7 @@ const dateTitle = post.data.locale === "es" ? "Última modificación" : "Last mo
     <ul
       aria-label={post.data.locale === "es" ? "Categorías" : "Categories"}
       class="my-0! flex list-none! flex-wrap gap-2 ps-0!"
+      style={`view-transition-name: ${getBlogPostTransitionName(post, "categories")}`}
     >
       {
         taxonomyItems.map((category) => (
@@ -64,6 +65,7 @@ const dateTitle = post.data.locale === "es" ? "Última modificación" : "Last mo
     <time
       class="text-muted-foreground flex shrink-0 items-center justify-end gap-1 text-xs"
       datetime={toIsoDateTime(lastModifiedDate)}
+      style={`view-transition-name: ${getBlogPostTransitionName(post, "date")}`}
       title={dateTitle}
     >
       {formatBlogDate(lastModifiedDate, post.data.locale)}

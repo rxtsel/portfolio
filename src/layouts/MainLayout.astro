@@ -2,6 +2,7 @@
 import Seo from "@jdevalk/astro-seo-graph/Seo.astro"
 import { buildPrefetchScript } from "c15t"
 import ConsentManager from "@/components/ConsentManager.astro"
+import ThemeInitScript from "@/components/ThemeInitScript.astro"
 import ThemeScript from "@/components/ThemeScript.astro"
 import { buildLayoutSeoProps, type LayoutSeoProps } from "@/lib/seo"
 import { PUBLIC_C15T_URL } from "astro:env/client"
@@ -28,6 +29,7 @@ const consentPrefetchScript = consentBackendURL
 <html lang={getLocaleLanguageTag(lang)}>
   <head>
     <meta charset="utf-8" />
+    <ThemeInitScript />
     <meta content="width=device-width" name="viewport" />
     <meta content={Astro.generator} name="generator" />
     {consentBackendOrigin && <link crossorigin="anonymous" href={consentBackendOrigin} rel="preconnect" />}

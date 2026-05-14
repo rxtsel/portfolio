@@ -5,6 +5,15 @@
   navigation: auto;
 }
 
+::view-transition-group(*) {
+  animation-duration: 240ms;
+  animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+::view-transition-group(root) {
+  animation-duration: 180ms;
+}
+
 @media (prefers-reduced-motion: reduce) {
   @view-transition {
     navigation: none;
@@ -70,6 +79,7 @@
   --input: oklch(0.922 0 0);
   --ring: oklch(0.708 0 0);
   --radius: 0.625rem;
+  color-scheme: light;
 }
 
 .dark {
@@ -89,6 +99,7 @@
   --border: oklch(1 0 0 / 10%);
   --input: oklch(1 0 0 / 15%);
   --ring: oklch(0.556 0 0);
+  color-scheme: dark;
 }
 
 @layer base {
@@ -103,7 +114,7 @@
     cursor: pointer;
   }
   html {
-    @apply scroll-pt-20 font-sans;
+    @apply bg-background scroll-pt-20 font-sans;
   }
 }
 
