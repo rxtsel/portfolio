@@ -68,6 +68,25 @@ export function formatDuration(startValue: DateInput, endValue: DateInput, local
   return parts.join(", ") || `0 ${getDateTimeUnitLabel("month", 0, locale)}`
 }
 
+export function formatInclusiveMonthDuration(startValue: DateInput, endValue: DateInput, locale: Locale) {
+  const startDate = toPlainDate(startValue)
+  const endDate = toPlainDate(endValue)
+  const totalMonths = Math.max(0, (endDate.year - startDate.year) * 12 + endDate.month - startDate.month + 1)
+  const years = Math.floor(totalMonths / 12)
+  const months = totalMonths % 12
+  const parts = []
+
+  if (years > 0) {
+    parts.push(`${years} ${getDateTimeUnitLabel("year", years, locale)}`)
+  }
+
+  if (months > 0) {
+    parts.push(`${months} ${getDateTimeUnitLabel("month", months, locale)}`)
+  }
+
+  return parts.join(", ") || `0 ${getDateTimeUnitLabel("month", 0, locale)}`
+}
+
 export function formatExperienceRange(startValue: DateInput, endValue: DateInput | "", locale: Locale) {
   const today = Temporal.Now.plainDateISO()
   const endDate = endValue ? toPlainDate(endValue) : today
@@ -75,7 +94,7 @@ export function formatExperienceRange(startValue: DateInput, endValue: DateInput
     endValue ? formatExperienceDate(endValue, locale) : getPresentLabel(locale)
   }`
 
-  return `${dateRange} · ${formatDuration(startValue, endDate, locale)}`
+  return `${dateRange} · ${formatInclusiveMonthDuration(startValue, endDate, locale)}`
 }
 
 export function getPresentLabel(locale: Locale) {
