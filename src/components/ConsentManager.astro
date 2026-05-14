@@ -2,7 +2,7 @@
 import { getIntegrations, matchesAllowedPath } from "@/lib/integrations"
 import { PUBLIC_C15T_URL } from "astro:env/client"
 
-const backendURL = PUBLIC_C15T_URL.trim()
+const backendURL = PUBLIC_C15T_URL?.trim()
 const integrations = await getIntegrations()
 const googleTagManagerContainerId = integrations?.googleTagManager.enabled
   ? integrations.googleTagManager.containerId.trim()

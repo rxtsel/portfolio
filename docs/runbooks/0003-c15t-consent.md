@@ -22,7 +22,7 @@ Set frontend env:
 PUBLIC_C15T_URL=https://your-consent-worker.example.com/api/c15t
 ```
 
-For GitHub Pages builds, store `PUBLIC_C15T_URL` as a repository Actions variable and map it in `.github/workflows/deploy.yml` so Astro can inline it during the build.
+For production builds, set `PUBLIC_C15T_URL` in Cloudflare Workers Builds variables so Astro can inline it during the build.
 
 ## Consent Testing
 

@@ -35,6 +35,7 @@ export default defineConfig({
       PUBLIC_C15T_URL: envField.string({
         context: "client",
         access: "public",
+        optional: true,
       }),
     },
   },
