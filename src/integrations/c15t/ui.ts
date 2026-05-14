@@ -302,7 +302,7 @@ function injectConsentStyles(): void {
 
     .c15t-card {
       position: fixed;
-      z-index: 60;
+      z-index: 100;
       bottom: 1rem;
       left: 1rem;
       width: calc(100vw - 2rem);
@@ -313,14 +313,14 @@ function injectConsentStyles(): void {
       border: 1px solid var(--border);
       border-radius: 0;
       background: color-mix(in oklab, var(--popover) 96%, transparent);
-      box-shadow: 0 24px 70px rgb(0 0 0 / 18%);
+      box-shadow: var(--shadow-sm);
       backdrop-filter: blur(14px);
     }
 
     .c15t-scrim {
       position: fixed;
       inset: 0;
-      z-index: 59;
+      z-index: 99;
       background: rgb(0 0 0 / 10%);
     }
 
@@ -389,10 +389,6 @@ function injectConsentStyles(): void {
       transition: transform 150ms ease, background-color 150ms ease, border-color 160ms ease;
     }
 
-    .c15t-button:hover {
-      color: var(--foreground);
-    }
-
     .c15t-button:active {
       transform: scale(0.98);
     }
@@ -405,7 +401,7 @@ function injectConsentStyles(): void {
     .c15t-button-primary {
       border-color: var(--primary);
       background: var(--primary);
-      color: var(--primary-foreground);
+      color: #FFFFFF;
 
       &:hover {
         background:  color-mix(in oklab, var(--primary) 80%, transparent);
@@ -423,7 +419,7 @@ function injectConsentStyles(): void {
 
     .c15t-trigger {
       position: fixed;
-      z-index: 50;
+      z-index: 98;
       left: 1rem;
       bottom: 1rem;
       display: inline-grid;
