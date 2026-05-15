@@ -10,8 +10,8 @@ intro: |-
 featuredProjects:
   - soundadvice-platform
   - soundadvice-website
-  - isart-portfolio
   - wearetop
+  - onlysend
 stack:
   - react
   - nextjs
