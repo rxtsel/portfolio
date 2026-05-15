@@ -2,18 +2,32 @@
 import { Image } from "astro:assets"
 
 interface Props {
-  href: string
+  customFavicon: string | undefined
+  href: string | undefined
   loading?: "lazy" | "eager"
 }
 
-const { href, loading = "lazy" } = Astro.props
+const { customFavicon, href, loading = "lazy" } = Astro.props
+
+const shouldRender = customFavicon || (href && href.length > 0)
+
+const src = customFavicon
+  ? customFavicon
+  : href
+    ? `https://favicon.vemetric.com/${new URL(href).hostname}?format=webp&size=36`
+    : ""
+const alt = customFavicon ? "Custom favicon" : href ? `Favicon for ${new URL(href).hostname}` : ""
 ---
 
-<Image
-  alt={`Favicon for ${new URL(href).hostname}`}
-  class="m-auto aspect-square shrink-0 object-contain"
-  height="18"
-  loading={loading}
-  src={`https://favicon.vemetric.com/${new URL(href).hostname}?format=webp&size=36`}
-  width="18"
-/>
+{
+  shouldRender && (
+    <Image
+      alt={alt}
+      class="m-auto aspect-square shrink-0 object-contain"
+      height="18"
+      loading={loading}
+      src={src}
+      width="18"
+    />
+  )
+}

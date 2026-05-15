@@ -109,6 +109,7 @@ const projectSchema = z.object({
   order: z.number().int().optional(),
   publishDate: z.coerce.date(),
   sourceUrl: z.preprocess(emptyStringToUndefined, z.url().optional()),
+  customFavicon: z.preprocess(emptyStringToUndefined, z.string().optional()),
   stack: z.array(z.string().min(1)).default([]),
   tags: z.array(z.string().min(1)).optional().default([]),
   translationKey: z.string().min(1),

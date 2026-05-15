@@ -9,16 +9,18 @@ type TaxonomyItem = {
 }
 
 interface Props {
+  customFavicon: string | undefined
   description: string
   headingLevel?: "h2" | "h3"
-  href?: string
-  sourceUrl?: string
+  href: string | undefined
+  sourceUrl: string | undefined
   taxonomyItems: TaxonomyItem[]
   title: string
   transitionNames?: Partial<Record<ProjectTransitionPart, string>>
 }
 
 const {
+  customFavicon,
   description,
   headingLevel = "h3",
   href,
@@ -44,9 +46,14 @@ const tagsProps = tagsStyle ? { style: tagsStyle } : {}
           rel="noopener noreferrer"
           target="_blank"
         >
-          <FaviconResolver href={href} />
+          <FaviconResolver customFavicon={customFavicon} href={href} />
           {title}
         </a>
+      ) : customFavicon ? (
+        <span class="item-center flex gap-2">
+          <FaviconResolver customFavicon={customFavicon} href="" />
+          {title}
+        </span>
       ) : (
         title
       )

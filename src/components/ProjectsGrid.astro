@@ -23,6 +23,7 @@ const { headingLevel = "h3", projects } = Astro.props
     projects.map((project) => (
       <li class="border odd:border-0 odd:border-x first-of-type:border-t last-of-type:border-b sm:odd:border">
         <ProjectCard
+          customFavicon={project.data.customFavicon}
           description={project.data.description}
           headingLevel={headingLevel}
           href={project.data.href as string}
