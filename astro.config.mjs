@@ -30,6 +30,9 @@ const seoGraphIntegration = /** @type {import("astro").AstroIntegration} */ (
 // https://astro.build/config
 export default defineConfig({
   site: "https://rxtsel.dev",
+  build: {
+    inlineStylesheets: "always",
+  },
   env: {
     schema: {
       PUBLIC_C15T_URL: envField.string({
