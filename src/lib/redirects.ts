@@ -60,4 +60,8 @@ export const redirects: Record<string, RedirectConfig> = {
     status: 301,
     destination: "/es/blog/como-sincronizar-bluetooth-en-dual-boot-triple-boot-windows-linux-macos/",
   },
+  "es/blog/how-to-synchronize-bluetooth-in-dual-boot-triple-boot-windows-linux-macos/": {
+    status: 301,
+    destination: "/es/blog/como-sincronizar-bluetooth-en-dual-boot-triple-boot-windows-linux-macos/",
+  },
 }
