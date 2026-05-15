@@ -3,7 +3,7 @@ translationKey: onlysend
 order: 9
 locale: es
 title: OnlySend
-description: Un compositor de correos limpio y minimalista impulsado por Resend. Hecho con Rust + Svelte.
+description: Una aplicación de escritorio mínima para enviar correos electrónicos desde tu propio dominio usando Resend.
 href: ''
 sourceUrl: https://github.com/rxtsel/only-send
 publishDate: 2025-11-26
