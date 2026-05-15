@@ -1,6 +1,6 @@
 ---
 translationKey: onlysend
-order: 9
+order: 7
 locale: es
 title: OnlySend
 description: Una aplicación de escritorio mínima para enviar correos electrónicos desde tu propio dominio usando Resend.

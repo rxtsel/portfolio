@@ -1,6 +1,6 @@
 ---
 translationKey: onlysend
-order: 9
+order: 7
 locale: en
 title: OnlySend
 description: A minimal desktop application for sending emails from your own domain using Resend.

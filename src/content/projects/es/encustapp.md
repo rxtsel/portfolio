@@ -1,6 +1,6 @@
 ---
 translationKey: encustapp
-order: 10
+order: 2
 locale: es
 title: encustapp
 description: Una aplicación de SvelteKit para la gestión de encuestas.

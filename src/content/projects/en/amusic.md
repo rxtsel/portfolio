@@ -1,6 +1,6 @@
 ---
 translationKey: amusic
-order: 8
+order: 6
 locale: en
 title: amusic
 description: A simple Discord Rich Presence client for Apple Music.

@@ -1,11 +1,11 @@
 ---
 translationKey: jptradingbots
-order: 3
+order: 5
 locale: es
 title: JPTradingBots
 description: Rediseño WordPress con tema personalizado, plugins y e-learning para mejorar presentación y experiencia de aprendizaje.
 href: https://jptradingbots.com
-sourceUrl: ""
+sourceUrl: ''
 publishDate: 2024-01-03
 stack:
   - css

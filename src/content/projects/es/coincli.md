@@ -1,6 +1,6 @@
 ---
 translationKey: coincli
-order: 11
+order: 3
 locale: es
 title: coincli
 description: CLI minimalista para buscar precios de criptomonedas, creada con Rust.
