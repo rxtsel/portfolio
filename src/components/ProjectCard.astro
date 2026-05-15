@@ -30,6 +30,8 @@ const {
 const Heading = headingLevel
 const getTransitionStyle = (part: ProjectTransitionPart) =>
   transitionNames[part] ? `view-transition-name: ${transitionNames[part]}` : undefined
+const tagsStyle = getTransitionStyle("tags")
+const tagsProps = tagsStyle ? { style: tagsStyle } : {}
 ---
 
 <article class="flex h-full flex-col gap-2 p-4" style={getTransitionStyle("card")}>
@@ -72,5 +74,5 @@ const getTransitionStyle = (part: ProjectTransitionPart) =>
 
   <p class="text-muted-foreground flex-1" style={getTransitionStyle("description")}>{description}</p>
 
-  <Tags style={getTransitionStyle("tags")} tags={taxonomyItems} />
+  <Tags {...tagsProps} tags={taxonomyItems} />
 </article>
