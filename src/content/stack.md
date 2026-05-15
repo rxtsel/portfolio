@@ -99,4 +99,7 @@ stack:
   - name: Vitest
     slug: vitest
     href: https://vitest.dev
+  - name: SQLite
+    slug: sqlite
+    href: https://sqlite.org
 ---
