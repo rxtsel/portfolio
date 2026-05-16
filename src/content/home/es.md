@@ -38,10 +38,10 @@ stack:
   - claude
   - python
 latestPosts:
-  - basic-commands-for-neovim
   - how-to-sync-bluetooth-in-dual-boot-triple-boot-windows-linux-macos
-  - how-to-install-husky-commitlint-and-lint-staged-in-your-projects-a-step-by-step-guide
   - how-to-install-arch-linux-using-the-command-line
+  - basic-commands-for-neovim
+  - how-to-set-up-lefthook-and-commitlint-in-your-projects
 seo:
   title: Cristhian Melo - Desarrollador de Software
   description: Desarrollador de Software frontend-heavy con más de 3 años de experiencia construyendo productos web rápidos, pulidos y escalables.
