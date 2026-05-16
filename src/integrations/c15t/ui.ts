@@ -393,7 +393,7 @@ function injectConsentStyles(): void {
     .c15t-button-primary {
       border-color: var(--primary);
       background: var(--primary);
-      color: #FFFFFF;
+      color: #000000;
 
       &:hover {
         background:  color-mix(in oklab, var(--primary) 80%, transparent);
