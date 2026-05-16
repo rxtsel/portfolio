@@ -9,6 +9,15 @@ const backgroundImage = readFile(path.resolve("public/og_template.jpg")).then((b
   buffer.toString("base64"),
 )
 
+function getTitleFontSize(title: string) {
+  const length = title.length
+
+  if (length > 110) return 42
+  if (length > 85) return 48
+  if (length > 65) return 54
+  return 60
+}
+
 export async function generateBlogOgImage(post: BlogPost) {
   const [fontDataSemibold, backgroundBase64] = await Promise.all([geistSemibold, backgroundImage])
 
@@ -28,9 +37,10 @@ export async function generateBlogOgImage(post: BlogPost) {
               style: {
                 color: "#FAFAFA",
                 fontFamily: "Geist",
-                fontSize: "54px",
+                fontSize: `${getTitleFontSize(post.data.title)}px`,
                 fontWeight: 600,
                 textWrap: "balance",
+                whiteSpace: "normal",
               },
               children: post.data.title,
             },
