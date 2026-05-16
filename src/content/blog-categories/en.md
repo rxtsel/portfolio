@@ -1,6 +1,8 @@
 ---
 locale: en
 categories:
+  - translationKey: tooling
+    name: Tooling
   - translationKey: linux
     name: Linux
   - translationKey: terminals
