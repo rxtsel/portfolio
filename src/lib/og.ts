@@ -16,7 +16,7 @@ export async function generateBlogOgImage(post: BlogPost) {
     {
       type: "div",
       props: {
-        tw: "w-full h-full flex items-center justify-center relative px-22 py-15",
+        tw: "w-full h-full flex items-center justify-start relative px-22 py-16",
         style: {
           backgroundImage: `url('data:image/jpeg;base64,${backgroundBase64}')`,
           fontFamily: "Geist",
@@ -30,7 +30,7 @@ export async function generateBlogOgImage(post: BlogPost) {
                 fontFamily: "Geist",
                 fontSize: "54px",
                 fontWeight: 600,
-                textWrap: "pretty",
+                textWrap: "balance",
               },
               children: post.data.title,
             },
