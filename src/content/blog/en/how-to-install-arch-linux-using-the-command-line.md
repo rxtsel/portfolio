@@ -5,7 +5,7 @@ published: true
 title: How to Install Arch Linux Using the Command Line
 description: Explore the comprehensive guide on installing Arch Linux effortlessly using the command line interface.
 publishDate: 2024-02-02
-updatedDate: ""
+updatedDate: ''
 categories:
   - linux
   - tutorials
@@ -40,15 +40,13 @@ There are people who feel a bit "dirty" if they don't install Arch Linux from th
 ## Installation
 
 1. Verify UEFI Boot
-   - Press <kbd>Win</kbd> + <kbd>R</kbd>, type msinfo32, and press Enter.
 
-   - Look for the BIOS Mode entry.
-
-   - If the value is Legacy, the boot environment is BIOS (Installation would be different). If it is another value like **GPT**, the corresponding boot environment will be displayed.
+- Press <kbd>Win</kbd> + <kbd>R</kbd>, type msinfo32, and press Enter.
+- Look for the BIOS Mode entry.
+- If the value is Legacy, the boot environment is BIOS (Installation would be different). If it is another value like **GPT**, the corresponding boot environment will be displayed.
 
 2. **Download Arch Linux:**
    First, you need to download the latest version of Arch Linux from the [official website](https://archlinux.org/download/).
-
 3. **Boot Arch on a USB:**
    To create a bootable USB, you can use **Rufus** on Windows.
 
@@ -90,11 +88,11 @@ timedatectl set-ntp true
 
 We need at least 3 partitions: one for **boot**, another for **swap**, and another for **root**.
 
-| SIZE               | PARTITION TYPE          |
-| ------------------ | ----------------------- |
-| **512M**           | EFI System              |
-| **YOUR GB OF RAM** | SWAP (linux swap)       |
-| **REMAINING GB**   | ROOT (linux filesystem) |
+| SIZE | PARTITION TYPE |
+| --- | --- |
+| **512M** | EFI System |
+| **YOUR GB OF RAM** | SWAP (linux swap) |
+| **REMAINING GB** | ROOT (linux filesystem) |
 
 With the following command, we can see the disks we have:
 
@@ -176,13 +174,15 @@ hwclock –-systohc
 
 From here on, I'll use **nvim** as the text editor. If you're not familiar with it, you can follow this guide on [Basic Commands for Neovim](/en/blog/basic-commands-for-neovim). At least, so you know how to save and exit Neovim.
 
-```sh"
+```sh
+"
 nvim /etc/locale.gen
 ```
 
 - Locate the line containing: **es_CO.UTF-8** for Colombia locale and uncomment it. Remove the **#** from the line and save the file.
 
-```diff title="/etc/locale.gen"
+```diff
+title="/etc/locale.gen"
 - #es_CO.UTF-8 UTF-8
 + es_CO.UTF-8 UTF-8
 ```
@@ -193,7 +193,8 @@ nvim /etc/locale.gen
 nvim /etc/locale.conf
 ```
 
-```diff title="/etc/locale.conf"
+```diff
+title="/etc/locale.conf"
 + LANG=es_CO.UTF-8
 ```
 
@@ -203,7 +204,8 @@ nvim /etc/locale.conf
 nvim /etc/vconsole.conf
 ```
 
-```diff title="/etc/vconsole.conf"
+```diff
+title="/etc/vconsole.conf"
 + KEYMAP=la-latin1
 ```
 
@@ -215,7 +217,8 @@ nvim /etc/hostname
 
 - Enter a name for your **PC**; in my case, I'll put **rxtsel**
 
-```diff title="/etc/hostname"
+```diff
+title="/etc/hostname"
 rxtsel
 ```
 
@@ -287,7 +290,8 @@ EDITOR=nvim visudo
 
 - **_Uncomment: %wheel ALL=(ALL) ALL and save._**
 
-```diff title="visudo"
+```diff
+title="visudo"
 - # %wheel ALL=(ALL) ALL
 + %wheel ALL=(ALL) ALL
 ```
@@ -310,7 +314,7 @@ passwd root
 
 ### 28. Install Display Driver:
 
----
+***
 
 If you have an **INTEL** GPU, run the following command:
 
@@ -318,7 +322,7 @@ If you have an **INTEL** GPU, run the following command:
 pacman -S xf86-video-intel
 ```
 
----
+***
 
 If you have an **AMD** GPU, run the following command:
 
@@ -326,7 +330,7 @@ If you have an **AMD** GPU, run the following command:
 pacman -S vulkan-radeon vulkan-icd-loader mesa
 ```
 
----
+***
 
 ### 29. Install Display Server:
 
@@ -375,7 +379,7 @@ ping 8.8.8.8
 
 You now have an internet connection.
 
-# Installing Your Desktop Environment or Window Manager
+## Installing Your Desktop Environment or Window Manager
 
 ### From here, it's your choice. You can install the desktop environment you prefer, or a window manager, or simply stick with the terminal. Some popular choices include:
 

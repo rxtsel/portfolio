@@ -5,7 +5,7 @@ published: true
 title: Cómo instalar Arch Linux usando la línea de comandos
 description: Explora la guía completa sobre cómo instalar Arch Linux de manera sencilla utilizando la interfaz de línea de comandos.
 publishDate: 2024-02-02
-updatedDate: ""
+updatedDate: ''
 categories:
   - linux
   - tutorials
@@ -40,15 +40,13 @@ Hay personas que se sienten un poco "sucios" si no instalan Arch Linux desde la 
 ## Instalación
 
 1. Verificar el arranque en UEFI
-   - Pulse <kbd>Win</kbd> + <kbd>R</kbd> escriba msinfo32 y pulse Intro.
 
-   - Busque la entrada Modo de BIOS.
-
-   - Si el valor indicado es Heredado, el entorno de arranque es BIOS (La instalación sería diferente). Si es otro valor como **GPT**, se mostrará el entorno de arranque correspondiente.
+- Pulse <kbd>Win</kbd> + <kbd>R</kbd> escriba msinfo32 y pulse Intro.
+- Busque la entrada Modo de BIOS.
+- Si el valor indicado es Heredado, el entorno de arranque es BIOS (La instalación sería diferente). Si es otro valor como **GPT**, se mostrará el entorno de arranque correspondiente.
 
 2. **Descargar Arch Linux:**
    Primero, necesitas descargar la última versión de Arch Linux desde el [sitio web oficial](https://archlinux.org/download/).
-
 3. **Bootea Arch en una USB:**
    Para crear un USB booteable, puedes usar **Rufus** en Windows.
 
@@ -90,11 +88,11 @@ timedatectl set-ntp true
 
 Nesecitamos al menos 3 particiones, una para el **boot**, otra para el **swap** y otra para el **root**.
 
-| CANTIDAD          | TIPO DE PARTICION       |
-| ----------------- | ----------------------- |
-| **512M**          | EFI System              |
-| **TUS GB DE RAM** | SWAP (linux swap)       |
-| **RESTO DE GB**   | ROOT (linux filesystem) |
+| CANTIDAD | TIPO DE PARTICION |
+| --- | --- |
+| **512M** | EFI System |
+| **TUS GB DE RAM** | SWAP (linux swap) |
+| **RESTO DE GB** | ROOT (linux filesystem) |
 
 Con el siguiente comando podemos ver los discos que tenemos:
 
@@ -176,13 +174,15 @@ hwclock –-systohc
 
 Apartir de aquí, usaré **nvim** como editor de texto, sino sabes cómo usarlo, puedes seguir esta guía de [Commandos Básicos de Neovim](/es/blog/basic-commands-for-neovim). Al menos para que sepas cómo guardar y salir de neovim.
 
-```sh"
+```sh
+"
 nvim /etc/locale.gen
 ```
 
 - Ubica la linea que contenga: **es_CO.UTF-8** para localización de Colombia y descoméntala. Remueve el **#** de la linea y guarda el archivo.
 
-```diff title="/etc/locale.gen"
+```diff
+title="/etc/locale.gen"
 - #es_CO.UTF-8 UTF-8
 + es_CO.UTF-8 UTF-8
 ```
@@ -193,7 +193,8 @@ nvim /etc/locale.gen
 nvim /etc/locale.conf
 ```
 
-```diff title="/etc/locale.conf"
+```diff
+title="/etc/locale.conf"
 + LANG=es_CO.UTF-8
 ```
 
@@ -203,7 +204,8 @@ nvim /etc/locale.conf
 nvim /etc/vconsole.conf
 ```
 
-```diff title="/etc/vconsole.conf"
+```diff
+title="/etc/vconsole.conf"
 + KEYMAP=la-latin1
 ```
 
@@ -215,7 +217,8 @@ nvim /etc/hostname
 
 - Escribe un nombre para tu **pc**, en mi caso pondré **rxtsel**
 
-```diff title="/etc/hostname"
+```diff
+title="/etc/hostname"
 rxtsel
 ```
 
@@ -287,7 +290,8 @@ EDITOR=nvim visudo
 
 - **_Descomentar: %wheel ALL=(ALL) ALL y guardar._**
 
-```diff title="visudo"
+```diff
+title="visudo"
 - # %wheel ALL=(ALL) ALL
 + %wheel ALL=(ALL) ALL
 ```
@@ -312,13 +316,13 @@ passwd root
 
 Si tienes gpu **INTEL**, ejecuta el siguiente comando:
 
----
+***
 
 ```sh
 pacman -S xf86-video-intel
 ```
 
----
+***
 
 Si tienes gpu **AMD**, ejecuta el siguiente comando:
 
@@ -326,7 +330,7 @@ Si tienes gpu **AMD**, ejecuta el siguiente comando:
 pacman -S vulkan-radeon vulkan-icd-loader mesa
 ```
 
----
+***
 
 ### 29. Instalar servidor de display:
 
@@ -375,7 +379,7 @@ ping 8.8.8.8
 
 Ya tienes conexión a internet.
 
-# Instalando nuestro Entorno de escritorio o gestor de ventana
+## Instalando nuestro Entorno de escritorio o gestor de ventana
 
 ### Apartir de aquí ya queda a tu elección, puedes instalar el entorno de escritorio que quieras, o un gestor de ventanas, o simplemente quedarte con la terminal. Algunos más populares son:
 
