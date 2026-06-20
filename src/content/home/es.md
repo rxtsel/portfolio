@@ -8,9 +8,9 @@ intro: |-
 
   _- **rxtsel**_ _se pronuncia "ratsel"._
 featuredProjects:
+  - rpass-cli
   - soundadvice-platform
   - soundadvice-website
-  - wearetop
   - onlysend
 stack:
   - react
