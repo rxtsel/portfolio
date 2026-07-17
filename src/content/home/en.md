@@ -2,7 +2,7 @@
 locale: en
 title: Cristhian Melo
 intro: |-
-  **Software Developer** and frontend-heavy full stack developer with 3+ years of experience building fast, polished, and scalable web products.
+  **Software Developer** and frontend-heavy full stack developer with 4+ years of experience building fast, polished, and scalable web products.
 
   I combine strong product sense, detailed visual execution, performance, architecture, and full stack ownership to turn ambiguous ideas into production-ready software.
 
