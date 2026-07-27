@@ -102,4 +102,7 @@ stack:
   - name: SQLite
     slug: sqlite
     href: https://sqlite.org
+  - name: Lua
+    slug: lua
+    href: https://www.lua.org/
 ---
