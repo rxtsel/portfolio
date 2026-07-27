@@ -1,6 +1,6 @@
 ---
 translationKey: rpass
-order: 13
+order: 14
 locale: en
 title: rpass
 description: Companion extension for rpass-cli that integrates pass-compatible password management directly into Raycast-compatible launchers.
