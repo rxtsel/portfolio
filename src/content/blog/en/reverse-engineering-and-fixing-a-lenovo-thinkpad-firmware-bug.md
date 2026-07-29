@@ -14,8 +14,6 @@ seo:
   keywords: ACPI, SSDT, Lenovo ThinkPad, NixOS, firmware bug, PEGP.DDNT, AE_NOT_FOUND, thermal_zone6, initrd
 ---
 
-## Reverse Engineering and Fixing a Lenovo ThinkPad Firmware Bug
-
 Sometimes the best bugs are the ones that shouldn't exist.
 
 After installing NixOS on my **Lenovo ThinkPad T14 Gen 2 Intel**, I noticed the kernel printed the same ACPI errors on every boot:
