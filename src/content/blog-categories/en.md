@@ -1,6 +1,8 @@
 ---
 locale: en
 categories:
+  - translationKey: firmware
+    name: Firmware
   - translationKey: tooling
     name: Tooling
   - translationKey: linux
