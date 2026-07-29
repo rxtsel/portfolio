@@ -38,8 +38,8 @@ stack:
   - claude
   - python
 latestPosts:
+  - reverse-engineering-and-fixing-a-lenovo-thinkpad-firmware-bug
   - how-to-sync-bluetooth-in-dual-boot-triple-boot-windows-linux-macos
-  - how-to-install-arch-linux-using-the-command-line
   - basic-commands-for-neovim
   - how-to-set-up-lefthook-and-commitlint-in-your-projects
 seo:
