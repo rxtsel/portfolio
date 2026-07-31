@@ -1,6 +1,6 @@
 ---
 translationKey: rpass-cli
-order: 13
+order: 14
 locale: en
 title: rpass-cli
 description: A cross-platform password manager that puts you in control of your data.

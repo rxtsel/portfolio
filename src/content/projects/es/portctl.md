@@ -1,6 +1,6 @@
 ---
 translationKey: porctl
-order: 12
+order: 13
 locale: es
 title: portctl
 description: Un plugin simple y ligero que permite inspeccionar y cerrar procesos que están escuchando en puertos TCP/UDP directamente desde Noctalia.

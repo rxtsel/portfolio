@@ -1,6 +1,6 @@
 ---
 translationKey: rpass-cli
-order: 13
+order: 14
 locale: es
 title: rpass-cli
 description: Un gestor de contraseñas multiplataforma que te da el control de tus datos.

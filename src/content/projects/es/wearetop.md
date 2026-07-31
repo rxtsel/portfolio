@@ -1,6 +1,6 @@
 ---
 translationKey: wearetop
-order: 8
+order: 10
 locale: es
 title: WeAreTop
 description: Sitio con CMS para consultora educativa internacional, construido con Astro para velocidad, claridad y fácil edición.
