@@ -1,6 +1,6 @@
 ---
 translationKey: wearetop
-order: 10
+order: 11
 locale: en
 title: WeAreTop
 description: CMS-powered site for an international education consultancy, built with Astro for speed, clarity, and easy editing.

@@ -1,6 +1,6 @@
 ---
 translationKey: soundadvice-website
-order: 12
+order: 13
 locale: en
 title: SoundAdvice Website
 description: Public website with events, checkout, contests, and mentor profiles, optimized with CMS, cache, and automatic invalidation.

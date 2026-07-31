@@ -1,6 +1,6 @@
 ---
 translationKey: soundadvice-platform
-order: 11
+order: 12
 locale: en
 title: SoundAdvice Platform
 description: Full stack platform for mentorships, payments, streaming, courses, and community, built to scale with modular architecture.

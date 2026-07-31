@@ -1,6 +1,6 @@
 ---
 translationKey: rpass
-order: 15
+order: 16
 locale: en
 title: rpass
 description: Companion extension for rpass-cli to search, edit, generate, and sync pass-compatible passwords directly in Raycast or Vicinae.

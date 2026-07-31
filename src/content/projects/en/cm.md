@@ -1,6 +1,6 @@
 ---
 translationKey: cm
-order: 16
+order: 9
 locale: en
 title: CM.
 description: Minimal WooCommerce storefront with a 100% custom UI, focused on performance, usability, and a streamlined shopping experience.

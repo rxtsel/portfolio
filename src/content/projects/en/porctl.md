@@ -1,6 +1,6 @@
 ---
 translationKey: porctl
-order: 13
+order: 14
 locale: en
 title: porctl
 description: A simple and lightweight add-on that allows you to inspect and close processes listening on TCP/UDP ports directly from the Noctalia bar.
