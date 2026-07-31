@@ -44,6 +44,6 @@ latestPosts:
   - how-to-set-up-lefthook-and-commitlint-in-your-projects
 seo:
   title: Cristhian Melo - Desarrollador de Software
-  description: Desarrollador de Software frontend-heavy con más de 3 años de experiencia construyendo productos web rápidos, pulidos y escalables.
-  keywords: desarrollador de software, frontend engineer, portfolio desarrollador web, desarrollador React, desarrollador Astro
+  description: Desarrollador de Software frontend-heavy con más de 4 años de experiencia construyendo productos web rápidos, pulidos y escalables.
+  keywords: desarrollador de software, frontend engineer, portfolio desarrollador web, desarrollador React, desarrollador Astro, colombia
 ---

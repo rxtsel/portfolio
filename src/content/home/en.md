@@ -44,6 +44,6 @@ latestPosts:
   - how-to-set-up-lefthook-and-commitlint-in-your-projects
 seo:
   title: Cristhian Melo - Software Developer
-  description: Frontend-heavy Software Developer with 3+ years of experience building fast, polished, and scalable web products.
-  keywords: software developer, frontend engineer, web developer portfolio, React developer, Astro developer
+  description: Frontend-heavy Software Developer with 4+ years of experience building fast, polished, and scalable web products.
+  keywords: software developer, frontend engineer, web developer portfolio, React developer, Astro developer, colombia
 ---
