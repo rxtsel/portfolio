@@ -8,10 +8,10 @@ intro: |-
 
   _- **rxtsel**_ _se pronuncia "ratsel"._
 featuredProjects:
+  - xavel
   - rpass-cli
   - soundadvice-platform
   - soundadvice-website
-  - onlysend
 stack:
   - react
   - nextjs
