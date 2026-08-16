@@ -17,6 +17,7 @@ stack:
   - playwright
   - vitest
   - redis
+  - posthog
 tags:
   - orpc
   - cloudflare
