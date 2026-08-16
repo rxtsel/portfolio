@@ -38,6 +38,7 @@ stack:
   - claude
   - python
   - go
+  - posthog
 latestPosts:
   - reverse-engineering-and-fixing-a-lenovo-thinkpad-firmware-bug
   - how-to-sync-bluetooth-in-dual-boot-triple-boot-windows-linux-macos

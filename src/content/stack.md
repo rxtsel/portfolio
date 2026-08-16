@@ -108,4 +108,7 @@ stack:
   - name: Go
     slug: go
     href: https://go.dev
+  - name: PostHog
+    slug: posthog
+    href: https://posthog.com
 ---
