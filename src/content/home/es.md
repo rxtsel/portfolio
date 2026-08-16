@@ -37,6 +37,7 @@ stack:
   - chatgpt
   - claude
   - python
+  - go
 latestPosts:
   - reverse-engineering-and-fixing-a-lenovo-thinkpad-firmware-bug
   - how-to-sync-bluetooth-in-dual-boot-triple-boot-windows-linux-macos

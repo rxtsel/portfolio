@@ -105,4 +105,7 @@ stack:
   - name: Lua
     slug: lua
     href: https://www.lua.org/
+  - name: Go
+    slug: go
+    href: https://go.dev
 ---
