@@ -105,7 +105,7 @@ stack:
   - name: Lua
     slug: lua
     href: https://www.lua.org/
-  - name: Go
+  - name: Go (Golang)
     slug: go
     href: https://go.dev
   - name: PostHog
