@@ -189,12 +189,6 @@ const graph = buildBlogPostGraph({
     display: flow-root;
   }
 
-  @media (prefers-reduced-motion: no-preference) {
-    :global(html) {
-      scroll-behavior: smooth;
-    }
-  }
-
   @media (width >= 1280px) and (prefers-reduced-motion: no-preference) {
     @supports (timeline-scope: --toc-section-0) and (animation-timeline: --toc-section-0) and
       (view-timeline-inset: 6rem calc(100% - 6rem)) {
