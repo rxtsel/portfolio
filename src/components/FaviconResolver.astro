@@ -1,13 +1,15 @@
 ---
 import { Image } from "astro:assets"
+import type { FaviconBackground } from "@/lib/favicon"
 
 interface Props {
   customFavicon: string | undefined
+  background?: FaviconBackground
   href: string | undefined
   loading?: "lazy" | "eager"
 }
 
-const { customFavicon, href, loading = "lazy" } = Astro.props
+const { background = "none", customFavicon, href, loading = "lazy" } = Astro.props
 
 const shouldRender = customFavicon || (href && href.length > 0)
 
@@ -23,7 +25,7 @@ const alt = customFavicon ? "Custom favicon" : href ? `Favicon for ${new URL(hre
   shouldRender && (
     <Image
       alt={alt}
-      class="m-auto aspect-square shrink-0 object-contain"
+      class:list={["m-auto aspect-square shrink-0 object-contain", { "bg-white": background === "light" }]}
       densities={[1, 2, 3]}
       fit="contain"
       format="webp"

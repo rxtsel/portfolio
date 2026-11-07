@@ -7,6 +7,7 @@ description: SaaS platform for managing customers, sending invoices, collecting 
 href: https://xavel.app
 sourceUrl: ""
 customFavicon: https://xavel.app/favicon.svg
+faviconBackground: light
 publishDate: 2026-08-06
 stack:
   - tanstack

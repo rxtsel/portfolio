@@ -1,5 +1,6 @@
 ---
 import GitHubIcon from "@/assets/logos/github.svg"
+import type { FaviconBackground } from "@/lib/favicon"
 import type { ProjectTransitionPart } from "@/lib/projects"
 import Tags from "./Tags.astro"
 import FaviconResolver from "./FaviconResolver.astro"
@@ -11,6 +12,7 @@ type TaxonomyItem = {
 interface Props {
   customFavicon: string | undefined
   description: string
+  faviconBackground?: FaviconBackground
   headingLevel?: "h2" | "h3"
   href: string | undefined
   sourceUrl: string | undefined
@@ -22,6 +24,7 @@ interface Props {
 const {
   customFavicon,
   description,
+  faviconBackground = "none",
   headingLevel = "h3",
   href,
   sourceUrl,
@@ -46,12 +49,12 @@ const tagsProps = tagsStyle ? { style: tagsStyle } : {}
           rel="noopener noreferrer"
           target="_blank"
         >
-          <FaviconResolver customFavicon={customFavicon} href={href} />
+          <FaviconResolver background={faviconBackground} customFavicon={customFavicon} href={href} />
           {title}
         </a>
       ) : customFavicon ? (
         <span class="item-center flex gap-2">
-          <FaviconResolver customFavicon={customFavicon} href="" />
+          <FaviconResolver background={faviconBackground} customFavicon={customFavicon} href="" />
           {title}
         </span>
       ) : (

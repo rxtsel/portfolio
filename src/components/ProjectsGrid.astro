@@ -25,6 +25,7 @@ const { headingLevel = "h3", projects } = Astro.props
         <ProjectCard
           customFavicon={project.data.customFavicon}
           description={project.data.description}
+          faviconBackground={project.data.faviconBackground}
           headingLevel={headingLevel}
           href={project.data.href as string}
           sourceUrl={project.data.sourceUrl as string}

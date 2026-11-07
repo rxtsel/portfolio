@@ -278,6 +278,16 @@ collections:
             ['^https:\/\/(?![^?#]*\.[iI][cC][oO](?:[?#]|$))\S+$', "Use an HTTPS image URL, not an ICO file"],
           hint: "Optional HTTPS URL to a PNG, JPEG, WebP, AVIF or SVG logo. Use a square (1:1) image, at least 54×54 px, or an SVG for sharp retina icons. ICO files are not supported. Images are optimized at build time and displayed at 18×18 px without cropping or stretching. If empty, the favicon is detected from the project URL; no icon appears without a project URL.",
         }
+      - label: Favicon background
+        name: faviconBackground
+        widget: select
+        required: false
+        default: none
+        i18n: duplicate
+        options:
+          - { label: No background, value: none }
+          - { label: Light background, value: light }
+        hint: "Choose Light background for dark or multicolor logos that disappear in dark mode. Adds a white background in both themes without changing the logo colors or its 18×18 px size."
       - {
           label: Publish date,
           name: publishDate,

@@ -5,7 +5,9 @@ locale: en
 title: Las Pretas
 description: Custom WordPress build from Figma, with pixel-perfect implementation and a brand-faithful visual experience.
 href: https://laspretas.com
-sourceUrl: ''
+sourceUrl: ""
+customFavicon: ""
+faviconBackground: light
 publishDate: 2024-01-02
 stack:
   - css

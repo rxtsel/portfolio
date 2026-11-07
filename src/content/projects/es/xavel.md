@@ -7,6 +7,7 @@ description: Plataforma SaaS para gestionar clientes, enviar facturas, recibir p
 href: https://xavel.app
 sourceUrl: ""
 customFavicon: https://xavel.app/favicon.svg
+faviconBackground: light
 publishDate: 2026-08-06
 stack:
   - tanstack
