@@ -1,0 +1,372 @@
+---
+import type { MarkdownHeading } from "astro"
+import { Image } from "astro:assets"
+import xialuIcon from "@/assets/projects/xialu.webp"
+import ArrowIcon from "@/assets/arrow.svg"
+import PageToolbar from "@/components/PageToolbar.astro"
+import ContentWithToc from "@/components/ContentWithToc.astro"
+import StackList from "@/components/StackList.astro"
+import MainLayout from "@/layouts/MainLayout.astro"
+import { getLocaleLanguageTag, type LanguageLink, type Locale } from "@/lib/i18n"
+
+interface Props {
+  locale: Locale
+}
+
+const { locale } = Astro.props
+const content = {
+  en: {
+    title: "Xialu: a local-first personal finance app",
+    description:
+      "A personal finance app built with React Native and SQLite. How I designed Xialu around local data, transaction-derived balances and offline workflows.",
+    back: "Projects",
+    projectsPath: "/projects/",
+    lead: "Personal finances, on your phone.",
+    intro: "I built Xialu to manage my personal finances. I use it day to day as I continue to develop it.",
+    facts: [
+      { label: "My work", value: "Product, interface & engineering" },
+      { label: "Testing", value: "Tested on iPhone; Android not yet tested" },
+      { label: "Status", value: "In development" },
+    ],
+    media: "Xialu in use",
+    featuresHeading: "What it does",
+    features: [
+      {
+        title: "Accounts and credit cards",
+        body: "Keep track of balances and movements by account and currency.",
+      },
+      {
+        title: "Income and expenses",
+        body: "Record transactions, assign categories and review your history.",
+      },
+      {
+        title: "Transfers and currency exchange",
+        body: "Move money between accounts while preserving the amounts and exchange rate recorded at the time.",
+      },
+      {
+        title: "Exchange-rate lookup",
+        body: "Look up reference rates from Yahoo Finance when exchanging currencies. If the request fails, you can use a saved quote or enter the rate manually.",
+      },
+      {
+        title: "Credit card payment reminders",
+        body: "Set statement closing and payment dates when adding a card. Xialu uses the payment day to schedule local reminders for cards with recorded debt.",
+      },
+      {
+        title: "Apple Pay and Shortcuts",
+        body: "An iOS Shortcuts automation captures Apple Pay payment details for review in Xialu. Confirm the expense before it affects your balance. The updated flow is still undergoing device testing.",
+      },
+      {
+        title: "Portable backups",
+        body: "Export your data in a common format for iOS and Android, with optional password-protected encryption. Cross-platform restoration still needs validation on Android.",
+      },
+    ],
+    whyHeading: "Why local-first",
+    why: "Checking a balance or recording an expense should not wait for a remote server. Xialu reads and writes to SQLite on the device, so the core financial workflow works offline. This keeps network latency out of those operations; it also makes backups an important part of keeping your data safe.",
+    engineeringHeading: "The engineering behind the numbers",
+    decisions: [
+      {
+        title: "Transactions are the source of truth",
+        body: "An account balance is calculated from its posted, non-deleted movements. It cannot be overwritten independently. Correcting a transaction changes the derived balance, avoiding two separately maintained values that can drift apart.",
+      },
+      {
+        title: "A transfer is one atomic operation",
+        body: "The outgoing and incoming entries are written in a single database transaction. If one fails, neither is committed. The ledger cannot keep only one half of a transfer.",
+      },
+      {
+        title: "Money uses integer minor units",
+        body: "Amounts are stored as whole minor units rather than floating-point numbers. Historical currency exchanges keep their recorded amounts and rate, so a new rate does not rewrite an old movement.",
+      },
+      {
+        title: "Domain contracts separate rules from storage",
+        body: "Account and transaction repositories expose interfaces with SQLite implementations. This gives responsibility boundaries a concrete shape and lets callers depend on contracts. These are the single-responsibility and dependency-inversion principles I applied, rather than tying every screen directly to database details.",
+      },
+    ],
+    workflowHeading: "How I built it",
+    workflow: [
+      "I defined the product, interface and architecture through incremental specifications across the app’s workflows. For transaction handling, for example, I required amounts in integer minor units to avoid floating-point rounding errors. Balances had to be derived from transactions. Correcting a transaction had to update the balance without maintaining a separate value that could drift out of sync.",
+      "For each step, the agent implemented only what I had specified. I then reviewed the diff and checked the behavior before accepting it. I closed each increment with a conventional commit before writing the next specification.",
+    ],
+    architectureLabel: "Data access layers",
+    architecture: ["Interface", "Application services", "Repositories", "SQLite"],
+    stackHeading: "Built with",
+    toolsHeading: "AI-assisted development",
+    logoAlt: "Xialu app icon: a black cat holding a card",
+    identity: "The black cat in the logo is a tribute to my own cat.",
+  },
+  es: {
+    title: "Xialu: una app de finanzas personales local-first",
+    description:
+      "Una app de finanzas personales con React Native y SQLite. Las decisiones detrás de Xialu: datos locales, saldos derivados de movimientos y uso sin conexión.",
+    back: "Proyectos",
+    projectsPath: "/es/proyectos/",
+    lead: "Tus finanzas, en tu teléfono.",
+    intro:
+      "Construí Xialu para gestionar mis finanzas personales. Ya la uso en mi día a día y sigo desarrollándola.",
+    facts: [
+      { label: "Mi trabajo", value: "Producto, interfaz e ingeniería" },
+      { label: "Pruebas", value: "Probada en iPhone; Android pendiente de pruebas" },
+      { label: "Estado", value: "En desarrollo" },
+    ],
+    media: "Xialu en uso",
+    featuresHeading: "Qué puedes hacer",
+    features: [
+      { title: "Cuentas y tarjetas de crédito", body: "Consulta saldos y movimientos por cuenta y moneda." },
+      { title: "Ingresos y gastos", body: "Registra movimientos, asigna categorías y revisa tu historial." },
+      {
+        title: "Transferencias y cambio de moneda",
+        body: "Mueve dinero entre cuentas conservando los importes y la tasa de cambio registrados en ese momento.",
+      },
+      {
+        title: "Consulta de tasas de cambio",
+        body: "Consulta tasas de referencia desde Yahoo Finance al cambiar de moneda. Si falla la consulta, puedes usar una cotización guardada o introducir la tasa manualmente.",
+      },
+      {
+        title: "Recordatorios de pago de tarjetas",
+        body: "Configura la fecha de corte y de pago al añadir una tarjeta. Xialu usa el día de pago para programar recordatorios locales cuando hay deuda registrada.",
+      },
+      {
+        title: "Apple Pay y Atajos",
+        body: "Una automatización de Atajos en iOS captura los datos del pago con Apple Pay para revisarlos en Xialu. Confirma el gasto antes de que afecte al saldo. El flujo actualizado sigue en pruebas en dispositivo.",
+      },
+      {
+        title: "Respaldos portables",
+        body: "Exporta tus datos a un formato común para iOS y Android, con cifrado opcional protegido por contraseña. La restauración cruzada sigue pendiente de validación en Android.",
+      },
+    ],
+    whyHeading: "Por qué local-first",
+    why: "Consultar un saldo o registrar un gasto no debería esperar a un servidor remoto. Xialu lee y escribe en SQLite en el dispositivo, así que el flujo financiero principal funciona sin conexión. La latencia de red queda fuera de esas operaciones; los respaldos también pasan a ser una parte importante del cuidado de los datos.",
+    engineeringHeading: "La ingeniería detrás de los números",
+    decisions: [
+      {
+        title: "Las transacciones son la fuente de verdad",
+        body: "El saldo de una cuenta se calcula a partir de sus movimientos confirmados y no eliminados. No se puede sobrescribir de forma independiente. Corregir una transacción cambia el saldo derivado y evita mantener dos valores separados que puedan dejar de coincidir.",
+      },
+      {
+        title: "Una transferencia es una operación atómica",
+        body: "La salida y la entrada se escriben en una sola transacción de base de datos. Si una falla, ninguna se confirma. El registro no puede quedarse con una sola mitad de la transferencia.",
+      },
+      {
+        title: "El dinero se representa con enteros",
+        body: "Los importes se guardan en unidades mínimas enteras, en lugar de números de coma flotante. Los cambios de moneda históricos conservan sus importes y su tasa: una cotización nueva no reescribe un movimiento anterior.",
+      },
+      {
+        title: "Contratos que separan las reglas del almacenamiento",
+        body: "Los repositorios de cuentas y transacciones exponen interfaces con implementaciones SQLite. Esto define responsabilidades concretas y permite que sus consumidores dependan de contratos. Así apliqué responsabilidad única e inversión de dependencias, en lugar de acoplar cada pantalla a los detalles de la base de datos.",
+      },
+    ],
+    workflowHeading: "Cómo la construí",
+    workflow: [
+      "Definí el producto, la interfaz y la arquitectura mediante especificaciones incrementales para los distintos flujos de la app. Por ejemplo, al especificar el flujo de movimientos, establecí que los importes se representaran en unidades mínimas enteras para evitar errores de coma flotante. Los saldos debían derivarse de las transacciones. Corregir un movimiento debía actualizar el saldo sin mantener otro valor que pudiera desincronizarse.",
+      "En cada paso, el agente implementaba únicamente lo especificado. Después revisaba el diff y comprobaba el comportamiento antes de aceptarlo. Cerraba cada incremento con un conventional commit antes de escribir la siguiente especificación.",
+    ],
+    architectureLabel: "Capas de acceso a datos",
+    architecture: ["Interfaz", "Servicios de aplicación", "Repositorios", "SQLite"],
+    stackHeading: "Construida con",
+    toolsHeading: "Desarrollo asistido por IA",
+    logoAlt: "Icono de Xialu: una gata negra con una tarjeta",
+    identity: "La gata negra del logo es un homenaje a mi gata.",
+  },
+} satisfies Record<Locale, unknown>
+const copy = content[locale]
+const stackItems = [
+  { name: "React Native", slug: "react", href: "https://reactnative.dev/" },
+  { name: "Expo", slug: "expo", href: "https://expo.dev/" },
+  { name: "TypeScript", slug: "typescript", href: "https://www.typescriptlang.org/" },
+  { name: "SQLite", slug: "sqlite", href: "https://sqlite.org/" },
+  { name: "Drizzle ORM", slug: "drizzle", href: "https://orm.drizzle.team/" },
+]
+const aiTools = [
+  { name: "pi.dev", slug: "pi", href: "https://pi.dev/" },
+  { name: "gpt-6.1-sol", slug: "chatgpt", href: "https://openai.com/", ariaLabel: "OpenAI gpt-6.1-sol" },
+]
+const canonical = new URL(Astro.url.pathname, Astro.site).toString()
+const markdown = [
+  "# Xialu",
+  copy.lead,
+  copy.intro,
+  ...copy.facts.map((fact) => `**${fact.label}:** ${fact.value}`),
+  `## ${copy.featuresHeading}`,
+  copy.features.map((feature) => `- **${feature.title}.** ${feature.body}`).join("\n"),
+  `## ${copy.whyHeading}`,
+  copy.why,
+  `## ${copy.engineeringHeading}`,
+  ...copy.decisions.flatMap((decision) => [`### ${decision.title}`, decision.body]),
+  copy.architecture.join(" → "),
+  `## ${copy.workflowHeading}`,
+  ...copy.workflow,
+  `## ${copy.stackHeading}`,
+  stackItems.map((item) => item.name).join(" · "),
+  `## ${copy.toolsHeading}`,
+  aiTools.map((item) => item.ariaLabel ?? item.name).join(" · "),
+  copy.identity,
+].join("\n\n")
+const hasMedia = Astro.slots.has("media")
+const headings: MarkdownHeading[] = [
+  ...(hasMedia ? [{ depth: 2, slug: "xialu-media", text: copy.media }] : []),
+  { depth: 2, slug: "xialu-features", text: copy.featuresHeading },
+  { depth: 2, slug: "xialu-local-first", text: copy.whyHeading },
+  { depth: 2, slug: "xialu-engineering", text: copy.engineeringHeading },
+  ...copy.decisions.map((decision, index) => ({
+    depth: 3,
+    slug: `xialu-decision-${index}`,
+    text: decision.title,
+  })),
+  { depth: 2, slug: "xialu-workflow", text: copy.workflowHeading },
+  { depth: 2, slug: "xialu-stack", text: copy.stackHeading },
+  { depth: 2, slug: "xialu-ai-tools", text: copy.toolsHeading },
+]
+const sectionStyles = Object.fromEntries(
+  headings.map((heading, index) => [heading.slug, `view-timeline-name: --toc-section-${index}`]),
+)
+const languageLinks = [
+  { href: "/projects/xialu/", locale: "en" },
+  { href: "/es/proyectos/xialu/", locale: "es" },
+] satisfies LanguageLink[]
+const alternates = {
+  defaultLocale: "en",
+  entries: [
+    ...languageLinks.map((link) => ({
+      href: new URL(link.href, Astro.site).toString(),
+      hreflang: getLocaleLanguageTag(link.locale),
+    })),
+    { href: new URL("/projects/xialu/", Astro.site).toString(), hreflang: "x-default" },
+  ],
+}
+---
+
+<MainLayout
+  alternates={alternates}
+  canonical={canonical}
+  description={copy.description}
+  lang={locale}
+  languageLinks={languageLinks}
+  title={copy.title}
+>
+  <ContentWithToc headings={headings} locale={locale}>
+    <main class="w-full min-w-0">
+      <article>
+        <header class="mb-10">
+          <PageToolbar
+            backHref={copy.projectsPath}
+            backLabel={copy.back}
+            locale={locale}
+            markdown={markdown}
+            title={copy.title}
+            url={canonical}
+          />
+          <div class="flex items-center gap-4">
+            <Image
+              alt={copy.logoAlt}
+              class="size-20 shrink-0"
+              densities={[1, 2, 3]}
+              height={80}
+              loading="eager"
+              src={xialuIcon}
+              width={80}
+            />
+            <div class="min-w-0">
+              <h1 class="text-3xl leading-tight font-semibold sm:text-4xl">Xialu</h1>
+              <p class="mt-2 text-base font-medium text-balance sm:text-lg">{copy.lead}</p>
+            </div>
+          </div>
+          <p class="text-muted-foreground mt-6 leading-7 text-pretty">{copy.intro}</p>
+          <dl class="mt-6 grid gap-5 border-y py-5 sm:grid-cols-3">
+            {
+              copy.facts.map((fact) => (
+                <div>
+                  <dt class="text-muted-foreground text-sm">{fact.label}</dt>
+                  <dd class="mt-1 text-sm font-medium">{fact.value}</dd>
+                </div>
+              ))
+            }
+          </dl>
+        </header>
+
+        <div
+          class="prose prose-neutral prose-sm dark:prose-invert prose-p:text-muted-foreground prose-headings:text-balance lg:prose-base max-w-none"
+        >
+          {
+            hasMedia && (
+              <section aria-labelledby="xialu-media" data-toc-section style={sectionStyles["xialu-media"]}>
+                <h2 id="xialu-media">{copy.media}</h2>
+                <div class="not-prose grid gap-6 sm:grid-cols-2 [&_img]:h-auto [&_img]:w-full [&_video]:h-auto [&_video]:w-full">
+                  <slot name="media" />
+                </div>
+              </section>
+            )
+          }
+
+          <section aria-labelledby="xialu-features" data-toc-section style={sectionStyles["xialu-features"]}>
+            <h2 id="xialu-features">{copy.featuresHeading}</h2>
+            <ul>
+              {
+                copy.features.map((feature) => (
+                  <li>
+                    <strong>{feature.title}.</strong> {feature.body}
+                  </li>
+                ))
+              }
+            </ul>
+          </section>
+
+          <section
+            aria-labelledby="xialu-local-first"
+            data-toc-section
+            style={sectionStyles["xialu-local-first"]}
+          >
+            <h2 id="xialu-local-first">{copy.whyHeading}</h2>
+            <p>{copy.why}</p>
+          </section>
+
+          <section
+            aria-labelledby="xialu-engineering"
+            data-toc-section
+            style={sectionStyles["xialu-engineering"]}
+          >
+            <h2 id="xialu-engineering">{copy.engineeringHeading}</h2>
+            {
+              copy.decisions.map((decision, index) => (
+                <section data-toc-section style={sectionStyles[`xialu-decision-${index}`]}>
+                  <h3 id={`xialu-decision-${index}`}>{decision.title}</h3>
+                  <p>{decision.body}</p>
+                </section>
+              ))
+            }
+            <ol
+              aria-label={copy.architectureLabel}
+              class="not-prose my-6 flex list-none flex-wrap items-center gap-x-2 gap-y-2 border-y px-0 py-4 text-sm"
+            >
+              {
+                copy.architecture.map((layer, index) => (
+                  <li class="inline-flex items-center gap-2">
+                    {index > 0 && <ArrowIcon aria-hidden="true" class="size-3.5 shrink-0 rotate-90" />}
+                    <span>{layer}</span>
+                  </li>
+                ))
+              }
+            </ol>
+          </section>
+
+          <section aria-labelledby="xialu-workflow" data-toc-section style={sectionStyles["xialu-workflow"]}>
+            <h2 id="xialu-workflow">{copy.workflowHeading}</h2>
+            {copy.workflow.map((paragraph) => <p>{paragraph}</p>)}
+          </section>
+
+          <section aria-labelledby="xialu-stack" data-toc-section style={sectionStyles["xialu-stack"]}>
+            <h2 id="xialu-stack">{copy.stackHeading}</h2>
+            <StackList stackItems={stackItems} />
+          </section>
+
+          <section aria-labelledby="xialu-ai-tools" data-toc-section style={sectionStyles["xialu-ai-tools"]}>
+            <h2 id="xialu-ai-tools">{copy.toolsHeading}</h2>
+            <StackList stackItems={aiTools} />
+          </section>
+        </div>
+
+        <footer class="text-muted-foreground mt-8 border-t pt-6 text-sm">
+          <p>{copy.identity}</p>
+        </footer>
+      </article>
+    </main>
+  </ContentWithToc>
+</MainLayout>

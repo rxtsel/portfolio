@@ -1,10 +1,9 @@
 ---
 import { Code } from "astro:components"
 import { getCollection, render } from "astro:content"
-import ArrowIcon from "@/assets/arrow.svg"
 import BugIcon from "@/assets/bug.svg"
-import BlogPostActions from "@/components/BlogPostActions.astro"
-import BlogTableOfContents from "@/components/BlogTableOfContents.astro"
+import PageToolbar from "@/components/PageToolbar.astro"
+import ContentWithToc from "@/components/ContentWithToc.astro"
 import MainLayout from "@/layouts/MainLayout.astro"
 import { getReadingMinutes, readBlogMarkdownContent } from "@/lib/blog-markdown"
 import {
@@ -26,7 +25,6 @@ interface Props {
 const { post, posts } = Astro.props
 const { Content, headings } = await render(post)
 const tocHeadings = headings.filter(({ depth }) => depth === 2 || depth === 3)
-const tocTimelines = tocHeadings.map((_, index) => `--toc-section-${index}`).join(", ")
 const canonical = new URL(getBlogPostAlternateHref(post), Astro.site).toString()
 const issueUrl = new URL("https://github.com/rxtsel/portfolio/issues/new")
 issueUrl.search = new URLSearchParams({
@@ -113,28 +111,21 @@ const graph = buildBlogPostGraph({
   titleTemplate="%s - Blog"
 >
   <div aria-hidden="true" class="reading-progress"></div>
-  <div class="post-layout" style={tocTimelines ? `timeline-scope: ${tocTimelines}` : undefined}>
+  <ContentWithToc headings={tocHeadings} locale={post.data.locale}>
     <main
       class="prose prose-neutral prose-p:text-pretty prose-sm lg:prose-base dark:prose-invert prose-a:wrap-break-word prose-code:wrap-break-word prose-pre:max-w-full prose-pre:overflow-x-auto prose-table:block prose-table:max-w-full prose-table:overflow-x-auto prose-headings:text-balance w-full max-w-full min-w-0 [&_.expressive-code]:max-w-full [&_.expressive-code]:overflow-x-auto [&_figure]:max-w-full"
     >
       <article>
         <header>
-          <div class="not-prose mb-6 flex flex-wrap items-center justify-between gap-3">
-            <a
-              class="text-muted-foreground hover:text-foreground focus-visible:border-ring focus-visible:ring-ring/50 inline-flex h-8 w-fit items-center gap-1.5 text-sm transition-colors outline-none focus-visible:ring-3 [&_svg]:size-4"
-              href={blogHref}
-            >
-              <ArrowIcon aria-hidden="true" class="-rotate-90" />
-              <span>{labels[post.data.locale].backToBlog}</span>
-            </a>
-
-            <BlogPostActions
-              locale={post.data.locale}
-              markdown={markdown}
-              title={post.data.title}
-              url={canonical}
-            />
-          </div>
+          <PageToolbar
+            backHref={blogHref}
+            backLabel={labels[post.data.locale].backToBlog}
+            locale={post.data.locale}
+            markdown={markdown}
+            markdownUrl={`${canonical.replace(/\/$/, "")}.md`}
+            title={post.data.title}
+            url={canonical}
+          />
 
           <h1 style={`view-transition-name: ${getBlogPostTransitionName(post, "title")}`}>
             {post.data.title}
@@ -211,30 +202,10 @@ const graph = buildBlogPostGraph({
         </footer>
       </article>
     </main>
-    {tocHeadings.length > 0 && <BlogTableOfContents headings={tocHeadings} locale={post.data.locale} />}
-  </div>
+  </ContentWithToc>
 </MainLayout>
 
 <style>
-  .post-layout {
-    position: relative;
-    min-width: 0;
-  }
-
-  .post-layout :global(.blog-section) {
-    display: flow-root;
-  }
-
-  @media (width >= 1280px) and (prefers-reduced-motion: no-preference) {
-    @supports (timeline-scope: --toc-section-0) and (animation-timeline: --toc-section-0) and
-      (view-timeline-inset: 6rem calc(100% - 6rem)) {
-      .post-layout :global(.blog-section) {
-        view-timeline-axis: block;
-        view-timeline-inset: 6rem calc(100% - 6rem);
-      }
-    }
-  }
-
   .reading-progress {
     display: none;
   }

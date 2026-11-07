@@ -1,30 +1,19 @@
 ---
 import type { MarkdownHeading } from "astro"
 import type { Locale } from "@/lib/i18n"
+import { groupTocHeadings } from "@/lib/table-of-contents"
 
 interface Props {
   headings: MarkdownHeading[]
   locale: Locale
 }
 
-type TocItem = { heading: MarkdownHeading; index: number }
-type TocBranch = TocItem & { children: TocItem[] }
-
 const { headings, locale } = Astro.props
 const label = locale === "es" ? "En esta página" : "On this page"
-const entries: TocBranch[] = []
-
-for (const [index, heading] of headings.entries()) {
-  const parent = entries.at(-1)
-  if (heading.depth === 3 && parent?.heading.depth === 2) {
-    parent.children.push({ heading, index })
-  } else {
-    entries.push({ heading, index, children: [] })
-  }
-}
+const entries = groupTocHeadings(headings)
 ---
 
-<aside class="blog-toc">
+<aside class="table-of-contents">
   <nav aria-label={label}>
     <h2>{label}</h2>
     <ol class="toc-list">
@@ -57,12 +46,12 @@ for (const [index, heading] of headings.entries()) {
 </aside>
 
 <style>
-  .blog-toc {
+  .table-of-contents {
     display: none;
   }
 
   @media (width >= 1280px) {
-    .blog-toc {
+    .table-of-contents {
       position: absolute;
       inset-block: 0;
       left: calc(100% + 2rem);

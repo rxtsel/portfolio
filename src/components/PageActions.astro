@@ -14,17 +14,19 @@ import type { Locale } from "@/lib/i18n"
 interface Props {
   locale: Locale
   markdown: string
+  markdownUrl?: string
   title: string
   url: string
 }
 
-const { locale, markdown, title, url } = Astro.props
+const { locale, markdown, markdownUrl, title, url } = Astro.props
 const labels = {
   en: {
     ai: "AI actions",
     chatgpt: "Open in ChatGPT",
     claude: "Open in Claude",
     copied: "Copied",
+    copyFailed: "Copy failed",
     copyLink: "Copy link",
     copyPage: "Copy Page",
     markdown: "View as Markdown",
@@ -40,6 +42,7 @@ const labels = {
     chatgpt: "Abrir en ChatGPT",
     claude: "Abrir en Claude",
     copied: "Copiado",
+    copyFailed: "No se pudo copiar",
     copyLink: "Copiar enlace",
     copyPage: "Copiar página",
     markdown: "Ver como Markdown",
@@ -51,8 +54,7 @@ const labels = {
     shareX: "Compartir en X",
   },
 } satisfies Record<Locale, Record<string, string>>
-const markdownUrl = `${url.replace(/\/$/, "")}.md`
-const markdownSourceId = "blog-post-markdown-source"
+const markdownSourceId = "page-markdown-source"
 const buttonClass =
   "bg-background text-muted-foreground hover:text-foreground hover:bg-accent focus-visible:border-ring focus-visible:ring-ring/50 inline-flex h-8 items-center gap-1.5 border px-2 text-sm transition-colors outline-none focus-visible:ring-3 [&_svg]:size-4"
 const iconButtonClass = `${buttonClass} size-8 justify-center px-0`
@@ -64,8 +66,8 @@ const menuItemClass =
 
 <div
   class="not-prose relative flex flex-wrap items-center justify-end gap-2"
-  data-blog-actions
   data-markdown-url={markdownUrl}
+  data-page-actions
   data-title={title}
   data-url={url}
 >
@@ -75,40 +77,44 @@ const menuItemClass =
     <CopyButton
       class="border-e-0"
       copiedLabel={labels[locale].copied}
-      errorLabel={labels[locale].markdown}
+      errorLabel={markdownUrl ? labels[locale].markdown : labels[locale].copyFailed}
       fallbackHref={markdownUrl}
       label={labels[locale].copyPage}
       sourceId={markdownSourceId}
     />
     <button
-      aria-controls="blog-ai-menu"
+      aria-controls="page-ai-menu"
       aria-expanded="false"
       aria-haspopup="menu"
       aria-label={labels[locale].openActions}
       class:list={iconButtonClass}
-      data-dropdown-toggle="blog-ai-menu"
-      id="blog-ai-trigger"
+      data-dropdown-toggle="page-ai-menu"
+      id="page-ai-trigger"
       type="button"
     >
       <ChevronIcon aria-hidden="true" class="pointer-events-none" />
     </button>
 
-    <div aria-labelledby="blog-ai-trigger" class:list={menuClass} id="blog-ai-menu" role="menu">
+    <div aria-labelledby="page-ai-trigger" class:list={menuClass} id="page-ai-menu" role="menu">
       <ul class="grid gap-1">
+        {
+          markdownUrl && (
+            <li>
+              <button class:list={menuItemClass} data-page-action="markdown" role="menuitem" type="button">
+                <MarkdownIcon aria-hidden="true" class="pointer-events-none" />
+                <span>{labels[locale].markdown}</span>
+              </button>
+            </li>
+          )
+        }
         <li>
-          <button class:list={menuItemClass} data-blog-action="markdown" role="menuitem" type="button">
-            <MarkdownIcon aria-hidden="true" class="pointer-events-none" />
-            <span>{labels[locale].markdown}</span>
-          </button>
-        </li>
-        <li>
-          <button class:list={menuItemClass} data-blog-action="chatgpt" role="menuitem" type="button">
+          <button class:list={menuItemClass} data-page-action="chatgpt" role="menuitem" type="button">
             <ChatGptIcon aria-hidden="true" class="pointer-events-none" />
             <span>{labels[locale].chatgpt}</span>
           </button>
         </li>
         <li>
-          <button class:list={menuItemClass} data-blog-action="claude" role="menuitem" type="button">
+          <button class:list={menuItemClass} data-page-action="claude" role="menuitem" type="button">
             <ClaudeIcon aria-hidden="true" class="pointer-events-none" />
             <span>{labels[locale].claude}</span>
           </button>
@@ -119,22 +125,22 @@ const menuItemClass =
 
   <div class="relative inline-flex items-center">
     <button
-      aria-controls="blog-share-menu"
+      aria-controls="page-share-menu"
       aria-expanded="false"
       aria-haspopup="menu"
       aria-label={labels[locale].share}
       class:list={iconButtonClass}
-      data-dropdown-toggle="blog-share-menu"
-      id="blog-share-trigger"
+      data-dropdown-toggle="page-share-menu"
+      id="page-share-trigger"
       type="button"
     >
       <ShareIcon aria-hidden="true" class="pointer-events-none" />
     </button>
 
     <div
-      aria-labelledby="blog-share-trigger"
+      aria-labelledby="page-share-trigger"
       class:list={[menuClass, "right-0"]}
-      id="blog-share-menu"
+      id="page-share-menu"
       role="menu"
     >
       <ul class="grid gap-1">
@@ -149,13 +155,13 @@ const menuItemClass =
           />
         </li>
         <li>
-          <button class:list={menuItemClass} data-blog-action="share-x" role="menuitem" type="button">
+          <button class:list={menuItemClass} data-page-action="share-x" role="menuitem" type="button">
             <XIcon aria-hidden="true" class="pointer-events-none" />
             <span>{labels[locale].shareX}</span>
           </button>
         </li>
         <li>
-          <button class:list={menuItemClass} data-blog-action="share-linkedin" role="menuitem" type="button">
+          <button class:list={menuItemClass} data-page-action="share-linkedin" role="menuitem" type="button">
             <LinkedInIcon aria-hidden="true" class="pointer-events-none" />
             <span>{labels[locale].shareLinkedIn}</span>
           </button>
@@ -163,7 +169,7 @@ const menuItemClass =
         <li>
           <a
             class:list={menuItemClass}
-            data-blog-action="share-facebook"
+            data-page-action="share-facebook"
             href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`}
             rel="noopener noreferrer"
             role="menuitem"
@@ -176,7 +182,7 @@ const menuItemClass =
         <li>
           <a
             class:list={menuItemClass}
-            data-blog-action="share-whatsapp"
+            data-page-action="share-whatsapp"
             href={`https://wa.me/?text=${encodeURIComponent(`${title} ${url}`)}`}
             rel="noopener noreferrer"
             role="menuitem"
@@ -192,12 +198,12 @@ const menuItemClass =
 </div>
 
 <script>
-  const actionsWindow = window as Window & { blogPostActionsMounted?: boolean }
+  const actionsWindow = window as Window & { pageActionsMounted?: boolean }
 
   function getActionUrl(action: string, root: HTMLElement) {
     const title = root.dataset.title ?? ""
     const url = root.dataset.url ?? ""
-    const prompt = `Read this post: ${title} ${url}`
+    const prompt = `Read this page: ${title} ${url}`
     const encodedPrompt = encodeURIComponent(prompt)
 
     if (action === "chatgpt") {
@@ -252,7 +258,9 @@ const menuItemClass =
 
   async function runAction(action: string, root: HTMLElement) {
     if (action === "markdown") {
-      window.open(root.dataset.markdownUrl, "_blank", "noopener,noreferrer")
+      if (root.dataset.markdownUrl) {
+        window.open(root.dataset.markdownUrl, "_blank", "noopener,noreferrer")
+      }
       return
     }
 
@@ -263,13 +271,13 @@ const menuItemClass =
     }
   }
 
-  if (!actionsWindow.blogPostActionsMounted) {
-    actionsWindow.blogPostActionsMounted = true
+  if (!actionsWindow.pageActionsMounted) {
+    actionsWindow.pageActionsMounted = true
     document.addEventListener("click", (event) => {
       const target = event.target instanceof HTMLElement ? event.target : null
       const dropdownTrigger = target?.closest<HTMLElement>("[data-dropdown-toggle]")
-      const actionControl = target?.closest<HTMLElement>("[data-blog-action]")
-      const actionRoot = actionControl?.closest<HTMLElement>("[data-blog-actions]")
+      const actionControl = target?.closest<HTMLElement>("[data-page-action]")
+      const actionRoot = actionControl?.closest<HTMLElement>("[data-page-actions]")
 
       if (dropdownTrigger) {
         toggleDropdown(dropdownTrigger)
@@ -277,12 +285,12 @@ const menuItemClass =
       }
 
       if (actionControl && actionRoot) {
-        void runAction(actionControl.getAttribute("data-blog-action") ?? "", actionRoot)
+        void runAction(actionControl.getAttribute("data-page-action") ?? "", actionRoot)
         closeDropdowns()
         return
       }
 
-      if (!target?.closest("[data-blog-actions]")) {
+      if (!target?.closest("[data-page-actions]")) {
         closeDropdowns()
       }
     })

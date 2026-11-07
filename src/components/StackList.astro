@@ -4,7 +4,7 @@ import { stackItemSchema } from "@/content.config"
 import type { AstroComponentFactory } from "astro/runtime/server/index.js"
 
 interface Props {
-  stackItems: z.infer<typeof stackItemSchema>[]
+  stackItems: (z.infer<typeof stackItemSchema> & { ariaLabel?: string })[]
 }
 
 const { stackItems } = Astro.props
@@ -25,16 +25,20 @@ const stackItemsWithLogos = stackItems.map((item) => ({
       <li class="text-muted-foreground retina:border-[0.5px] rounded-none border bg-zinc-50 px-1.5 py-0.5 font-mono text-xs dark:bg-zinc-900 [&_svg]:size-3.5">
         {item.href ? (
           <a
+            aria-label={item.ariaLabel}
             class="flex items-center gap-x-1"
             href={`${item.href}?utm_source=rxtsel.dev&utm_medium=referral`}
             rel="noopener noreferrer"
             target="_blank"
           >
-            {Logo && <Logo aria-label={`${item.name} logo`} class="text-foreground" />}
+            {Logo && <Logo aria-hidden="true" class="text-foreground" />}
             {item.name}
           </a>
         ) : (
-          <span>{item.name}</span>
+          <span class="flex items-center gap-x-1">
+            {Logo && <Logo aria-hidden="true" class="text-foreground" />}
+            {item.name}
+          </span>
         )}
       </li>
     ))

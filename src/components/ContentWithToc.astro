@@ -1,0 +1,42 @@
+---
+import type { MarkdownHeading } from "astro"
+import TableOfContents from "@/components/TableOfContents.astro"
+import type { Locale } from "@/lib/i18n"
+
+// Section wrappers use data-toc-section and matching --toc-section-N view timelines.
+interface Props {
+  headings: MarkdownHeading[]
+  locale: Locale
+}
+
+const { headings, locale } = Astro.props
+const timelines = headings.map((_, index) => `--toc-section-${index}`).join(", ")
+---
+
+<div class="content-with-toc" style={timelines ? `timeline-scope: ${timelines}` : undefined}>
+  <slot />
+  {headings.length > 0 && <TableOfContents headings={headings} locale={locale} />}
+</div>
+
+<style>
+  .content-with-toc {
+    position: relative;
+    min-width: 0;
+  }
+
+  .content-with-toc :global(.blog-section),
+  .content-with-toc :global([data-toc-section]) {
+    display: flow-root;
+  }
+
+  @media (width >= 1280px) and (prefers-reduced-motion: no-preference) {
+    @supports (timeline-scope: --toc-section-0) and (animation-timeline: --toc-section-0) and
+      (view-timeline-inset: 6rem calc(100% - 6rem)) {
+      .content-with-toc :global(.blog-section),
+      .content-with-toc :global([data-toc-section]) {
+        view-timeline-axis: block;
+        view-timeline-inset: 6rem calc(100% - 6rem);
+      }
+    }
+  }
+</style>
