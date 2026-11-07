@@ -5,7 +5,7 @@ import ArrowIcon from "@/assets/arrow.svg"
 import BlogPostActions from "@/components/BlogPostActions.astro"
 import BlogTableOfContents from "@/components/BlogTableOfContents.astro"
 import MainLayout from "@/layouts/MainLayout.astro"
-import { readBlogMarkdownContent } from "@/lib/blog-markdown"
+import { getReadingMinutes, readBlogMarkdownContent } from "@/lib/blog-markdown"
 import {
   getBlogPostAlternateHref,
   getBlogPostLanguageLinks,
@@ -49,6 +49,7 @@ const labels = {
     backToBlog: "Blog",
     content: "Article content",
     published: "Published",
+    readingTime: "min read",
     updated: "Updated",
   },
   es: {
@@ -56,6 +57,7 @@ const labels = {
     backToBlog: "Blog",
     content: "Contenido del artículo",
     published: "Publicado",
+    readingTime: "min de lectura",
     updated: "Actualizado",
   },
 }
@@ -71,6 +73,7 @@ const taxonomyItems = getCategoryItemsByTranslationKey(blogCategoriesEntry, post
 )
 const blogHref = getLocalizedPath(post.data.locale, "blog")
 const markdown = await readBlogMarkdownContent(post.id)
+const readingMinutes = getReadingMinutes(markdown)
 const publishedDate = post.data.publishDate
 const updatedDate = post.data.updatedDate
 const lastModifiedDate = updatedDate ?? publishedDate
@@ -131,26 +134,32 @@ const graph = buildBlogPostGraph({
           </p>
 
           <div
-            class="not-prose text-muted-foreground flex flex-wrap items-center gap-x-1 gap-y-2 text-sm"
+            class="not-prose text-muted-foreground flex flex-wrap items-center justify-between gap-x-4 gap-y-2 text-sm"
             style={`view-transition-name: ${getBlogPostTransitionName(post, "date")}`}
           >
-            <time datetime={toIsoDateTime(publishedDate)}>
-              {labels[post.data.locale].published}
-              {" "}
-              {formatBlogDate(publishedDate, post.data.locale)}
+            <div class="flex flex-wrap items-center gap-x-1 gap-y-2">
+              <time datetime={toIsoDateTime(publishedDate)}>
+                {labels[post.data.locale].published}
+                {" "}
+                {formatBlogDate(publishedDate, post.data.locale)}
+              </time>
+              {
+                updatedDate && (
+                  <>
+                    <span aria-hidden="true" class="text-xs">
+                      /
+                    </span>
+                    <time datetime={toIsoDateTime(lastModifiedDate)}>
+                      {labels[post.data.locale].updated} {formatBlogDate(lastModifiedDate, post.data.locale)}
+                    </time>
+                  </>
+                )
+              }
+            </div>
+            <time class="ms-auto whitespace-nowrap" datetime={`PT${readingMinutes}M`}>
+              ≈ {readingMinutes}
+              {labels[post.data.locale].readingTime}
             </time>
-            {
-              updatedDate && (
-                <>
-                  <span aria-hidden="true" class="text-muted-foreground text-xs">
-                    /
-                  </span>
-                  <time datetime={toIsoDateTime(lastModifiedDate)}>
-                    {labels[post.data.locale].updated} {formatBlogDate(lastModifiedDate, post.data.locale)}
-                  </time>
-                </>
-              )
-            }
           </div>
 
           {

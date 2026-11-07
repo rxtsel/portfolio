@@ -1,8 +1,21 @@
 import { readFile } from "node:fs/promises"
 import path from "node:path"
+import { renderSafeMarkdown } from "./markdown.ts"
 
 export function stripFrontmatter(markdown: string) {
   return markdown.replace(/^---\s*[\s\S]*?\s*---\s*/, "").trim()
+}
+
+export function getReadingMinutes(markdown: string) {
+  const text = renderSafeMarkdown(markdown)
+    .replace(/<pre\b[^>]*>[\s\S]*?<\/pre>/g, " ")
+    .replace(/<[^>]*>/g, " ")
+    .replace(/&(?:#\d+|#x[\da-f]+|[a-z][a-z\d]+);/gi, " ")
+  const words = [...new Intl.Segmenter(undefined, { granularity: "word" }).segment(text)].filter(
+    ({ isWordLike }) => isWordLike,
+  ).length
+
+  return Math.max(1, Math.ceil(words / 200))
 }
 
 export async function readBlogMarkdownSource(id: string) {
