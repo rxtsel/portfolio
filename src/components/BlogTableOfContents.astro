@@ -1,0 +1,159 @@
+---
+import type { MarkdownHeading } from "astro"
+import type { Locale } from "@/lib/i18n"
+
+interface Props {
+  headings: MarkdownHeading[]
+  locale: Locale
+}
+
+type TocItem = { heading: MarkdownHeading; index: number }
+type TocBranch = TocItem & { children: TocItem[] }
+
+const { headings, locale } = Astro.props
+const label = locale === "es" ? "En esta página" : "On this page"
+const entries: TocBranch[] = []
+
+for (const [index, heading] of headings.entries()) {
+  const parent = entries.at(-1)
+  if (heading.depth === 3 && parent?.heading.depth === 2) {
+    parent.children.push({ heading, index })
+  } else {
+    entries.push({ heading, index, children: [] })
+  }
+}
+---
+
+<aside class="blog-toc">
+  <nav aria-label={label}>
+    <h2>{label}</h2>
+    <ol class="toc-list">
+      {
+        entries.map(({ heading, index, children }) => (
+          <li>
+            <div class="toc-row" style={`--section-timeline: --toc-section-${index}`}>
+              <a class="toc-link link-underline" href={`#${heading.slug || `toc-section-${index}`}`}>
+                {heading.text}
+              </a>
+            </div>
+            {children.length > 0 && (
+              <ol class="toc-sublist">
+                {children.map(({ heading, index }) => (
+                  <li>
+                    <div class="toc-row" style={`--section-timeline: --toc-section-${index}`}>
+                      <a class="toc-link link-underline" href={`#${heading.slug || `toc-section-${index}`}`}>
+                        {heading.text}
+                      </a>
+                    </div>
+                  </li>
+                ))}
+              </ol>
+            )}
+          </li>
+        ))
+      }
+    </ol>
+  </nav>
+</aside>
+
+<style>
+  .blog-toc {
+    display: none;
+  }
+
+  @media (width >= 1280px) {
+    .blog-toc {
+      position: absolute;
+      inset-block: 0;
+      left: calc(100% + 2rem);
+      display: block;
+      width: 14rem;
+    }
+
+    nav {
+      position: sticky;
+      top: 6rem;
+      max-height: calc(100dvh - 8rem);
+      overflow-y: auto;
+      scrollbar-width: thin;
+      scrollbar-color: var(--border) transparent;
+    }
+
+    h2 {
+      margin-bottom: 0.75rem;
+      font-size: 0.875rem;
+      font-weight: 500;
+    }
+
+    ol {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .toc-list {
+      border-left: 1px solid var(--border);
+    }
+
+    .toc-row {
+      position: relative;
+      padding-left: 0.875rem;
+    }
+
+    .toc-sublist .toc-row {
+      padding-left: 1.625rem;
+    }
+
+    .toc-link {
+      display: block;
+      width: fit-content;
+      max-width: 100%;
+      padding-block: 0.375rem;
+      color: var(--foreground);
+      opacity: 0.6;
+      font-size: 0.8125rem;
+      line-height: 1.5;
+      overflow-wrap: anywhere;
+      text-decoration-line: none;
+    }
+
+    .toc-link:hover,
+    .toc-link:focus-visible {
+      text-decoration-line: underline;
+    }
+
+    .toc-link:focus-visible {
+      outline: 2px solid var(--ring);
+      outline-offset: -2px;
+    }
+
+    @supports (timeline-scope: --toc-section-0) and (animation-timeline: --toc-section-0) and
+      (view-timeline-inset: 6rem calc(100% - 6rem)) {
+      @media (prefers-reduced-motion: no-preference) {
+        .toc-link {
+          animation: toc-active auto steps(1, end);
+          animation-timeline: var(--section-timeline);
+        }
+
+        .toc-row::before {
+          position: absolute;
+          inset: 0 auto 0 -1px;
+          width: 2px;
+          background: var(--primary);
+          opacity: 0;
+          pointer-events: none;
+          content: "";
+          animation: toc-active auto steps(1, end);
+          animation-timeline: var(--section-timeline);
+        }
+      }
+    }
+  }
+
+  @keyframes toc-active {
+    from,
+    to {
+      opacity: 1;
+    }
+  }
+</style>
