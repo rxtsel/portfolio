@@ -53,6 +53,14 @@ The `_headers` file applies:
 
 If a public asset must be cached for one year, give it a content-hashed filename first.
 
+## Project Icons
+
+Sveltia stores the source HTTPS URL in `customFavicon`. Use trusted PNG, JPEG, WebP, AVIF or SVG sources, preferably square and at least 54×54 px (or vector). ICO URLs are rejected by the CMS/content schema; the image service also rejects ICO file contents, regardless of the URL extension.
+
+Astro generates hashed WebP assets under `/_astro/` at build time, with 18, 36 and 54 px variants for 1×/2×/3× displays. The visible size stays 18×18 px, without cropping or stretching. Remote SVG processing is enabled for these editor-curated sources; do not accept image URLs from untrusted users or enable on-demand rendering without reviewing this policy.
+
+Astro caches processed images in `node_modules/.astro`. Preserve this directory between CI builds to reuse the cache; remote freshness follows the origin's HTTP cache headers. A cold build requires the remote image sources to be available. Run `pnpm test` to check URL validation, disguised ICO rejection and retina image transforms.
+
 ## 404 Behavior
 
 `wrangler.jsonc` uses `not_found_handling: "404-page"` so Cloudflare serves the generated `dist/404.html` for missing static asset routes.
