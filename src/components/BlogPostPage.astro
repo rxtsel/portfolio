@@ -2,6 +2,7 @@
 import { Code } from "astro:components"
 import { getCollection, render } from "astro:content"
 import ArrowIcon from "@/assets/arrow.svg"
+import BugIcon from "@/assets/bug.svg"
 import BlogPostActions from "@/components/BlogPostActions.astro"
 import BlogTableOfContents from "@/components/BlogTableOfContents.astro"
 import MainLayout from "@/layouts/MainLayout.astro"
@@ -27,6 +28,12 @@ const { Content, headings } = await render(post)
 const tocHeadings = headings.filter(({ depth }) => depth === 2 || depth === 3)
 const tocTimelines = tocHeadings.map((_, index) => `--toc-section-${index}`).join(", ")
 const canonical = new URL(getBlogPostAlternateHref(post), Astro.site).toString()
+const issueUrl = new URL("https://github.com/rxtsel/portfolio/issues/new")
+issueUrl.search = new URLSearchParams({
+  template: "error.yml",
+  title: `[Error] ${post.data.title}`,
+  pagina: canonical,
+}).toString()
 const ogImage = new URL(`${getBlogPostAlternateHref(post)}/og.png`, Astro.site).toString()
 const alternatePosts = getAlternateBlogPosts(posts, post)
 const defaultAlternatePost = alternatePosts.find((entry) => entry.data.locale === "en") ?? post
@@ -48,6 +55,8 @@ const labels = {
     categories: "Post categories",
     backToBlog: "Blog",
     content: "Article content",
+    errorPrompt: "Found an error in this post?",
+    reportError: "Let me know on GitHub.",
     published: "Published",
     readingTime: "min read",
     updated: "Updated",
@@ -56,6 +65,8 @@ const labels = {
     categories: "Categorías del artículo",
     backToBlog: "Blog",
     content: "Contenido del artículo",
+    errorPrompt: "¿Has encontrado un error en este artículo?",
+    reportError: "Avísame en GitHub.",
     published: "Publicado",
     readingTime: "min de lectura",
     updated: "Actualizado",
@@ -182,6 +193,22 @@ const graph = buildBlogPostGraph({
         <section aria-label={labels[post.data.locale].content}>
           <Content components={{ pre: Code }} />
         </section>
+
+        <footer class="not-prose text-muted-foreground mt-8 border-t px-10 pt-4 text-center text-sm">
+          <p>
+            <BugIcon aria-hidden="true" class="me-1 inline-block size-4 align-text-bottom" />
+            {labels[post.data.locale].errorPrompt}
+            {" "}
+            <a
+              class="link-underline hover:text-foreground"
+              href={issueUrl.href}
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              {labels[post.data.locale].reportError}
+            </a>
+          </p>
+        </footer>
       </article>
     </main>
     {tocHeadings.length > 0 && <BlogTableOfContents headings={tocHeadings} locale={post.data.locale} />}

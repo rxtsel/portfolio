@@ -1,0 +1,36 @@
+name: "🐛 Reportar un error"
+description: "Una errata, un enlace roto, un ejemplo incorrecto o algo que no funciona en el sitio."
+title: "[Error] "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ¡Gracias por avisarme! Si llegas desde un artículo, su enlace ya viene rellenado.
+
+        Las issues son públicas: no incluyas contraseñas, tokens ni otros datos privados.
+
+  - type: input
+    id: pagina
+    attributes:
+      label: "Artículo o página"
+      description: "Enlace a la página donde encontraste el problema."
+      placeholder: "https://rxtsel.dev/blog/..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: problema
+    attributes:
+      label: "¿Qué problema encontraste?"
+      description: "Copia el fragmento o enlace afectado y explica el error. Si algo no funciona, indica cómo reproducirlo y qué navegador usas. Puedes adjuntar capturas."
+    validations:
+      required: true
+
+  - type: textarea
+    id: propuesta
+    attributes:
+      label: "Corrección propuesta (opcional)"
+      description: "Si sabes cómo corregirlo, comparte tu propuesta o una fuente de referencia."
+    validations:
+      required: false
