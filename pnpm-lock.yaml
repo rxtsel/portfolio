@@ -16,9 +16,6 @@ importers:
       "@c15t/scripts":
         specifier: 2.1.0
         version: 2.1.0
-      "@fontsource-variable/geist":
-        specifier: 5.2.8
-        version: 5.2.8
       "@jdevalk/astro-seo-graph":
         specifier: 1.4.0
         version: 1.4.0(astro@6.3.1(@types/node@25.6.0)(@upstash/redis@1.38.0)(jiti@2.7.0)(lightningcss@1.32.0)(rollup@4.60.3)(tsx@4.21.0)(yaml@2.8.4))(typescript@6.0.3)
@@ -1080,12 +1077,6 @@ packages:
     resolution:
       {
         integrity: sha512-l59lUx8fq1v5g6SpmbDjiU0+7IdfbiWnAyRmtTVSpfhyq+nZMN4UcmYyu2b9Mynhzt7Gr+O+cXyEPDNb2AVWVQ==,
-      }
-
-  "@fontsource-variable/geist@5.2.8":
-    resolution:
-      {
-        integrity: sha512-cJ6m9e+8MQ5dCYJsLylfZrgBh6KkG4bOLckB35Tr9J/EqdkEM6QllH5PxqP1dhTvFup+HtMRPuz9xOjxXJggxw==,
       }
 
   "@humanfs/core@0.19.2":
@@ -6882,8 +6873,6 @@ snapshots:
   "@expressive-code/plugin-text-markers@0.42.0":
     dependencies:
       "@expressive-code/core": 0.42.0
-
-  "@fontsource-variable/geist@5.2.8": {}
 
   "@humanfs/core@0.19.2":
     dependencies:

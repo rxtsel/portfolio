@@ -9,6 +9,7 @@
     "preview": "astro preview",
     "astro": "astro",
     "check": "astro check",
+    "test": "node --experimental-strip-types --test tests/*.test.mjs",
     "format": "prettier . --write",
     "lint": "eslint . --fix"
   },
@@ -16,7 +17,6 @@
     "@astrojs/rss": "4.0.18",
     "@astrojs/sitemap": "3.7.2",
     "@c15t/scripts": "2.1.0",
-    "@fontsource-variable/geist": "5.2.8",
     "@jdevalk/astro-seo-graph": "1.4.0",
     "@jdevalk/seo-graph-core": "0.6.1",
     "@js-temporal/polyfill": "0.5.1",

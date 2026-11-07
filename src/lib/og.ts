@@ -3,8 +3,6 @@ import path from "node:path"
 import { ImageResponse } from "@vercel/og"
 import type { BlogPost } from "@/lib/blog"
 
-const geistSemibold = readFile(path.resolve("public/fonts/geist/ttf/geist-latin-600-normal.ttf"))
-
 const backgroundImage = readFile(path.resolve("public/og_template.jpg")).then((buffer) =>
   buffer.toString("base64"),
 )
@@ -19,7 +17,7 @@ function getTitleFontSize(title: string) {
 }
 
 export async function generateBlogOgImage(post: BlogPost) {
-  const [fontDataSemibold, backgroundBase64] = await Promise.all([geistSemibold, backgroundImage])
+  const backgroundBase64 = await backgroundImage
 
   return new ImageResponse(
     {
@@ -28,7 +26,6 @@ export async function generateBlogOgImage(post: BlogPost) {
         tw: "w-full h-full flex items-center justify-start relative px-22 py-16",
         style: {
           backgroundImage: `url('data:image/jpeg;base64,${backgroundBase64}')`,
-          fontFamily: "Geist",
         },
         children: [
           {
@@ -36,7 +33,6 @@ export async function generateBlogOgImage(post: BlogPost) {
             props: {
               style: {
                 color: "#FAFAFA",
-                fontFamily: "Geist",
                 fontSize: `${getTitleFontSize(post.data.title)}px`,
                 fontWeight: 600,
                 textWrap: "balance",
@@ -49,14 +45,6 @@ export async function generateBlogOgImage(post: BlogPost) {
       },
     },
     {
-      fonts: [
-        {
-          data: fontDataSemibold,
-          name: "Geist",
-          style: "normal",
-          weight: 600,
-        },
-      ],
       height: 630,
       width: 1200,
     },
