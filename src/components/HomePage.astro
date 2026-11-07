@@ -98,13 +98,13 @@ const postsHref = getLocalizedPath(locale, "blog")
     {
       projects.length > 0 && (
         <section>
-          <header class="flex items-center justify-between">
-            <h2>{labels[locale].projects}</h2>
-            <a class="link relative top-2 text-sm lg:top-3" href={projectsHref}>
+          <h2>{labels[locale].projects}</h2>
+          <ProjectsGrid projects={projects} />
+          <div class="not-prose mt-4 flex justify-center lg:justify-end">
+            <a class="link-underline inline-flex min-h-11 items-center text-sm" href={projectsHref}>
               {labels[locale].viewAllProjects}
             </a>
-          </header>
-          <ProjectsGrid projects={projects} />
+          </div>
         </section>
       )
     }
@@ -120,13 +120,13 @@ const postsHref = getLocalizedPath(locale, "blog")
     {
       latestPosts.length > 0 && (
         <section>
-          <header class="flex items-center justify-between">
-            <h2>{labels[locale].latestPosts}</h2>
-            <a class="link relative top-2 text-sm lg:top-3" href={postsHref}>
+          <h2>{labels[locale].latestPosts}</h2>
+          <BlogPostList blogPost={latestPosts} headingLevel="h3" />
+          <div class="not-prose mt-4 flex justify-center lg:justify-end">
+            <a class="link-underline inline-flex min-h-11 items-center text-sm" href={postsHref}>
               {labels[locale].viewAllPosts}
             </a>
-          </header>
-          <BlogPostList blogPost={latestPosts} headingLevel="h3" />
+          </div>
         </section>
       )
     }
