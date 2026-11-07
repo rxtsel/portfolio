@@ -2,9 +2,11 @@
 import ChevronIcon from "@/assets/chevron.svg"
 import ChatGptIcon from "@/assets/logos/chatgpt.svg"
 import ClaudeIcon from "@/assets/logos/claude.svg"
+import FacebookIcon from "@/assets/logos/facebook.svg"
 import LinkedInIcon from "@/assets/logos/linkedin.svg"
 import MarkdownIcon from "@/assets/logos/markdown.svg"
 import ShareIcon from "@/assets/share.svg"
+import WhatsAppIcon from "@/assets/logos/whatsapp.svg"
 import XIcon from "@/assets/logos/x.svg"
 import CopyButton from "@/components/CopyButton.astro"
 import type { Locale } from "@/lib/i18n"
@@ -28,6 +30,8 @@ const labels = {
     markdown: "View as Markdown",
     openActions: "Open page actions",
     share: "Share actions",
+    shareFacebook: "Share on Facebook",
+    shareWhatsApp: "Share on WhatsApp",
     shareLinkedIn: "Share on LinkedIn",
     shareX: "Share on X",
   },
@@ -41,6 +45,8 @@ const labels = {
     markdown: "Ver como Markdown",
     openActions: "Abrir acciones de página",
     share: "Acciones de compartir",
+    shareFacebook: "Compartir en Facebook",
+    shareWhatsApp: "Compartir en WhatsApp",
     shareLinkedIn: "Compartir en LinkedIn",
     shareX: "Compartir en X",
   },
@@ -51,7 +57,7 @@ const buttonClass =
   "bg-background text-muted-foreground hover:text-foreground hover:bg-accent focus-visible:border-ring focus-visible:ring-ring/50 inline-flex h-8 items-center gap-1.5 border px-2 text-sm transition-colors outline-none focus-visible:ring-3 [&_svg]:size-4"
 const iconButtonClass = `${buttonClass} size-8 justify-center px-0`
 const menuClass =
-  "bg-popover text-popover-foreground border-border absolute top-full z-50 mt-1 hidden w-48 border p-1 shadow-lg"
+  "bg-popover text-popover-foreground border-border absolute top-full z-50 mt-1 hidden w-max min-w-48 border p-1 shadow-lg"
 const menuItemClass =
   "text-muted-foreground hover:bg-accent hover:text-foreground focus-visible:bg-accent focus-visible:text-foreground flex h-8 w-full items-center gap-2 px-2 text-sm text-left outline-none [&_svg]:size-4"
 ---
@@ -153,6 +159,32 @@ const menuItemClass =
             <LinkedInIcon aria-hidden="true" class="pointer-events-none" />
             <span>{labels[locale].shareLinkedIn}</span>
           </button>
+        </li>
+        <li>
+          <a
+            class:list={menuItemClass}
+            data-blog-action="share-facebook"
+            href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`}
+            rel="noopener noreferrer"
+            role="menuitem"
+            target="_blank"
+          >
+            <FacebookIcon aria-hidden="true" class="pointer-events-none" />
+            <span>{labels[locale].shareFacebook}</span>
+          </a>
+        </li>
+        <li>
+          <a
+            class:list={menuItemClass}
+            data-blog-action="share-whatsapp"
+            href={`https://wa.me/?text=${encodeURIComponent(`${title} ${url}`)}`}
+            rel="noopener noreferrer"
+            role="menuitem"
+            target="_blank"
+          >
+            <WhatsAppIcon aria-hidden="true" class="pointer-events-none" />
+            <span>{labels[locale].shareWhatsApp}</span>
+          </a>
         </li>
       </ul>
     </div>
