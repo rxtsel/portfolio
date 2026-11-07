@@ -63,15 +63,11 @@ const sortedJobs = [...item.jobs].sort((current, next) => {
 <li class="relative my-0! ms-[20.5px] grid gap-4 ps-0!">
   <header>
     <span
-      class="border-border bg-primary absolute inset-s-[-1.35rem] mt-1.5 block size-3 border lg:mt-2.5"
-      role="none"
-    >
-      {
-        companyIsCurrent ? (
-          <span class="bg-primary absolute inline-flex size-2.5 animate-ping border border-transparent opacity-75" />
-        ) : null
-      }
-    </span>
+      class:list={[
+        "border-border bg-primary absolute inset-s-[-1.35rem] mt-1.5 block size-3 border lg:mt-2.5",
+        { "motion-safe:animate-pulse": companyIsCurrent },
+      ]}
+      role="none"></span>
 
     {
       item.companyUrl ? (
