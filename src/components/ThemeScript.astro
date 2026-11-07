@@ -54,7 +54,6 @@
     document.documentElement.classList.toggle("dark", shouldUseDarkTheme(theme))
     document.documentElement.dataset.themeMode = theme
     document.documentElement.style.colorScheme = shouldUseDarkTheme(theme) ? "dark" : "light"
-    document.documentElement.dataset.theme = `github-${theme}-default`
     updateThemeControls(theme)
   }
 
