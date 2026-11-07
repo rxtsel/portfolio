@@ -7,7 +7,8 @@ import PageToolbar from "@/components/PageToolbar.astro"
 import ContentWithToc from "@/components/ContentWithToc.astro"
 import StackList from "@/components/StackList.astro"
 import MainLayout from "@/layouts/MainLayout.astro"
-import { getLocaleLanguageTag, type LanguageLink, type Locale } from "@/lib/i18n"
+import { getLocaleLanguageTag, locales, type LanguageLink, type Locale } from "@/lib/i18n"
+import { projectPages } from "@/lib/project-pages"
 
 interface Props {
   locale: Locale
@@ -168,6 +169,8 @@ const content = {
   },
 } satisfies Record<Locale, unknown>
 const copy = content[locale]
+const project = projectPages.xialu
+const projectLocale = project.locales[locale]
 const stackItems = [
   { name: "React Native", slug: "react", href: "https://reactnative.dev/" },
   { name: "Expo", slug: "expo", href: "https://expo.dev/" },
@@ -179,7 +182,8 @@ const aiTools = [
   { name: "pi.dev", slug: "pi", href: "https://pi.dev/" },
   { name: "gpt-6.1-sol", slug: "chatgpt", href: "https://openai.com/", ariaLabel: "OpenAI gpt-6.1-sol" },
 ]
-const canonical = new URL(Astro.url.pathname, Astro.site).toString()
+const canonical = new URL(projectLocale.path, Astro.site).toString()
+const ogImage = new URL("og.png", canonical).toString()
 const markdown = [
   "# Xialu",
   copy.lead,
@@ -218,10 +222,10 @@ const headings: MarkdownHeading[] = [
 const sectionStyles = Object.fromEntries(
   headings.map((heading, index) => [heading.slug, `view-timeline-name: --toc-section-${index}`]),
 )
-const languageLinks = [
-  { href: "/projects/xialu/", locale: "en" },
-  { href: "/es/proyectos/xialu/", locale: "es" },
-] satisfies LanguageLink[]
+const languageLinks = locales.map((locale) => ({
+  href: project.locales[locale].path,
+  locale,
+})) satisfies LanguageLink[]
 const alternates = {
   defaultLocale: "en",
   entries: [
@@ -229,7 +233,7 @@ const alternates = {
       href: new URL(link.href, Astro.site).toString(),
       hreflang: getLocaleLanguageTag(link.locale),
     })),
-    { href: new URL("/projects/xialu/", Astro.site).toString(), hreflang: "x-default" },
+    { href: new URL(project.locales.en.path, Astro.site).toString(), hreflang: "x-default" },
   ],
 }
 ---
@@ -240,6 +244,8 @@ const alternates = {
   description={copy.description}
   lang={locale}
   languageLinks={languageLinks}
+  ogImage={ogImage}
+  ogImageAlt={`${project.title}: ${projectLocale.description}`}
   title={copy.title}
 >
   <ContentWithToc headings={headings} locale={locale}>
