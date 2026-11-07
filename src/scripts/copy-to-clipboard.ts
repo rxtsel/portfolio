@@ -1,5 +1,3 @@
-import { feedback } from "@/lib/feedback"
-
 type CopyState = "done" | "error" | "idle"
 
 const resetDelay = 1500
@@ -71,10 +69,8 @@ async function copy(button: HTMLElement) {
   try {
     await writeClipboard(getCopyText(button))
     setCopyState(button, "done")
-    feedback.success()
   } catch {
     setCopyState(button, "error")
-    feedback.error()
     openFallback(button)
   } finally {
     button.dispatchEvent(new CustomEvent("copy:complete", { bubbles: true }))
