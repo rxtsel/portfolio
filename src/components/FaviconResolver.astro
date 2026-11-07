@@ -14,7 +14,7 @@ const shouldRender = customFavicon || (href && href.length > 0)
 const src = customFavicon
   ? customFavicon
   : href
-    ? `https://favicon.vemetric.com/${new URL(href).hostname}?format=webp&size=36`
+    ? `https://favicon.vemetric.com/${new URL(href).hostname}?format=webp&size=54`
     : ""
 const alt = customFavicon ? "Custom favicon" : href ? `Favicon for ${new URL(href).hostname}` : ""
 ---
@@ -24,10 +24,14 @@ const alt = customFavicon ? "Custom favicon" : href ? `Favicon for ${new URL(hre
     <Image
       alt={alt}
       class="m-auto aspect-square shrink-0 object-contain"
-      height="18"
+      densities={[1, 2, 3]}
+      fit="contain"
+      format="webp"
+      height={18}
       loading={loading}
+      quality={90}
       src={src}
-      width="18"
+      width={18}
     />
   )
 }

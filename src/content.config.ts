@@ -2,6 +2,7 @@ import { defineCollection } from "astro:content"
 import { glob } from "astro/loaders"
 import { z } from "astro/zod"
 import { toIsoDate } from "@/lib/date-time"
+import { faviconUrlPattern } from "@/lib/favicon"
 
 const emptyStringToUndefined = (value: unknown) => (value === "" ? undefined : value)
 
@@ -109,7 +110,10 @@ const projectSchema = z.object({
   order: z.number().int().optional(),
   publishDate: z.coerce.date(),
   sourceUrl: z.preprocess(emptyStringToUndefined, z.url().optional()),
-  customFavicon: z.preprocess(emptyStringToUndefined, z.string().optional()),
+  customFavicon: z.preprocess(
+    emptyStringToUndefined,
+    z.url().regex(faviconUrlPattern, "Use an HTTPS image URL, not an ICO file").optional(),
+  ),
   stack: z.array(z.string().min(1)).default([]),
   tags: z.array(z.string().min(1)).optional().default([]),
   translationKey: z.string().min(1),

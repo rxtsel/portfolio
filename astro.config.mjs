@@ -31,6 +31,12 @@ const seoGraphIntegration = /** @type {import("astro").AstroIntegration} */ (
 // https://astro.build/config
 export default defineConfig({
   site: "https://rxtsel.dev",
+  image: {
+    remotePatterns: [{ protocol: "https" }],
+    // SVG sources are curated by CMS editors and rasterized only during static builds.
+    dangerouslyProcessSVG: true,
+    service: { entrypoint: "./src/lib/image-service.ts" },
+  },
   build: {
     inlineStylesheets: "always",
   },
