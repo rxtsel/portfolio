@@ -4,7 +4,7 @@ import { readFile } from "node:fs/promises"
 import test from "node:test"
 import { URL } from "node:url"
 import { imageMetadata } from "astro/assets/utils"
-import { faviconUrlPattern } from "../src/lib/favicon.ts"
+import { faviconBackgroundSchema, faviconUrlPattern } from "../src/lib/favicon.ts"
 import imageService from "../src/lib/image-service.ts"
 
 test("CMS and build use the same HTTPS/non-ICO validation", async () => {
@@ -30,6 +30,13 @@ test("CMS and build use the same HTTPS/non-ICO validation", async () => {
   ]) {
     assert.ok(!faviconUrlPattern.test(url), url)
   }
+})
+
+test("favicon backgrounds are opt-in and limited to the CMS options", () => {
+  assert.equal(faviconBackgroundSchema.parse(undefined), "none")
+  assert.equal(faviconBackgroundSchema.parse("none"), "none")
+  assert.equal(faviconBackgroundSchema.parse("light"), "light")
+  assert.equal(faviconBackgroundSchema.safeParse("invert").success, false)
 })
 
 test("ICO content is rejected even when the URL claims to be PNG", async () => {
