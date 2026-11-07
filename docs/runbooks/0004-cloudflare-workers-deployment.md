@@ -59,6 +59,8 @@ Sveltia stores the source HTTPS URL in `customFavicon`. Use trusted PNG, JPEG, W
 
 Astro generates hashed WebP assets under `/_astro/` at build time, with 18, 36 and 54 px variants for 1×/2×/3× displays. The visible size stays 18×18 px, without cropping or stretching. Remote SVG processing is enabled for these editor-curated sources; do not accept image URLs from untrusted users or enable on-demand rendering without reviewing this policy.
 
+The per-project `faviconBackground` selector defaults to `none`. Choose `light` in Sveltia to add a white background with square corners in both themes for logos that disappear on dark surfaces. This does not invert colors, add padding, change image sizes or generate extra assets, and also works with automatically detected favicons.
+
 Astro caches processed images in `node_modules/.astro`. Preserve this directory between CI builds to reuse the cache; remote freshness follows the origin's HTTP cache headers. A cold build requires the remote image sources to be available. Run `pnpm test` to check URL validation, disguised ICO rejection and retina image transforms.
 
 ## 404 Behavior
