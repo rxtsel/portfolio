@@ -14,6 +14,7 @@ interface Props {
   customFavicon: string | ImageMetadata | undefined
   description: string
   faviconBackground?: FaviconBackground
+  faviconLoading?: "lazy" | "eager"
   headingLevel?: "h2" | "h3"
   href: string | undefined
   sourceUrl: string | undefined
@@ -26,6 +27,7 @@ const {
   customFavicon,
   description,
   faviconBackground = "none",
+  faviconLoading = "lazy",
   headingLevel = "h3",
   href,
   sourceUrl,
@@ -58,6 +60,7 @@ const tagsProps = tagsStyle ? { style: tagsStyle } : {}
             background={faviconBackground}
             customFavicon={customFavicon}
             href={href}
+            loading={faviconLoading}
             transitionName={transitionNames.logo}
           />
           <span
@@ -73,6 +76,7 @@ const tagsProps = tagsStyle ? { style: tagsStyle } : {}
             background={faviconBackground}
             customFavicon={customFavicon}
             href=""
+            loading={faviconLoading}
             transitionName={transitionNames.logo}
           />
           <span

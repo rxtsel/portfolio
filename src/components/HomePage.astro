@@ -99,7 +99,7 @@ const postsHref = getLocalizedPath(locale, "blog")
       projects.length > 0 && (
         <section>
           <h2>{labels[locale].projects}</h2>
-          <ProjectsGrid projects={projects} />
+          <ProjectsGrid faviconLoading="eager" projects={projects} />
           <div class="not-prose mt-4 flex justify-center lg:justify-end">
             <a class="link-underline inline-flex min-h-11 items-center text-sm" href={projectsHref}>
               {labels[locale].viewAllProjects}

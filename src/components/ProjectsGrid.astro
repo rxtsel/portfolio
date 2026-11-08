@@ -13,11 +13,12 @@ interface ProjectItem extends Project {
 }
 
 interface Props {
+  faviconLoading?: "lazy" | "eager"
   headingLevel?: "h2" | "h3"
   projects: ProjectItem[]
 }
 
-const { headingLevel = "h3", projects } = Astro.props
+const { faviconLoading = "lazy", headingLevel = "h3", projects } = Astro.props
 const logos = import.meta.glob<{ default: ImageMetadata }>("/src/assets/projects/*.webp", { eager: true })
 ---
 
@@ -36,6 +37,7 @@ const logos = import.meta.glob<{ default: ImageMetadata }>("/src/assets/projects
             customFavicon={favicon}
             description={project.data.description}
             faviconBackground={project.data.faviconBackground}
+            faviconLoading={faviconLoading}
             headingLevel={headingLevel}
             href={page?.locales[project.data.locale].path ?? project.data.href}
             sourceUrl={project.data.sourceUrl as string}
