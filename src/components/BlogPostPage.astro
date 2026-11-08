@@ -7,6 +7,7 @@ import ContentWithToc from "@/components/ContentWithToc.astro"
 import MainLayout from "@/layouts/MainLayout.astro"
 import { getReadingMinutes, readBlogMarkdownContent } from "@/lib/blog-markdown"
 import {
+  getBlogHeadingTransitionName,
   getBlogPostAlternateHref,
   getBlogPostLanguageLinks,
   getBlogPostTransitionName,
@@ -110,6 +111,7 @@ const graph = buildBlogPostGraph({
   title={post.data.title}
   titleTemplate="%s - Blog"
 >
+  <link blocking="render" href="#blog-post-content" rel="expect" slot="head" />
   <div aria-hidden="true" class="reading-progress"></div>
   <ContentWithToc headings={tocHeadings} locale={post.data.locale}>
     <main
@@ -120,6 +122,7 @@ const graph = buildBlogPostGraph({
           <PageToolbar
             backHref={blogHref}
             backLabel={labels[post.data.locale].backToBlog}
+            backTransitionName={getBlogHeadingTransitionName(post.data.locale)}
             locale={post.data.locale}
             markdown={markdown}
             markdownUrl={`${canonical.replace(/\/$/, "")}.md`}
@@ -181,7 +184,7 @@ const graph = buildBlogPostGraph({
           }
         </header>
 
-        <section aria-label={labels[post.data.locale].content}>
+        <section aria-label={labels[post.data.locale].content} id="blog-post-content">
           <Content components={{ pre: Code }} />
         </section>
 

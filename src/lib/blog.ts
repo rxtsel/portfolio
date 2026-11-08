@@ -4,6 +4,10 @@ import { getBlogPostSlug, getLocalizedPath, locales, type LanguageLink, type Loc
 export type BlogPost = CollectionEntry<"blog">
 export type BlogPostTransitionPart = "card" | "categories" | "date" | "description" | "title"
 
+export function getBlogHeadingTransitionName(locale: Locale) {
+  return `blog-${locale}-heading`
+}
+
 export function getBlogPostTransitionName(post: BlogPost, part: BlogPostTransitionPart) {
   const transitionId = post.id.replace(/[^a-zA-Z0-9_-]/g, "-")
 

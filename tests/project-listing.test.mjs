@@ -20,21 +20,25 @@ test("coded project pages resolve by translation key in both languages", () => {
   }
 })
 
-test("render-blocking snapshot marker is wired only into project pages", () => {
+test("shared navigation pages wait for their snapshot marker without blocking Home", () => {
   const read = (file) => readFileSync(new URL(`../src/${file}`, import.meta.url), "utf8")
   assert.match(read("layouts/MainLayout.astro"), /<slot name="head"\s*\/>/)
   assert.match(read("layouts/MainLayout.astro"), /<slot\s*\/>[\s\S]*<Footer/)
   assert.match(read("components/Footer.astro"), /<footer\b[^>]*id="site-footer"/)
-  for (const file of ["ProjectsIndexPage", "XialuProjectPage"]) {
+  for (const [file, marker] of [
+    ["ProjectsIndexPage", "site-footer"],
+    ["XialuProjectPage", "site-footer"],
+    ["BlogIndexPage", "site-footer"],
+    ["BlogPostPage", "blog-post-content"],
+  ]) {
     const link = read(`components/${file}.astro`).match(/<link\b[^>]*rel="expect"[^>]*>/)?.[0]
     assert.ok(link)
-    for (const attribute of ['blocking="render"', 'href="#site-footer"', 'slot="head"']) {
+    for (const attribute of ['blocking="render"', `href="#${marker}"`, 'slot="head"']) {
       assert.ok(link.includes(attribute))
     }
   }
-  for (const file of ["HomePage", "BlogPostPage"]) {
-    assert.doesNotMatch(read(`components/${file}.astro`), /rel="expect"/)
-  }
+  assert.match(read("components/BlogPostPage.astro"), /<section\b[^>]*id="blog-post-content"/)
+  assert.doesNotMatch(read("components/HomePage.astro"), /rel="expect"/)
 })
 
 test("project navigation headings share a locale-specific identity", () => {
