@@ -47,7 +47,7 @@ latestPosts:
   - basic-commands-for-neovim
   - how-to-set-up-lefthook-and-commitlint-in-your-projects
 seo:
-  title: Cristhian Melo - Software Developer
-  description: Frontend-heavy Software Developer with 4+ years of experience building fast, polished, and scalable web products.
-  keywords: software developer, frontend engineer, web developer portfolio, React developer, Astro developer, colombia
+  title: Cristhian Melo - Software Engineer
+  description: Software engineer with experience building web, desktop, and mobile apps, from design and frontend to backend, data, and infrastructure.
+  keywords: software engineer, full stack development, web apps, mobile apps, software architecture, Colombia
 ---
