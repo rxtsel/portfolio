@@ -2,6 +2,7 @@
 import type { MarkdownHeading } from "astro"
 import { Image } from "astro:assets"
 import xialuIcon from "@/assets/projects/xialu.webp"
+import catPhoto from "@/assets/projects/xialu/cat.webp"
 import ArrowIcon from "@/assets/arrow.svg"
 import PageToolbar from "@/components/PageToolbar.astro"
 import ContentWithToc from "@/components/ContentWithToc.astro"
@@ -94,6 +95,7 @@ const content = {
     toolsHeading: "AI-assisted development",
     logoAlt: "Xialu app icon: a black cat holding a card",
     identity: "The black cat in the logo is a tribute to my own cat. 🐈‍⬛",
+    catAlt: "Khala, my black cat, resting on a blue bedspread",
   },
   es: {
     title: "Xialu: una app de finanzas personales local-first",
@@ -167,6 +169,7 @@ const content = {
     toolsHeading: "Desarrollo asistido por IA",
     logoAlt: "Icono de Xialu: una gata negra con una tarjeta",
     identity: "La gata negra del logo es un homenaje a mi gata. 🐈‍⬛",
+    catAlt: "Khala, mi gata negra, descansando sobre una colcha azul",
   },
 } satisfies Record<Locale, unknown>
 const copy = content[locale]
@@ -381,6 +384,18 @@ const alternates = {
 
         <footer class="text-muted-foreground mt-8 border-t pt-6 text-sm">
           <p>{copy.identity}</p>
+          <figure class="bg-muted mx-auto mt-4 w-full max-w-80 rounded-xl border p-2">
+            <img
+              alt={copy.catAlt}
+              class="h-auto w-full rounded-md"
+              decoding="async"
+              height={catPhoto.height}
+              loading="lazy"
+              src={catPhoto.src}
+              width={catPhoto.width}
+            />
+            <figcaption class="text-foreground pt-2 pb-1 text-center text-sm font-medium">Khala</figcaption>
+          </figure>
         </footer>
       </article>
     </main>
