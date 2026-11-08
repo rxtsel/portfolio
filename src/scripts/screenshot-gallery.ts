@@ -1,6 +1,6 @@
 const screenshotTransitions = new WeakMap<HTMLDialogElement, ViewTransition>()
 
-function updateScreenshot(dialog: HTMLDialogElement, update: () => void | Promise<void>) {
+function updateScreenshot(dialog: HTMLDialogElement, update: () => void) {
   const shot = dialog.parentElement
 
   if (document.startViewTransition && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
@@ -19,13 +19,34 @@ function updateScreenshot(dialog: HTMLDialogElement, update: () => void | Promis
     screenshotTransitions.get(dialog)?.skipTransition()
     screenshotTransitions.delete(dialog)
     shot?.removeAttribute("data-transitioning")
-    void update()
+    update()
   }
 }
 
 document.querySelectorAll<HTMLElement>("[data-screenshot-gallery]").forEach((gallery) => {
-  gallery.addEventListener("click", (event) => {
+  const status = gallery.querySelector<HTMLElement>("[data-gallery-status]")
+  let pending: { link: HTMLAnchorElement; dialog: HTMLDialogElement } | undefined
+
+  function cancelPending() {
+    if (pending) {
+      pending.link.removeAttribute("aria-busy")
+      screenshotTransitions.get(pending.dialog)?.skipTransition()
+      pending = undefined
+    }
+    if (status) status.textContent = ""
+  }
+
+  window.addEventListener("pagehide", cancelPending)
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") cancelPending()
+  })
+  document.addEventListener("click", (event) => {
+    if (event.target instanceof Element && !gallery.contains(event.target)) cancelPending()
+  })
+
+  gallery.addEventListener("click", async (event) => {
     if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) {
+      cancelPending()
       return
     }
 
@@ -35,19 +56,37 @@ document.querySelectorAll<HTMLElement>("[data-screenshot-gallery]").forEach((gal
         : null
     const dialog = link ? document.getElementById(link.dataset.screenshotOpen ?? "") : null
 
-    if (!(dialog instanceof HTMLDialogElement)) {
+    if (!link || !(dialog instanceof HTMLDialogElement)) {
+      cancelPending()
       return
     }
 
     event.preventDefault()
-    updateScreenshot(dialog, async () => {
+    if (pending?.link === link) return
+    cancelPending()
+    const request = { link, dialog }
+    pending = request
+    link.setAttribute("aria-busy", "true")
+    if (status) status.textContent = gallery.dataset.loadingLabel ?? ""
+
+    const image = dialog.querySelector("img")
+    if (image) {
+      image.loading = "eager"
+      // Network and decoding must finish before view transitions pause rendering.
+      await image.decode().catch(() => {})
+    }
+    if (pending !== request) return
+    if (!dialog.isConnected || document.hidden) {
+      cancelPending()
+      return
+    }
+
+    link.removeAttribute("aria-busy")
+    if (status) status.textContent = ""
+    updateScreenshot(dialog, () => {
+      if (pending !== request || !dialog.isConnected || document.hidden) return
+      pending = undefined
       dialog.showModal()
-      const image = dialog.querySelector("img")
-      if (image) {
-        image.loading = "eager"
-        // Keep the dialog usable if the full-size image fails to load.
-        await image.decode().catch(() => {})
-      }
     })
   })
 

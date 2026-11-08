@@ -12,12 +12,22 @@ interface Props {
 
 const { id, locale, screenshots } = Astro.props
 const labels = {
-  en: { gallery: "Project screenshots", open: "Enlarge screenshot", close: "Close screenshot" },
-  es: { gallery: "Capturas del proyecto", open: "Ampliar captura", close: "Cerrar captura" },
+  en: {
+    gallery: "Project screenshots",
+    open: "Enlarge screenshot",
+    close: "Close screenshot",
+    loading: "Loading screenshot…",
+  },
+  es: {
+    gallery: "Capturas del proyecto",
+    open: "Ampliar captura",
+    close: "Cerrar captura",
+    loading: "Cargando captura…",
+  },
 }[locale]
 ---
 
-<div data-screenshot-gallery>
+<div data-loading-label={labels.loading} data-screenshot-gallery>
   <ul aria-label={labels.gallery} class="gallery-strip">
     {
       screenshots.map((screenshot, index) => {
@@ -66,11 +76,36 @@ const labels = {
       })
     }
   </ul>
+  <span class="sr-only" data-gallery-status role="status"></span>
 </div>
 
 <script src="../scripts/screenshot-gallery.ts"></script>
 
 <style>
+  .gallery-link:global([aria-busy="true"]) {
+    cursor: progress;
+  }
+
+  .gallery-link:global([aria-busy="true"]) :global(.gallery-thumbnail) {
+    opacity: 0.55;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .gallery-link:global([aria-busy="true"]) :global(.gallery-thumbnail) {
+      animation: gallery-loading-pulse 1.2s ease-in-out infinite;
+    }
+  }
+
+  @keyframes gallery-loading-pulse {
+    from,
+    to {
+      opacity: 0.45;
+    }
+    50% {
+      opacity: 0.85;
+    }
+  }
+
   .gallery-strip {
     display: grid;
     grid-auto-flow: column;
