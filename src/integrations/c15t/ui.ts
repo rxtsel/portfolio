@@ -378,11 +378,6 @@ function injectConsentStyles(): void {
       font-size: 0.875rem;
       font-weight: 550;
       outline: none;
-      transition: transform 150ms ease, background-color 150ms ease, border-color 160ms ease;
-    }
-
-    .c15t-button:active {
-      transform: scale(0.98);
     }
 
     .c15t-button:focus-visible {
@@ -422,7 +417,6 @@ function injectConsentStyles(): void {
       color: var(--muted-foreground);
       background: var(--background);
       backdrop-filter: blur(8px);
-      transition: transform 200ms ease, color 200ms ease, opacity 200ms ease;
     }
 
     .c15t-trigger-icon {

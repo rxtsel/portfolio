@@ -59,7 +59,7 @@ const buttonClass =
   "bg-background text-muted-foreground hover:text-foreground hover:bg-accent focus-visible:border-ring focus-visible:ring-ring/50 inline-flex h-8 items-center gap-1.5 border px-2 text-sm transition-colors outline-none focus-visible:ring-3 [&_svg]:size-4"
 const iconButtonClass = `${buttonClass} size-8 justify-center px-0`
 const menuClass =
-  "bg-popover text-popover-foreground border-border absolute top-full z-50 mt-1 hidden w-max min-w-48 border p-1 shadow-lg"
+  "page-actions-menu bg-popover text-popover-foreground border-border absolute top-full right-0 z-50 mt-1 hidden w-max min-w-48 border p-1 shadow-lg"
 const menuItemClass =
   "text-muted-foreground hover:bg-accent hover:text-foreground focus-visible:bg-accent focus-visible:text-foreground flex h-8 w-full items-center gap-2 px-2 text-sm text-left outline-none [&_svg]:size-4"
 ---
@@ -95,7 +95,14 @@ const menuItemClass =
       <ChevronIcon aria-hidden="true" class="pointer-events-none" />
     </button>
 
-    <div aria-labelledby="page-ai-trigger" class:list={menuClass} id="page-ai-menu" role="menu">
+    <div
+      aria-hidden="true"
+      aria-labelledby="page-ai-trigger"
+      class:list={menuClass}
+      id="page-ai-menu"
+      inert
+      role="menu"
+    >
       <ul class="grid gap-1">
         {
           markdownUrl && (
@@ -138,9 +145,11 @@ const menuItemClass =
     </button>
 
     <div
+      aria-hidden="true"
       aria-labelledby="page-share-trigger"
-      class:list={[menuClass, "right-0"]}
+      class:list={menuClass}
       id="page-share-menu"
+      inert
       role="menu"
     >
       <ul class="grid gap-1">
@@ -148,6 +157,7 @@ const menuItemClass =
           <CopyButton
             class:list={menuItemClass}
             copiedLabel={labels[locale].copied}
+            errorLabel={labels[locale].copyFailed}
             label={labels[locale].copyLink}
             role="menuitem"
             text={url}
@@ -229,8 +239,16 @@ const menuItemClass =
     const menuId = trigger.getAttribute("data-dropdown-toggle")
     const menu = menuId ? document.getElementById(menuId) : null
 
+    if (menu?.contains(document.activeElement)) {
+      trigger.focus()
+    }
+
     trigger.setAttribute("aria-expanded", "false")
-    menu?.classList.add("hidden")
+    if (menu) {
+      menu.inert = true
+      menu.setAttribute("aria-hidden", "true")
+      menu.classList.add("hidden")
+    }
   }
 
   function closeDropdowns(except?: HTMLElement) {
@@ -241,7 +259,7 @@ const menuItemClass =
     })
   }
 
-  function toggleDropdown(trigger: HTMLElement) {
+  function toggleDropdown(trigger: HTMLElement, edge: "first" | "last" = "first", forceOpen = false) {
     const menuId = trigger.getAttribute("data-dropdown-toggle")
     const menu = menuId ? document.getElementById(menuId) : null
 
@@ -249,11 +267,23 @@ const menuItemClass =
       return
     }
 
-    const willOpen = menu.classList.contains("hidden")
+    const willOpen = forceOpen || menu.classList.contains("hidden")
 
     closeDropdowns(trigger)
-    trigger.setAttribute("aria-expanded", String(willOpen))
-    menu.classList.toggle("hidden", !willOpen)
+    if (!willOpen) {
+      closeDropdown(trigger)
+      return
+    }
+
+    trigger.setAttribute("aria-expanded", "true")
+    menu.inert = false
+    menu.setAttribute("aria-hidden", "false")
+    menu.classList.remove("hidden")
+    const items = menu.querySelectorAll<HTMLElement>('[role="menuitem"]')
+    items.forEach((item) => {
+      item.tabIndex = -1
+    })
+    items[edge === "first" ? 0 : items.length - 1]?.focus()
   }
 
   async function runAction(action: string, root: HTMLElement) {
@@ -274,7 +304,7 @@ const menuItemClass =
   if (!actionsWindow.pageActionsMounted) {
     actionsWindow.pageActionsMounted = true
     document.addEventListener("click", (event) => {
-      const target = event.target instanceof HTMLElement ? event.target : null
+      const target = event.target instanceof Element ? event.target : null
       const dropdownTrigger = target?.closest<HTMLElement>("[data-dropdown-toggle]")
       const actionControl = target?.closest<HTMLElement>("[data-page-action]")
       const actionRoot = actionControl?.closest<HTMLElement>("[data-page-actions]")
@@ -295,14 +325,73 @@ const menuItemClass =
       }
     })
 
-    document.addEventListener("copy:complete", () => {
-      closeDropdowns()
-    })
-
     document.addEventListener("keydown", (event) => {
-      if (event.key === "Escape") {
-        closeDropdowns()
+      const target = event.target instanceof Element ? event.target : null
+      if (!target?.closest("[data-page-actions]")) {
+        return
       }
+
+      const trigger = target.closest<HTMLElement>("[data-dropdown-toggle]")
+      if (trigger && (event.key === "ArrowDown" || event.key === "ArrowUp")) {
+        event.preventDefault()
+        toggleDropdown(trigger, event.key === "ArrowUp" ? "last" : "first", true)
+        return
+      }
+
+      if (event.key === "Escape" || event.key === "Tab") {
+        closeDropdowns()
+        if (event.key === "Escape") {
+          event.preventDefault()
+        }
+        return
+      }
+
+      const menu = target.closest<HTMLElement>('[role="menu"]')
+      if (!menu || menu.inert || !["ArrowDown", "ArrowUp", "Home", "End"].includes(event.key)) {
+        return
+      }
+
+      event.preventDefault()
+      const items = Array.from(menu.querySelectorAll<HTMLElement>('[role="menuitem"]'))
+      const current = items.indexOf(document.activeElement as HTMLElement)
+      const next =
+        event.key === "Home"
+          ? 0
+          : event.key === "End"
+            ? items.length - 1
+            : (current + (event.key === "ArrowDown" ? 1 : -1) + items.length) % items.length
+      items[next]?.focus()
     })
   }
 </script>
+
+<style>
+  .page-actions-menu {
+    opacity: 0;
+    transform: translateY(-4px) scale(0.97);
+    transform-origin: top right;
+    transition:
+      opacity 160ms var(--ease-out),
+      transform 160ms var(--ease-out),
+      display 160ms allow-discrete;
+  }
+
+  .page-actions-menu:not(.hidden) {
+    opacity: 1;
+    transform: none;
+  }
+
+  @starting-style {
+    .page-actions-menu:not(.hidden) {
+      opacity: 0;
+      transform: translateY(-4px) scale(0.97);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .page-actions-menu {
+      transition: none;
+      transform: none;
+    }
+  }
+</style>

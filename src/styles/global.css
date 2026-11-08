@@ -57,6 +57,7 @@
 }
 
 :root {
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
   --popover: oklch(1 0 0);
@@ -114,6 +115,42 @@
   }
 }
 
+.feedback-icon {
+  opacity: 0;
+  transform: scale(0.93);
+  filter: blur(2px);
+  transition:
+    opacity 160ms var(--ease-out),
+    transform 160ms var(--ease-out),
+    filter 160ms var(--ease-out);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  :is(button, [role="button"], [data-scroll-to-top], .ghost):not(
+    :disabled,
+    [aria-disabled="true"],
+    [role="menuitem"]
+  ) {
+    transition:
+      color 160ms ease,
+      background-color 160ms ease,
+      border-color 160ms ease,
+      scale 160ms var(--ease-out);
+
+    &:active {
+      scale: 0.97;
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .feedback-icon {
+    transition: none;
+    transform: none;
+    filter: none;
+  }
+}
+
 @layer utilities {
   .link-underline {
     @apply underline decoration-[color-mix(in_oklab,currentcolor_30%,transparent)] decoration-1 underline-offset-3 transition-colors hover:decoration-current;
@@ -124,6 +161,6 @@
   }
 
   .ghost {
-    @apply focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:border-destructive aria-invalid:ring-destructive/20 dark:aria-invalid:border-destructive/50 dark:aria-invalid:ring-destructive/40 hover:bg-muted hover:text-foreground aria-expanded:bg-muted aria-expanded:text-foreground dark:hover:bg-muted/50 inline-flex h-8 shrink-0 items-center justify-center gap-1.5 border border-none border-transparent bg-clip-padding px-2.5 pr-1.5 pl-2 text-sm font-medium whitespace-nowrap transition-all outline-none select-none focus-visible:ring-3 active:scale-[0.98] disabled:pointer-events-none disabled:opacity-50 in-data-[slot=button-group]:rounded-lg has-data-[icon=inline-end]:pr-1.5 has-data-[icon=inline-start]:pl-1.5 aria-invalid:ring-3 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4;
+    @apply focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:border-destructive aria-invalid:ring-destructive/20 dark:aria-invalid:border-destructive/50 dark:aria-invalid:ring-destructive/40 hover:bg-muted hover:text-foreground aria-expanded:bg-muted aria-expanded:text-foreground dark:hover:bg-muted/50 inline-flex h-8 shrink-0 items-center justify-center gap-1.5 border border-none border-transparent bg-clip-padding px-2.5 pr-1.5 pl-2 text-sm font-medium whitespace-nowrap transition-colors outline-none select-none focus-visible:ring-3 disabled:pointer-events-none disabled:opacity-50 in-data-[slot=button-group]:rounded-lg has-data-[icon=inline-end]:pr-1.5 has-data-[icon=inline-start]:pl-1.5 aria-invalid:ring-3 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4;
   }
 }

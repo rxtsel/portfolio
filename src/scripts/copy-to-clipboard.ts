@@ -20,6 +20,11 @@ function setCopyState(button: HTMLElement, state: CopyState) {
       state === "done" ? status.getAttribute("data-copied-label") : status.getAttribute("data-error-label")
 
     status.textContent = state === "idle" ? "" : (label ?? "")
+    const visibleLabel = button.querySelector<HTMLElement>("[data-copy-label]")
+    if (visibleLabel) {
+      visibleLabel.textContent =
+        state === "idle" ? visibleLabel.getAttribute("data-copy-label") : (label ?? "")
+    }
   }
 
   if (state !== "idle") {
@@ -81,7 +86,7 @@ if (!copyWindow.copyToClipboardMounted) {
   copyWindow.copyToClipboardMounted = true
   document.addEventListener("click", (event) => {
     const button =
-      event.target instanceof HTMLElement ? event.target.closest<HTMLElement>("[data-copy-button]") : null
+      event.target instanceof Element ? event.target.closest<HTMLElement>("[data-copy-button]") : null
 
     if (!button) {
       return

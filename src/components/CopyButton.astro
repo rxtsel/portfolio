@@ -34,7 +34,7 @@ const {
   aria-label={iconOnly ? label : undefined}
   class:list={[
     !unstyled &&
-      "bg-background text-muted-foreground hover:text-foreground hover:bg-accent focus-visible:border-ring focus-visible:ring-ring/50 inline-flex h-8 items-center gap-1.5 border px-2 text-sm transition-colors will-change-transform outline-none focus-visible:ring-3 [&_svg]:size-4",
+      "bg-background text-muted-foreground hover:text-foreground hover:bg-accent focus-visible:border-ring focus-visible:ring-ring/50 inline-flex h-8 items-center gap-1.5 border px-2 text-sm transition-colors outline-none focus-visible:ring-3 [&_svg]:size-4",
     !unstyled && iconOnly && "size-8 justify-center px-0",
     className,
   ]}
@@ -48,20 +48,22 @@ const {
   type="button"
 >
   <span aria-hidden="true" class="grid size-4 place-items-center">
-    <CopyIcon
-      class="pointer-events-none col-start-1 row-start-1 transition-[opacity,scale,filter] duration-150"
-      data-copy-icon="idle"
-    />
-    <CheckIcon
-      class="pointer-events-none col-start-1 row-start-1 opacity-0 transition-[opacity,scale,filter] duration-150"
-      data-copy-icon="done"
-    />
-    <CircleXIcon
-      class="pointer-events-none col-start-1 row-start-1 opacity-0 transition-[opacity,scale,filter] duration-150"
-      data-copy-icon="error"
-    />
+    <CopyIcon class="feedback-icon pointer-events-none col-start-1 row-start-1" data-copy-icon="idle" />
+    <CheckIcon class="feedback-icon pointer-events-none col-start-1 row-start-1" data-copy-icon="done" />
+    <CircleXIcon class="feedback-icon pointer-events-none col-start-1 row-start-1" data-copy-icon="error" />
   </span>
-  {!iconOnly && <span>{label}</span>}
+  {
+    !iconOnly && (
+      <span class="grid text-left">
+        <span aria-hidden="true" class="invisible col-start-1 row-start-1">
+          {label}
+        </span>
+        <span class="col-start-1 row-start-1" data-copy-label={label}>
+          {label}
+        </span>
+      </span>
+    )
+  }
   <span
     aria-live="polite"
     class="sr-only"
@@ -73,17 +75,11 @@ const {
 <script src="../scripts/copy-to-clipboard.ts"></script>
 
 <style is:global>
-  [data-copy-state="done"] [data-copy-icon="idle"],
-  [data-copy-state="error"] [data-copy-icon="idle"] {
-    filter: blur(2px);
-    opacity: 0;
-    scale: 0.8;
-  }
-
+  [data-copy-state="idle"] [data-copy-icon="idle"],
   [data-copy-state="done"] [data-copy-icon="done"],
   [data-copy-state="error"] [data-copy-icon="error"] {
     filter: blur(0);
     opacity: 1;
-    scale: 1;
+    transform: scale(1);
   }
 </style>

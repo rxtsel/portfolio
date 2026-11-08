@@ -6,11 +6,34 @@ import SunIcon from "@/assets/soon.svg"
 
 <button
   aria-label="System theme. Switch to light theme"
-  class="bg-background ring-border text-foreground hover:bg-accent inline-flex size-8 items-center justify-center ring-1 transition-colors ring-inset [&_svg]:size-4"
+  class="bg-background ring-border text-foreground hover:bg-accent focus-visible:ring-ring/50 inline-grid size-8 place-items-center ring-1 transition-colors outline-none ring-inset focus-visible:ring-3 [&_svg]:size-4"
   data-theme-toggle
   type="button"
 >
-  <MonitorIcon class="block" data-theme-icon="system" />
-  <SunIcon class="hidden" data-theme-icon="light" />
-  <MoonIcon class="hidden" data-theme-icon="dark" />
+  <MonitorIcon
+    aria-hidden="true"
+    class="feedback-icon pointer-events-none col-start-1 row-start-1"
+    data-theme-icon="system"
+  />
+  <SunIcon
+    aria-hidden="true"
+    class="feedback-icon pointer-events-none col-start-1 row-start-1"
+    data-theme-icon="light"
+  />
+  <MoonIcon
+    aria-hidden="true"
+    class="feedback-icon pointer-events-none col-start-1 row-start-1"
+    data-theme-icon="dark"
+  />
 </button>
+
+<style is:global>
+  html:not([data-theme-mode]) [data-theme-icon="system"],
+  html[data-theme-mode="system"] [data-theme-icon="system"],
+  html[data-theme-mode="light"] [data-theme-icon="light"],
+  html[data-theme-mode="dark"] [data-theme-icon="dark"] {
+    opacity: 1;
+    transform: scale(1);
+    filter: blur(0);
+  }
+</style>
