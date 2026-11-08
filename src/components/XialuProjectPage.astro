@@ -1,7 +1,6 @@
 ---
 import type { MarkdownHeading } from "astro"
-import { Image } from "astro:assets"
-import xialuIcon from "@/assets/projects/xialu.webp"
+import xialuIcon from "@/assets/projects/xialu.webp?inline"
 import catPhoto from "@/assets/projects/xialu/cat.webp"
 import ArrowIcon from "@/assets/arrow.svg"
 import PageToolbar from "@/components/PageToolbar.astro"
@@ -268,10 +267,10 @@ const alternates = {
             url={canonical}
           />
           <div class="flex items-center gap-4">
-            <Image
+            <img
               alt={copy.logoAlt}
               class="size-20 shrink-0"
-              densities={[1, 2, 3]}
+              decoding="sync"
               height={80}
               loading="eager"
               src={xialuIcon}

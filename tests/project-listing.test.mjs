@@ -41,6 +41,15 @@ test("shared navigation pages wait for their snapshot marker without blocking Ho
   assert.doesNotMatch(read("components/HomePage.astro"), /rel="expect"/)
 })
 
+test("Xialu's critical logo is inlined and decoded synchronously", () => {
+  const source = readFileSync(new URL("../src/components/XialuProjectPage.astro", import.meta.url), "utf8")
+  assert.match(source, /import xialuIcon from "@\/assets\/projects\/xialu\.webp\?inline"/)
+  const logo = source.match(/<img\b[^>]*src=\{xialuIcon\}[^>]*>/)?.[0]
+  assert.ok(logo)
+  assert.ok(logo.includes('decoding="sync"'))
+  assert.ok(logo.includes('loading="eager"'))
+})
+
 test("project navigation headings share a locale-specific identity", () => {
   assert.equal(getProjectsHeadingTransitionName("en"), "projects-en-heading")
   assert.equal(getProjectsHeadingTransitionName("es"), "projects-es-heading")
