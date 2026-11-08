@@ -20,7 +20,10 @@ const entries = groupTocHeadings(headings)
       {
         entries.map(({ heading, index, children }) => (
           <li>
-            <div class="toc-row" style={`--section-timeline: --toc-section-${index}`}>
+            <div
+              class="toc-row"
+              style={`--section-timeline: --toc-section-${index}; --previous-section-timeline: --toc-section-${Math.max(0, index - 1)}`}
+            >
               <a class="toc-link link-underline" href={`#${heading.slug || `toc-section-${index}`}`}>
                 {heading.text}
               </a>
@@ -29,7 +32,10 @@ const entries = groupTocHeadings(headings)
               <ol class="toc-sublist">
                 {children.map(({ heading, index }) => (
                   <li>
-                    <div class="toc-row" style={`--section-timeline: --toc-section-${index}`}>
+                    <div
+                      class="toc-row"
+                      style={`--section-timeline: --toc-section-${index}; --previous-section-timeline: --toc-section-${index - 1}`}
+                    >
                       <a class="toc-link link-underline" href={`#${heading.slug || `toc-section-${index}`}`}>
                         {heading.text}
                       </a>
@@ -83,6 +89,7 @@ const entries = groupTocHeadings(headings)
     .toc-row {
       --rail-offset: 0px;
       --connector-width: 0px;
+      --arrival-offset: 0rem;
       position: relative;
       padding-left: 0.875rem;
     }
@@ -95,6 +102,15 @@ const entries = groupTocHeadings(headings)
     .toc-sublist > li:first-child > .toc-row,
     .toc-list > li:has(> .toc-sublist) + li > .toc-row {
       --connector-width: calc(0.75rem + 2px);
+    }
+
+    /* H2/H3 timelines differ by the 1rem between their existing heading margins. */
+    .toc-sublist > li:first-child > .toc-row {
+      --arrival-offset: -1rem;
+    }
+
+    .toc-list > li:has(> .toc-sublist) + li > .toc-row {
+      --arrival-offset: 1rem;
     }
 
     .toc-row::before,
@@ -144,16 +160,31 @@ const entries = groupTocHeadings(headings)
       (view-timeline-inset: 6rem calc(100% - 6rem)) {
       @media (prefers-reduced-motion: no-preference) {
         .toc-row::after {
-          animation: toc-progress auto linear both;
-          animation-timeline: var(--section-timeline);
+          /* Finish this row's upper half before its section starts, then reveal its lower half. */
+          animation:
+            toc-arrive auto linear forwards,
+            toc-leave auto linear forwards;
+          animation-timeline: var(--previous-section-timeline), var(--section-timeline);
+          animation-range:
+            50% calc(100% + var(--arrival-offset)),
+            0% 50%;
         }
       }
     }
   }
 
-  @keyframes toc-progress {
+  @keyframes toc-arrive {
     from {
       clip-path: inset(0 0 100% 0);
+    }
+    to {
+      clip-path: inset(0 0 50% 0);
+    }
+  }
+
+  @keyframes toc-leave {
+    from {
+      clip-path: inset(0 0 50% 0);
     }
     to {
       clip-path: inset(0);

@@ -34,8 +34,14 @@ const timelines = headings.map((_, index) => `--toc-section-${index}`).join(", "
       (view-timeline-inset: 6rem calc(100% - 6rem)) {
       .content-with-toc :global(.blog-section),
       .content-with-toc :global([data-toc-section]) {
+        /* Root scroll-pt-20 minus prose-base's H2 top margin; only the timeline moves. */
+        --toc-reading-line: 2rem;
         view-timeline-axis: block;
-        view-timeline-inset: 6rem calc(100% - 6rem);
+        view-timeline-inset: var(--toc-reading-line) calc(100% - var(--toc-reading-line));
+      }
+
+      .content-with-toc :global(:is(.blog-section, [data-toc-section]):has(> h3)) {
+        --toc-reading-line: 3rem;
       }
     }
   }
