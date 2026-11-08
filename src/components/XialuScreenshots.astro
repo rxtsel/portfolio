@@ -1,0 +1,134 @@
+---
+import transactions from "@/assets/projects/xialu/tx-view.webp"
+import accounts from "@/assets/projects/xialu/accounts-view.webp"
+import categories from "@/assets/projects/xialu/categories-view.webp"
+import settings from "@/assets/projects/xialu/settings-view.webp"
+import balance from "@/assets/projects/xialu/balance-view.webp"
+import quickActions from "@/assets/projects/xialu/tx-view-with-cta-expanded.webp"
+import newAccount from "@/assets/projects/xialu/new-account-sheet.webp"
+import accountPicker from "@/assets/projects/xialu/new-tx-sheet-with-expanded-accounts.webp"
+import categoryPicker from "@/assets/projects/xialu/new-tx-sheet-with-expanded-categories.webp"
+import transfer from "@/assets/projects/xialu/new-tx-sheet-with-transfer-tab-active-showing-rate.webp"
+import ScreenshotGallery from "@/components/ScreenshotGallery.astro"
+import type { Locale } from "@/lib/i18n"
+
+interface Props {
+  locale: Locale
+}
+
+const { locale } = Astro.props
+const screenshots = [
+  {
+    src: transactions,
+    en: {
+      title: "Transactions",
+      alt: "Transactions grouped by date, with a period summary in USD and an option to undo a deletion.",
+    },
+    es: {
+      title: "Movimientos",
+      alt: "Movimientos agrupados por fecha, con resumen del periodo en USD y una opción para deshacer una eliminación.",
+    },
+  },
+  {
+    src: accounts,
+    en: {
+      title: "Accounts",
+      alt: "Accounts in USD, COP and BTC, showing balances and credit card debt.",
+    },
+    es: {
+      title: "Cuentas",
+      alt: "Cuentas en USD, COP y BTC, con sus saldos y la deuda de una tarjeta de crédito.",
+    },
+  },
+  {
+    src: categories,
+    en: {
+      title: "Categories",
+      alt: "Categories with icons, grouped into banking, entertainment, and food and drinks.",
+    },
+    es: {
+      title: "Categorías",
+      alt: "Categorías con iconos, agrupadas en banca, entretenimiento, comida y bebidas.",
+    },
+  },
+  {
+    src: settings,
+    en: {
+      title: "Settings",
+      alt: "Transaction and currency settings, with options to export or import a backup and delete local data.",
+    },
+    es: {
+      title: "Ajustes",
+      alt: "Ajustes de movimientos y monedas, con opciones para exportar o importar copias de seguridad y borrar los datos locales.",
+    },
+  },
+  {
+    src: balance,
+    en: {
+      title: "Period summary",
+      alt: "Period balance, income and expenses in USD, with a note that converted amounts use historical reference rates.",
+    },
+    es: {
+      title: "Resumen del periodo",
+      alt: "Balance, ingresos y gastos del periodo en USD, con una nota sobre el uso de tasas históricas de referencia.",
+    },
+  },
+  {
+    src: quickActions,
+    en: {
+      title: "Quick actions",
+      alt: "Quick-action menu above the transaction list to add an expense, income or transfer.",
+    },
+    es: {
+      title: "Acciones rápidas",
+      alt: "Menú de acciones sobre la lista de movimientos para añadir un gasto, un ingreso o una transferencia.",
+    },
+  },
+  {
+    src: newAccount,
+    en: {
+      title: "New account",
+      alt: "New BTC account form with the icon editor open on the Favicon tab.",
+    },
+    es: {
+      title: "Nueva cuenta",
+      alt: "Formulario de nueva cuenta en BTC, con el editor de iconos abierto en la pestaña Favicon.",
+    },
+  },
+  {
+    src: accountPicker,
+    en: {
+      title: "Account picker",
+      alt: "New expense form with the account picker open and ARQ selected.",
+    },
+    es: {
+      title: "Selector de cuentas",
+      alt: "Formulario de gasto con el selector de cuentas desplegado y ARQ como cuenta seleccionada.",
+    },
+  },
+  {
+    src: categoryPicker,
+    en: {
+      title: "Category picker",
+      alt: "New expense form with the category picker open and Food & Drinks expanded.",
+    },
+    es: {
+      title: "Selector de categorías",
+      alt: "Formulario de gasto con el selector de categorías abierto y las subcategorías de comida y bebidas desplegadas.",
+    },
+  },
+  {
+    src: transfer,
+    en: {
+      title: "Currency exchange",
+      alt: "USD-to-COP transfer with source and destination accounts, the exchange rate and the amount to receive.",
+    },
+    es: {
+      title: "Cambio de moneda",
+      alt: "Transferencia de USD a COP con las cuentas de origen y destino, la tasa de cambio y el importe a recibir.",
+    },
+  },
+].map(({ src, ...copy }) => ({ src, ...copy[locale] }))
+---
+
+<ScreenshotGallery id="xialu-screenshots" locale={locale} screenshots={screenshots} />

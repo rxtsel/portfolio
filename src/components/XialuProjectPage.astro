@@ -251,7 +251,7 @@ const alternates = {
   <ContentWithToc headings={headings} locale={locale}>
     <main class="w-full min-w-0">
       <article>
-        <header class="mb-10">
+        <header>
           <PageToolbar
             backHref={copy.projectsPath}
             backLabel={copy.back}
@@ -295,7 +295,7 @@ const alternates = {
             hasMedia && (
               <section aria-labelledby="xialu-media" data-toc-section style={sectionStyles["xialu-media"]}>
                 <h2 id="xialu-media">{copy.media}</h2>
-                <div class="not-prose grid gap-6 sm:grid-cols-2 [&_img]:h-auto [&_img]:w-full [&_video]:h-auto [&_video]:w-full">
+                <div class="not-prose [&_video]:h-auto [&_video]:w-full">
                   <slot name="media" />
                 </div>
               </section>

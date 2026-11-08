@@ -1,0 +1,213 @@
+---
+import type { ImageMetadata } from "astro"
+import { Image } from "astro:assets"
+import CloseIcon from "@/assets/close.svg"
+import type { Locale } from "@/lib/i18n"
+
+interface Props {
+  id: string
+  locale: Locale
+  screenshots: { src: ImageMetadata; title: string; alt: string }[]
+}
+
+const { id, locale, screenshots } = Astro.props
+const labels = {
+  en: { gallery: "Project screenshots", open: "Enlarge screenshot", close: "Close screenshot" },
+  es: { gallery: "Capturas del proyecto", open: "Ampliar captura", close: "Cerrar captura" },
+}[locale]
+---
+
+<div data-screenshot-gallery>
+  <ul aria-label={labels.gallery} class="gallery-strip">
+    {
+      screenshots.map((screenshot, index) => {
+        const dialogId = `${id}-${index}`
+        return (
+          <li class="gallery-shot" style={`--shot-name: shot-${dialogId}`}>
+            <a
+              aria-label={`${labels.open}: ${screenshot.title}`}
+              class="gallery-link"
+              data-screenshot-open={dialogId}
+              href={screenshot.src.src}
+            >
+              <Image
+                alt={screenshot.alt}
+                class="gallery-thumbnail"
+                format="webp"
+                loading={index < 4 ? "eager" : "lazy"}
+                quality={90}
+                sizes="(min-width: 640px) 160px, 42vw"
+                src={screenshot.src}
+                width={480}
+                widths={[160, 320, 480]}
+              />
+              <span class="gallery-caption">{screenshot.title}</span>
+            </a>
+            <dialog aria-label={screenshot.title} closedby="any" id={dialogId}>
+              <header class="gallery-dialog-header">
+                <form method="dialog">
+                  <button aria-label={labels.close} type="submit">
+                    <CloseIcon aria-hidden="true" />
+                  </button>
+                </form>
+              </header>
+              <img
+                alt={screenshot.alt}
+                class="gallery-full-image"
+                decoding="async"
+                height={screenshot.src.height}
+                loading="lazy"
+                src={screenshot.src.src}
+                width={screenshot.src.width}
+              />
+            </dialog>
+          </li>
+        )
+      })
+    }
+  </ul>
+</div>
+
+<script src="../scripts/screenshot-gallery.ts"></script>
+
+<style>
+  .gallery-strip {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: 42%;
+    gap: 0.75rem;
+    margin: 0;
+    padding: 0.25rem;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x proximity;
+    scrollbar-width: none;
+    list-style: none;
+  }
+
+  .gallery-strip::-webkit-scrollbar {
+    display: none;
+  }
+
+  .gallery-shot {
+    min-width: 0;
+    scroll-snap-align: start;
+  }
+
+  .gallery-link {
+    display: block;
+    color: var(--muted-foreground);
+    text-decoration: none;
+    cursor: zoom-in;
+  }
+
+  .gallery-link:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+  }
+
+  .gallery-link :global(.gallery-thumbnail) {
+    display: block;
+    width: 100%;
+    height: auto;
+    border: 1px solid var(--border);
+  }
+
+  .gallery-caption {
+    display: block;
+    margin-top: 0.5rem;
+    font-size: 0.75rem;
+    line-height: 1.5;
+  }
+
+  .gallery-shot:global([data-transitioning]):not(:has(dialog:modal)) :global(.gallery-thumbnail) {
+    view-transition-name: var(--shot-name);
+  }
+
+  dialog {
+    width: fit-content;
+    max-width: calc(100vw - 2rem);
+    max-height: calc(100dvh - 2rem);
+    margin: auto;
+    padding: 0;
+    overflow: visible;
+    color: #fff;
+    background: transparent;
+    border: 0;
+  }
+
+  dialog::backdrop {
+    background: rgb(0 0 0 / 80%);
+  }
+
+  .gallery-dialog-header {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-bottom: 0.5rem;
+  }
+
+  .gallery-dialog-header button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    color: #d4d4d8;
+    background: transparent;
+    border: 0;
+  }
+
+  .gallery-dialog-header button:hover {
+    color: #fff;
+  }
+
+  .gallery-dialog-header button:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: -2px;
+  }
+
+  .gallery-dialog-header :global(svg) {
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+
+  .gallery-full-image {
+    display: block;
+    width: auto;
+    max-width: calc(100vw - 2rem);
+    height: auto;
+    max-height: calc(100dvh - 6rem);
+    margin-inline: auto;
+    object-fit: contain;
+    background: #000;
+    border: 6px solid #27272a;
+    border-radius: min(2.5rem, 5dvh);
+    outline: 1px solid #52525b;
+  }
+
+  .gallery-shot:global([data-transitioning]) dialog:modal .gallery-full-image {
+    view-transition-name: var(--shot-name);
+  }
+
+  /* Keep viewport geometry stable from the opening snapshot through the closing animation. */
+  :global(html:has([data-screenshot-gallery] :is(dialog:modal, [data-transitioning]))) {
+    overflow: hidden;
+    scrollbar-gutter: auto;
+  }
+
+  /* Avoid a nested scroll container that moves sticky elements and clips the TOC. */
+  :global(body:has([data-screenshot-gallery] :is(dialog:modal, [data-transitioning]))) {
+    overflow: visible;
+  }
+
+  @media (width >= 640px) {
+    .gallery-strip {
+      grid-auto-columns: calc((100% - 2.25rem) / 4);
+    }
+
+    .gallery-strip:has(> :nth-child(5)) {
+      grid-auto-columns: calc((100% - 3rem) / 4.25);
+    }
+  }
+</style>

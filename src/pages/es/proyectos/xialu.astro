@@ -1,5 +1,8 @@
 ---
 import XialuProjectPage from "@/components/XialuProjectPage.astro"
+import XialuScreenshots from "@/components/XialuScreenshots.astro"
 ---
 
-<XialuProjectPage locale="es" />
+<XialuProjectPage locale="es">
+  <XialuScreenshots locale="es" slot="media" />
+</XialuProjectPage>
