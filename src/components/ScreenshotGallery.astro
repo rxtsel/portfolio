@@ -88,11 +88,12 @@ const labels = {
 
   .gallery-link:global([aria-busy="true"]) :global(.gallery-thumbnail) {
     opacity: 0.55;
+    transition: opacity 0s 800ms;
   }
 
   @media (prefers-reduced-motion: no-preference) {
     .gallery-link:global([aria-busy="true"]) :global(.gallery-thumbnail) {
-      animation: gallery-loading-pulse 1.2s ease-in-out infinite;
+      animation: gallery-loading-pulse 1.2s ease-in-out 800ms infinite;
     }
   }
 
