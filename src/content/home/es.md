@@ -2,11 +2,13 @@
 locale: es
 title: Cristhian Melo
 intro: |-
-  **Desarrollador de Software** frontend-heavy con más de 4 años de experiencia construyendo productos web rápidos, pulidos y escalables.
+  Soy **ingeniero de software**. Me gusta construir cosas y entender cómo funcionan por dentro. He trabajado en aplicaciones web, de escritorio y móviles. Disfruto todo el proceso: desde el diseño y el frontend hasta el backend, los datos y la infraestructura. Me interesan especialmente la arquitectura de software y escribir código fácil de mantener.
 
-  Combino criterio de producto, diseño visual detallado, performance, arquitectura y ownership full stack para llevar ideas ambiguas a software listo para producción.
+  Llevo más de una década usando Linux. De ese mundo me quedé con dos ideas: mantener las cosas simples y hacer bien aquello en lo que me meto. Intento llevarlas también al software que construyo.
 
-  _- **rxtsel**_ _se pronuncia "ratsel"._
+  Últimamente ando experimentando con Rust y echando una mano en proyectos de código abierto.
+
+  **¿Por qué rxtsel?** Al principio era «ratsel»: fácil de decir y de recordar. Pero los nombres de usuario y dominios que quería ya estaban ocupados, así que cambié la «a» por una «x». Pensé que todo el mundo lo pronunciaría igual. Al final, casi todos lo deletrean. No los culpo.
 featuredProjects:
   - xavel
   - rpass-cli

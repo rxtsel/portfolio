@@ -2,11 +2,13 @@
 locale: en
 title: Cristhian Melo
 intro: |-
-  **Software Developer** and frontend-heavy full stack developer with 4+ years of experience building fast, polished, and scalable web products.
+  I'm a **software engineer** who likes building things and figuring out how they work under the hood. I've worked on web, desktop, and mobile apps. I enjoy the whole process: from design and frontend work to backend systems, data, and infrastructure. I care especially about software architecture and writing code that's easy to maintain.
 
-  I combine strong product sense, detailed visual execution, performance, architecture, and full stack ownership to turn ambiguous ideas into production-ready software.
+  I've used Linux for over a decade. Two ideas from that world have stayed with me: keep things simple and do a good job of whatever I take on. I try to bring both to the software I build.
 
-  _- **rxtsel**_ _is pronounced "ratsel"._
+  Lately, I've been tinkering with Rust and pitching in on open-source projects.
+
+  **Why rxtsel?** It started as "ratsel": easy to say, easy to remember. But the usernames and domains I wanted were taken, so I swapped the "a" for an "x". I thought people would still pronounce it the same way. Turns out most people just spell it out. Fair enough.
 featuredProjects:
   - xavel
   - rpass-cli
