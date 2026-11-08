@@ -22,24 +22,30 @@ const { languageLinks, locale, pathname } = Astro.props
 const links = languageLinks ?? getDefaultLanguageLinks()
 const logoHref = getLocalizedPath(locale)
 const blogHref = getLocalizedPath(locale, "blog")
+const projectsHref = getLocalizedPath(locale, locale === "es" ? "proyectos" : "projects")
 const normalizePath = (path: string) => path.replace(/\/+$/, "") || "/"
 const normalizedPathname = normalizePath(pathname)
 const normalizedBlogHref = normalizePath(blogHref)
+const normalizedProjectsHref = normalizePath(projectsHref)
+const isProjectsIndexActive = normalizedPathname === normalizedProjectsHref
+const isProjectsActive = isProjectsIndexActive || normalizedPathname.startsWith(`${normalizedProjectsHref}/`)
 const isBlogIndexActive = normalizedPathname === normalizedBlogHref
 const isBlogActive = isBlogIndexActive || normalizedPathname.startsWith(`${normalizedBlogHref}/`)
 const isNotFoundRoute = Astro.routePattern === "/404"
 const navLinkClass =
-  "text-muted-foreground cursor-pointer hover:text-foreground data-active:text-foreground inline-flex h-8 items-center px-1 text-sm font-medium transition-colors"
+  "text-muted-foreground cursor-pointer hover:text-foreground data-active:text-foreground inline-flex h-8 items-center text-sm font-medium transition-colors"
 const languageLinkClass =
   "text-muted-foreground hover:text-foreground data-active:text-foreground inline-flex h-8 items-center text-sm font-medium transition-colors"
 const labels = {
   en: {
     language: "Language selector",
     primary: "Primary",
+    projects: "Projects",
   },
   es: {
     language: "Selector de idioma",
     primary: "Principal",
+    projects: "Proyectos",
   },
 } satisfies Record<Locale, Record<string, string>>
 ---
@@ -49,8 +55,17 @@ const labels = {
     <Logo aria-label="Rxtsel logo" height={30} width={29} />
   </a>
 
-  <div class="flex items-center">
-    <nav aria-label={labels[locale].primary} class="flex items-center">
+  <div class="flex items-center gap-2">
+    <nav aria-label={labels[locale].primary} class="flex items-center gap-2">
+      <a
+        aria-current={isProjectsIndexActive ? "page" : isProjectsActive ? "location" : undefined}
+        class:list={navLinkClass}
+        data-active={isProjectsActive ? true : undefined}
+        href={projectsHref}
+      >
+        {labels[locale].projects}
+      </a>
+      <span aria-hidden="true" class="bg-muted-foreground/50 size-0.5 shrink-0 rounded-full"></span>
       <a
         aria-current={isBlogActive ? "page" : undefined}
         class:list={navLinkClass}
@@ -66,7 +81,7 @@ const labels = {
         <>
           <Separator />
 
-          <nav aria-label={labels[locale].language} class="flex items-center gap-x-1 px-1">
+          <nav aria-label={labels[locale].language} class="flex items-center gap-x-1">
             {links.map((link, index) => (
               <>
                 {index > 0 && (
@@ -102,7 +117,7 @@ const labels = {
       )
     }
 
-    <Separator class="mr-2" />
+    <Separator />
 
     <ThemeSwitcher />
   </div>
