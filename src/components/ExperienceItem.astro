@@ -60,13 +60,10 @@ const sortedJobs = [...item.jobs].sort((current, next) => {
 })
 ---
 
-<li class="relative my-0! ms-[20.5px] grid gap-4 ps-0!">
-  <header>
+<li class="experience-company relative my-0! ms-[20.5px] grid gap-4 ps-0!">
+  <header class="experience-company-header">
     <span
-      class:list={[
-        "border-border bg-primary absolute inset-s-[-1.35rem] mt-1.5 block size-3 border lg:mt-2.5",
-        { "motion-safe:animate-pulse": companyIsCurrent },
-      ]}
+      class="border-border bg-primary absolute inset-s-[-1.35rem] mt-1.5 block size-3 border lg:mt-2.5"
       role="none"></span>
 
     {
@@ -121,7 +118,7 @@ const sortedJobs = [...item.jobs].sort((current, next) => {
         const descriptionHtml = job.description ? renderSafeMarkdown(job.description) : ""
 
         return (
-          <article class="relative ml-[21.5px] grid gap-2">
+          <article class="experience-job relative ml-[21.5px] grid gap-2">
             <span
               class="bg-border absolute inset-s-[-1.35rem] mt-[3px] block size-3 border lg:mt-[5.5px]"
               role="none"
@@ -161,3 +158,96 @@ const sortedJobs = [...item.jobs].sort((current, next) => {
     }
   </div>
 </li>
+
+<style>
+  .experience-company {
+    /* Match the existing square centers and the 21.5px indentation without moving content. */
+    --company-center: 0.75rem;
+    --job-center: calc(3px + 0.375rem);
+    --rail-start: calc(-1.35rem + 0.375rem);
+  }
+
+  @media (width >= 1024px) {
+    .experience-company {
+      --company-center: 1rem;
+      --job-center: calc(5.5px + 0.375rem);
+    }
+  }
+
+  .experience-company-header {
+    position: relative;
+  }
+
+  .experience-company-header::before,
+  .experience-company::after,
+  .experience-job::before,
+  .experience-job::after {
+    position: absolute;
+    background: var(--border);
+    pointer-events: none;
+  }
+
+  .experience-company-header::before {
+    inset-inline-start: var(--rail-start);
+    top: var(--company-center);
+    bottom: calc(-1rem - var(--job-center));
+    width: 1px;
+    content: "";
+  }
+
+  .experience-job::before {
+    inset-inline-start: var(--rail-start);
+    top: var(--job-center);
+    bottom: calc(-1rem - var(--job-center));
+    width: 1px;
+    content: "";
+  }
+
+  .experience-job:first-child::after {
+    inset-inline-start: calc(var(--rail-start) - 21.5px);
+    top: var(--job-center);
+    width: 22.5px;
+    height: 1px;
+    content: "";
+  }
+
+  .experience-job:last-child::before {
+    bottom: 0;
+  }
+
+  .experience-company:not(:last-child)::after {
+    inset-inline-start: var(--rail-start);
+    top: 100%;
+    width: 22.5px;
+    height: calc(2rem + var(--company-center));
+    background:
+      linear-gradient(var(--border), var(--border)) 0 0 / 100% 1px no-repeat,
+      linear-gradient(var(--border), var(--border)) 0 0 / 1px 100% no-repeat;
+    content: "";
+  }
+
+  .experience-company:last-child .experience-job:last-child::before {
+    content: none;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    @supports (animation-timeline: view(block 80% 20%)) {
+      .experience-company-header::before,
+      .experience-company::after,
+      .experience-job::before,
+      .experience-job::after {
+        animation: experience-reveal auto linear both;
+        animation-timeline: view(block 80% 20%);
+      }
+    }
+  }
+
+  @keyframes experience-reveal {
+    from {
+      clip-path: inset(0 0 100% 0);
+    }
+    to {
+      clip-path: inset(0);
+    }
+  }
+</style>
