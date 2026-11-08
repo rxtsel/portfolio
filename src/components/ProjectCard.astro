@@ -52,7 +52,7 @@ const tagsProps = tagsStyle ? { style: tagsStyle } : {}
       href ? (
         <a
           class="link-underline item-center flex gap-2"
-          href={isInternalLink ? href : `${href}?utm_source=rxtsel.dev&utm_medium=referral`}
+          href={isInternalLink ? href : `${href}?ref=rxtsel.dev`}
           rel={isInternalLink ? undefined : "noopener noreferrer"}
           target={isInternalLink ? undefined : "_blank"}
         >
@@ -95,7 +95,7 @@ const tagsProps = tagsStyle ? { style: tagsStyle } : {}
       sourceUrl ? (
         <a
           aria-label={`View ${title} on GitHub`}
-          href={`${sourceUrl}?utm_source=rxtsel.dev`}
+          href={`${sourceUrl}?ref=rxtsel.dev`}
           rel="noopener noreferrer"
           style={getTransitionStyle("source")}
           target="_blank"
