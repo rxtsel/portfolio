@@ -66,6 +66,12 @@ stack:
   - name: React
     slug: react
     href: https://react.dev
+  - name: React Native
+    slug: react-native
+    href: https://reactnative.dev
+  - name: Expo
+    slug: expo
+    href: https://expo.dev
   - name: shadcn/ui
     slug: shadcn-ui
     href: https://ui.shadcn.com

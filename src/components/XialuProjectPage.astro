@@ -9,6 +9,7 @@ import StackList from "@/components/StackList.astro"
 import MainLayout from "@/layouts/MainLayout.astro"
 import { getLocaleLanguageTag, locales, type LanguageLink, type Locale } from "@/lib/i18n"
 import { projectPages } from "@/lib/project-pages"
+import { getProjectsHeadingTransitionName, getProjectTransitionName } from "@/lib/projects"
 
 interface Props {
   locale: Locale
@@ -170,6 +171,7 @@ const content = {
 } satisfies Record<Locale, unknown>
 const copy = content[locale]
 const project = projectPages.xialu
+const transitionProject = { data: { locale, translationKey: "xialu" } }
 const projectLocale = project.locales[locale]
 const stackItems = [
   { name: "React Native", slug: "react", href: "https://reactnative.dev/" },
@@ -248,6 +250,7 @@ const alternates = {
   ogImageAlt={`${project.title}: ${projectLocale.description}`}
   title={copy.title}
 >
+  <link blocking="render" href="#site-footer" rel="expect" slot="head" />
   <ContentWithToc headings={headings} locale={locale}>
     <main class="w-full min-w-0">
       <article>
@@ -255,6 +258,7 @@ const alternates = {
           <PageToolbar
             backHref={copy.projectsPath}
             backLabel={copy.back}
+            backTransitionName={getProjectsHeadingTransitionName(locale)}
             locale={locale}
             markdown={markdown}
             title={copy.title}
@@ -268,10 +272,16 @@ const alternates = {
               height={80}
               loading="eager"
               src={xialuIcon}
+              style={`view-transition-name: var(--project-identity-transition, ${getProjectTransitionName(transitionProject, "logo")})`}
               width={80}
             />
             <div class="min-w-0">
-              <h1 class="text-3xl leading-tight font-semibold sm:text-4xl">Xialu</h1>
+              <h1
+                class="w-fit text-3xl leading-tight font-semibold sm:text-4xl"
+                style={`view-transition-name: var(--project-identity-transition, ${getProjectTransitionName(transitionProject, "title")})`}
+              >
+                Xialu
+              </h1>
               <p class="mt-2 text-base font-medium text-balance sm:text-lg">{copy.lead}</p>
             </div>
           </div>

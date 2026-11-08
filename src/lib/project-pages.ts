@@ -24,6 +24,10 @@ export const projectPages = {
   },
 } satisfies Record<string, ProjectPage>
 
+export function getProjectPage(translationKey: string) {
+  return Object.entries(projectPages).find(([key]) => key === translationKey)?.[1]
+}
+
 export function getProjectOgStaticPaths(locale: Locale) {
   return Object.entries(projectPages).map(([slug, project]) => ({
     params: { slug },

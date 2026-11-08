@@ -196,8 +196,9 @@ const labels = {
     scrollbar-gutter: auto;
   }
 
-  /* Avoid a nested scroll container that moves sticky elements and clips the TOC. */
+  /* Keep page identities in the backdrop snapshot without creating a nested scroll container. */
   :global(body:has([data-screenshot-gallery] :is(dialog:modal, [data-transitioning]))) {
+    --project-identity-transition: none;
     overflow: visible;
   }
 

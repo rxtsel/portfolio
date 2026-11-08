@@ -1,4 +1,5 @@
 ---
+import type { ImageMetadata } from "astro"
 import GitHubIcon from "@/assets/logos/github.svg"
 import type { FaviconBackground } from "@/lib/favicon"
 import type { ProjectTransitionPart } from "@/lib/projects"
@@ -10,7 +11,7 @@ type TaxonomyItem = {
 }
 
 interface Props {
-  customFavicon: string | undefined
+  customFavicon: string | ImageMetadata | undefined
   description: string
   faviconBackground?: FaviconBackground
   headingLevel?: "h2" | "h3"
@@ -33,6 +34,7 @@ const {
   transitionNames = {},
 } = Astro.props
 const Heading = headingLevel
+const isInternalLink = href?.startsWith("/") && !href.startsWith("//")
 const getTransitionStyle = (part: ProjectTransitionPart) =>
   transitionNames[part] ? `view-transition-name: ${transitionNames[part]}` : undefined
 const tagsStyle = getTransitionStyle("tags")
@@ -40,22 +42,45 @@ const tagsProps = tagsStyle ? { style: tagsStyle } : {}
 ---
 
 <article class="flex h-full flex-col gap-2 p-4" style={getTransitionStyle("card")}>
-  <Heading class="flex items-center justify-between text-lg font-medium" style={getTransitionStyle("title")}>
+  <Heading
+    class="flex items-center justify-between text-lg font-medium"
+    style={transitionNames.logo ? undefined : getTransitionStyle("title")}
+  >
     {
       href ? (
         <a
           class="link-underline item-center flex gap-2"
-          href={`${href}?utm_source=rxtsel.dev&utm_medium=referral`}
-          rel="noopener noreferrer"
-          target="_blank"
+          href={isInternalLink ? href : `${href}?utm_source=rxtsel.dev&utm_medium=referral`}
+          rel={isInternalLink ? undefined : "noopener noreferrer"}
+          target={isInternalLink ? undefined : "_blank"}
         >
-          <FaviconResolver background={faviconBackground} customFavicon={customFavicon} href={href} />
-          {title}
+          <FaviconResolver
+            background={faviconBackground}
+            customFavicon={customFavicon}
+            href={href}
+            transitionName={transitionNames.logo}
+          />
+          <span
+            class:list={{ "leading-tight": Boolean(transitionNames.logo) }}
+            style={transitionNames.logo ? getTransitionStyle("title") : undefined}
+          >
+            {title}
+          </span>
         </a>
       ) : customFavicon ? (
         <span class="item-center flex gap-2">
-          <FaviconResolver background={faviconBackground} customFavicon={customFavicon} href="" />
-          {title}
+          <FaviconResolver
+            background={faviconBackground}
+            customFavicon={customFavicon}
+            href=""
+            transitionName={transitionNames.logo}
+          />
+          <span
+            class:list={{ "leading-tight": Boolean(transitionNames.logo) }}
+            style={transitionNames.logo ? getTransitionStyle("title") : undefined}
+          >
+            {title}
+          </span>
         </span>
       ) : (
         title

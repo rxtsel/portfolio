@@ -1,15 +1,17 @@
 ---
+import type { ImageMetadata } from "astro"
 import { Image } from "astro:assets"
 import type { FaviconBackground } from "@/lib/favicon"
 
 interface Props {
-  customFavicon: string | undefined
+  customFavicon: string | ImageMetadata | undefined
   background?: FaviconBackground
   href: string | undefined
   loading?: "lazy" | "eager"
+  transitionName?: string | undefined
 }
 
-const { background = "none", customFavicon, href, loading = "lazy" } = Astro.props
+const { background = "none", customFavicon, href, loading = "lazy", transitionName } = Astro.props
 
 const shouldRender = customFavicon || (href && href.length > 0)
 
@@ -19,6 +21,8 @@ const src = customFavicon
     ? `https://favicon.vemetric.com/${new URL(href).hostname}?format=webp&size=54`
     : ""
 const alt = customFavicon ? "Custom favicon" : href ? `Favicon for ${new URL(href).hostname}` : ""
+// Astro's Image props require imported assets and URL strings to remain separate types.
+const imageSource = typeof src === "string" ? { src } : { src }
 ---
 
 {
@@ -32,7 +36,8 @@ const alt = customFavicon ? "Custom favicon" : href ? `Favicon for ${new URL(hre
       height={18}
       loading={loading}
       quality={90}
-      src={src}
+      {...imageSource}
+      style={transitionName ? `view-transition-name: ${transitionName}` : undefined}
       width={18}
     />
   )

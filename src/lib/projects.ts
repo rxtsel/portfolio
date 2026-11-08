@@ -2,10 +2,17 @@ import type { CollectionEntry } from "astro:content"
 import type { Locale } from "@/lib/i18n"
 
 export type Project = CollectionEntry<"projects">
-export type ProjectTransitionPart = "card" | "description" | "source" | "tags" | "title"
+export type ProjectTransitionPart = "card" | "description" | "logo" | "source" | "tags" | "title"
 
-export function getProjectTransitionName(project: Project, part: ProjectTransitionPart) {
-  const transitionId = project.id.replace(/[^a-zA-Z0-9_-]/g, "-")
+export function getProjectsHeadingTransitionName(locale: Locale) {
+  return `projects-${locale}-heading`
+}
+
+export function getProjectTransitionName(
+  project: { data: Pick<Project["data"], "locale" | "translationKey"> },
+  part: ProjectTransitionPart,
+) {
+  const transitionId = `${project.data.locale}-${project.data.translationKey}`.replace(/[^a-zA-Z0-9_-]/g, "-")
 
   return `project-${transitionId}-${part}`
 }

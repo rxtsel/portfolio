@@ -6,9 +6,10 @@ import PageActions from "@/components/PageActions.astro"
 interface Props extends ComponentProps<typeof PageActions> {
   backHref: string
   backLabel: string
+  backTransitionName?: string | undefined
 }
 
-const { backHref, backLabel, ...actions } = Astro.props
+const { backHref, backLabel, backTransitionName, ...actions } = Astro.props
 ---
 
 <div class="not-prose mb-6 flex flex-wrap items-center justify-between gap-3">
@@ -17,7 +18,11 @@ const { backHref, backLabel, ...actions } = Astro.props
     href={backHref}
   >
     <ArrowIcon aria-hidden="true" class="-rotate-90" />
-    <span>{backLabel}</span>
+    <span
+      style={backTransitionName
+        ? `view-transition-name: var(--project-identity-transition, ${backTransitionName})`
+        : undefined}>{backLabel}</span
+    >
   </a>
   <PageActions {...actions} />
 </div>

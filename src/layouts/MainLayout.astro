@@ -37,6 +37,7 @@ const consentPrefetchScript = consentBackendURL
     {consentPrefetchScript && <script is:inline set:html={consentPrefetchScript} />}
     <ThemeScript />
     <Seo {...seo} />
+    <slot name="head" />
   </head>
   <body
     class="mx-auto grid min-h-screen w-full max-w-prose grid-rows-[auto_1fr_auto] gap-y-6 overflow-x-hidden px-4 font-sans antialiased md:px-0"
