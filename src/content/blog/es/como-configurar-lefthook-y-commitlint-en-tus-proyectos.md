@@ -18,7 +18,7 @@ seo:
 
 Lefthook es una alternativa a Husky notablemente más rápida, escrita en Go. Puede instalarse como binario independiente o como paquete de Node.js. En esta guía usaremos la segunda opción para que quede declarado como dependencia del proyecto y cualquier persona que lo clone lo tenga disponible automáticamente tras instalar dependencias.
 
-Se asume que ya conoces qué son los [git hooks](https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks?utm_source=rxtsel.dev&utm_medium=blog) y para qué sirven. A lo largo de esta guía configuraremos los hooks `pre-commit`, `commit-msg` y `pre-push`, que son los más utilizados en el día a día, aunque en la documentación oficial encontrarás todos los hooks disponibles.
+Se asume que ya conoces qué son los [git hooks](https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks?ref=rxtsel.dev) y para qué sirven. A lo largo de esta guía configuraremos los hooks `pre-commit`, `commit-msg` y `pre-push`, que son los más utilizados en el día a día, aunque en la documentación oficial encontrarás todos los hooks disponibles.
 
 Puedes usar cualquier gestor de paquetes. En los ejemplos usaré **pnpm**.
 
@@ -54,7 +54,7 @@ Y agrega lefthook a la sección `onlyBuiltDependencies` en tu `package.json` ra�
 
 ## Configuración de commitlint
 
-Commitlint valida que los mensajes de commit sigan el estándar de [Conventional Commits](https://www.conventionalcommits.org?utm_source=rxtsel.dev&utm_medium=blog), lo que facilita generar changelogs automáticos y mantener un historial legible.
+Commitlint valida que los mensajes de commit sigan el estándar de [Conventional Commits](https://www.conventionalcommits.org?ref=rxtsel.dev), lo que facilita generar changelogs automáticos y mantener un historial legible.
 
 Crea el archivo de configuración en la raíz del proyecto:
 
@@ -64,7 +64,7 @@ export default { extends: ["@commitlint/config-conventional"] }
 
 ## Configuración de Lefthook
 
-Para este ejemplo asumiré que el proyecto tiene [Biome](https://biomejs.dev?utm_source=rxtsel.dev&utm_medium=blog) como linter y formateador, con los siguientes scripts en `package.json`:
+Para este ejemplo asumiré que el proyecto tiene [Biome](https://biomejs.dev?ref=rxtsel.dev) como linter y formateador, con los siguientes scripts en `package.json`:
 
 ```json title="package.json"
 {
@@ -111,4 +111,4 @@ Cada sección corresponde a un hook de Git:
 
 La opción `parallel` controla si los comandos dentro de un hook se ejecutan en paralelo o en secuencia. Como en este ejemplo `pre-commit` solo tiene un comando, el valor `false` (que es el predeterminado) no cambia nada, pero lo incluyo para que sea explícito si luego agregas más comandos.
 
-Puedes ampliar esta configuración según las necesidades del proyecto: tests unitarios en `pre-commit`, pruebas end-to-end en `pre-push`, generación de tipos, etc. Consulta la [documentación oficial de Lefthook](https://lefthook.dev?utm_source=rxtsel.dev&utm_medium=blog) para ver todas las opciones disponibles.
+Puedes ampliar esta configuración según las necesidades del proyecto: tests unitarios en `pre-commit`, pruebas end-to-end en `pre-push`, generación de tipos, etc. Consulta la [documentación oficial de Lefthook](https://lefthook.dev?ref=rxtsel.dev) para ver todas las opciones disponibles.
