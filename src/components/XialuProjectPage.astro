@@ -336,12 +336,11 @@ const alternates = {
             <p>{copy.why}</p>
           </section>
 
-          <section
-            aria-labelledby="xialu-engineering"
-            data-toc-section
-            style={sectionStyles["xialu-engineering"]}
-          >
-            <h2 id="xialu-engineering">{copy.engineeringHeading}</h2>
+          <section aria-labelledby="xialu-engineering">
+            <!-- Keep the H2 timeline separate from its H3 sections so progress never overlaps. -->
+            <div data-toc-section style={sectionStyles["xialu-engineering"]}>
+              <h2 id="xialu-engineering">{copy.engineeringHeading}</h2>
+            </div>
             {
               copy.decisions.map((decision, index) => (
                 <section data-toc-section style={sectionStyles[`xialu-decision-${index}`]}>

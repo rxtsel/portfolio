@@ -80,17 +80,41 @@ const entries = groupTocHeadings(headings)
       list-style: none;
     }
 
-    .toc-list {
-      border-left: 1px solid var(--border);
-    }
-
     .toc-row {
+      --rail-offset: 0px;
+      --connector-width: 0px;
       position: relative;
       padding-left: 0.875rem;
     }
 
     .toc-sublist .toc-row {
+      --rail-offset: 0.75rem;
       padding-left: 1.625rem;
+    }
+
+    .toc-sublist > li:first-child > .toc-row,
+    .toc-list > li:has(> .toc-sublist) + li > .toc-row {
+      --connector-width: calc(0.75rem + 2px);
+    }
+
+    .toc-row::before,
+    .toc-row::after {
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(currentColor, currentColor) var(--rail-offset) 0 / 2px 100% no-repeat,
+        linear-gradient(currentColor, currentColor) 0 0 / var(--connector-width) 2px no-repeat;
+      pointer-events: none;
+      content: "";
+    }
+
+    .toc-row::before {
+      color: var(--border);
+    }
+
+    .toc-row::after {
+      color: var(--primary);
+      clip-path: inset(0 0 100% 0);
     }
 
     .toc-link {
@@ -119,30 +143,20 @@ const entries = groupTocHeadings(headings)
     @supports (timeline-scope: --toc-section-0) and (animation-timeline: --toc-section-0) and
       (view-timeline-inset: 6rem calc(100% - 6rem)) {
       @media (prefers-reduced-motion: no-preference) {
-        .toc-link {
-          animation: toc-active auto steps(1, end);
-          animation-timeline: var(--section-timeline);
-        }
-
-        .toc-row::before {
-          position: absolute;
-          inset: 0 auto 0 -1px;
-          width: 2px;
-          background: var(--primary);
-          opacity: 0;
-          pointer-events: none;
-          content: "";
-          animation: toc-active auto steps(1, end);
+        .toc-row::after {
+          animation: toc-progress auto linear both;
           animation-timeline: var(--section-timeline);
         }
       }
     }
   }
 
-  @keyframes toc-active {
-    from,
+  @keyframes toc-progress {
+    from {
+      clip-path: inset(0 0 100% 0);
+    }
     to {
-      opacity: 1;
+      clip-path: inset(0);
     }
   }
 </style>
