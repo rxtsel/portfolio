@@ -1,20 +1,27 @@
 ---
-import MonitorIcon from "@/assets/desktop-screen.svg"
 import MoonIcon from "@/assets/moon.svg"
 import SunIcon from "@/assets/soon.svg"
+import type { Locale } from "@/lib/i18n"
+
+interface Props {
+  locale: Locale
+}
+
+const { locale } = Astro.props
+const labels = {
+  en: { light: "Switch to light theme", dark: "Switch to dark theme" },
+  es: { light: "Cambiar a tema claro", dark: "Cambiar a tema oscuro" },
+}[locale]
 ---
 
 <button
-  aria-label="System theme. Switch to light theme"
+  aria-label={labels.dark}
   class="bg-background ring-border text-foreground hover:bg-accent focus-visible:ring-ring/50 inline-grid size-8 place-items-center ring-1 transition-colors outline-none ring-inset focus-visible:ring-3 [&_svg]:size-4"
+  data-dark-label={labels.dark}
+  data-light-label={labels.light}
   data-theme-toggle
   type="button"
 >
-  <MonitorIcon
-    aria-hidden="true"
-    class="feedback-icon pointer-events-none col-start-1 row-start-1"
-    data-theme-icon="system"
-  />
   <SunIcon
     aria-hidden="true"
     class="feedback-icon pointer-events-none col-start-1 row-start-1"
@@ -28,12 +35,26 @@ import SunIcon from "@/assets/soon.svg"
 </button>
 
 <style is:global>
-  html:not([data-theme-mode]) [data-theme-icon="system"],
-  html[data-theme-mode="system"] [data-theme-icon="system"],
-  html[data-theme-mode="light"] [data-theme-icon="light"],
-  html[data-theme-mode="dark"] [data-theme-icon="dark"] {
+  html[data-theme-mode="dark"] [data-theme-icon="light"],
+  html[data-theme-mode="light"] [data-theme-icon="dark"] {
     opacity: 1;
     transform: scale(1);
     filter: blur(0);
+  }
+
+  @media (prefers-color-scheme: light) {
+    html:not([data-theme-mode="light"]):not([data-theme-mode="dark"]) [data-theme-icon="dark"] {
+      opacity: 1;
+      transform: scale(1);
+      filter: blur(0);
+    }
+  }
+
+  @media (prefers-color-scheme: dark) {
+    html:not([data-theme-mode="light"]):not([data-theme-mode="dark"]) [data-theme-icon="light"] {
+      opacity: 1;
+      transform: scale(1);
+      filter: blur(0);
+    }
   }
 </style>

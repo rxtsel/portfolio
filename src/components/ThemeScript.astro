@@ -1,22 +1,7 @@
 <script is:inline>
   const themeStorageKey = "theme"
-  const themeOrder = ["system", "light", "dark"]
-  const themeModes = new Set(themeOrder)
+  const themeModes = new Set(["system", "light", "dark"])
   const darkScheme = window.matchMedia("(prefers-color-scheme: dark)")
-  const themeLabels = {
-    system: {
-      current: "System theme",
-      next: "light theme",
-    },
-    light: {
-      current: "Light theme",
-      next: "dark theme",
-    },
-    dark: {
-      current: "Dark theme",
-      next: "system theme",
-    },
-  }
 
   function getStoredTheme() {
     const theme = localStorage.getItem(themeStorageKey)
@@ -28,26 +13,18 @@
     return theme === "dark" || (theme === "system" && darkScheme.matches)
   }
 
-  function updateThemeControls(theme) {
+  function updateThemeControls() {
+    const nextTheme = document.documentElement.classList.contains("dark") ? "light" : "dark"
     document.querySelectorAll("[data-theme-toggle]").forEach((control) => {
-      const labels = themeLabels[theme]
-
-      control.setAttribute("aria-label", `${labels.current}. Switch to ${labels.next}`)
+      control.setAttribute("aria-label", control.getAttribute(`data-${nextTheme}-label`))
     })
-  }
-
-  function getNextTheme(theme) {
-    const currentIndex = themeOrder.indexOf(theme)
-    const nextIndex = (currentIndex + 1) % themeOrder.length
-
-    return themeOrder[nextIndex]
   }
 
   function applyTheme(theme = getStoredTheme()) {
     document.documentElement.classList.toggle("dark", shouldUseDarkTheme(theme))
     document.documentElement.dataset.themeMode = theme
     document.documentElement.style.colorScheme = shouldUseDarkTheme(theme) ? "dark" : "light"
-    updateThemeControls(theme)
+    updateThemeControls()
   }
 
   function setTheme(theme) {
@@ -63,10 +40,10 @@
       return
     }
 
-    setTheme(getNextTheme(getStoredTheme()))
+    setTheme(document.documentElement.classList.contains("dark") ? "light" : "dark")
   })
 
-  document.addEventListener("DOMContentLoaded", () => updateThemeControls(getStoredTheme()))
+  document.addEventListener("DOMContentLoaded", updateThemeControls)
   darkScheme.addEventListener("change", () => {
     if (getStoredTheme() === "system") {
       applyTheme("system")
