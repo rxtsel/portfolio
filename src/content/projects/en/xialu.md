@@ -1,6 +1,6 @@
 ---
 translationKey: xialu
-order: 18
+order: 20
 locale: en
 title: Xialu
 description: Personal finances on your phone, with local data and offline access.

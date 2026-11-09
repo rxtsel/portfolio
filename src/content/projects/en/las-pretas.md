@@ -1,6 +1,6 @@
 ---
 translationKey: las-pretas
-order: 4
+order: 6
 locale: en
 title: Las Pretas
 description: Custom WordPress build from Figma, with pixel-perfect implementation and a brand-faithful visual experience.

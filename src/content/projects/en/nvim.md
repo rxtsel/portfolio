@@ -1,12 +1,11 @@
 ---
 translationKey: nvim
-order: -1
+order: 2
 locale: en
 title: nvim
 description: My keyboard-first Neovim setup with Nix
 href: https://github.com/rxtsel/nvim
 sourceUrl: https://github.com/rxtsel/nvim
-publishDate: 2022-03-13
 detailPage: true
 screenshotOrientation: horizontal
 screenshots:
@@ -16,6 +15,7 @@ screenshots:
   - src: ../../../assets/projects/nvim/diff.webp
     title: Reviewing changes
     alt: Git change explorer in Neovim showing a side-by-side Lua diff.
+publishDate: 2022-03-13
 stack:
   - linux
   - lua

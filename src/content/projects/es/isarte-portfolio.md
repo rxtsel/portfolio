@@ -1,6 +1,6 @@
 ---
 translationKey: isart-portfolio
-order: 10
+order: 12
 locale: es
 title: Isarte Portfolio
 description: Portfolio artístico rápido y minimalista para presentar obras, exposiciones y premios con foco visual.

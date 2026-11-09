@@ -1,6 +1,6 @@
 ---
 translationKey: xialu
-order: 18
+order: 20
 locale: es
 title: Xialu
 description: Tus finanzas en tu teléfono, con datos locales y uso sin conexión.

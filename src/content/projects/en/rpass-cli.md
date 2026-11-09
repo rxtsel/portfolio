@@ -1,13 +1,13 @@
 ---
 translationKey: rpass-cli
-order: 15
+order: 17
 locale: en
 title: rpass-cli
 description: A local password manager in Rust, compatible with pass
 href: https://crates.io/crates/rpass-cli
 sourceUrl: https://github.com/rxtsel/rpass-cli
-logo: ../../../assets/projects/rpass.webp
 detailPage: true
+logo: ../../../assets/projects/rpass.webp
 screenshotOrientation: horizontal
 publishDate: 2026-06-19
 stack:

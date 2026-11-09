@@ -1,18 +1,18 @@
 ---
 translationKey: dotfiles
-order: -2
+order: 1
 locale: es
 title: dotfiles
 description: Mi entorno Linux reproducible con NixOS y Home Manager
 href: https://github.com/rxtsel/dotfiles
 sourceUrl: https://github.com/rxtsel/dotfiles
-publishDate: 2022-02-03
 detailPage: true
 screenshotOrientation: horizontal
 screenshots:
   - src: ../../../assets/projects/dotfiles/desktop.webp
     title: Escritorio Linux
     alt: Mi escritorio NixOS con Niri, Noctalia, una terminal, Neovim y un gestor de archivos.
+publishDate: 2022-02-03
 stack:
   - linux
 tags: []

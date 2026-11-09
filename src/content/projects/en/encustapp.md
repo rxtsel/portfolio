@@ -1,6 +1,6 @@
 ---
 translationKey: encustapp
-order: 2
+order: 5
 locale: en
 title: encustapp
 description: A SvelteKit application for survey management.

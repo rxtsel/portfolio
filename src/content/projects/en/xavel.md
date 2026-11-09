@@ -1,6 +1,6 @@
 ---
 translationKey: xavel
-order: 17
+order: 19
 locale: en
 title: Xavel
 description: SaaS platform for managing customers, sending invoices, collecting payments, and automating billing workflows from a single application.

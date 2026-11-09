@@ -1,6 +1,6 @@
 ---
 translationKey: isart-portfolio
-order: 10
+order: 12
 locale: en
 title: Isart Portfolio
 description: Fast, minimal artist portfolio for showcasing works, exhibitions, and awards with strong visual focus.

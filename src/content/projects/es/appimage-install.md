@@ -1,18 +1,18 @@
 ---
 translationKey: appimage-install
-order: 0
+order: 3
 locale: es
 title: appimage-install
 description: Integración de AppImages en Linux y NixOS
 href: https://github.com/rxtsel/appimage-install
 sourceUrl: https://github.com/rxtsel/appimage-install
-publishDate: 2025-06-25
 detailPage: true
 screenshotOrientation: horizontal
 screenshots:
   - src: ../../../assets/projects/appimage-install/install.webp
     title: Instalación de un AppImage
     alt: Terminal ejecutando appimage-install con Obsidian, moviendo el archivo, extrayendo el icono y creando el lanzador .desktop.
+publishDate: 2025-06-25
 stack:
   - linux
 tags: []

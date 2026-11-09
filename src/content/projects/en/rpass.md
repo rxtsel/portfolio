@@ -1,13 +1,13 @@
 ---
 translationKey: rpass
-order: 16
+order: 18
 locale: en
 title: rpass
 description: A password manager client for Raycast and Vicinae
 href: https://www.raycast.com/rxtsel/rpass
 sourceUrl: https://github.com/raycast/extensions/tree/f221118834d65884520ada04e7d3ef46376a31a1/extensions/rpass/
-logo: ../../../assets/projects/rpass.webp
 detailPage: true
+logo: ../../../assets/projects/rpass.webp
 screenshotOrientation: horizontal
 screenshots:
   - src: ../../../assets/projects/rpass/vault.webp

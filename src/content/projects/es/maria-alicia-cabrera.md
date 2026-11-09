@@ -1,6 +1,6 @@
 ---
 translationKey: maria-alicia-cabrera
-order: 1
+order: 4
 locale: es
 title: María Alicia Cabrera
 description: Sitio editable para escritora colombiana, con CMS personalizado para gestionar obra, contenido e información pública.

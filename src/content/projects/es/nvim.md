@@ -1,12 +1,11 @@
 ---
 translationKey: nvim
-order: -1
+order: 2
 locale: es
 title: nvim
 description: Mi configuración de Neovim con Nix
 href: https://github.com/rxtsel/nvim
 sourceUrl: https://github.com/rxtsel/nvim
-publishDate: 2022-03-13
 detailPage: true
 screenshotOrientation: horizontal
 screenshots:
@@ -16,6 +15,7 @@ screenshots:
   - src: ../../../assets/projects/nvim/diff.webp
     title: Revisión de cambios
     alt: Explorador de cambios de Git en Neovim con un diff de Lua lado a lado.
+publishDate: 2022-03-13
 stack:
   - linux
   - lua

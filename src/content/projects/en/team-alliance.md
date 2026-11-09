@@ -1,6 +1,6 @@
 ---
 translationKey: team-alliance
-order: 8
+order: 10
 locale: en
 title: TEAM Alliance
 description: Bilingual landing page for an international education alliance featuring a multi-step membership application.

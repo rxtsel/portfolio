@@ -1,6 +1,6 @@
 ---
 translationKey: portctl
-order: 14
+order: 16
 locale: en
 title: portctl
 description: Inspect TCP/UDP ports and stop processes from Noctalia

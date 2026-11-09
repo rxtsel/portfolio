@@ -1,6 +1,6 @@
 ---
 translationKey: xavel
-order: 17
+order: 19
 locale: es
 title: Xavel
 description: Plataforma SaaS para gestionar clientes, enviar facturas, recibir pagos y automatizar procesos de cobro desde una única aplicación.
