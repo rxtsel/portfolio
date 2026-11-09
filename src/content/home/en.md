@@ -2,13 +2,13 @@
 locale: en
 title: Cristhian Melo
 intro: |-
-  I'm a **software engineer** who likes building things and figuring out how they work under the hood. I've worked on web, desktop, and mobile apps. I enjoy the whole process: from design and frontend work to backend systems, data, and infrastructure. I care especially about software architecture and writing code that's easy to maintain.
+  I'm a **software engineer**. I like building things and figuring out how they work under the hood. I've worked on web, desktop, and mobile apps. I care about software architecture and keeping code easy to maintain.
 
-  I've used Linux for over a decade. Two ideas from that world have stayed with me: keep things simple and do a good job of whatever I take on. I try to bring both to the software I build.
+  I've used Linux for over a decade. Two ideas from that world have stuck with me: keep things simple and make each part do its job well.
 
   Lately, I've been tinkering with Rust and pitching in on open-source projects.
 
-  **Why rxtsel?** It started as "ratsel": easy to say, easy to remember. But the usernames and domains I wanted were taken, so I swapped the "a" for an "x". I thought people would still pronounce it the same way. Turns out most people just spell it out. Fair enough.
+  **Why rxtsel?** "Ratsel" was the name I had in mind for a black cat. I ended up with a female cat, named her Kala, and kept "ratsel" as my name online. Since the usernames and domains I wanted were taken, I swapped the "a" for an "x", thinking people would still pronounce it the same way. Now everyone spells it out.
 featuredProjects:
   - xavel
   - rpass-cli
