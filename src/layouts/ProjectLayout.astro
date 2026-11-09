@@ -68,7 +68,7 @@ const sourceLabel = locale === "es" ? `Ver ${title} en GitHub` : `View ${title} 
   description={description}
   lang={locale}
   languageLinks={languageLinks}
-  {...ogImage ? { ogImage } : {}}
+  ogImage={ogImage ?? new URL("og.png", canonical).toString()}
   ogImageAlt={`${title}: ${description}`}
   title={pageTitle}
 >

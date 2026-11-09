@@ -6,7 +6,7 @@ import { getProjectOgStaticPaths, projectPages } from "../src/lib/project-pages.
 
 for (const locale of ["en", "es"]) {
   test(`project OG paths and PNG are generated for ${locale}`, async () => {
-    const paths = getProjectOgStaticPaths(locale)
+    const paths = getProjectOgStaticPaths(locale, [], {})
     assert.equal(paths.length, Object.keys(projectPages).length)
 
     for (const { params, props } of paths) {
@@ -53,6 +53,53 @@ for (const locale of ["en", "es"]) {
     }
   })
 }
+
+test("content project OG paths reuse localized metadata and optional local logos", () => {
+  const logo = { src: "/_astro/rpass.webp" }
+  const entry = (locale, translationKey, extra = {}) => ({
+    data: {
+      locale,
+      translationKey,
+      title: translationKey,
+      description: `Description ${locale}`,
+      detailPage: true,
+      ...extra,
+    },
+  })
+  const projects = [
+    entry("en", "dotfiles"),
+    entry("es", "dotfiles"),
+    entry("en", "rpass", { logo }),
+    entry("es", "rpass", { logo }),
+    entry("en", "xialu"),
+    entry("es", "xialu"),
+    entry("en", "external", { detailPage: false }),
+  ]
+  const logos = { "/src/assets/projects/rpass.webp": logo }
+  for (const locale of ["en", "es"]) {
+    const paths = getProjectOgStaticPaths(locale, projects, logos)
+    assert.deepEqual(
+      paths.map(({ params }) => params.slug),
+      ["xialu", "dotfiles", "rpass"],
+    )
+    assert.equal(paths[1].props.description, `Description ${locale}`)
+    assert.equal(paths[1].props.logoPath, undefined)
+    assert.equal(paths[2].props.logoPath, "src/assets/projects/rpass.webp")
+  }
+  assert.throws(() => getProjectOgStaticPaths("en", projects, {}), /Missing OG logo for project: rpass/)
+})
+
+test("project OG images also render without a logo", async () => {
+  const response = await generateProjectOgImage({
+    title: "dotfiles",
+    description: "My reproducible Linux setup with NixOS",
+  })
+  assert.equal(response.status, 200)
+  const image = await sharp(await response.arrayBuffer()).metadata()
+  assert.equal(image.width, 1200)
+  assert.equal(image.height, 630)
+  assert.equal(image.format, "png")
+})
 
 test("Xialu OG descriptions are localized", () => {
   assert.notEqual(projectPages.xialu.locales.en.description, projectPages.xialu.locales.es.description)

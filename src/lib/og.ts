@@ -18,7 +18,7 @@ const projectIsotype = readFile(path.resolve("src/assets/logo.svg"), "utf8").the
 export interface ProjectOgData {
   title: string
   description: string
-  logoPath: string
+  logoPath?: string
 }
 
 function getTitleFontSize(title: string) {
@@ -33,7 +33,7 @@ function getTitleFontSize(title: string) {
 export async function generateProjectOgImage({ title, description, logoPath }: ProjectOgData) {
   const [isotype, logo] = await Promise.all([
     projectIsotype,
-    sharp(path.resolve(logoPath)).resize(180, 180, { fit: "inside" }).png().toBuffer(),
+    logoPath ? sharp(path.resolve(logoPath)).resize(180, 180, { fit: "inside" }).png().toBuffer() : undefined,
   ])
 
   return new ImageResponse(
@@ -64,15 +64,19 @@ export async function generateProjectOgImage({ title, description, logoPath }: P
             props: {
               style: { display: "flex", alignItems: "center", gap: 48, width: "100%" },
               children: [
-                {
-                  type: "img",
-                  props: {
-                    src: `data:image/png;base64,${logo.toString("base64")}`,
-                    width: 180,
-                    height: 180,
-                    style: { objectFit: "contain", flexShrink: 0 },
-                  },
-                },
+                ...(logo
+                  ? [
+                      {
+                        type: "img",
+                        props: {
+                          src: `data:image/png;base64,${logo.toString("base64")}`,
+                          width: 180,
+                          height: 180,
+                          style: { objectFit: "contain", flexShrink: 0 },
+                        },
+                      },
+                    ]
+                  : []),
                 {
                   type: "div",
                   props: {
