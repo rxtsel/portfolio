@@ -116,6 +116,13 @@ const projectSchema = z.object({
     z.url().regex(faviconUrlPattern, "Use an HTTPS image URL, not an ICO file").optional(),
   ),
   stack: z.array(z.string().min(1)).default([]),
+  aiTools: z
+    .array(
+      stackItemSchema.extend({
+        href: z.preprocess(emptyStringToUndefined, z.url().optional()),
+      }),
+    )
+    .default([]),
   tags: z.array(z.string().min(1)).optional().default([]),
   translationKey: z.string().min(1),
 })

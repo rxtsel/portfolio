@@ -15,6 +15,7 @@ screenshots:
 publishDate: 2025-06-25
 stack:
   - linux
+  - bash
 tags: []
 ---
 

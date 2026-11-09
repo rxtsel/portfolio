@@ -15,6 +15,7 @@ screenshots:
 publishDate: 2022-02-03
 stack:
   - linux
+  - nix
 tags: []
 ---
 

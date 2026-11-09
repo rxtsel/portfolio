@@ -335,6 +335,16 @@ collections:
           - "{{stack.*.name}}"
         search_fields:
           - "{{stack.*.name}}"
+      - label: AI assistance
+        name: aiTools
+        widget: list
+        required: false
+        i18n: duplicate
+        hint: "Only list tools or models actually used on this project. Leave empty to hide the section."
+        fields:
+          - { label: Tool or model, name: name, widget: string }
+          - { label: Icon slug, name: slug, widget: string }
+          - { label: Website, name: href, widget: string, required: false }
       - label: Tags
         name: tags
         widget: relation

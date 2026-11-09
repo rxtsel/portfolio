@@ -5,6 +5,7 @@ import { URL } from "node:url"
 import { getLocalizedProjects, getProjectDetailPath } from "../src/lib/projects.ts"
 import { getScreenshotPlaceholderCount } from "../src/lib/screenshots.ts"
 import rehypeBlogSections from "../src/lib/rehype-blog-sections.mjs"
+import { getStackItemsBySlug, getTagItemsBySlug } from "../src/lib/taxonomy.ts"
 
 test("project detail links preserve Xialu and opt in per project and language", () => {
   for (const locale of ["en", "es"]) {
@@ -14,6 +15,26 @@ test("project detail links preserve Xialu and opt in per project and language", 
     assert.equal(getProjectDetailPath(entry("xialu")), `${base}/xialu/`)
     assert.equal(getProjectDetailPath(entry("onlysend")), undefined)
   }
+})
+
+test("detail stacks reuse the shared taxonomy without adding undeclared technologies", () => {
+  const rust = { slug: "rust", name: "Rust", href: "https://www.rust-lang.org/" }
+  const linux = { slug: "linux", name: "Linux" }
+  const stack = { data: { stack: [linux, rust] } }
+  assert.deepEqual(getStackItemsBySlug(stack, ["rust", "linux"]), [rust, linux])
+  assert.deepEqual(getStackItemsBySlug(stack, []), [])
+  assert.throws(() => getStackItemsBySlug(stack, ["missing"]), /Missing stack item relation/)
+  const page = readFileSync(new URL("../src/components/ProjectDetailPage.astro", import.meta.url), "utf8")
+  assert.ok(page.includes("getStackItemsBySlug(stack, project.data.stack)"))
+  const architecture = { slug: "clean-architecture", name: "Clean Architecture" }
+  const tags = { data: { tags: [architecture] } }
+  assert.deepEqual(getTagItemsBySlug(tags, ["clean-architecture"]), [architecture])
+  assert.deepEqual(getTagItemsBySlug(tags, []), [])
+  assert.ok(page.includes("getTagItemsBySlug(tags, project.data.tags)"))
+  assert.ok(page.includes('class="not-prose mt-3" tags={tagItems}'))
+  assert.ok(page.includes("stackItems.length > 0 &&"))
+  assert.ok(page.includes("aiTools.length > 0 &&"))
+  assert.ok(page.includes("tocHeadings.indexOf(aiHeading)"))
 })
 
 test("galleries fill only the empty visible slots in either orientation", () => {

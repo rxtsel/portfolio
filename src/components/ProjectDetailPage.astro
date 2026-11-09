@@ -1,7 +1,10 @@
 ---
-import { render } from "astro:content"
+import { getCollection, render } from "astro:content"
 import ProjectLayout from "@/layouts/ProjectLayout.astro"
 import ScreenshotGallery from "@/components/ScreenshotGallery.astro"
+import StackList from "@/components/StackList.astro"
+import Tags from "@/components/Tags.astro"
+import { getStackItemsBySlug, getTagItemsBySlug } from "@/lib/taxonomy"
 import type { Project } from "@/lib/projects"
 
 interface Props {
@@ -20,13 +23,50 @@ const {
   screenshotOrientation,
 } = project.data
 const { Content, headings } = await render(project)
+const [stack] = await getCollection("stack")
+if (!stack) {
+  throw new Error("Missing stack content")
+}
+const [tags] = await getCollection("tags")
+if (!tags) {
+  throw new Error("Missing tags content")
+}
+const stackItems = getStackItemsBySlug(stack, project.data.stack)
+const tagItems = getTagItemsBySlug(tags, project.data.tags)
+const hasStack = stackItems.length > 0 || tagItems.length > 0
+const aiTools = project.data.aiTools
+const stackHeading = {
+  depth: 2,
+  slug: "project-stack",
+  text: locale === "es" ? "Construido con" : "Built with",
+}
+const aiHeading = {
+  depth: 2,
+  slug: "project-ai-tools",
+  text: locale === "es" ? "Desarrollo asistido por IA" : "AI-assisted development",
+}
 const mediaHeading = { depth: 2, slug: "screenshots", text: locale === "es" ? "Capturas" : "Screenshots" }
 const hasScreenshots = screenshots.length > 0
 const tocHeadings = [
   ...(hasScreenshots ? [mediaHeading] : []),
   ...headings.filter(({ depth }) => depth === 2 || depth === 3),
+  ...(hasStack ? [stackHeading] : []),
+  ...(aiTools.length > 0 ? [aiHeading] : []),
 ]
-const markdown = [`# ${title}`, description, project.body ?? "", sourceUrl ?? ""].join("\n\n")
+const markdown = [
+  `# ${title}`,
+  description,
+  project.body ?? "",
+  ...(hasStack
+    ? [
+        `## ${stackHeading.text}`,
+        ...(stackItems.length > 0 ? [stackItems.map((item) => item.name).join(" · ")] : []),
+        ...(tagItems.length > 0 ? [tagItems.map((item) => item.name).join(" · ")] : []),
+      ]
+    : []),
+  ...(aiTools.length > 0 ? [`## ${aiHeading.text}`, aiTools.map((item) => item.name).join(" · ")] : []),
+  sourceUrl ?? "",
+].join("\n\n")
 ---
 
 <ProjectLayout
@@ -61,5 +101,30 @@ const markdown = [`# ${title}`, description, project.body ?? "", sourceUrl ?? ""
       )
     }
     <Content />
+    {
+      hasStack && (
+        <section
+          aria-labelledby={stackHeading.slug}
+          data-toc-section
+          style={`view-timeline-name: --toc-section-${tocHeadings.indexOf(stackHeading)}`}
+        >
+          <h2 id={stackHeading.slug}>{stackHeading.text}</h2>
+          {stackItems.length > 0 && <StackList stackItems={stackItems} />}
+          {tagItems.length > 0 && <Tags class="not-prose mt-3" tags={tagItems} />}
+        </section>
+      )
+    }
+    {
+      aiTools.length > 0 && (
+        <section
+          aria-labelledby={aiHeading.slug}
+          data-toc-section
+          style={`view-timeline-name: --toc-section-${tocHeadings.indexOf(aiHeading)}`}
+        >
+          <h2 id={aiHeading.slug}>{aiHeading.text}</h2>
+          <StackList stackItems={aiTools} />
+        </section>
+      )
+    }
   </div>
 </ProjectLayout>

@@ -111,6 +111,12 @@ stack:
   - name: Lua
     slug: lua
     href: https://www.lua.org/
+  - name: Bash
+    slug: bash
+    href: https://www.gnu.org/software/bash/
+  - name: Nix
+    slug: nix
+    href: https://nixos.org/
   - name: Go (Golang)
     slug: go
     href: https://go.dev
