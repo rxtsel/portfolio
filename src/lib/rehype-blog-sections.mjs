@@ -5,13 +5,22 @@ function hasSlugText(node) {
 /** Wrap each H2/H3 and its content in a CSS view-timeline subject. */
 export default function rehypeBlogSections() {
   return (tree, file) => {
-    if (!/[/\\]content[/\\]blog[/\\]/.test(file.path ?? "")) {
+    const project =
+      /[/\\]content[/\\]projects[/\\]/.test(file.path ?? "") && file.data?.astro?.frontmatter?.detailPage
+    if (!project && !/[/\\]content[/\\]blog[/\\]/.test(file.path ?? "")) {
       return
     }
 
-    let index = 0
+    // Reserve the first timeline only when the project actually has a gallery.
+    let index = project && file.data.astro.frontmatter.screenshots?.length > 0 ? 1 : 0
 
     function group(parent) {
+      if (project && parent.type === "element" && parent.tagName === "a") {
+        parent.properties = {
+          ...parent.properties,
+          className: [...(parent.properties?.className ?? []), "link-underline"],
+        }
+      }
       if (!parent.children) {
         return
       }

@@ -1,0 +1,34 @@
+---
+import GitHubIcon from "@/assets/logos/github.svg"
+
+interface Props {
+  href: string | undefined
+  label: string
+  transitionStyle?: string | undefined
+}
+
+const { href, label, transitionStyle } = Astro.props
+const buttonClass = "inline-flex size-8 shrink-0 items-center justify-center"
+---
+
+{
+  href ? (
+    <a
+      aria-label={label}
+      class:list={[
+        buttonClass,
+        "hover:bg-muted focus-visible:ring-ring/50 transition-colors outline-none focus-visible:ring-3",
+      ]}
+      href={href}
+      rel="noopener noreferrer"
+      target="_blank"
+      title={label}
+    >
+      <GitHubIcon aria-hidden="true" class="size-4" style={transitionStyle} />
+    </a>
+  ) : (
+    <button aria-label={label} class:list={[buttonClass, "opacity-40"]} disabled type="button">
+      <GitHubIcon aria-hidden="true" class="size-4" style={transitionStyle} />
+    </button>
+  )
+}

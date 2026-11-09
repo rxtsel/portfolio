@@ -31,7 +31,9 @@ test("shared navigation pages wait for their snapshot marker without blocking Ho
     ["BlogIndexPage", "site-footer"],
     ["BlogPostPage", "blog-post-content"],
   ]) {
-    const link = read(`components/${file}.astro`).match(/<link\b[^>]*rel="expect"[^>]*>/)?.[0]
+    const source =
+      file === "XialuProjectPage" ? read("layouts/ProjectLayout.astro") : read(`components/${file}.astro`)
+    const link = source.match(/<link\b[^>]*rel="expect"[^>]*>/)?.[0]
     assert.ok(link)
     for (const attribute of ['blocking="render"', `href="#${marker}"`, 'slot="head"']) {
       assert.ok(link.includes(attribute))
@@ -44,10 +46,21 @@ test("shared navigation pages wait for their snapshot marker without blocking Ho
 test("Xialu's critical logo is inlined and decoded synchronously", () => {
   const source = readFileSync(new URL("../src/components/XialuProjectPage.astro", import.meta.url), "utf8")
   assert.match(source, /import xialuIcon from "@\/assets\/projects\/xialu\.webp\?inline"/)
-  const logo = source.match(/<img\b[^>]*src=\{xialuIcon\}[^>]*>/)?.[0]
+  assert.match(source, /<ProjectLayout[\s\S]*logo=\{xialuIcon\}/)
+  const layout = readFileSync(new URL("../src/layouts/ProjectLayout.astro", import.meta.url), "utf8")
+  const logo = layout.match(/<img\b[^>]*src=\{logo\}[^>]*>/)?.[0]
   assert.ok(logo)
   assert.ok(logo.includes('decoding="sync"'))
   assert.ok(logo.includes('loading="eager"'))
+})
+
+test("card title transitions stay on the text, even without a logo", () => {
+  const source = readFileSync(new URL("../src/components/ProjectCard.astro", import.meta.url), "utf8")
+  const heading = source.match(/<Heading\b[^>]*>/)?.[0]
+  assert.ok(heading)
+  assert.doesNotMatch(heading, /style=/)
+  assert.doesNotMatch(source, /transitionNames\.logo \? getTransitionStyle\("title"\)/)
+  assert.equal((source.match(/style=\{getTransitionStyle\("title"\)\}/g) ?? []).length, 3)
 })
 
 test("project navigation headings share a locale-specific identity", () => {
@@ -60,7 +73,7 @@ for (const locale of ["en", "es"]) {
     const data = { locale, translationKey: "xialu" }
     const entry = { id: `${locale}/renamed-by-cms`, data }
     const page = { data }
-    for (const part of ["title", "logo"]) {
+    for (const part of ["title", "logo", "source"]) {
       assert.equal(getProjectTransitionName(entry, part), `project-${locale}-xialu-${part}`)
       assert.equal(getProjectTransitionName(entry, part), getProjectTransitionName(page, part))
     }

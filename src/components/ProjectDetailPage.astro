@@ -1,0 +1,65 @@
+---
+import { render } from "astro:content"
+import ProjectLayout from "@/layouts/ProjectLayout.astro"
+import ScreenshotGallery from "@/components/ScreenshotGallery.astro"
+import type { Project } from "@/lib/projects"
+
+interface Props {
+  project: Project
+}
+const { project } = Astro.props
+const {
+  locale,
+  translationKey,
+  title,
+  description,
+  href,
+  sourceUrl,
+  customFavicon,
+  screenshots,
+  screenshotOrientation,
+} = project.data
+const { Content, headings } = await render(project)
+const mediaHeading = { depth: 2, slug: "screenshots", text: locale === "es" ? "Capturas" : "Screenshots" }
+const hasScreenshots = screenshots.length > 0
+const tocHeadings = [
+  ...(hasScreenshots ? [mediaHeading] : []),
+  ...headings.filter(({ depth }) => depth === 2 || depth === 3),
+]
+const markdown = [`# ${title}`, description, project.body ?? "", sourceUrl ?? ""].join("\n\n")
+---
+
+<ProjectLayout
+  description={description}
+  headings={tocHeadings}
+  href={href}
+  lead={description}
+  locale={locale}
+  logo={project.data.logo?.src ?? customFavicon}
+  markdown={markdown}
+  pageTitle={`${title}: ${description}`}
+  slug={translationKey}
+  sourceUrl={sourceUrl}
+  title={title}
+>
+  <div
+    class="prose prose-neutral prose-sm dark:prose-invert prose-p:text-muted-foreground prose-headings:text-balance lg:prose-base max-w-none"
+  >
+    {
+      hasScreenshots && (
+        <section aria-labelledby="screenshots" data-toc-section style="view-timeline-name: --toc-section-0">
+          <h2 id="screenshots">{mediaHeading.text}</h2>
+          <div class="not-prose">
+            <ScreenshotGallery
+              id={`${translationKey}-screenshots`}
+              locale={locale}
+              orientation={screenshotOrientation}
+              screenshots={screenshots}
+            />
+          </div>
+        </section>
+      )
+    }
+    <Content />
+  </div>
+</ProjectLayout>

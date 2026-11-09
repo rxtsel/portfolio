@@ -192,7 +192,21 @@ const home = defineCollection({
 
 const projects = defineCollection({
   loader: glob({ base: "./src/content/projects", pattern: "**/*.{md,mdx}" }),
-  schema: () => projectSchema,
+  schema: ({ image }) =>
+    projectSchema.extend({
+      detailPage: z.boolean().default(false),
+      logo: z.preprocess(emptyStringToUndefined, image().optional()),
+      screenshotOrientation: z.enum(["vertical", "horizontal"]).default("horizontal"),
+      screenshots: z
+        .array(
+          z.object({
+            src: image(),
+            title: z.string().min(1),
+            alt: z.string().min(1),
+          }),
+        )
+        .default([]),
+    }),
 })
 
 const experience = defineCollection({

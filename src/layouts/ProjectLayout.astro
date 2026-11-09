@@ -1,0 +1,160 @@
+---
+import type { MarkdownHeading } from "astro"
+import ArrowIcon from "@/assets/arrow.svg"
+import GitHubButton from "@/components/GitHubButton.astro"
+import ContentWithToc from "@/components/ContentWithToc.astro"
+import PageToolbar from "@/components/PageToolbar.astro"
+import MainLayout from "@/layouts/MainLayout.astro"
+import { getLocaleLanguageTag, type LanguageLink, type Locale } from "@/lib/i18n"
+import { getProjectsHeadingTransitionName, getProjectTransitionName } from "@/lib/projects"
+
+interface Props {
+  locale: Locale
+  slug: string
+  title: string
+  pageTitle?: string
+  description: string
+  lead?: string
+  intro?: string
+  logo?: string | undefined
+  href?: string | undefined
+  sourceUrl?: string | undefined
+  ogImage?: string
+  markdown: string
+  headings?: MarkdownHeading[]
+  facts?: { label: string; value: string }[]
+}
+
+const {
+  locale,
+  slug,
+  title,
+  pageTitle = title,
+  description,
+  lead,
+  intro,
+  logo,
+  href,
+  sourceUrl,
+  ogImage,
+  markdown,
+  headings = [],
+  facts = [],
+} = Astro.props
+const languageLinks: LanguageLink[] = [
+  { locale: "en", href: `/projects/${slug}/` },
+  { locale: "es", href: `/es/proyectos/${slug}/` },
+]
+const canonical = new URL(languageLinks.find((link) => link.locale === locale)!.href, Astro.site).toString()
+const alternates = {
+  defaultLocale: "en",
+  entries: [
+    ...languageLinks.map((link) => ({
+      href: new URL(link.href, Astro.site).toString(),
+      hreflang: getLocaleLanguageTag(link.locale),
+    })),
+    { href: new URL(`/projects/${slug}/`, Astro.site).toString(), hreflang: "x-default" },
+  ],
+}
+const transitionProject = { data: { locale, translationKey: slug } }
+const websiteHref = href && new URL(href).hostname !== "github.com" ? href : undefined
+const sourceTransitionStyle = `view-transition-name: var(--project-identity-transition, ${getProjectTransitionName(transitionProject, "source")})`
+const sourceLabel = locale === "es" ? `Ver ${title} en GitHub` : `View ${title} on GitHub`
+---
+
+<MainLayout
+  alternates={alternates}
+  canonical={canonical}
+  description={description}
+  lang={locale}
+  languageLinks={languageLinks}
+  {...ogImage ? { ogImage } : {}}
+  ogImageAlt={`${title}: ${description}`}
+  title={pageTitle}
+>
+  <link blocking="render" href="#site-footer" rel="expect" slot="head" />
+  <ContentWithToc headings={headings} locale={locale}>
+    <main class="w-full min-w-0">
+      <article>
+        <header>
+          <PageToolbar
+            backHref={locale === "es" ? "/es/proyectos/" : "/projects/"}
+            backLabel={locale === "es" ? "Proyectos" : "Projects"}
+            backTransitionName={getProjectsHeadingTransitionName(locale)}
+            locale={locale}
+            markdown={markdown}
+            title={pageTitle}
+            url={canonical}
+          />
+          <div class="flex items-center gap-4">
+            {
+              logo && (
+                <img
+                  alt=""
+                  class="size-20 shrink-0"
+                  decoding="sync"
+                  height={80}
+                  loading="eager"
+                  src={logo}
+                  style={`view-transition-name: var(--project-identity-transition, ${getProjectTransitionName(transitionProject, "logo")})`}
+                  width={80}
+                />
+              )
+            }
+            <div class="min-w-0 grow">
+              <div class="flex items-center justify-between gap-4">
+                <h1
+                  class="w-fit text-3xl leading-tight font-semibold sm:text-4xl"
+                  style={`view-transition-name: var(--project-identity-transition, ${getProjectTransitionName(transitionProject, "title")})`}
+                >
+                  {
+                    websiteHref ? (
+                      <a
+                        class="link-underline group inline-flex items-center gap-2"
+                        href={websiteHref}
+                        rel="noopener noreferrer"
+                        target="_blank"
+                      >
+                        {title}
+                        <ArrowIcon class="size-5 shrink-0 rotate-45 motion-safe:transition-transform motion-safe:group-hover:translate-x-1 motion-safe:group-hover:-translate-y-1 motion-safe:group-focus-visible:translate-x-1 motion-safe:group-focus-visible:-translate-y-1" />
+                        <span class="sr-only">
+                          {locale === "es" ? "(abre en otra pestaña)" : "(opens in a new tab)"}
+                        </span>
+                      </a>
+                    ) : (
+                      title
+                    )
+                  }
+                </h1>
+                <GitHubButton
+                  href={sourceUrl}
+                  label={sourceUrl
+                    ? sourceLabel
+                    : locale === "es"
+                      ? "Código fuente no disponible"
+                      : "Source code unavailable"}
+                  transitionStyle={sourceTransitionStyle}
+                />
+              </div>
+              {lead && <p class="mt-2 text-base font-medium text-balance sm:text-lg">{lead}</p>}
+            </div>
+          </div>
+          {intro && <p class="text-muted-foreground mt-6 leading-7 text-pretty">{intro}</p>}
+          {
+            facts.length > 0 && (
+              <dl class="mt-6 grid gap-5 border-y py-5 sm:grid-cols-3">
+                {facts.map((fact) => (
+                  <div>
+                    <dt class="text-muted-foreground text-sm">{fact.label}</dt>
+                    <dd class="mt-1 text-sm font-medium">{fact.value}</dd>
+                  </div>
+                ))}
+              </dl>
+            )
+          }
+        </header>
+        <slot />
+      </article>
+    </main>
+  </ContentWithToc>
+</MainLayout>

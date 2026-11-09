@@ -268,6 +268,33 @@ collections:
       - { label: Order, name: order, widget: number, required: false }
       - { label: URL, name: href, widget: string, required: false, i18n: duplicate }
       - { label: Source URL, name: sourceUrl, widget: string, required: false, i18n: duplicate }
+      - { label: Internal project page, name: detailPage, widget: boolean, default: false, i18n: duplicate }
+      - label: Logo
+        name: logo
+        widget: image
+        required: false
+        i18n: duplicate
+        media_folder: /src/assets/projects
+        public_folder: ../../../assets/projects
+      - label: Screenshot orientation
+        name: screenshotOrientation
+        widget: select
+        default: horizontal
+        i18n: duplicate
+        options: [vertical, horizontal]
+      - label: Screenshots
+        name: screenshots
+        widget: list
+        required: false
+        i18n: true
+        fields:
+          - label: Image
+            name: src
+            widget: image
+            media_folder: /src/assets/projects
+            public_folder: ../../../assets/projects
+          - { label: Title, name: title, widget: string }
+          - { label: Alternative text, name: alt, widget: string }
       - {
           label: Custom favicon,
           name: customFavicon,

@@ -1,8 +1,17 @@
 import type { CollectionEntry } from "astro:content"
 import type { Locale } from "@/lib/i18n"
+import { getProjectPage } from "./project-pages.ts"
 
 export type Project = CollectionEntry<"projects">
 export type ProjectTransitionPart = "card" | "description" | "logo" | "source" | "tags" | "title"
+
+export function getProjectDetailPath(project: Project) {
+  const { locale, translationKey, detailPage } = project.data
+  return (
+    getProjectPage(translationKey)?.locales[locale].path ??
+    (detailPage ? `${locale === "es" ? "/es/proyectos" : "/projects"}/${translationKey}/` : undefined)
+  )
+}
 
 export function getProjectsHeadingTransitionName(locale: Locale) {
   return `projects-${locale}-heading`

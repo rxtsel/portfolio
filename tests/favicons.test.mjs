@@ -4,7 +4,7 @@ import { readFile } from "node:fs/promises"
 import test from "node:test"
 import { URL } from "node:url"
 import { imageMetadata } from "astro/assets/utils"
-import { faviconBackgroundSchema, faviconUrlPattern } from "../src/lib/favicon.ts"
+import { faviconBackgroundSchema, faviconUrlPattern, getFaviconHostname } from "../src/lib/favicon.ts"
 import imageService from "../src/lib/image-service.ts"
 
 test("CMS and build use the same HTTPS/non-ICO validation", async () => {
@@ -30,6 +30,22 @@ test("CMS and build use the same HTTPS/non-ICO validation", async () => {
   ]) {
     assert.ok(!faviconUrlPattern.test(url), url)
   }
+})
+
+test("favicon lookup skips internal, invalid and non-web URLs", () => {
+  for (const href of [
+    undefined,
+    "",
+    "/projects/dotfiles/",
+    "//example.com",
+    "not a URL",
+    "mailto:me@example.com",
+    "javascript:alert(1)",
+  ]) {
+    assert.equal(getFaviconHostname(href), undefined)
+  }
+  assert.equal(getFaviconHostname("https://example.com/project"), "example.com")
+  assert.equal(getFaviconHostname("http://example.com:8080/project"), "example.com")
 })
 
 test("favicon backgrounds are opt-in and limited to the CMS options", () => {

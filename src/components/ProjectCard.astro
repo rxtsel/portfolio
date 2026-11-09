@@ -1,6 +1,6 @@
 ---
 import type { ImageMetadata } from "astro"
-import GitHubIcon from "@/assets/logos/github.svg"
+import GitHubButton from "@/components/GitHubButton.astro"
 import type { FaviconBackground } from "@/lib/favicon"
 import type { ProjectTransitionPart } from "@/lib/projects"
 import Tags from "./Tags.astro"
@@ -44,10 +44,7 @@ const tagsProps = tagsStyle ? { style: tagsStyle } : {}
 ---
 
 <article class="flex h-full flex-col gap-2 p-4" style={getTransitionStyle("card")}>
-  <Heading
-    class="flex items-center justify-between text-lg font-medium"
-    style={transitionNames.logo ? undefined : getTransitionStyle("title")}
-  >
+  <Heading class="flex items-center justify-between text-lg font-medium">
     {
       href ? (
         <a
@@ -65,7 +62,7 @@ const tagsProps = tagsStyle ? { style: tagsStyle } : {}
           />
           <span
             class:list={{ "leading-tight": Boolean(transitionNames.logo) }}
-            style={transitionNames.logo ? getTransitionStyle("title") : undefined}
+            style={getTransitionStyle("title")}
           >
             {title}
           </span>
@@ -81,34 +78,21 @@ const tagsProps = tagsStyle ? { style: tagsStyle } : {}
           />
           <span
             class:list={{ "leading-tight": Boolean(transitionNames.logo) }}
-            style={transitionNames.logo ? getTransitionStyle("title") : undefined}
+            style={getTransitionStyle("title")}
           >
             {title}
           </span>
         </span>
       ) : (
-        title
+        <span style={getTransitionStyle("title")}>{title}</span>
       )
     }
 
-    {
-      sourceUrl ? (
-        <a
-          aria-label={`View ${title} on GitHub`}
-          href={`${sourceUrl}?ref=rxtsel.dev`}
-          rel="noopener noreferrer"
-          style={getTransitionStyle("source")}
-          target="_blank"
-          title="View source on GitHub"
-        >
-          <GitHubIcon class="text-foreground size-4.5 shrink-0" />
-        </a>
-      ) : (
-        <span style={getTransitionStyle("source")}>
-          <GitHubIcon class="size-4.5 shrink-0 opacity-40" />
-        </span>
-      )
-    }
+    <GitHubButton
+      href={sourceUrl ? `${sourceUrl}?ref=rxtsel.dev` : undefined}
+      label={sourceUrl ? `View ${title} on GitHub` : "Source code unavailable"}
+      transitionStyle={getTransitionStyle("source")}
+    />
   </Heading>
 
   <p class="text-muted-foreground flex-1" style={getTransitionStyle("description")}>{description}</p>

@@ -3,13 +3,10 @@ import type { MarkdownHeading } from "astro"
 import xialuIcon from "@/assets/projects/xialu.webp?inline"
 import catPhoto from "@/assets/projects/xialu/cat.webp"
 import ArrowIcon from "@/assets/arrow.svg"
-import PageToolbar from "@/components/PageToolbar.astro"
-import ContentWithToc from "@/components/ContentWithToc.astro"
 import StackList from "@/components/StackList.astro"
-import MainLayout from "@/layouts/MainLayout.astro"
-import { getLocaleLanguageTag, locales, type LanguageLink, type Locale } from "@/lib/i18n"
+import ProjectLayout from "@/layouts/ProjectLayout.astro"
+import type { Locale } from "@/lib/i18n"
 import { projectPages } from "@/lib/project-pages"
-import { getProjectsHeadingTransitionName, getProjectTransitionName } from "@/lib/projects"
 
 interface Props {
   locale: Locale
@@ -173,7 +170,6 @@ const content = {
 } satisfies Record<Locale, unknown>
 const copy = content[locale]
 const project = projectPages.xialu
-const transitionProject = { data: { locale, translationKey: "xialu" } }
 const projectLocale = project.locales[locale]
 const stackItems = [
   { name: "React Native", slug: "react", href: "https://reactnative.dev/" },
@@ -226,180 +222,115 @@ const headings: MarkdownHeading[] = [
 const sectionStyles = Object.fromEntries(
   headings.map((heading, index) => [heading.slug, `view-timeline-name: --toc-section-${index}`]),
 )
-const languageLinks = locales.map((locale) => ({
-  href: project.locales[locale].path,
-  locale,
-})) satisfies LanguageLink[]
-const alternates = {
-  defaultLocale: "en",
-  entries: [
-    ...languageLinks.map((link) => ({
-      href: new URL(link.href, Astro.site).toString(),
-      hreflang: getLocaleLanguageTag(link.locale),
-    })),
-    { href: new URL(project.locales.en.path, Astro.site).toString(), hreflang: "x-default" },
-  ],
-}
 ---
 
-<MainLayout
-  alternates={alternates}
-  canonical={canonical}
+<ProjectLayout
   description={copy.description}
-  lang={locale}
-  languageLinks={languageLinks}
+  facts={copy.facts}
+  headings={headings}
+  intro={copy.intro}
+  lead={copy.lead}
+  locale={locale}
+  logo={xialuIcon}
+  markdown={markdown}
   ogImage={ogImage}
-  ogImageAlt={`${project.title}: ${projectLocale.description}`}
-  title={copy.title}
+  pageTitle={copy.title}
+  slug="xialu"
+  title="Xialu"
 >
-  <link blocking="render" href="#site-footer" rel="expect" slot="head" />
-  <ContentWithToc headings={headings} locale={locale}>
-    <main class="w-full min-w-0">
-      <article>
-        <header>
-          <PageToolbar
-            backHref={copy.projectsPath}
-            backLabel={copy.back}
-            backTransitionName={getProjectsHeadingTransitionName(locale)}
-            locale={locale}
-            markdown={markdown}
-            title={copy.title}
-            url={canonical}
-          />
-          <div class="flex items-center gap-4">
-            <img
-              alt={copy.logoAlt}
-              class="size-20 shrink-0"
-              decoding="sync"
-              height={80}
-              loading="eager"
-              src={xialuIcon}
-              style={`view-transition-name: var(--project-identity-transition, ${getProjectTransitionName(transitionProject, "logo")})`}
-              width={80}
-            />
-            <div class="min-w-0">
-              <h1
-                class="w-fit text-3xl leading-tight font-semibold sm:text-4xl"
-                style={`view-transition-name: var(--project-identity-transition, ${getProjectTransitionName(transitionProject, "title")})`}
-              >
-                Xialu
-              </h1>
-              <p class="mt-2 text-base font-medium text-balance sm:text-lg">{copy.lead}</p>
-            </div>
+  <div
+    class="prose prose-neutral prose-sm dark:prose-invert prose-p:text-muted-foreground prose-headings:text-balance lg:prose-base max-w-none"
+  >
+    {
+      hasMedia && (
+        <section aria-labelledby="xialu-media" data-toc-section style={sectionStyles["xialu-media"]}>
+          <h2 id="xialu-media">{copy.media}</h2>
+          <div class="not-prose [&_video]:h-auto [&_video]:w-full">
+            <slot name="media" />
           </div>
-          <p class="text-muted-foreground mt-6 leading-7 text-pretty">{copy.intro}</p>
-          <dl class="mt-6 grid gap-5 border-y py-5 sm:grid-cols-3">
-            {
-              copy.facts.map((fact) => (
-                <div>
-                  <dt class="text-muted-foreground text-sm">{fact.label}</dt>
-                  <dd class="mt-1 text-sm font-medium">{fact.value}</dd>
-                </div>
-              ))
-            }
-          </dl>
-        </header>
+        </section>
+      )
+    }
 
-        <div
-          class="prose prose-neutral prose-sm dark:prose-invert prose-p:text-muted-foreground prose-headings:text-balance lg:prose-base max-w-none"
-        >
-          {
-            hasMedia && (
-              <section aria-labelledby="xialu-media" data-toc-section style={sectionStyles["xialu-media"]}>
-                <h2 id="xialu-media">{copy.media}</h2>
-                <div class="not-prose [&_video]:h-auto [&_video]:w-full">
-                  <slot name="media" />
-                </div>
-              </section>
-            )
-          }
+    <section aria-labelledby="xialu-features" data-toc-section style={sectionStyles["xialu-features"]}>
+      <h2 id="xialu-features">{copy.featuresHeading}</h2>
+      <ul>
+        {
+          copy.features.map((feature) => (
+            <li>
+              <strong>{feature.title}.</strong> {feature.body}
+            </li>
+          ))
+        }
+      </ul>
+    </section>
 
-          <section aria-labelledby="xialu-features" data-toc-section style={sectionStyles["xialu-features"]}>
-            <h2 id="xialu-features">{copy.featuresHeading}</h2>
-            <ul>
-              {
-                copy.features.map((feature) => (
-                  <li>
-                    <strong>{feature.title}.</strong> {feature.body}
-                  </li>
-                ))
-              }
-            </ul>
+    <section aria-labelledby="xialu-local-first" data-toc-section style={sectionStyles["xialu-local-first"]}>
+      <h2 id="xialu-local-first">{copy.whyHeading}</h2>
+      <p>{copy.why}</p>
+    </section>
+
+    <section aria-labelledby="xialu-engineering">
+      <!-- Keep the H2 timeline separate from its H3 sections so progress never overlaps. -->
+      <div data-toc-section style={sectionStyles["xialu-engineering"]}>
+        <h2 id="xialu-engineering">{copy.engineeringHeading}</h2>
+      </div>
+      {
+        copy.decisions.map((decision, index) => (
+          <section data-toc-section style={sectionStyles[`xialu-decision-${index}`]}>
+            <h3 id={`xialu-decision-${index}`}>{decision.title}</h3>
+            <p>{decision.body}</p>
           </section>
+        ))
+      }
+      <ol
+        aria-label={copy.architectureLabel}
+        class="not-prose my-6 flex list-none flex-wrap items-center gap-x-2 gap-y-2 border-y px-0 py-4 text-sm"
+      >
+        {
+          copy.architecture.map((layer, index) => (
+            <li class="inline-flex items-center gap-2">
+              {index > 0 && <ArrowIcon aria-hidden="true" class="size-3.5 shrink-0 rotate-90" />}
+              <span>{layer}</span>
+            </li>
+          ))
+        }
+      </ol>
+    </section>
 
-          <section
-            aria-labelledby="xialu-local-first"
-            data-toc-section
-            style={sectionStyles["xialu-local-first"]}
-          >
-            <h2 id="xialu-local-first">{copy.whyHeading}</h2>
-            <p>{copy.why}</p>
-          </section>
+    <section aria-labelledby="xialu-workflow" data-toc-section style={sectionStyles["xialu-workflow"]}>
+      <h2 id="xialu-workflow">{copy.workflowHeading}</h2>
+      {copy.workflow.map((paragraph) => <p>{paragraph}</p>)}
+    </section>
 
-          <section aria-labelledby="xialu-engineering">
-            <!-- Keep the H2 timeline separate from its H3 sections so progress never overlaps. -->
-            <div data-toc-section style={sectionStyles["xialu-engineering"]}>
-              <h2 id="xialu-engineering">{copy.engineeringHeading}</h2>
-            </div>
-            {
-              copy.decisions.map((decision, index) => (
-                <section data-toc-section style={sectionStyles[`xialu-decision-${index}`]}>
-                  <h3 id={`xialu-decision-${index}`}>{decision.title}</h3>
-                  <p>{decision.body}</p>
-                </section>
-              ))
-            }
-            <ol
-              aria-label={copy.architectureLabel}
-              class="not-prose my-6 flex list-none flex-wrap items-center gap-x-2 gap-y-2 border-y px-0 py-4 text-sm"
-            >
-              {
-                copy.architecture.map((layer, index) => (
-                  <li class="inline-flex items-center gap-2">
-                    {index > 0 && <ArrowIcon aria-hidden="true" class="size-3.5 shrink-0 rotate-90" />}
-                    <span>{layer}</span>
-                  </li>
-                ))
-              }
-            </ol>
-          </section>
+    <section aria-labelledby="xialu-stack" data-toc-section style={sectionStyles["xialu-stack"]}>
+      <h2 id="xialu-stack">{copy.stackHeading}</h2>
+      <StackList stackItems={stackItems} />
+    </section>
 
-          <section aria-labelledby="xialu-workflow" data-toc-section style={sectionStyles["xialu-workflow"]}>
-            <h2 id="xialu-workflow">{copy.workflowHeading}</h2>
-            {copy.workflow.map((paragraph) => <p>{paragraph}</p>)}
-          </section>
+    <section aria-labelledby="xialu-ai-tools" data-toc-section style={sectionStyles["xialu-ai-tools"]}>
+      <h2 id="xialu-ai-tools">{copy.toolsHeading}</h2>
+      <StackList stackItems={aiTools} />
+    </section>
+  </div>
 
-          <section aria-labelledby="xialu-stack" data-toc-section style={sectionStyles["xialu-stack"]}>
-            <h2 id="xialu-stack">{copy.stackHeading}</h2>
-            <StackList stackItems={stackItems} />
-          </section>
-
-          <section aria-labelledby="xialu-ai-tools" data-toc-section style={sectionStyles["xialu-ai-tools"]}>
-            <h2 id="xialu-ai-tools">{copy.toolsHeading}</h2>
-            <StackList stackItems={aiTools} />
-          </section>
-        </div>
-
-        <footer class="text-muted-foreground mt-8 border-t pt-6 text-sm">
-          <p>{copy.identity}</p>
-          <figure class="mx-auto mt-4 w-full max-w-80 border bg-white p-3 shadow-sm dark:shadow-md">
-            <img
-              alt={copy.catAlt}
-              class="h-auto w-full"
-              decoding="async"
-              height={catPhoto.height}
-              loading="lazy"
-              src={catPhoto.src}
-              width={catPhoto.width}
-            />
-            <figcaption class="pt-5 pb-3 text-center">
-              <time class="block text-xs text-neutral-600" datetime="2026-11-07">
-                {locale === "es" ? "7 de noviembre de 2026" : "November 7, 2026"}
-              </time>
-            </figcaption>
-          </figure>
-        </footer>
-      </article>
-    </main>
-  </ContentWithToc>
-</MainLayout>
+  <footer class="text-muted-foreground mt-8 border-t pt-6 text-sm">
+    <p>{copy.identity}</p>
+    <figure class="mx-auto mt-4 w-full max-w-80 border bg-white p-3 shadow-sm dark:shadow-md">
+      <img
+        alt={copy.catAlt}
+        class="h-auto w-full"
+        decoding="async"
+        height={catPhoto.height}
+        loading="lazy"
+        src={catPhoto.src}
+        width={catPhoto.width}
+      />
+      <figcaption class="pt-5 pb-3 text-center">
+        <time class="block text-xs text-neutral-600" datetime="2026-11-07">
+          {locale === "es" ? "7 de noviembre de 2026" : "November 7, 2026"}
+        </time>
+      </figcaption>
+    </figure>
+  </footer>
+</ProjectLayout>

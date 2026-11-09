@@ -3,23 +3,29 @@ import type { ImageMetadata } from "astro"
 import { Image } from "astro:assets"
 import CloseIcon from "@/assets/close.svg"
 import type { Locale } from "@/lib/i18n"
+import { getScreenshotPlaceholderCount, type ScreenshotOrientation } from "@/lib/screenshots"
 
 interface Props {
   id: string
   locale: Locale
   screenshots: { src: ImageMetadata; title: string; alt: string }[]
+  orientation: ScreenshotOrientation
 }
 
-const { id, locale, screenshots } = Astro.props
+const { id, locale, screenshots, orientation } = Astro.props
+const placeholders = getScreenshotPlaceholderCount(screenshots.length, orientation)
+const singleHorizontal = orientation === "horizontal" && screenshots.length === 1
 const labels = {
   en: {
     gallery: "Project screenshots",
+    placeholder: "Screenshot not yet available",
     open: "Enlarge screenshot",
     close: "Close screenshot",
     loading: "Loading screenshot…",
   },
   es: {
     gallery: "Capturas del proyecto",
+    placeholder: "Captura aún no disponible",
     open: "Ampliar captura",
     close: "Cerrar captura",
     loading: "Cargando captura…",
@@ -27,7 +33,7 @@ const labels = {
 }[locale]
 ---
 
-<div data-loading-label={labels.loading} data-screenshot-gallery>
+<div data-loading-label={labels.loading} data-orientation={orientation} data-screenshot-gallery>
   <ul aria-label={labels.gallery} class="gallery-strip">
     {
       screenshots.map((screenshot, index) => {
@@ -46,10 +52,22 @@ const labels = {
                 format="webp"
                 loading={index < 4 ? "eager" : "lazy"}
                 quality={90}
-                sizes="(min-width: 640px) 160px, 42vw"
+                sizes={
+                  singleHorizontal
+                    ? "(min-width: 640px) 640px, 100vw"
+                    : orientation === "vertical"
+                      ? "(min-width: 640px) 160px, 42vw"
+                      : "(min-width: 640px) 320px, 85vw"
+                }
                 src={screenshot.src}
-                width={480}
-                widths={[160, 320, 480]}
+                width={singleHorizontal ? 1280 : orientation === "vertical" ? 480 : 960}
+                widths={
+                  singleHorizontal
+                    ? [320, 640, 1280]
+                    : orientation === "vertical"
+                      ? [160, 320, 480]
+                      : [320, 640, 960]
+                }
               />
               <span class="gallery-caption">{screenshot.title}</span>
             </a>
@@ -74,6 +92,13 @@ const labels = {
           </li>
         )
       })
+    }
+    {
+      Array.from({ length: placeholders }, () => (
+        <li class="gallery-shot">
+          <div aria-label={labels.placeholder} class="gallery-placeholder" role="img" />
+        </li>
+      ))
     }
   </ul>
   <span class="sr-only" data-gallery-status role="status"></span>
@@ -119,6 +144,37 @@ const labels = {
     scroll-snap-type: x proximity;
     scrollbar-width: none;
     list-style: none;
+  }
+
+  [data-orientation="horizontal"] .gallery-strip {
+    grid-auto-columns: 85%;
+  }
+
+  .gallery-placeholder {
+    aspect-ratio: 9 / 19.5;
+    border: 1px solid var(--border);
+    background: repeating-linear-gradient(135deg, transparent 0 7px, var(--border) 7px 8px);
+  }
+
+  [data-orientation="horizontal"] .gallery-placeholder {
+    aspect-ratio: 16 / 10;
+  }
+
+  [data-orientation="horizontal"] .gallery-link :global(.gallery-thumbnail) {
+    aspect-ratio: 16 / 10;
+    object-fit: contain;
+  }
+
+  [data-orientation="horizontal"] .gallery-full-image {
+    border-radius: 0.5rem;
+  }
+
+  [data-orientation="horizontal"] .gallery-strip:has(> :only-child) {
+    grid-auto-columns: 100%;
+  }
+
+  [data-orientation="horizontal"] .gallery-strip:has(> :only-child) :global(.gallery-thumbnail) {
+    aspect-ratio: auto;
   }
 
   .gallery-strip::-webkit-scrollbar {
@@ -245,6 +301,14 @@ const labels = {
 
     .gallery-strip:has(> :nth-child(5)) {
       grid-auto-columns: calc((100% - 3rem) / 4.25);
+    }
+
+    [data-orientation="horizontal"] .gallery-strip {
+      grid-auto-columns: calc((100% - 0.75rem) / 2);
+    }
+
+    [data-orientation="horizontal"] .gallery-strip:has(> :nth-child(3)) {
+      grid-auto-columns: calc((100% - 1.5rem) / 2.15);
     }
   }
 </style>
