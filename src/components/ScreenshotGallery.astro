@@ -2,6 +2,7 @@
 import type { ImageMetadata } from "astro"
 import { Image } from "astro:assets"
 import CloseIcon from "@/assets/close.svg"
+import ArrowIcon from "@/assets/arrow.svg"
 import type { Locale } from "@/lib/i18n"
 import { getScreenshotPlaceholderCount, type ScreenshotOrientation } from "@/lib/screenshots"
 
@@ -21,6 +22,8 @@ const labels = {
     placeholder: "Screenshot not yet available",
     open: "Enlarge screenshot",
     close: "Close screenshot",
+    previous: "Previous screenshot",
+    next: "Next screenshot",
     loading: "Loading screenshot…",
   },
   es: {
@@ -28,6 +31,8 @@ const labels = {
     placeholder: "Captura aún no disponible",
     open: "Ampliar captura",
     close: "Cerrar captura",
+    previous: "Captura anterior",
+    next: "Siguiente captura",
     loading: "Cargando captura…",
   },
 }[locale]
@@ -41,6 +46,8 @@ const labels = {
         return (
           <li class="gallery-shot" style={`--shot-name: shot-${dialogId}`}>
             <a
+              aria-controls={id}
+              aria-haspopup="dialog"
               aria-label={`${labels.open}: ${screenshot.title}`}
               class="gallery-link"
               data-screenshot-open={dialogId}
@@ -71,24 +78,6 @@ const labels = {
               />
               <span class="gallery-caption">{screenshot.title}</span>
             </a>
-            <dialog aria-label={screenshot.title} closedby="any" id={dialogId}>
-              <header class="gallery-dialog-header">
-                <form method="dialog">
-                  <button aria-label={labels.close} type="submit">
-                    <CloseIcon aria-hidden="true" />
-                  </button>
-                </form>
-              </header>
-              <img
-                alt={screenshot.alt}
-                class="gallery-full-image"
-                decoding="async"
-                height={screenshot.src.height}
-                loading="lazy"
-                src={screenshot.src.src}
-                width={screenshot.src.width}
-              />
-            </dialog>
           </li>
         )
       })
@@ -101,6 +90,49 @@ const labels = {
       ))
     }
   </ul>
+  {
+    screenshots.length > 0 && (
+      <dialog aria-label={labels.gallery} closedby="any" data-gallery-dialog id={id}>
+        <header class="gallery-dialog-header">
+          {screenshots.length > 1 && (
+            <div class="gallery-dialog-controls">
+              <button aria-label={labels.previous} data-gallery-previous disabled type="button">
+                <ArrowIcon aria-hidden="true" class="-rotate-90" />
+              </button>
+              <button aria-label={labels.next} data-gallery-next type="button">
+                <ArrowIcon aria-hidden="true" class="rotate-90" />
+              </button>
+            </div>
+          )}
+          <form method="dialog">
+            <button aria-label={labels.close} data-gallery-close type="submit">
+              <CloseIcon aria-hidden="true" />
+            </button>
+          </form>
+        </header>
+        <ul aria-label={labels.gallery} class="gallery-slides" data-gallery-slides>
+          {screenshots.map((screenshot, index) => (
+            <li
+              aria-hidden={index !== 0 ? "true" : "false"}
+              class="gallery-slide"
+              data-active={index === 0 ? "" : undefined}
+              data-screenshot-title={screenshot.title}
+            >
+              <img
+                alt={screenshot.alt}
+                class="gallery-full-image"
+                data-src={screenshot.src.src}
+                decoding="async"
+                draggable="false"
+                height={screenshot.src.height}
+                width={screenshot.src.width}
+              />
+            </li>
+          ))}
+        </ul>
+      </dialog>
+    )
+  }
   <span class="sr-only" data-gallery-status role="status"></span>
 </div>
 
@@ -212,13 +244,15 @@ const labels = {
     line-height: 1.5;
   }
 
-  .gallery-shot:global([data-transitioning]):not(:has(dialog:modal)) :global(.gallery-thumbnail) {
+  [data-screenshot-gallery]:not(:has(dialog:modal))
+    .gallery-shot:global([data-transitioning])
+    :global(.gallery-thumbnail) {
     view-transition-name: var(--shot-name);
   }
 
   dialog {
-    width: fit-content;
-    max-width: calc(100vw - 2rem);
+    width: calc(100vw - 2rem);
+    max-width: 100%;
     max-height: calc(100dvh - 2rem);
     margin: auto;
     padding: 0;
@@ -228,30 +262,77 @@ const labels = {
     border: 0;
   }
 
+  [data-orientation="vertical"] dialog {
+    width: min(calc(100vw - 2rem), max(9rem, calc((100dvh - 8rem) * 9 / 19.5)));
+  }
+
   dialog::backdrop {
     background: rgb(0 0 0 / 80%);
+  }
+
+  dialog:global([aria-busy="true"]) {
+    cursor: progress;
+  }
+
+  .gallery-slides {
+    display: flex;
+    height: calc(100dvh - 8rem);
+    margin: 0;
+    padding: 0;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    list-style: none;
+  }
+
+  .gallery-slides::-webkit-scrollbar {
+    display: none;
+  }
+
+  .gallery-slide {
+    display: flex;
+    flex: 0 0 100%;
+    align-items: center;
+    justify-content: center;
+    min-width: 0;
+    scroll-snap-align: center;
+    scroll-snap-stop: always;
+  }
+
+  .gallery-dialog-controls {
+    display: flex;
+    gap: 0.25rem;
   }
 
   .gallery-dialog-header {
     display: flex;
     align-items: center;
-    justify-content: flex-end;
+    justify-content: space-between;
     margin-bottom: 0.5rem;
+  }
+
+  .gallery-dialog-header form {
+    margin-left: auto;
   }
 
   .gallery-dialog-header button {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 2.5rem;
-    height: 2.5rem;
+    width: 2.75rem;
+    height: 2.75rem;
     color: #d4d4d8;
     background: transparent;
     border: 0;
   }
 
-  .gallery-dialog-header button:hover {
+  .gallery-dialog-header button:hover:not(:disabled) {
     color: #fff;
+  }
+
+  .gallery-dialog-header button:disabled {
+    opacity: 0.35;
   }
 
   .gallery-dialog-header button:focus-visible {
@@ -267,9 +348,9 @@ const labels = {
   .gallery-full-image {
     display: block;
     width: auto;
-    max-width: calc(100vw - 2rem);
+    max-width: 100%;
     height: auto;
-    max-height: calc(100dvh - 6rem);
+    max-height: 100%;
     margin-inline: auto;
     object-fit: contain;
     background: #000;
@@ -278,7 +359,7 @@ const labels = {
     outline: 1px solid #52525b;
   }
 
-  .gallery-shot:global([data-transitioning]) dialog:modal .gallery-full-image {
+  dialog:global([data-transitioning]):modal .gallery-slide:global([data-active]) .gallery-full-image {
     view-transition-name: var(--shot-name);
   }
 

@@ -1,5 +1,15 @@
 import assert from "node:assert/strict"
+import { readFileSync } from "node:fs"
 import test from "node:test"
+import { URL } from "node:url"
+
+test("gallery markup uses one native scroll-snap dialog without a counter", () => {
+  const source = readFileSync(new URL("../src/components/ScreenshotGallery.astro", import.meta.url), "utf8")
+  assert.equal((source.match(/<dialog\b/g) ?? []).length, 1)
+  assert.match(source, /scroll-snap-type: x mandatory/)
+  assert.match(source, /screenshots.length > 1 &&/)
+  assert.doesNotMatch(source, /<output\b|data-gallery-position|scroll-marker/)
+})
 
 const deferred = () => {
   let resolve
@@ -9,18 +19,23 @@ const deferred = () => {
   return { promise, resolve }
 }
 
-test("gallery loads before capturing and discards cancelled or superseded openings", async (t) => {
-  const galleryEvents = new Map()
+test("the shared gallery preserves loading, zoom and native carousel navigation", async (t) => {
   const documentEvents = new Map()
   const windowEvents = new Map()
   const motion = { matches: false }
   const status = { textContent: "" }
   let transitions = 0
   let manualTransitions = false
+  let observer
   const updates = []
 
   class Element {
     attributes = new Map()
+    dataset = {}
+    events = new Map()
+    style = { setProperty: (key, value) => this.attributes.set(key, value) }
+    scrollLeft = 0
+    clientWidth = 100
     setAttribute(name, value) {
       this.attributes.set(name, value)
     }
@@ -30,50 +45,97 @@ test("gallery loads before capturing and discards cancelled or superseded openin
     removeAttribute(name) {
       this.attributes.delete(name)
     }
+    toggleAttribute(name, force) {
+      if (force) {
+        this.setAttribute(name, "")
+      } else {
+        this.removeAttribute(name)
+      }
+    }
+    addEventListener(name, handler) {
+      this.events.set(name, handler)
+    }
+    focus() {
+      document.activeElement = this
+    }
+    getBoundingClientRect() {
+      return { left: 0 }
+    }
+    scrollTo({ left }) {
+      this.scrollLeft = left
+    }
   }
   class HTMLDialogElement extends Element {
-    parentElement = new Element()
     isConnected = true
     open = false
-    image = { loading: "lazy", decode: async () => {} }
-    events = new Map()
     showModal() {
       this.open = true
     }
     close() {
       this.open = false
+      this.events.get("close")?.()
     }
-    querySelector() {
-      return this.image
-    }
-    addEventListener(name, handler) {
-      this.events.set(name, handler)
+    contains(element) {
+      return [this, viewport, previousButton, nextButton, closeButton, ...slides, ...images].includes(element)
     }
   }
-  const dialogs = [new HTMLDialogElement(), new HTMLDialogElement()]
-  const links = dialogs.map((_, index) => {
+  const dialog = new HTMLDialogElement()
+  const viewport = new Element()
+  const strip = new Element()
+  const previousButton = new Element()
+  const nextButton = new Element()
+  const closeButton = new Element()
+  const shots = Array.from({ length: 3 }, () => new Element())
+  const slides = shots.map((_, index) => {
+    const slide = new Element()
+    slide.dataset = { screenshotTitle: `Screenshot ${index + 1}` }
+    return slide
+  })
+  const links = shots.map((shot, index) => {
     const link = new Element()
     link.dataset = { screenshotOpen: `example-${index}` }
+    link.href = `https://example.com/${index}.webp`
+    link.parentElement = shot
     link.closest = () => link
     return link
   })
-  const gallery = {
-    dataset: { loadingLabel: "Loading screenshot…" },
-    contains: (element) => links.includes(element),
-    querySelector: () => status,
-    querySelectorAll: () => dialogs,
-    addEventListener: (name, handler) => galleryEvents.set(name, handler),
-  }
+  const images = shots.map((_, index) => {
+    const image = new Element()
+    image.dataset = { src: links[index].href }
+    image.loading = "lazy"
+    image.decode = async () => {}
+    Object.defineProperty(image, "src", {
+      set(src) {
+        image.setAttribute("src", src)
+      },
+    })
+    return image
+  })
+  const gallery = new Element()
+  gallery.dataset = { loadingLabel: "Loading screenshot…" }
+  gallery.contains = (element) => links.includes(element) || dialog.contains(element)
+  gallery.querySelector = (selector) =>
+    ({
+      "[data-gallery-dialog]": dialog,
+      "[data-gallery-slides]": viewport,
+      ".gallery-strip": strip,
+      "[data-gallery-status]": status,
+      "[data-gallery-previous]": previousButton,
+      "[data-gallery-next]": nextButton,
+      "[data-gallery-close]": closeButton,
+    })[selector]
+  gallery.querySelectorAll = (selector) =>
+    ({ "[data-screenshot-open]": links, ".gallery-slide": slides, ".gallery-full-image": images })[selector]
   const document = {
     hidden: false,
+    activeElement: null,
     querySelectorAll: () => [gallery],
-    getElementById: (id) => dialogs.find((_, index) => id === `example-${index}`),
     addEventListener: (name, handler) => documentEvents.set(name, handler),
     startViewTransition: (update) => {
       transitions++
       const done = deferred()
       const run = () => {
-        assert.equal(update(), undefined, "snapshot updates must not wait on asynchronous work")
+        assert.equal(update(), undefined, "snapshots must not wait on asynchronous work")
         done.resolve()
       }
       if (manualTransitions) {
@@ -88,12 +150,20 @@ test("gallery loads before capturing and discards cancelled or superseded openin
     document,
     Element,
     HTMLDialogElement,
+    IntersectionObserver: class {
+      constructor(callback, options) {
+        assert.equal(options.root, viewport)
+        this.callback = callback
+        observer = this
+      }
+      observe() {}
+    },
     window: {
       matchMedia: () => motion,
       addEventListener: (name, handler) => windowEvents.set(name, handler),
     },
   }
-  const previous = Object.fromEntries(Object.keys(globals).map((key) => [key, globalThis[key]]))
+  const saved = Object.fromEntries(Object.keys(globals).map((key) => [key, globalThis[key]]))
   Object.assign(globalThis, globals)
   const event = (extra = {}) => ({
     target: links[0],
@@ -104,90 +174,85 @@ test("gallery loads before capturing and discards cancelled or superseded openin
     },
     ...extra,
   })
-  const click = (index = 0, extra = {}) =>
-    galleryEvents.get("click")(event({ target: links[index], ...extra }))
-  const close = (index = 0, type = "cancel") => dialogs[index].events.get(type)(event())
+  const click = (index = 0) => gallery.events.get("click")(event({ target: links[index] }))
+  const close = (type = "cancel") => dialog.events.get(type)(event())
+  const key = (key, extra = {}) => documentEvents.get("keydown")(event({ key, ...extra }))
+  const swipe = (index) => {
+    viewport.scrollLeft = index * viewport.clientWidth
+    observer.callback([{ target: slides[index], isIntersecting: true, intersectionRatio: 0.75 }])
+  }
+  const resetDecodes = () => images.forEach((image) => (image.decode = async () => {}))
 
   try {
     await import("../src/scripts/screenshot-gallery.ts")
 
-    await t.test("slow decoding leaves the page interactive until the image is ready", async () => {
+    await t.test("decodes before freezing the page and loads only the selected image initially", async () => {
       const ready = deferred()
-      dialogs[0].image.decode = () => ready.promise
+      images[0].decode = () => ready.promise
       const opening = click()
-      assert.equal(dialogs[0].open, false)
+      assert.equal(dialog.open, false)
       assert.equal(transitions, 0)
-      assert.equal(dialogs[0].image.loading, "eager")
       assert.equal(links[0].getAttribute("aria-busy"), "true")
+      assert.equal(images[1].getAttribute("src"), null)
       assert.equal(status.textContent, "Loading screenshot…")
       ready.resolve()
       await opening
-      assert.equal(dialogs[0].open, true)
+      assert.equal(dialog.open, true)
       assert.equal(transitions, 1)
       assert.equal(links[0].getAttribute("aria-busy"), null)
-      assert.equal(status.textContent, "")
+      assert.equal(images[1].getAttribute("src"), links[1].href)
+      assert.equal(images[2].getAttribute("src"), null)
       close()
-      assert.equal(dialogs[0].open, false)
+      assert.equal(dialog.open, false)
     })
 
     for (const [name, cancel] of [
-      ["Escape", () => documentEvents.get("keydown")({ key: "Escape" })],
+      ["Escape", () => key("Escape")],
       ["outside click", () => documentEvents.get("click")({ target: new Element() })],
       ["page navigation", () => windowEvents.get("pagehide")()],
-      [
-        "hidden page",
-        () => {
-          document.hidden = true
-        },
-      ],
-      [
-        "removed dialog",
-        () => {
-          dialogs[0].isConnected = false
-        },
-      ],
+      ["hidden page", () => (document.hidden = true)],
+      ["removed dialog", () => (dialog.isConnected = false)],
     ]) {
-      await t.test(`${name} prevents a late image from opening a discarded dialog`, async () => {
+      await t.test(`${name} discards a pending opening`, async () => {
         const ready = deferred()
-        dialogs[0].image.decode = () => ready.promise
+        images[0].decode = () => ready.promise
         const count = transitions
         const opening = click()
         cancel()
         ready.resolve()
         await opening
-        assert.equal(dialogs[0].open, false)
+        assert.equal(dialog.open, false)
         assert.equal(transitions, count)
         assert.equal(links[0].getAttribute("aria-busy"), null)
         assert.equal(status.textContent, "")
         document.hidden = false
-        dialogs[0].isConnected = true
+        dialog.isConnected = true
       })
     }
 
-    await t.test("only the latest selection opens, even when older images finish first", async () => {
+    await t.test("only the latest selection opens", async () => {
       const first = deferred(),
         second = deferred()
-      dialogs[0].image.decode = () => first.promise
-      dialogs[1].image.decode = () => second.promise
+      images[0].decode = () => first.promise
+      images[1].decode = () => second.promise
       const count = transitions
       const older = click(0),
         latest = click(1)
-      assert.equal(links[0].getAttribute("aria-busy"), null)
-      assert.equal(links[1].getAttribute("aria-busy"), "true")
       first.resolve()
       await older
       assert.equal(transitions, count)
       second.resolve()
       await latest
-      assert.equal(dialogs[0].open, false)
-      assert.equal(dialogs[1].open, true)
-      close(1, "submit")
+      assert.equal(dialog.open, true)
+      assert.equal(slides[1].getAttribute("data-active"), "")
+      assert.equal(viewport.scrollLeft, 100)
+      close("submit")
     })
 
     await t.test("repeated clicks do not queue multiple openings", async () => {
       const ready = deferred()
       let decodes = 0
-      dialogs[0].image.decode = () => {
+      images[0].decode = () => {
         decodes++
         return ready.promise
       }
@@ -196,78 +261,149 @@ test("gallery loads before capturing and discards cancelled or superseded openin
       assert.equal(decodes, 1)
       ready.resolve()
       await opening
-      assert.equal(dialogs[0].open, true)
       close()
     })
 
-    await t.test("retrying the same link after cancellation does not revive its older request", async () => {
+    await t.test("retrying after cancellation does not revive the older request", async () => {
       const ready = deferred()
-      dialogs[0].image.decode = () => ready.promise
+      images[0].decode = () => ready.promise
       const count = transitions
       const older = click()
-      documentEvents.get("keydown")({ key: "Escape" })
+      key("Escape")
       const latest = click()
       ready.resolve()
       await Promise.all([older, latest])
-      assert.equal(dialogs[0].open, true)
+      assert.equal(dialog.open, true)
       assert.equal(transitions, count + 1)
       close()
     })
 
     await t.test("Escape also cancels an opening queued for the next snapshot", async () => {
-      dialogs[0].image.decode = async () => {}
+      resetDecodes()
       manualTransitions = true
       await click()
-      assert.equal(dialogs[0].open, false)
-      assert.equal(dialogs[0].parentElement.getAttribute("data-transitioning"), "")
-      documentEvents.get("keydown")({ key: "Escape" })
+      assert.equal(dialog.open, false)
+      assert.equal(shots[0].getAttribute("data-transitioning"), "")
+      key("Escape")
       updates.shift()()
       await Promise.resolve()
-      assert.equal(dialogs[0].open, false)
-      assert.equal(dialogs[0].parentElement.getAttribute("data-transitioning"), null)
+      assert.equal(dialog.open, false)
+      assert.equal(shots[0].getAttribute("data-transitioning"), null)
+      assert.equal(dialog.getAttribute("data-transitioning"), null)
       manualTransitions = false
     })
 
-    await t.test("a failed image still leaves a closable native dialog", async () => {
-      dialogs[0].image.decode = async () => {
+    await t.test("arrow keys and buttons navigate without restarting the zoom or wrapping", async () => {
+      resetDecodes()
+      await click()
+      const count = transitions
+      assert.equal(previousButton.disabled, true)
+      await key("ArrowLeft")
+      assert.equal(viewport.scrollLeft, 0)
+      await key("ArrowRight")
+      assert.equal(viewport.scrollLeft, 100)
+      assert.equal(previousButton.disabled, false)
+      await nextButton.events.get("click")()
+      assert.equal(viewport.scrollLeft, 200)
+      assert.equal(nextButton.disabled, true)
+      await key("ArrowRight")
+      assert.equal(viewport.scrollLeft, 200)
+      assert.equal(transitions, count)
+      await previousButton.events.get("click")()
+      assert.equal(dialog.getAttribute("aria-label"), "Screenshot 2")
+      assert.equal(slides[0].getAttribute("aria-hidden"), "true")
+      assert.equal(slides[1].getAttribute("aria-hidden"), "false")
+      close()
+      assert.equal(document.activeElement, links[1])
+      assert.equal(dialog.getAttribute("--shot-name"), "shot-example-1")
+    })
+
+    await t.test("rapid keys discard superseded loads and Escape cancels navigation", async () => {
+      resetDecodes()
+      await click()
+      const first = deferred(),
+        second = deferred()
+      images[1].decode = () => first.promise
+      images[2].decode = () => second.promise
+      const older = key("ArrowRight"),
+        latest = key("ArrowRight")
+      first.resolve()
+      await older
+      assert.equal(viewport.scrollLeft, 0)
+      second.resolve()
+      await latest
+      assert.equal(viewport.scrollLeft, 200)
+      const late = deferred()
+      images[1].decode = () => late.promise
+      const changing = key("ArrowLeft")
+      close()
+      late.resolve()
+      await changing
+      assert.equal(dialog.open, false)
+      assert.equal(links[1].getAttribute("aria-busy"), null)
+    })
+
+    await t.test("native swipes synchronize controls, title and the selected closing thumbnail", async () => {
+      resetDecodes()
+      await click(1)
+      nextButton.focus()
+      const count = transitions
+      swipe(2)
+      assert.equal(nextButton.disabled, true)
+      assert.equal(document.activeElement, closeButton)
+      assert.equal(dialog.getAttribute("aria-label"), "Screenshot 3")
+      assert.equal(transitions, count)
+      close()
+      assert.equal(document.activeElement, links[2])
+      assert.equal(dialog.getAttribute("--shot-name"), "shot-example-2")
+    })
+
+    await t.test("tapping empty viewer space closes while tapping the image does not", async () => {
+      resetDecodes()
+      await click()
+      viewport.events.get("click")(event({ target: images[0] }))
+      assert.equal(dialog.open, true)
+      viewport.events.get("click")(event({ target: slides[0] }))
+      assert.equal(dialog.open, false)
+    })
+
+    await t.test("failed images remain closable and modifiers keep their native behavior", async () => {
+      images[0].decode = async () => {
         throw new Error("Image unavailable")
       }
       await click()
-      assert.equal(dialogs[0].open, true)
+      assert.equal(dialog.open, true)
+      const modifiedKey = event({ key: "ArrowRight", altKey: true })
+      documentEvents.get("keydown")(modifiedKey)
+      assert.equal(modifiedKey.prevented, false)
       close()
-      assert.equal(dialogs[0].open, false)
+      const modified = event({ ctrlKey: true })
+      await gallery.events.get("click")(modified)
+      assert.equal(modified.prevented, false)
+      const closedArrow = event({ key: "ArrowRight" })
+      documentEvents.get("keydown")(closedArrow)
+      assert.equal(closedArrow.prevented, false)
     })
 
-    await t.test("reduced motion and missing API preserve native open and close", async () => {
-      dialogs[0].image.decode = async () => {}
+    await t.test("reduced motion and missing API retain navigation and native closing", async () => {
+      resetDecodes()
       const count = transitions
       motion.matches = true
       await click()
-      assert.equal(dialogs[0].open, true)
-      close(0, "submit")
-      assert.equal(dialogs[0].open, false)
+      await key("ArrowRight")
+      assert.equal(viewport.scrollLeft, 100)
+      close("submit")
       assert.equal(transitions, count)
       motion.matches = false
       const native = document.startViewTransition
       delete document.startViewTransition
       await click()
-      assert.equal(dialogs[0].open, true)
       close()
-      assert.equal(dialogs[0].open, false)
+      assert.equal(dialog.open, false)
       document.startViewTransition = native
     })
-
-    await t.test("modified clicks and missing targets keep their native link behavior", async () => {
-      const modified = event({ ctrlKey: true })
-      await galleryEvents.get("click")(modified)
-      assert.equal(modified.prevented, false)
-      links[0].dataset.screenshotOpen = "missing"
-      const missing = event()
-      await galleryEvents.get("click")(missing)
-      assert.equal(missing.prevented, false)
-    })
   } finally {
-    for (const [key, value] of Object.entries(previous)) {
+    for (const [key, value] of Object.entries(saved)) {
       if (value === undefined) {
         delete globalThis[key]
       } else {
