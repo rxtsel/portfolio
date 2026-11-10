@@ -22,7 +22,7 @@ items:
         tags:
           - extreme-programming
           - wpo
-      - role: Desarrollador Full Stack
+      - role: Desarrollador de Software - Full Stack
         startDate: 2025-01-02
         endDate: ""
         current: true
