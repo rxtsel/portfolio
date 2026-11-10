@@ -8,10 +8,9 @@ interface Props {
   background?: FaviconBackground
   href: string | undefined
   loading?: "lazy" | "eager"
-  transitionName?: string | undefined
 }
 
-const { background = "none", customFavicon, href, loading = "lazy", transitionName } = Astro.props
+const { background = "none", customFavicon, href, loading = "lazy" } = Astro.props
 
 const hostname = getFaviconHostname(href)
 const shouldRender = customFavicon || hostname
@@ -38,7 +37,7 @@ const imageSource = typeof src === "string" ? { src } : { src }
       loading={loading}
       quality={90}
       {...imageSource}
-      style={transitionName ? `view-transition-name: ${transitionName}` : undefined}
+      data-project-part="logo"
       width={18}
     />
   )

@@ -3,7 +3,7 @@ import { readFileSync } from "node:fs"
 import test from "node:test"
 import { URL } from "node:url"
 import { getProjectPage } from "../src/lib/project-pages.ts"
-import { getLocalizedProjects, getProjectTransitionName, getSelectedProjects } from "../src/lib/projects.ts"
+import { getLocalizedProjects, getSelectedProjects } from "../src/lib/projects.ts"
 
 test("coded project pages resolve by translation key in both languages", () => {
   const page = getProjectPage("xialu")
@@ -54,20 +54,27 @@ test("card title transitions stay on the text, even without a logo", () => {
   const heading = source.match(/<Heading\b[^>]*>/)?.[0]
   assert.ok(heading)
   assert.doesNotMatch(heading, /style=/)
-  assert.doesNotMatch(source, /transitionNames\.logo \? getTransitionStyle\("title"\)/)
-  assert.equal((source.match(/style=\{getTransitionStyle\("title"\)\}/g) ?? []).length, 3)
+  assert.equal((source.match(/data-project-part="title"/g) ?? []).length, 3)
+  assert.doesNotMatch(source, /view-transition-name/)
 })
 
-test("only project titles and optional logos share card-to-header transitions", () => {
-  const grid = readFileSync(new URL("../src/components/ProjectsGrid.astro", import.meta.url), "utf8")
-  const layout = readFileSync(new URL("../src/layouts/ProjectLayout.astro", import.meta.url), "utf8")
-  assert.match(grid, /title: getProjectTransitionName\(project, "title"\)/)
-  assert.match(grid, /favicon \? \{ logo: getProjectTransitionName\(project, "logo"\)/)
-  assert.doesNotMatch(grid, /(?:card|description|source|tags): getProjectTransitionName/)
-  for (const part of ["title", "logo"]) {
-    assert.ok(layout.includes(`getProjectTransitionName(transitionProject, "${part}")`))
-  }
-  assert.doesNotMatch(layout, /sourceTransitionStyle|transitionStyle=|backTransitionName=/)
+test("project identities are opt-in markers for just-in-time capture, not permanent snapshots", () => {
+  const read = (file) => readFileSync(new URL(`../src/${file}`, import.meta.url), "utf8")
+  const grid = read("components/ProjectsGrid.astro")
+  const layout = read("layouts/ProjectLayout.astro")
+  assert.match(grid, /data-project-path=\{detailPath\}/)
+  assert.match(layout, /data-project-path=\{Astro.url.pathname\}/)
+  assert.match(layout, /lead === description \? "description" : undefined/)
+  assert.doesNotMatch(grid + layout, /view-transition-name|backTransitionName=/)
+  const main = read("layouts/MainLayout.astro")
+  assert.match(main, /<script is:inline set:html=\{pageTransitions\}/)
+})
+
+test("disabled GitHub opacity belongs to the captured SVG, not its parent", () => {
+  const source = readFileSync(new URL("../src/components/GitHubButton.astro", import.meta.url), "utf8")
+  assert.match(source, /<button[^>]*disabled/)
+  assert.match(source, /<GitHubIcon[^>]*class="size-4 opacity-40"[^>]*data-project-part="source"/)
+  assert.doesNotMatch(source.match(/<button[^>]*>/)?.[0] ?? "", /opacity-40/)
 })
 
 test("the Projects heading does not animate into the detail back link", () => {
@@ -78,17 +85,6 @@ test("the Projects heading does not animate into the detail back link", () => {
 })
 
 for (const locale of ["en", "es"]) {
-  test(`title and logo transition identities survive CMS filename changes in ${locale}`, () => {
-    const data = { locale, translationKey: "xialu" }
-    const entry = { id: `${locale}/renamed-by-cms`, data }
-    const page = { data }
-    for (const part of ["title", "logo", "source"]) {
-      assert.equal(getProjectTransitionName(entry, part), `project-${locale}-xialu-${part}`)
-      assert.equal(getProjectTransitionName(entry, part), getProjectTransitionName(page, part))
-    }
-    assert.notEqual(getProjectTransitionName(page, "title"), getProjectTransitionName(page, "logo"))
-  })
-
   test(`project order is independent of dates and featured selection in ${locale}`, () => {
     const projects = [
       {

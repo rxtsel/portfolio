@@ -2,7 +2,7 @@
 import type { ImageMetadata } from "astro"
 import ProjectCard from "@/components/ProjectCard.astro"
 import { getProjectPage } from "@/lib/project-pages"
-import { getProjectDetailPath, getProjectTransitionName, type Project } from "@/lib/projects"
+import { getProjectDetailPath, type Project } from "@/lib/projects"
 
 type TaxonomyItem = {
   name: string
@@ -35,7 +35,10 @@ const logos = import.meta.glob<{ default: ImageMetadata }>("/src/assets/projects
       }
 
       return (
-        <li class="border odd:border-0 odd:border-x first-of-type:border-t last-of-type:border-b sm:odd:border">
+        <li
+          class="border odd:border-0 odd:border-x first-of-type:border-t last-of-type:border-b sm:odd:border"
+          data-project-path={detailPath}
+        >
           <ProjectCard
             customFavicon={favicon}
             description={project.data.description}
@@ -46,10 +49,6 @@ const logos = import.meta.glob<{ default: ImageMetadata }>("/src/assets/projects
             sourceUrl={project.data.sourceUrl as string}
             taxonomyItems={project.taxonomyItems}
             title={project.data.title}
-            transitionNames={{
-              title: getProjectTransitionName(project, "title"),
-              ...(favicon ? { logo: getProjectTransitionName(project, "logo") } : {}),
-            }}
           />
         </li>
       )

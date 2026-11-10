@@ -4,10 +4,9 @@ import GitHubIcon from "@/assets/logos/github.svg"
 interface Props {
   href: string | undefined
   label: string
-  transitionStyle?: string | undefined
 }
 
-const { href, label, transitionStyle } = Astro.props
+const { href, label } = Astro.props
 const buttonClass = "inline-flex size-8 shrink-0 items-center justify-center"
 ---
 
@@ -24,11 +23,11 @@ const buttonClass = "inline-flex size-8 shrink-0 items-center justify-center"
       target="_blank"
       title={label}
     >
-      <GitHubIcon aria-hidden="true" class="size-4" style={transitionStyle} />
+      <GitHubIcon aria-hidden="true" class="size-4" data-project-part="source" />
     </a>
   ) : (
-    <button aria-label={label} class:list={[buttonClass, "opacity-40"]} disabled type="button">
-      <GitHubIcon aria-hidden="true" class="size-4" style={transitionStyle} />
+    <button aria-label={label} class:list={buttonClass} disabled type="button">
+      <GitHubIcon aria-hidden="true" class="size-4 opacity-40" data-project-part="source" />
     </button>
   )
 }

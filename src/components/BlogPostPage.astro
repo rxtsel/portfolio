@@ -6,13 +6,7 @@ import PageToolbar from "@/components/PageToolbar.astro"
 import ContentWithToc from "@/components/ContentWithToc.astro"
 import MainLayout from "@/layouts/MainLayout.astro"
 import { getReadingMinutes, readBlogMarkdownContent } from "@/lib/blog-markdown"
-import {
-  getBlogHeadingTransitionName,
-  getBlogPostAlternateHref,
-  getBlogPostLanguageLinks,
-  getBlogPostTransitionName,
-  type BlogPost,
-} from "@/lib/blog"
+import { getBlogPostAlternateHref, getBlogPostLanguageLinks, type BlogPost } from "@/lib/blog"
 import { getAlternateBlogPosts, getLocaleLanguageTag, getLocalizedPath } from "@/lib/i18n"
 import { formatBlogDate, toIsoDateTime } from "@/lib/date-time"
 import { buildBlogPostGraph } from "@/lib/seo"
@@ -117,12 +111,11 @@ const graph = buildBlogPostGraph({
     <main
       class="prose prose-neutral prose-p:text-pretty prose-sm lg:prose-base dark:prose-invert prose-a:wrap-break-word prose-code:wrap-break-word prose-pre:max-w-full prose-pre:overflow-x-auto prose-table:block prose-table:max-w-full prose-table:overflow-x-auto prose-headings:text-balance w-full max-w-full min-w-0 [&_.expressive-code]:max-w-full [&_.expressive-code]:overflow-x-auto [&_figure]:max-w-full"
     >
-      <article>
+      <article data-blog-path={getBlogPostAlternateHref(post)}>
         <header>
           <PageToolbar
             backHref={blogHref}
             backLabel={labels[post.data.locale].backToBlog}
-            backTransitionName={getBlogHeadingTransitionName(post.data.locale)}
             locale={post.data.locale}
             markdown={markdown}
             markdownUrl={`${canonical.replace(/\/$/, "")}.md`}
@@ -130,22 +123,23 @@ const graph = buildBlogPostGraph({
             url={canonical}
           />
 
-          <h1 style={`view-transition-name: ${getBlogPostTransitionName(post, "title")}`}>
+          <h1 data-blog-part="title">
             {post.data.title}
           </h1>
 
-          <p style={`view-transition-name: ${getBlogPostTransitionName(post, "description")}`}>
+          <p data-blog-part="description">
             {post.data.description}
           </p>
 
           <div
             class="not-prose text-muted-foreground flex flex-wrap items-center justify-between gap-x-4 gap-y-2 text-sm"
-            style={`view-transition-name: ${getBlogPostTransitionName(post, "date")}`}
           >
             <div class="flex flex-wrap items-center gap-x-1 gap-y-2">
-              <time datetime={toIsoDateTime(publishedDate)}>
-                {labels[post.data.locale].published}
-                {" "}
+              <span>{labels[post.data.locale].published}</span>
+              <time
+                data-blog-part={!updatedDate ? "date" : undefined}
+                datetime={toIsoDateTime(publishedDate)}
+              >
                 {formatBlogDate(publishedDate, post.data.locale)}
               </time>
               {
@@ -154,8 +148,9 @@ const graph = buildBlogPostGraph({
                     <span aria-hidden="true" class="text-xs">
                       /
                     </span>
-                    <time datetime={toIsoDateTime(lastModifiedDate)}>
-                      {labels[post.data.locale].updated} {formatBlogDate(lastModifiedDate, post.data.locale)}
+                    <span>{labels[post.data.locale].updated}</span>
+                    <time data-blog-part="date" datetime={toIsoDateTime(lastModifiedDate)}>
+                      {formatBlogDate(lastModifiedDate, post.data.locale)}
                     </time>
                   </>
                 )
@@ -171,8 +166,8 @@ const graph = buildBlogPostGraph({
             taxonomyItems.length > 0 && (
               <ul
                 aria-label={labels[post.data.locale].categories}
-                class="not-prose my-6 flex list-none flex-wrap gap-2 ps-0"
-                style={`view-transition-name: ${getBlogPostTransitionName(post, "categories")}`}
+                class="not-prose my-6 flex w-fit list-none flex-wrap gap-2 ps-0"
+                data-blog-part="categories"
               >
                 {taxonomyItems.map((category) => (
                   <li class="text-muted-foreground retina:border-[0.5px] inline-flex items-center rounded-none border bg-zinc-50 px-1.5 py-0.5 font-mono text-xs dark:bg-zinc-900">

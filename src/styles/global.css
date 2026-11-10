@@ -14,6 +14,39 @@
   animation-duration: 180ms;
 }
 
+:root:active-view-transition-type(project, blog) {
+  &::view-transition-group(root) {
+    animation: none;
+  }
+
+  &::view-transition-old(root),
+  &::view-transition-old(*):only-child,
+  &::view-transition-old(project-header),
+  &::view-transition-old(project-toolbar),
+  &::view-transition-old(blog-header),
+  &::view-transition-old(blog-toolbar) {
+    display: none;
+  }
+
+  &::view-transition-new(root),
+  &::view-transition-new(*):only-child,
+  &::view-transition-new(project-header),
+  &::view-transition-new(project-toolbar),
+  &::view-transition-new(blog-header),
+  &::view-transition-new(blog-toolbar) {
+    animation: none;
+    mix-blend-mode: normal;
+  }
+
+  &::view-transition-group(project-header),
+  &::view-transition-group(project-toolbar),
+  &::view-transition-group(blog-header),
+  &::view-transition-group(blog-toolbar) {
+    z-index: 1;
+    animation: none;
+  }
+}
+
 @media (prefers-reduced-motion: no-preference) {
   html {
     scroll-behavior: smooth;

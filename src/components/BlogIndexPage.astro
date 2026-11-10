@@ -1,7 +1,7 @@
 ---
 import { getCollection } from "astro:content"
 import MainLayout from "@/layouts/MainLayout.astro"
-import { getBlogHeadingTransitionName, getPublishedBlogPosts } from "@/lib/blog"
+import { getPublishedBlogPosts } from "@/lib/blog"
 import { getDefaultLanguageLinks, type Locale } from "@/lib/i18n"
 import BlogPostList from "./BlogPostList.astro"
 
@@ -42,7 +42,7 @@ const posts = getPublishedBlogPosts(await getCollection("blog"), locale)
   <main
     class="prose dark:prose-invert prose-neutral prose-sm lg:prose-base prose-p:text-muted-foreground prose-a:no-underline max-w-none"
   >
-    <h1 class="w-fit" style={`view-transition-name: ${getBlogHeadingTransitionName(locale)}`}>Blog</h1>
+    <h1 class="w-fit">Blog</h1>
     <BlogPostList blogPost={posts} />
   </main>
 </MainLayout>

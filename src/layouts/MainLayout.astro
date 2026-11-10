@@ -4,6 +4,7 @@ import { buildPrefetchScript } from "c15t"
 import ConsentManager from "@/components/ConsentManager.astro"
 import ThemeInitScript from "@/components/ThemeInitScript.astro"
 import ThemeScript from "@/components/ThemeScript.astro"
+import pageTransitions from "@/scripts/page-transitions.js?raw"
 import { buildLayoutSeoProps, type LayoutSeoProps } from "@/lib/seo"
 import { PUBLIC_C15T_URL } from "astro:env/client"
 import "@/styles/global.css"
@@ -36,6 +37,8 @@ const consentPrefetchScript = consentBackendURL
     {/* eslint-disable-next-line astro/no-set-html-directive */}
     {consentPrefetchScript && <script is:inline set:html={consentPrefetchScript} />}
     <ThemeScript />
+    {/* eslint-disable-next-line astro/no-set-html-directive */}
+    <script is:inline set:html={pageTransitions} />
     <Seo {...seo} />
     <slot name="head" />
   </head>

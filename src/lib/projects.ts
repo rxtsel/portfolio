@@ -3,7 +3,6 @@ import type { Locale } from "@/lib/i18n"
 import { getProjectPage } from "./project-pages.ts"
 
 export type Project = CollectionEntry<"projects">
-export type ProjectTransitionPart = "card" | "description" | "logo" | "source" | "tags" | "title"
 
 export function getProjectDetailPath(project: Project) {
   const { locale, translationKey, detailPage } = project.data
@@ -11,15 +10,6 @@ export function getProjectDetailPath(project: Project) {
     getProjectPage(translationKey)?.locales[locale].path ??
     (detailPage ? `${locale === "es" ? "/es/proyectos" : "/projects"}/${translationKey}/` : undefined)
   )
-}
-
-export function getProjectTransitionName(
-  project: { data: Pick<Project["data"], "locale" | "translationKey"> },
-  part: ProjectTransitionPart,
-) {
-  const transitionId = `${project.data.locale}-${project.data.translationKey}`.replace(/[^a-zA-Z0-9_-]/g, "-")
-
-  return `project-${transitionId}-${part}`
 }
 
 function compareProjectsByOrder(current: Project, next: Project) {
