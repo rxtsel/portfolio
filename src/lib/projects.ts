@@ -13,10 +13,6 @@ export function getProjectDetailPath(project: Project) {
   )
 }
 
-export function getProjectsHeadingTransitionName(locale: Locale) {
-  return `projects-${locale}-heading`
-}
-
 export function getProjectTransitionName(
   project: { data: Pick<Project["data"], "locale" | "translationKey"> },
   part: ProjectTransitionPart,

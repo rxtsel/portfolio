@@ -3,12 +3,7 @@ import { readFileSync } from "node:fs"
 import test from "node:test"
 import { URL } from "node:url"
 import { getProjectPage } from "../src/lib/project-pages.ts"
-import {
-  getLocalizedProjects,
-  getProjectsHeadingTransitionName,
-  getProjectTransitionName,
-  getSelectedProjects,
-} from "../src/lib/projects.ts"
+import { getLocalizedProjects, getProjectTransitionName, getSelectedProjects } from "../src/lib/projects.ts"
 
 test("coded project pages resolve by translation key in both languages", () => {
   const page = getProjectPage("xialu")
@@ -63,9 +58,23 @@ test("card title transitions stay on the text, even without a logo", () => {
   assert.equal((source.match(/style=\{getTransitionStyle\("title"\)\}/g) ?? []).length, 3)
 })
 
-test("project navigation headings share a locale-specific identity", () => {
-  assert.equal(getProjectsHeadingTransitionName("en"), "projects-en-heading")
-  assert.equal(getProjectsHeadingTransitionName("es"), "projects-es-heading")
+test("only project titles and optional logos share card-to-header transitions", () => {
+  const grid = readFileSync(new URL("../src/components/ProjectsGrid.astro", import.meta.url), "utf8")
+  const layout = readFileSync(new URL("../src/layouts/ProjectLayout.astro", import.meta.url), "utf8")
+  assert.match(grid, /title: getProjectTransitionName\(project, "title"\)/)
+  assert.match(grid, /favicon \? \{ logo: getProjectTransitionName\(project, "logo"\)/)
+  assert.doesNotMatch(grid, /(?:card|description|source|tags): getProjectTransitionName/)
+  for (const part of ["title", "logo"]) {
+    assert.ok(layout.includes(`getProjectTransitionName(transitionProject, "${part}")`))
+  }
+  assert.doesNotMatch(layout, /sourceTransitionStyle|transitionStyle=|backTransitionName=/)
+})
+
+test("the Projects heading does not animate into the detail back link", () => {
+  const index = readFileSync(new URL("../src/components/ProjectsIndexPage.astro", import.meta.url), "utf8")
+  const heading = index.match(/<h1\b[^>]*>/)?.[0]
+  assert.ok(heading)
+  assert.doesNotMatch(heading, /view-transition-name/)
 })
 
 for (const locale of ["en", "es"]) {

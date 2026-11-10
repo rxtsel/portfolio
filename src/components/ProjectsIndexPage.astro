@@ -3,7 +3,7 @@ import { getCollection } from "astro:content"
 import MainLayout from "@/layouts/MainLayout.astro"
 import ProjectsGrid from "@/components/ProjectsGrid.astro"
 import { getLocaleLanguageTag, type LanguageLink, type Locale } from "@/lib/i18n"
-import { getLocalizedProjects, getProjectsHeadingTransitionName } from "@/lib/projects"
+import { getLocalizedProjects } from "@/lib/projects"
 import { getProjectTaxonomyItems } from "@/lib/taxonomy"
 
 interface Props {
@@ -78,10 +78,7 @@ const projects = getLocalizedProjects(await getCollection("projects"), locale).m
 >
   <link blocking="render" href="#site-footer" rel="expect" slot="head" />
   <main class="w-full min-w-0">
-    <h1
-      class="w-fit text-4xl font-semibold"
-      style={`view-transition-name: ${getProjectsHeadingTransitionName(locale)}`}
-    >
+    <h1 class="w-fit text-4xl font-semibold">
       {metadata[locale].title}
     </h1>
     <div class="mt-8">

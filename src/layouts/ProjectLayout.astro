@@ -6,7 +6,7 @@ import ContentWithToc from "@/components/ContentWithToc.astro"
 import PageToolbar from "@/components/PageToolbar.astro"
 import MainLayout from "@/layouts/MainLayout.astro"
 import { getLocaleLanguageTag, type LanguageLink, type Locale } from "@/lib/i18n"
-import { getProjectsHeadingTransitionName, getProjectTransitionName } from "@/lib/projects"
+import { getProjectTransitionName } from "@/lib/projects"
 
 interface Props {
   locale: Locale
@@ -58,7 +58,6 @@ const alternates = {
 }
 const transitionProject = { data: { locale, translationKey: slug } }
 const websiteHref = href && new URL(href).hostname !== "github.com" ? href : undefined
-const sourceTransitionStyle = `view-transition-name: var(--project-identity-transition, ${getProjectTransitionName(transitionProject, "source")})`
 const sourceLabel = locale === "es" ? `Ver ${title} en GitHub` : `View ${title} on GitHub`
 ---
 
@@ -80,7 +79,6 @@ const sourceLabel = locale === "es" ? `Ver ${title} en GitHub` : `View ${title} 
           <PageToolbar
             backHref={locale === "es" ? "/es/proyectos/" : "/projects/"}
             backLabel={locale === "es" ? "Proyectos" : "Projects"}
-            backTransitionName={getProjectsHeadingTransitionName(locale)}
             locale={locale}
             markdown={markdown}
             title={pageTitle}
@@ -133,7 +131,6 @@ const sourceLabel = locale === "es" ? `Ver ${title} en GitHub` : `View ${title} 
                     : locale === "es"
                       ? "Código fuente no disponible"
                       : "Source code unavailable"}
-                  transitionStyle={sourceTransitionStyle}
                 />
               </div>
               {lead && <p class="mt-2 text-base font-medium text-balance sm:text-lg">{lead}</p>}
