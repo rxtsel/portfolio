@@ -13,7 +13,7 @@ test("project detail links preserve Xialu and opt in per project and language", 
     const base = locale === "es" ? "/es/proyectos" : "/projects"
     assert.equal(getProjectDetailPath(entry("dotfiles", true)), `${base}/dotfiles/`)
     assert.equal(getProjectDetailPath(entry("xialu")), `${base}/xialu/`)
-    assert.equal(getProjectDetailPath(entry("onlysend")), undefined)
+    assert.equal(getProjectDetailPath(entry("onlysend", true)), `${base}/onlysend/`)
   }
 })
 
