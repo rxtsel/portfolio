@@ -2,7 +2,7 @@
 locale: en
 title: Cristhian Melo
 intro: |-
-  I'm a **software engineer**. I like building things and figuring out how they work under the hood. I've worked on web, desktop, and mobile apps. I care about software architecture and keeping code easy to maintain.
+  I'm a **software engineer based in Colombia**. I like building things and figuring out how they work under the hood. I've worked on web, desktop, and mobile apps. I care about software architecture and keeping code easy to maintain.
 
   I've used Linux for over a decade. Two ideas from that world have stuck with me: keep things simple and make each part do its job well.
 
@@ -48,6 +48,6 @@ latestPosts:
   - how-to-set-up-lefthook-and-commitlint-in-your-projects
 seo:
   title: Cristhian Melo - Software Engineer
-  description: Software engineer with experience building web, desktop, and mobile apps, from design and frontend to backend, data, and infrastructure.
+  description: Software engineer based in Colombia, building web, desktop, and mobile apps, from design and frontend to backend, data, and infrastructure.
   keywords: software engineer, full stack development, web apps, mobile apps, software architecture, Colombia
 ---

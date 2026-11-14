@@ -2,7 +2,7 @@
 locale: es
 title: Cristhian Melo
 intro: |-
-  Soy **ingeniero de software**. Me gusta construir cosas y entender cómo funcionan por dentro. He trabajado en aplicaciones web, de escritorio y móviles. Me importa la arquitectura de software y que el código sea fácil de mantener.
+  Soy **ingeniero de software en Colombia**. Me gusta construir cosas y entender cómo funcionan por dentro. He trabajado en aplicaciones web, de escritorio y móviles. Me importa la arquitectura de software y que el código sea fácil de mantener.
 
   Llevo más de una década usando Linux. Dos ideas de ese mundo se me han quedado: mantener las cosas simples y hacer que cada parte cumpla bien su función.
 
@@ -48,6 +48,6 @@ latestPosts:
   - how-to-set-up-lefthook-and-commitlint-in-your-projects
 seo:
   title: Cristhian Melo - Ingeniero de Software
-  description: Ingeniero de software con experiencia en aplicaciones web, de escritorio y móviles, del diseño y frontend al backend, los datos y la infraestructura.
+  description: Ingeniero de software en Colombia con experiencia en aplicaciones web, de escritorio y móviles, del diseño y frontend al backend, los datos y la infraestructura.
   keywords: ingeniero de software, desarrollo full stack, aplicaciones web, aplicaciones móviles, arquitectura de software, Colombia
 ---
