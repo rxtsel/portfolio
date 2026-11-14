@@ -8,7 +8,7 @@ const SITE_URL = "https://rxtsel.dev"
 const SITE_NAME = "Cristhian Melo"
 const DEFAULT_OG_IMAGE = `${SITE_URL}/og.jpg`
 const DEFAULT_DESCRIPTION =
-  "Software Developer with 3+ years of experience, known for pixel-perfect execution and strong attention to detail. Passionate about seamless user experiences and clean, maintainable code."
+  "Software engineer based in Colombia, building web, desktop, and mobile apps with a focus on software architecture and maintainable code."
 
 export const siteMetadata = {
   description: DEFAULT_DESCRIPTION,
@@ -77,6 +77,10 @@ function buildGraphBase({ description, lang, title, url }: GraphInput) {
       "@id": ids.person,
       "@type": "Person",
       name: SITE_NAME,
+      jobTitle: "Software Engineer",
+      description: DEFAULT_DESCRIPTION,
+      homeLocation: { "@type": "Country", name: "Colombia" },
+      sameAs: ["https://github.com/rxtsel", "https://www.linkedin.com/in/rxtsel"],
       url: SITE_URL,
     }) as GraphEntity,
     buildWebSite(

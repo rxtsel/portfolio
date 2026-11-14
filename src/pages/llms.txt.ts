@@ -6,14 +6,14 @@ import { compareDatesDescending } from "@/lib/date-time"
 
 const siteUrl = "https://rxtsel.dev"
 const siteSummary =
-  "Software Developer with 3+ years of experience, known for pixel-perfect execution and strong attention to detail."
+  "Software engineer based in Colombia, building web, desktop, and mobile apps with a focus on software architecture and maintainable code."
 const blogDescriptions = {
   en: "Articles by Cristhian Melo about software engineering, web performance, accessibility, and maintainable frontend systems.",
   es: "Artículos de Cristhian Melo sobre ingeniería de software, rendimiento web, accesibilidad y sistemas frontend mantenibles.",
 } satisfies Record<Locale, string>
 const projectsDescriptions = {
-  en: "Selected software projects by Cristhian Melo, including web experiences, CMS work, and custom frontend implementations.",
-  es: "Proyectos seleccionados de Cristhian Melo, incluyendo experiencias web, CMS e implementaciones frontend a medida.",
+  en: "Selected projects by Cristhian Melo spanning web applications, developer tools, CMS work, and backend integrations.",
+  es: "Proyectos seleccionados de Cristhian Melo: aplicaciones web, herramientas para desarrolladores, CMS e integraciones backend.",
 } satisfies Record<Locale, string>
 
 function absoluteUrl(path: string) {
